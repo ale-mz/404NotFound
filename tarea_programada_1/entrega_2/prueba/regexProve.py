@@ -39,7 +39,7 @@ def t_IP(t):
   return t
 
 def t_CLOCK(t):
-  r'([01]\d|2[0-3])(:[0-5]\d){2}'
+  r'(([0-5]\d|60):){2}([0-5]\d)'
   return t
 
 # Define regex for plugins messages
@@ -61,12 +61,10 @@ def t_ACT_FLAG(t):
 def t_CH_MSG(t):
   r'([A-z]([a-z])+(\s))+(Channel:)'
   return t
-
 # Define cipher messages
 def t_CIPH_MSG(t):
   r'(C|c)ipher[\w\s\'-]*with'
   return t
-
 # Define bit messages
 def t_BIT_MSG(t):
   r'(B|b)it(\sRSA|\skey)'
@@ -86,6 +84,7 @@ def t_WEEK_DAY(t):
 def t_PORT(t):
   r':(\d){5}'
   return t
+
 
 # Define regex for Day dates (2 digit number)
 def t_REG_NUM(t):
