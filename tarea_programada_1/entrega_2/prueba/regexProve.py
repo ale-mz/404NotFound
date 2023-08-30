@@ -24,8 +24,20 @@ tokens = (
   'YEAR',
   'MONTH',
   'REG_NUM',
-  'BASIC_DIV'
+  'BASIC_DIV',
+  'ROUTE_ID',
+  'ROUTE_ID_END'
 )
+
+# Define regex for route id
+def t_ROUTE_ID(t):
+  r'<route-identifiers>'
+  return t
+
+# Define regex for route id
+def t_ROUTE_ID_END(t):
+  r'</route-identifiers>'
+  return t
 
 def t_FOLDER_DIR(t):
   r'/([\w\d._-]+/)+'
