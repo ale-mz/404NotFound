@@ -9,8 +9,13 @@ tokens = (
   'PLUGIN_MSG',
   'AF_FLAG',
   'ACT_FLAG',
-  'CH_MSG'
+  'CH_MSG',
+  'FOLDER_DIR'
 )
+
+def t_FOLDER_DIR(t):
+  r'/([\w\d._]+/)+'
+  return t
 
 def t_CARNET(t):
   r'[a-z,A-Z]\d{5}'
