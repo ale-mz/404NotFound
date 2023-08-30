@@ -14,7 +14,7 @@ tokens = (
 )
 
 def t_FOLDER_DIR(t):
-  r'/([\w\d._]+/)+'
+  r'/([\w\d._-]+/)+'
   return t
 
 def t_CARNET(t):
