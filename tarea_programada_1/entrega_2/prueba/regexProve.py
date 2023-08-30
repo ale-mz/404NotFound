@@ -12,11 +12,17 @@ tokens = (
   'ACT_FLAG',
   'CH_MSG',
   'CIPH_MSG',
+  'NET_NAME',
   'BIT_MSG',
+  'PUSH_MSG',
   'FOLDER_DIR',
-  'MONTH',
+  'IPV4_TKN',
+  'IPV6_TKN',
+  'MONTH_DATE',
   'WEEK_DAY',
   'PORT',
+  'YEAR',
+  'MONTH',
   'REG_NUM',
   'BASIC_DIV'
 )
@@ -39,7 +45,7 @@ def t_IP(t):
   return t
 
 def t_CLOCK(t):
-  r'(([0-5]\d|60):){2}([0-5]\d)'
+  r'([01]\d|2[0-3])(:[0-5]\d){2}'
   return t
 
 # Define regex for plugins messages
@@ -61,17 +67,39 @@ def t_ACT_FLAG(t):
 def t_CH_MSG(t):
   r'([A-z]([a-z])+(\s))+(Channel:)'
   return t
-# Define cipher messages
+
+# Define regex for cipher messages
 def t_CIPH_MSG(t):
-  r'(C|c)ipher[\w\s\'-]*with'
+  r'(C|c)ipher[\w\s\'-]*(key|RSA)'
   return t
-# Define bit messages
+
+# Define regex for all net names
+def t_NET_NAME(t):
+  r'::[\w\d-]+::'
+  return t
+
+# Define regex for bit messages
 def t_BIT_MSG(t):
   r'(B|b)it(\sRSA|\skey)'
   return t
 
+# Define regex for Push messages
+def t_PUSH_MSG(t):
+  r'(PUSH:[\w\s\'-]+|PUSH_REPLY,)'
+  return t
+
+# Define regex token for IPv4 Simbol
+def t_IPV4_TKN(t):
+  r'(I|i)(P|p)v4(=)?'
+  return t
+
+# Define regex token for IPv6 Simbol
+def t_IPV6_TKN(t):
+  r'(I|i)(P|p)v6(=)?'
+  return t
+
 # Define regex for log Months
-def t_MONTH(t):
+def t_MONTH_DATE(t):
   r'Jan|Feb|Ma(r|y)|A(pr|ug)|Ju(n|l)|Sep|Oct|Nov|Dec'
   return t
 
@@ -85,6 +113,15 @@ def t_PORT(t):
   r':(\d){5}'
   return t
 
+# define regex for Years
+def t_YEAR(t):
+  r'(\d){4}'
+  return t
+
+# Define regex for Months
+def t_MONTH(t):
+  r'(\d){2}'
+  return t
 
 # Define regex for Day dates (2 digit number)
 def t_REG_NUM(t):
@@ -105,7 +142,7 @@ t_ignore  = ' \t'
 
 # Error handling rule
 def t_error(t):
-  # print("Illegal character '%s'" % t.value[0])
+  print("Illegal character '%s'" % t.value[0])
   t.lexer.skip(1)
 
 # Build the lexer
