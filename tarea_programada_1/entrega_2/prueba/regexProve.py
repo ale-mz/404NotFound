@@ -5,7 +5,11 @@ import ply.lex as lex
 tokens = (
   'CARNET',
   'PROF',
-  'IP'
+  'IP',
+  'PLUGIN_MSG',
+  'AF_FLAG',
+  'ACT_FLAG',
+  'CH_MSG'
 )
 
 def t_CARNET(t):
@@ -19,6 +23,26 @@ def t_PROF(t):
 def t_IP(t):
   r"""(([0-2]([5][0-5]|[0-4][0-9])|[01]?[0-9]?[0-9])
       [\.]){3}([0-2]([5][0-5]|[0-4][0-9])|([01]?[0-9]?[0-9]))"""
+  return t
+
+# Define regex for plugins messages
+def t_PLUGIN_MSG(t):
+  r'PLUGIN_[A-Z]+:\s[A-Z]*'
+  return t
+
+# Define regex for AF_X messages
+def t_AF_FLAG(t):
+  r'\[AF_[A-Z]+\]'
+  return t
+
+# Define regex for actions flags
+def t_ACT_FLAG(t):
+  r'([A-Za-z]+)(_[a-z]+)?:(([A-za-z\s]+):)?'
+  return t
+
+# Define regex for channel messages
+def t_CH_MSG(t):
+  r'([A-z]([a-z])+(\s))+(Channel:)'
   return t
 
 # Define a rule so we can track line numbers
