@@ -627,7 +627,7 @@ Sun Sep 13 17:53:07 2020 b78720/201.203.46.250:59862 OPTIONS IMPORT: reading cli
 Wed Oct 21 17:53:07 2020 b78720/201.203.46.250:59862 MULTI: Learn: 192.168.68.26 -> b78720/201.203.46.250:59862
 Sun Sep 13 17:53:07 2020 b78720/201.203.46.250:59862 MULTI: primary virtual IP for b78720/201.203.46.250:59862: 192.168.68.26
 Sun Sep 13 17:53:09 2020 b78720/201.203.46.250:59862 PUSH: Received control message: 'PUSH_REQUEST'
-Tue Feb 16 25:02:22 2021 b78720/201.203.46.250:59862 SENT CONTROL [b78720]: 'PUSH_REPLY,route ::vpn-net:: 255.255.255.0,route ::priv-net-2:: 255.255.255.0,route ::vpn-gat::,topology net30,ping 10,ping-restart 120,ifconfig 192.168.68.26 192.168.68.25,peer-id 0,cipher AES-256-GCM' (status=1)
+Tue Feb 16 23:02:22 2021 b78720/201.203.46.250:59862 SENT CONTROL [b78720]: 'PUSH_REPLY,route ::vpn-net:: 255.255.255.0,route ::priv-net-2:: 255.255.255.0,route ::vpn-gat::,topology net30,ping 10,ping-restart 120,ifconfig 192.168.68.26 192.168.68.25,peer-id 0,cipher AES-256-GCM' (status=1)
 Sun Sep 13 17:53:09 2020 b78720/201.203.46.250:59862 Data Channel: using negotiated cipher 'AES-256-GCM'
 Sun Sep 13 17:53:09 2020 b78720/201.203.46.250:59862 Outgoing Data Channel: Cipher 'AES-256-GCM' initialized with 256 bit key
 Sun Sep 13 17:53:09 2020 b78720/201.203.46.250:59862 Incoming Data Channel: Cipher 'AES-256-GCM' initialized with 256 bit key
