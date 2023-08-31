@@ -28,8 +28,14 @@ tokens = (
   'ROUTE_ID',
   'ROUTE_ID_END',
   'PLUGIN_DISCONNECT',
-  'STATUS_BOOL'
+  'STATUS_BOOL',
+  'IP_STRING'
 )
+
+# Define regex for ip static string
+def t_IP_STRING(t):
+  r'ip '
+  return t
 
 # Define regex for status boolean
 def t_STATUS_BOOL(t):
