@@ -27,8 +27,14 @@ tokens = (
   'BASIC_DIV',
   'ROUTE_ID',
   'ROUTE_ID_END',
-  'PLUGIN_DISCONNECT'
+  'PLUGIN_DISCONNECT',
+  'STATUS_BOOL'
 )
+
+# Define regex for status boolean
+def t_STATUS_BOOL(t):
+  r'status=[0-1]'
+  return t
 
 # Define regex for plugin disconnect status
 def t_PLUGIN_DISCONNECT(t):
