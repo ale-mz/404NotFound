@@ -4,7 +4,7 @@ import ply.lex as lex
 # Define tokens to identify
 tokens = (
   'CARNET',
-  'PROF',
+  'exc_PROF',
   'IP',
   'CLOCK',
   'PLUGIN_MSG',
@@ -18,19 +18,65 @@ tokens = (
   'FOLDER_DIR',
   'IPV4_TKN',
   'IPV6_TKN',
+  'IP_RNG',
+  'MAC_ADDRESS',
   'MONTH_DATE',
   'WEEK_DAY',
   'PORT',
   'YEAR',
-  'MONTH',
+  'DAY',
   'REG_NUM',
   'BASIC_DIV',
   'ROUTE_ID',
   'ROUTE_ID_END',
   'PLUGIN_DISCONNECT',
   'STATUS_BOOL',
-  'IP_STRING'
+  'IP_STRING',
+  'LABEL',
+  'ROUTES',
+  'SPECIAL_CHAR',
+  'SQUARED_BRACKETS',
+  'BRACKETS',
+  'PUSH_REQUEST',
+  'AES_MSG',
+  'SIGTERM',
+  'PROTOCOL',
+  'TLS'
 )
+
+
+def t_TLS(t):
+  r'TLSv1.2'
+  return t
+
+def t_PROTOCOL(t):
+  r'protocol.'
+  return t
+
+def t_SIGTERM(t):
+  r'SIGTERM'
+  return t
+
+def t_PUSH_REQUEST(t):
+  r'PUSH_REQUEST'
+  return t
+
+def t_BRACKETS(t):
+  r'\([\w,\-_ >=]+\)'
+  return t
+
+def t_SQUARED_BRACKETS(t):
+  r'\[[\w,\-_ >\.)\(\/]+\]'
+  return t
+
+def t_AES_MSG(t):
+  r'AES\-256\-(GCM|SHA384)*'
+  return t
+
+# define regex for OPTIONS label
+def t_ROUTES(t):
+  r',route'
+  return t
 
 # Define regex for ip static string
 def t_IP_STRING(t):
@@ -58,15 +104,15 @@ def t_ROUTE_ID_END(t):
   return t
 
 def t_FOLDER_DIR(t):
-  r'/([\w\d._-]+/)+'
+  r'/([A-Za-z][\w._-]+/?)+'
   return t
 
 def t_CARNET(t):
   r'[a-z,A-Z]\d{5}'
   return t
 
-def t_PROF(t):
-  r'anom.[a-z]+'
+def t_exc_PROF(t):
+  r' anom.[a-z]+'
   return t
 
 def t_IP(t):
@@ -128,6 +174,16 @@ def t_IPV6_TKN(t):
   r'(I|i)(P|p)v6(=)?'
   return t
 
+# Define regex for IP ranges
+def t_IP_RNG(t):
+  r'(\/[0-9]{2})'
+  return t
+
+# Define regex for MAC address
+def t_MAC_ADDRESS(t):
+  r'([0-9A-Fa-f]{2}:){5}[0-9A-Fa-f]{2}'
+  return t
+
 # Define regex for log Months
 def t_MONTH_DATE(t):
   r'Jan|Feb|Ma(r|y)|A(pr|ug)|Ju(n|l)|Sep|Oct|Nov|Dec'
@@ -145,12 +201,12 @@ def t_PORT(t):
 
 # define regex for Years
 def t_YEAR(t):
-  r'(\d){4}'
+  r'20[0-2][0-9]'
   return t
 
 # Define regex for Months
-def t_MONTH(t):
-  r'(\d){2}'
+def t_DAY(t):
+  r'([1-9]|[1-2][0-9]|3[0-1])'
   return t
 
 # Define regex for Day dates (2 digit number)
@@ -158,8 +214,14 @@ def t_REG_NUM(t):
   r'(\d)+'
   return t
 
-def t_BASIC_DIV(t):
-  r'\/'
+# Define regex for labels
+def t_LABEL(t):
+  r'[\w =,\-\|\/]+(?=(\s|=))'
+  return t
+
+# Define regex for special characters
+def t_SPECIAL_CHAR(t):
+  r'[=:>\-\.]'
   return t
 
 # Define a rule so we can track line numbers
@@ -168,7 +230,7 @@ def t_newline(t):
   t.lexer.lineno += len(t.value)
 
 # A string containing ignored characters (spaces and tabs)
-t_ignore  = ' \t'
+t_ignore  = '\t  \''
 
 # Error handling rule
 def t_error(t):
