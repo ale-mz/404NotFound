@@ -26,8 +26,14 @@ tokens = (
   'REG_NUM',
   'BASIC_DIV',
   'ROUTE_ID',
-  'ROUTE_ID_END'
+  'ROUTE_ID_END',
+  'PLUGIN_DISCONNECT'
 )
+
+# Define regex for plugin disconnect status
+def t_PLUGIN_DISCONNECT(t):
+  r'PLUGIN_CLIENT_DISCONNECT'
+  return t
 
 # Define regex for route id
 def t_ROUTE_ID(t):
