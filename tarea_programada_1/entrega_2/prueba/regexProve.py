@@ -221,7 +221,7 @@ def t_LABEL(t):
 
 # Define regex for special characters
 def t_SPECIAL_CHAR(t):
-  r'[=:>\-\.]'
+  r'[=:>\-\.:]'
   return t
 
 # Define a rule so we can track line numbers
