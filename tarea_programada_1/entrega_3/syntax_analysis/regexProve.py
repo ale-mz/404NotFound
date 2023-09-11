@@ -239,23 +239,30 @@ def t_error(t):
   print("Illegal character '%s'" % t.value[0])
   t.lexer.skip(1)
 
-# Build the lexer
-lexer = lex.lex()
 
-# Open file for analize
-# NOTE: Consider the path that you execute. Depending the terminal from
-#       what you are executing you should change this path
-file = open("vpn-logs-2020-modified-abb-revMM.txt")
+if __name__ == "__main__":
+  # Build the lexer
+  lexer = lex.lex()
 
-data = file.read()
-# print(data)
+  # Open file for analize
+  # NOTE: Consider the path that you execute. Depending the terminal from
+  #       what you are executing you should change this path
+  # TODO: For the moment the file direction is hardcoded, but in future versions
+  #       it should be a parameter reveiced via the UI
+  file = open("vpn-logs-2020-modified-abb-revMM.txt")
 
-# Give the lexer some input
-lexer.input(data)
- 
-# Tokenize
-while True:
-  tok = lexer.token()
-  if not tok: 
-    break      # No more input
-  print(tok)
+  data = file.read()
+  # print(data)
+
+  # Give the lexer some input
+  lexer.input(data)
+  
+  tokens_output = open("tokens_output.txt", "w")
+  # Tokenize
+  while True:
+    tok = lexer.token()
+    if not tok: 
+      break      # No more input
+    # tokens_output.write(str(tok.value))
+    tokens_output.write(f"{tok.type}: {tok.value}\n")
+  tokens_output.close()
