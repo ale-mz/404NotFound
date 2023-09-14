@@ -289,16 +289,16 @@ def p_log_line(p):
               | date TCP_MSG IP PORT
               | date IP PORT SYS_MSG FLAGS IP PORT SPECIAL_CHAR VAR_SET VAR_VAL
               | date TCP_MSG IP PORT PLUGIN_MSG DIR VAR_SET VAR_VAL
-              | date IP PORT SYS_MSG SPECIAL_CHAR CARNET SPECIAL_CHAR CN_SET
+              | date IP PORT SYS_MSG SPECIAL_CHAR id SPECIAL_CHAR CN_SET
               | date IP PORT CONN_MSG CRYPTO_MSG
-              | date IP PORT SPECIAL_CHAR CARNET SPECIAL_CHAR PEER IP PORT
+              | date IP PORT SPECIAL_CHAR id SPECIAL_CHAR PEER IP PORT
               | date userid CONN_MSG POOL_RET VAR_SET IP SPECIAL_CHAR VAR_SET VAR_VAL
               | date userid PLUGIN_MSG DIR VAR_SET VAR_VAL
               | date userid CONN_MSG CONN_MSG DIR
-              | date userid CONN_MSG CONN_MSG IP SPECIAL_CHAR SPECIAL_CHAR CARNET SLASH IP PORT
-              | date userid SYS_MSG CARNET SLASH IP PORT COLON IP
+              | date userid CONN_MSG CONN_MSG IP SPECIAL_CHAR SPECIAL_CHAR id SLASH IP PORT
+              | date userid SYS_MSG id SLASH IP PORT COLON IP
               | date userid SYS_MSG
-              | date userid SENT_CNT SPECIAL_CHAR CARNET SPECIAL_CHAR COLON SPECIAL_CHAR ROUTE_FLAG VPN_IP IP ROUTE_FLAG VPN_IP IP ROUTE_FLAG VPN_IP TOPOLOGY IP IP SPECIAL_CHAR PEER SPECIAL_CHAR CIPHER SPECIAL_CHAR VAR_SET VAR_VAL
+              | date userid SENT_CNT SPECIAL_CHAR id SPECIAL_CHAR COLON SPECIAL_CHAR ROUTE_FLAG VPN_IP IP ROUTE_FLAG VPN_IP IP ROUTE_FLAG VPN_IP TOPOLOGY IP IP SPECIAL_CHAR PEER SPECIAL_CHAR CIPHER SPECIAL_CHAR VAR_SET VAR_VAL
               | date userid CONN_MSG CIPHER
               | date IP PORT PLUGIN_MSG DIR VAR_SET VAR_VAL
     '''
@@ -306,7 +306,14 @@ def p_log_line(p):
 
 def p_userid(p):
     '''
-    userid : CARNET SLASH IP PORT
+    userid : id SLASH IP PORT
+    '''
+    pass
+
+def p_id(p):
+    '''
+    id : CARNET
+        | PROF
     '''
     pass
 
