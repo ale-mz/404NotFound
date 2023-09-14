@@ -98,7 +98,6 @@ def t_PLUGIN_MSG(t):
   r'PLUGIN_([A-Z]+):([A-Z ]+)?'
   return t
 
-
 # Define tokens for route header
 def t_ROUTE_HEADER(t):
    r'<\/?route-identifiers>'
@@ -207,11 +206,6 @@ def t_CIPHER(t):
 def t_IFCONFIG_END(t):
   r'[A-Z ]+LIST'
   return t
-
-# Define regex for message at the end of a phase
-# def t_FASE_END(t):
-#   r'[A-Za-z ]+Completed'
-#   return t
 
 ### Connection Tokens ###
 # Define regex for last part of username authentication

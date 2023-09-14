@@ -13,11 +13,11 @@ Para trabajar con el analizador sintactico, se hizo uso de la libreria [yacc](ht
 ## Cómo ejecutar el analizador sintactico
 Para ejecutar el analizador sintactico se debe de ejecutar el siguiente comando:
 ```
-python .\regexProve.py
+python .\parser.py
 ```
 Ya que la salida producida por el programa puede llegar a ser bastante grande, lo que usualemente hacemos es redireccionar la salida estandar hacia a un archivo de texto, lo cual hacemos usando el siguiente commando:
 ```
-python .\regexProve.py >output.txt
+python .\parser.py >output.txt
 ```
 
 ## Cómo funciona el analizador sintactico
@@ -29,7 +29,8 @@ Para poder resolver el problema planteado, tuvimos que desarrollar un total de 3
 ### Gramatica
 Para poder resolver el problema planteado, tuvimos que desarrollar una gramatica compuesta de reglas bien ordenadas y funcionales.
 Tras varios intentos de implementación, terminamos usando una gramatica dynamica que para fines de optimización sea suficiente modular para volver a usar mas de una vez una misma regla.
-Aunque hemos intentado varias implementaciones, al final no hemos logrado implementar que un mismo analizador funcione para todas las partes del archivo de log, por lo cual hemos tenido que implementar varios analizadores minimalistas para varias partes del archivo de log.
+Aunque hemos intentado varias implementaciones, al final tuvimos que optar para una implementacion funcional mas molithica, pero que nos permitio resolver el problema planteado.
+Al usar una gran reglas que llama a una multitud de reglas mas pequeñas, nos permitio resolver el problema planteado, y al mismo tiempo nos permitio debugear de manera mas facil el codigo.
 
 ## Creditos
 ### Codigo escrito por:
