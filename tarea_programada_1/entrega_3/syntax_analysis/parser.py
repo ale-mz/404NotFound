@@ -16,8 +16,6 @@ tokens = (
   'PORT',
   'CARNET',
   'PROF',
-  # 'STATUS',
-  # 'POST',
   'PLUGIN_MSG',   # Body Tokens
   'VAR_SET',
   'VAR_VAL',
@@ -36,7 +34,6 @@ tokens = (
   'IP_PROTOCOL',
   'CONN_MSG',
   'IFCONFIG_END',
-  # 'FASE_END',
   'CN_SET',       # Connection Tokens
   'POOL_RET',
   'SENT_CNT',
@@ -48,13 +45,8 @@ tokens = (
   'COLON'
 )
 
-
-
-# t_STATUS = 'status'
-
 # # Define regex for PROF
 t_PROF = '[A-Za-z]+.[A-Za-z]+'
-# t_POST = 'POST'
 
 ### General Tokens ###
 # Define regex for IP tokens
@@ -98,8 +90,6 @@ def t_COMPLETED(t):
 # Define /sbin/ip messages on console
 def t_SBIN_IP_MSG(t):
   r'/sbin/ip([a-z ]+\d?[a-z ]+)'
-  # r'(/sbin/ip route del|/sbin/ip addr del dev tun0 local|/sbin/ip link set dev tun0 up mtu 1500|/sbin/ip addr add dev tun0 local|/sbin/ip route add)'
-  # r'/sbin/ip (route del|addr del dev tun0 local|link set dev tun0 up mtu 1500|addr add dev tun0 local|route add)'
   return t
 
 ### Body Tokens###
