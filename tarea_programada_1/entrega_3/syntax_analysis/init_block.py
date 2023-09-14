@@ -358,12 +358,12 @@ if __name__ == "__main__":
   # tokens_output = open("tokens_output.txt", "w")
   # # Tokenize
 
-  # lexer.input(log_data)
-  # while True:
-  #   tok = lexer.token()
-  #   if not tok: 
-  #     break      # No more input
-  #   print(tok)
+  lexer.input(log_data)
+  while True:
+    tok = lexer.token()
+    if not tok: 
+      break      # No more input
+    print(tok)
 
   #   # tokens_output.write(str(tok.value))
   #   tokens_output.write(f"{tok}\n")

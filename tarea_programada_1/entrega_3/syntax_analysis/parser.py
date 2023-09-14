@@ -12,11 +12,10 @@ tokens = (
   'DIR',
   'PEER',
   'IP_RNG',
-  'PORT',
-  'CARNET',
-  # 'PROF',
-  'STATUS',
-  'POST',
+  # 'PORT',
+  # 'CARNET',
+  # 'STATUS',
+  # 'POST',
   'PLUGIN_MSG',   # Body Tokens
   'VAR_SET',
   'VAR_VAL',
@@ -35,21 +34,21 @@ tokens = (
   'IP_PROTOCOL',
   'CONN_MSG',
   'IFCONFIG_END',
-  'FASE_END',
-  'CN_SET',       # Connection Tokens
-  'POOL_RET',
-  'SENT_CNT',
-  'ROUTE_FLAG',
-  'TOPOLOGY',
-  'CIPHER',
+  # 'FASE_END',
+  # 'CN_SET',       # Connection Tokens
+  # 'POOL_RET',
+  # 'SENT_CNT',
+  # 'ROUTE_FLAG',
+  # 'TOPOLOGY',
+  # 'CIPHER',
   'SPECIAL_CHAR', # Special Tokens
   'SLASH',
-  'COLON'
+  # 'COLON'
 )
 
-t_STATUS = 'status'
+# t_STATUS = 'status'
 
-t_POST = 'POST'
+# t_POST = 'POST'
 
 ### General Tokens ###
 # Define regex for IP tokens
@@ -81,10 +80,10 @@ t_PEER = '(peer(-id\s\d)?|via)|(Peer[\]A-Za-z \[_]+)'
 t_IP_RNG = '\/\d{2}\s'
 
 # Define regex for PORT IP
-t_PORT = '(?<=\d)(:\d{5})|(:\d{4})'
+# t_PORT = '(?<=\d)(:\d{5})|(:\d{4})'
 
 # Define regex for CARNET
-t_CARNET = '[\w]\d{5}'
+# t_CARNET = '[\w]\d{5}'
 
 # # Define regex for PROF
 # t_PROF = '[A-Za-z]+.[A-Za-z]+'
@@ -182,45 +181,45 @@ def t_CONN_MSG(t):
   return t
 
 # Define regex for connection pool assign
-def t_POOL_RET(t):
-  r'pool\sreturned'
-  return t
+# def t_POOL_RET(t):
+#   r'pool\sreturned'
+#   return t
 
 # Define regex for route line head
-def t_SENT_CNT(t):
-  r'SENT\sCONTROL'
-  return t
+# def t_SENT_CNT(t):
+#   r'SENT\sCONTROL'
+#   return t
 
 # Define regex for route flag
-def t_ROUTE_FLAG(t):
-  r'(PUSH_REPLY)?(,route)'
-  return t
+# def t_ROUTE_FLAG(t):
+#   r'(PUSH_REPLY)?(,route)'
+#   return t
 
 # Define regex for status of connection
-def t_TOPOLOGY(t):
-  r',topology[\w ,\-]+(?=\s)'
-  return t
+# def t_TOPOLOGY(t):
+#   r',topology[\w ,\-]+(?=\s)'
+#   return t
 
-# Define regex for cypher flag on peer
-def t_CIPHER(t):
-  r'([A-Za-z ]+)?(cipher|Cipher)[\' \w\-]+'
-  return t
+# # Define regex for cypher flag on peer
+# def t_CIPHER(t):
+#   r'([A-Za-z ]+)?(cipher|Cipher)[\' \w\-]+'
+#   return t
 
 # Define regex for message at the end of console
 def t_IFCONFIG_END(t):
   r'[A-Z ]+LIST'
   return t
 
-# Define regex for message at the end of a phase
-def t_FASE_END(t):
-  r'[A-Za-z ]+Completed'
-  return t
+# # Define regex for message at the end of a phase
+# def t_FASE_END(t):
+#   r'[A-Za-z ]+Completed'
+#   return t
 
 ### Connection Tokens ###
 # Define regex for last part of username authentication
-def t_CN_SET(t):
-  r'\[CN\sSET\]'
-  return t
+# def t_CN_SET(t):
+#   r'\[CN\sSET\]'
+#   return t
 
 
 ### Special Tokens ###
@@ -233,7 +232,7 @@ def t_SPECIAL_CHAR(t):
 t_SLASH = r'\/'
 
 # Define regex for colon
-t_COLON = r':(?=(\s|\'))'
+# t_COLON = r':(?=(\s|\'))'
 
 # Define a rule so we can track line numbers
 def t_newline(t):
@@ -251,27 +250,71 @@ def t_error(t):
 
 # ########################################################################################################################################
 # ########################################################################################################################################
+# ########################################################################################################################################
 
+def p_main_rule(p):
+    '''
+    main_rule : route_identifiers main_rule
+              | log_line main_rule
+              | log_line
+              | empty
+    '''
+    pass
+# parsing rules
 # Parsing rules
+
+def p_log_line(p):
+    '''
+    log_line : date PLUGIN_MSG DIR VAR_SET VAR_VAL
+              | date SBIN_IP_MSG IP IP_RNG
+              | date TUN_TAP_MSG
+              | date SBIN_IP_MSG IP PEER IP
+              | date SIGTERM_MSG 
+              | date OPEN_VPN_MSG MONTH DAY YEAR
+              | date LIB_VER_MSG DAY MONTH YEAR LIB_VER_MSG
+              | date SYS_MSG
+              | date PLUGIN_MSG DIR SPECIAL_CHAR SPECIAL_CHAR DIR SPECIAL_CHAR FLAGS SPECIAL_CHAR VAR_SET VAR_VAL
+              | date CRYPTO_MSG
+              | date ROUTE_GATEWAY IP SLASH IP VAR_SET VAR_VAL VAR_SET VAR_VAL
+              | date SBIN_IP_MSG DAY DAY
+              | date SBIN_IP_MSG IP IP_RNG PEER IP
+              | date IP_PROTOCOL
+              | date CONN_MSG VAR_SET VAR_VAL VAR_SET VAR_VAL
+              | date TCP_MSG 
+              | date SYS_MSG SPECIAL_CHAR VAR_SET VAR_VAL VAR_SET VAR_VAL
+              | date CONN_MSG VAR_SET IP VAR_SET VAR_VAL SPECIAL_CHAR VAR_SET VAR_VAL
+              | date IFCONFIG_END
+              | date SYS_MSG VAR_SET VAR_VAL VAR_SET VAR_VAL
+    '''
+    pass
+
+def p_date(p):
+    '''
+    date : WEEK_DAY MONTH DAY CLOCK YEAR
+          | WEEK_DAY MONTH DAY CLOCK
+    '''
+    pass
 
 def p_route_identifiers(p):
     'route_identifiers : ROUTE_HEADER key_value_list ROUTE_HEADER'
-    p[0] = p[2]
+    pass
 
 def p_key_value_list(p):
-    'key_value_list : key_value_list key_value'
-    p[0] = p[1] + [p[2]]
-
-def p_key_value_list_single(p):
-    'key_value_list : key_value'
-    p[0] = [p[1]]
+    '''key_value_list : key_value_list key_value
+                      | key_value'''
+    pass
 
 def p_key_value(p):
     'key_value : VPN_IP IP'
-    p[0] = (p[1], p[2])
+    pass
+
+def p_empty(p):
+    'empty :'
+    pass
 
 def p_error(p):
     print("Syntax error at:", p)
+
 
 if __name__ == "__main__":
   # Build the lexer
@@ -289,7 +332,7 @@ if __name__ == "__main__":
 
   # print(data)
 
-  # # Give the lexer some input
+  # Give the lexer some input
   # lexer.input(data)
   
   # tokens_output = open("tokens_output.txt", "w")

@@ -6,9 +6,9 @@ _tabversion = '3.10'
 
 _lr_method = 'LALR'
 
-_lr_signature = 'CARNET CIPHER CLOCK CN_SET COLON CONN_MSG CRYPTO_MSG DAY DIR FASE_END FLAGS IFCONFIG_END IP IP_PROTOCOL IP_RNG LIB_VER_MSG MONTH OPEN_VPN_MSG PEER PLUGIN_MSG POOL_RET PORT POST ROUTE_FLAG ROUTE_GATEWAY ROUTE_HEADER SBIN_IP_MSG SENT_CNT SIGTERM_MSG SLASH SPECIAL_CHAR STATUS SYS_MSG TCP_MSG TOPOLOGY TUN_TAP_MSG VAR_SET VAR_VAL VPN_IP WEEK_DAY YEAR\n    main_rule : log_line main_rule\n              | log_line\n              | empty\n    \n    log_line : date PLUGIN_MSG DIR VAR_SET VAR_VAL\n              | date SBIN_IP_MSG IP IP_RNG\n              | date TUN_TAP_MSG\n              | date SBIN_IP_MSG IP PEER IP\n              | date SIGTERM_MSG \n              | date OPEN_VPN_MSG MONTH DAY YEAR\n              | date LIB_VER_MSG DAY MONTH YEAR LIB_VER_MSG\n              | date SYS_MSG\n              | date PLUGIN_MSG DIR SPECIAL_CHAR SPECIAL_CHAR DIR SPECIAL_CHAR FLAGS SPECIAL_CHAR VAR_SET VAR_VAL\n              | date CRYPTO_MSG\n              | date ROUTE_GATEWAY IP SLASH IP VAR_SET VAR_VAL VAR_SET VAR_VAL\n              | date SBIN_IP_MSG DAY DAY\n              | date SBIN_IP_MSG IP IP_RNG PEER IP\n              | date IP_PROTOCOL\n              | date CONN_MSG VAR_SET VAR_VAL VAR_SET VAR_VAL\n              | date TCP_MSG \n              | date SYS_MSG SPECIAL_CHAR VAR_SET VAR_VAL VAR_SET VAR_VAL\n              | date CONN_MSG VAR_SET IP VAR_SET VAR_VAL SPECIAL_CHAR VAR_SET VAR_VAL\n              | date IFCONFIG_END\n              | date \n    \n    date : WEEK_DAY MONTH DAY CLOCK YEAR\n          | WEEK_DAY MONTH DAY CLOCK\n    empty :'
+_lr_signature = 'CLOCK CONN_MSG CRYPTO_MSG DAY DIR FLAGS IFCONFIG_END IP IP_PROTOCOL IP_RNG LIB_VER_MSG MONTH OPEN_VPN_MSG PEER PLUGIN_MSG ROUTE_GATEWAY ROUTE_HEADER SBIN_IP_MSG SIGTERM_MSG SLASH SPECIAL_CHAR SYS_MSG TCP_MSG TUN_TAP_MSG VAR_SET VAR_VAL VPN_IP WEEK_DAY YEAR\n    main_rule : route_identifiers main_rule\n              | log_line main_rule\n              | log_line\n              | empty\n    \n    log_line : date PLUGIN_MSG DIR VAR_SET VAR_VAL\n              | date SBIN_IP_MSG IP IP_RNG\n              | date TUN_TAP_MSG\n              | date SBIN_IP_MSG IP PEER IP\n              | date SIGTERM_MSG \n              | date OPEN_VPN_MSG MONTH DAY YEAR\n              | date LIB_VER_MSG DAY MONTH YEAR LIB_VER_MSG\n              | date SYS_MSG\n              | date PLUGIN_MSG DIR SPECIAL_CHAR SPECIAL_CHAR DIR SPECIAL_CHAR FLAGS SPECIAL_CHAR VAR_SET VAR_VAL\n              | date CRYPTO_MSG\n              | date ROUTE_GATEWAY IP SLASH IP VAR_SET VAR_VAL VAR_SET VAR_VAL\n              | date SBIN_IP_MSG DAY DAY\n              | date SBIN_IP_MSG IP IP_RNG PEER IP\n              | date IP_PROTOCOL\n              | date CONN_MSG VAR_SET VAR_VAL VAR_SET VAR_VAL\n              | date TCP_MSG \n              | date SYS_MSG SPECIAL_CHAR VAR_SET VAR_VAL VAR_SET VAR_VAL\n              | date CONN_MSG VAR_SET IP VAR_SET VAR_VAL SPECIAL_CHAR VAR_SET VAR_VAL\n              | date IFCONFIG_END\n              | date SYS_MSG VAR_SET VAR_VAL VAR_SET VAR_VAL\n    \n    date : WEEK_DAY MONTH DAY CLOCK YEAR\n          | WEEK_DAY MONTH DAY CLOCK\n    route_identifiers : ROUTE_HEADER key_value_list ROUTE_HEADERkey_value_list : key_value_list key_value\n                      | key_valuekey_value : VPN_IP IPempty :'
     
-_lr_action_items = {'$end':([0,1,2,3,4,6,9,10,13,14,16,18,19,32,34,41,42,45,46,52,54,55,58,61,68,69,71,],[-26,0,-2,-3,-23,-1,-6,-8,-11,-13,-17,-19,-22,-5,-15,-25,-4,-7,-9,-24,-16,-10,-18,-20,-14,-21,-12,]),'WEEK_DAY':([0,2,4,9,10,13,14,16,18,19,32,34,41,42,45,46,52,54,55,58,61,68,69,71,],[5,5,-23,-6,-8,-11,-13,-17,-19,-22,-5,-15,-25,-4,-7,-9,-24,-16,-10,-18,-20,-14,-21,-12,]),'PLUGIN_MSG':([4,41,52,],[7,-25,-24,]),'SBIN_IP_MSG':([4,41,52,],[8,-25,-24,]),'TUN_TAP_MSG':([4,41,52,],[9,-25,-24,]),'SIGTERM_MSG':([4,41,52,],[10,-25,-24,]),'OPEN_VPN_MSG':([4,41,52,],[11,-25,-24,]),'LIB_VER_MSG':([4,41,47,52,],[12,-25,55,-24,]),'SYS_MSG':([4,41,52,],[13,-25,-24,]),'CRYPTO_MSG':([4,41,52,],[14,-25,-24,]),'ROUTE_GATEWAY':([4,41,52,],[15,-25,-24,]),'IP_PROTOCOL':([4,41,52,],[16,-25,-24,]),'CONN_MSG':([4,41,52,],[17,-25,-24,]),'TCP_MSG':([4,41,52,],[18,-25,-24,]),'IFCONFIG_END':([4,41,52,],[19,-25,-24,]),'MONTH':([5,11,25,],[20,24,36,]),'DIR':([7,43,],[21,53,]),'IP':([8,15,28,33,38,44,],[22,27,40,45,49,54,]),'DAY':([8,12,20,23,24,],[23,25,29,34,35,]),'SPECIAL_CHAR':([13,21,31,53,59,64,],[26,31,43,60,63,67,]),'VAR_SET':([17,21,26,39,40,48,49,62,63,67,],[28,30,37,50,51,56,57,65,66,70,]),'IP_RNG':([22,],[32,]),'PEER':([22,32,],[33,44,]),'SLASH':([27,],[38,]),'VAR_VAL':([28,30,37,50,51,56,57,65,66,70,],[39,42,48,58,59,61,62,68,69,71,]),'CLOCK':([29,],[41,]),'YEAR':([35,36,41,],[46,47,52,]),'FLAGS':([60,],[64,]),}
+_lr_action_items = {'ROUTE_HEADER':([0,2,3,10,11,15,16,19,20,22,24,25,27,28,29,42,44,53,56,57,66,67,69,71,74,81,82,84,],[5,5,5,27,-29,-7,-9,-12,-14,-18,-20,-23,-27,-28,-30,-6,-16,-5,-8,-10,-17,-11,-24,-19,-21,-15,-22,-13,]),'$end':([0,1,2,3,4,8,9,15,16,19,20,22,24,25,27,42,44,53,56,57,66,67,69,71,74,81,82,84,],[-31,0,-31,-3,-4,-1,-2,-7,-9,-12,-14,-18,-20,-23,-27,-6,-16,-5,-8,-10,-17,-11,-24,-19,-21,-15,-22,-13,]),'WEEK_DAY':([0,2,3,15,16,19,20,22,24,25,27,42,44,53,56,57,66,67,69,71,74,81,82,84,],[7,7,7,-7,-9,-12,-14,-18,-20,-23,-27,-6,-16,-5,-8,-10,-17,-11,-24,-19,-21,-15,-22,-13,]),'VPN_IP':([5,10,11,28,29,],[12,12,-29,-28,-30,]),'PLUGIN_MSG':([6,52,64,],[13,-26,-25,]),'SBIN_IP_MSG':([6,52,64,],[14,-26,-25,]),'TUN_TAP_MSG':([6,52,64,],[15,-26,-25,]),'SIGTERM_MSG':([6,52,64,],[16,-26,-25,]),'OPEN_VPN_MSG':([6,52,64,],[17,-26,-25,]),'LIB_VER_MSG':([6,52,58,64,],[18,-26,67,-25,]),'SYS_MSG':([6,52,64,],[19,-26,-25,]),'CRYPTO_MSG':([6,52,64,],[20,-26,-25,]),'ROUTE_GATEWAY':([6,52,64,],[21,-26,-25,]),'IP_PROTOCOL':([6,52,64,],[22,-26,-25,]),'CONN_MSG':([6,52,64,],[23,-26,-25,]),'TCP_MSG':([6,52,64,],[24,-26,-25,]),'IFCONFIG_END':([6,52,64,],[25,-26,-25,]),'MONTH':([7,17,34,],[26,33,46,]),'IP':([12,14,21,38,43,49,55,],[29,31,37,51,56,61,66,]),'DIR':([13,54,],[30,65,]),'DAY':([14,18,26,32,33,],[32,34,39,44,45,]),'SPECIAL_CHAR':([19,30,41,65,72,77,],[35,41,54,73,76,80,]),'VAR_SET':([19,23,30,35,48,50,51,59,61,75,76,80,],[36,38,40,47,60,62,63,68,70,78,79,83,]),'IP_RNG':([31,],[42,]),'PEER':([31,42,],[43,55,]),'VAR_VAL':([36,38,40,47,60,62,63,68,70,78,79,83,],[48,50,53,59,69,71,72,74,75,81,82,84,]),'SLASH':([37,],[49,]),'CLOCK':([39,],[52,]),'YEAR':([45,46,52,],[57,58,64,]),'FLAGS':([73,],[77,]),}
 
 _lr_action = {}
 for _k, _v in _lr_action_items.items():
@@ -17,7 +17,7 @@ for _k, _v in _lr_action_items.items():
       _lr_action[_x][_k] = _y
 del _lr_action_items
 
-_lr_goto_items = {'main_rule':([0,2,],[1,6,]),'log_line':([0,2,],[2,2,]),'empty':([0,2,],[3,3,]),'date':([0,2,],[4,4,]),}
+_lr_goto_items = {'main_rule':([0,2,3,],[1,8,9,]),'route_identifiers':([0,2,3,],[2,2,2,]),'log_line':([0,2,3,],[3,3,3,]),'empty':([0,2,3,],[4,4,4,]),'date':([0,2,3,],[6,6,6,]),'key_value_list':([5,],[10,]),'key_value':([5,10,],[11,28,]),}
 
 _lr_goto = {}
 for _k, _v in _lr_goto_items.items():
@@ -27,30 +27,35 @@ for _k, _v in _lr_goto_items.items():
 del _lr_goto_items
 _lr_productions = [
   ("S' -> main_rule","S'",1,None,None,None),
-  ('main_rule -> log_line main_rule','main_rule',2,'p_main_rule','init_block.py',258),
-  ('main_rule -> log_line','main_rule',1,'p_main_rule','init_block.py',259),
-  ('main_rule -> empty','main_rule',1,'p_main_rule','init_block.py',260),
-  ('log_line -> date PLUGIN_MSG DIR VAR_SET VAR_VAL','log_line',5,'p_log_line','init_block.py',268),
-  ('log_line -> date SBIN_IP_MSG IP IP_RNG','log_line',4,'p_log_line','init_block.py',269),
-  ('log_line -> date TUN_TAP_MSG','log_line',2,'p_log_line','init_block.py',270),
-  ('log_line -> date SBIN_IP_MSG IP PEER IP','log_line',5,'p_log_line','init_block.py',271),
-  ('log_line -> date SIGTERM_MSG','log_line',2,'p_log_line','init_block.py',272),
-  ('log_line -> date OPEN_VPN_MSG MONTH DAY YEAR','log_line',5,'p_log_line','init_block.py',273),
-  ('log_line -> date LIB_VER_MSG DAY MONTH YEAR LIB_VER_MSG','log_line',6,'p_log_line','init_block.py',274),
-  ('log_line -> date SYS_MSG','log_line',2,'p_log_line','init_block.py',275),
-  ('log_line -> date PLUGIN_MSG DIR SPECIAL_CHAR SPECIAL_CHAR DIR SPECIAL_CHAR FLAGS SPECIAL_CHAR VAR_SET VAR_VAL','log_line',11,'p_log_line','init_block.py',276),
-  ('log_line -> date CRYPTO_MSG','log_line',2,'p_log_line','init_block.py',277),
-  ('log_line -> date ROUTE_GATEWAY IP SLASH IP VAR_SET VAR_VAL VAR_SET VAR_VAL','log_line',9,'p_log_line','init_block.py',278),
-  ('log_line -> date SBIN_IP_MSG DAY DAY','log_line',4,'p_log_line','init_block.py',279),
-  ('log_line -> date SBIN_IP_MSG IP IP_RNG PEER IP','log_line',6,'p_log_line','init_block.py',280),
-  ('log_line -> date IP_PROTOCOL','log_line',2,'p_log_line','init_block.py',281),
-  ('log_line -> date CONN_MSG VAR_SET VAR_VAL VAR_SET VAR_VAL','log_line',6,'p_log_line','init_block.py',282),
-  ('log_line -> date TCP_MSG','log_line',2,'p_log_line','init_block.py',283),
-  ('log_line -> date SYS_MSG SPECIAL_CHAR VAR_SET VAR_VAL VAR_SET VAR_VAL','log_line',7,'p_log_line','init_block.py',284),
-  ('log_line -> date CONN_MSG VAR_SET IP VAR_SET VAR_VAL SPECIAL_CHAR VAR_SET VAR_VAL','log_line',9,'p_log_line','init_block.py',285),
-  ('log_line -> date IFCONFIG_END','log_line',2,'p_log_line','init_block.py',286),
-  ('log_line -> date','log_line',1,'p_log_line','init_block.py',287),
-  ('date -> WEEK_DAY MONTH DAY CLOCK YEAR','date',5,'p_date','init_block.py',293),
-  ('date -> WEEK_DAY MONTH DAY CLOCK','date',4,'p_date','init_block.py',294),
-  ('empty -> <empty>','empty',0,'p_empty','init_block.py',299),
+  ('main_rule -> route_identifiers main_rule','main_rule',2,'p_main_rule','parser.py',257),
+  ('main_rule -> log_line main_rule','main_rule',2,'p_main_rule','parser.py',258),
+  ('main_rule -> log_line','main_rule',1,'p_main_rule','parser.py',259),
+  ('main_rule -> empty','main_rule',1,'p_main_rule','parser.py',260),
+  ('log_line -> date PLUGIN_MSG DIR VAR_SET VAR_VAL','log_line',5,'p_log_line','parser.py',268),
+  ('log_line -> date SBIN_IP_MSG IP IP_RNG','log_line',4,'p_log_line','parser.py',269),
+  ('log_line -> date TUN_TAP_MSG','log_line',2,'p_log_line','parser.py',270),
+  ('log_line -> date SBIN_IP_MSG IP PEER IP','log_line',5,'p_log_line','parser.py',271),
+  ('log_line -> date SIGTERM_MSG','log_line',2,'p_log_line','parser.py',272),
+  ('log_line -> date OPEN_VPN_MSG MONTH DAY YEAR','log_line',5,'p_log_line','parser.py',273),
+  ('log_line -> date LIB_VER_MSG DAY MONTH YEAR LIB_VER_MSG','log_line',6,'p_log_line','parser.py',274),
+  ('log_line -> date SYS_MSG','log_line',2,'p_log_line','parser.py',275),
+  ('log_line -> date PLUGIN_MSG DIR SPECIAL_CHAR SPECIAL_CHAR DIR SPECIAL_CHAR FLAGS SPECIAL_CHAR VAR_SET VAR_VAL','log_line',11,'p_log_line','parser.py',276),
+  ('log_line -> date CRYPTO_MSG','log_line',2,'p_log_line','parser.py',277),
+  ('log_line -> date ROUTE_GATEWAY IP SLASH IP VAR_SET VAR_VAL VAR_SET VAR_VAL','log_line',9,'p_log_line','parser.py',278),
+  ('log_line -> date SBIN_IP_MSG DAY DAY','log_line',4,'p_log_line','parser.py',279),
+  ('log_line -> date SBIN_IP_MSG IP IP_RNG PEER IP','log_line',6,'p_log_line','parser.py',280),
+  ('log_line -> date IP_PROTOCOL','log_line',2,'p_log_line','parser.py',281),
+  ('log_line -> date CONN_MSG VAR_SET VAR_VAL VAR_SET VAR_VAL','log_line',6,'p_log_line','parser.py',282),
+  ('log_line -> date TCP_MSG','log_line',2,'p_log_line','parser.py',283),
+  ('log_line -> date SYS_MSG SPECIAL_CHAR VAR_SET VAR_VAL VAR_SET VAR_VAL','log_line',7,'p_log_line','parser.py',284),
+  ('log_line -> date CONN_MSG VAR_SET IP VAR_SET VAR_VAL SPECIAL_CHAR VAR_SET VAR_VAL','log_line',9,'p_log_line','parser.py',285),
+  ('log_line -> date IFCONFIG_END','log_line',2,'p_log_line','parser.py',286),
+  ('log_line -> date SYS_MSG VAR_SET VAR_VAL VAR_SET VAR_VAL','log_line',6,'p_log_line','parser.py',287),
+  ('date -> WEEK_DAY MONTH DAY CLOCK YEAR','date',5,'p_date','parser.py',293),
+  ('date -> WEEK_DAY MONTH DAY CLOCK','date',4,'p_date','parser.py',294),
+  ('route_identifiers -> ROUTE_HEADER key_value_list ROUTE_HEADER','route_identifiers',3,'p_route_identifiers','parser.py',299),
+  ('key_value_list -> key_value_list key_value','key_value_list',2,'p_key_value_list','parser.py',303),
+  ('key_value_list -> key_value','key_value_list',1,'p_key_value_list','parser.py',304),
+  ('key_value -> VPN_IP IP','key_value',2,'p_key_value','parser.py',308),
+  ('empty -> <empty>','empty',0,'p_empty','parser.py',312),
 ]
