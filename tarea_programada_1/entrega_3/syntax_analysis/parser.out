@@ -14,7 +14,6 @@ Unused terminals:
     FASE_END
     FLAGS
     IFCONFIG_END
-    IP
     IP_PROTOCOL
     IP_RNG
     LIB_VER_MSG
@@ -38,7 +37,6 @@ Unused terminals:
     TUN_TAP_MSG
     VAR_SET
     VAR_VAL
-    VPN_IP
     WEEK_DAY
     YEAR
 
@@ -46,6 +44,7 @@ Grammar
 
 Rule 0     S' -> route_identifiers
 Rule 1     route_identifiers -> ROUTE_HEADER
+Rule 2     key_value -> VPN_IP IP
 
 Terminals, with rules where they appear
 
@@ -61,7 +60,7 @@ DIR                  :
 FASE_END             : 
 FLAGS                : 
 IFCONFIG_END         : 
-IP                   : 
+IP                   : 2
 IP_PROTOCOL          : 
 IP_RNG               : 
 LIB_VER_MSG          : 
@@ -86,13 +85,14 @@ TOPOLOGY             :
 TUN_TAP_MSG          : 
 VAR_SET              : 
 VAR_VAL              : 
-VPN_IP               : 
+VPN_IP               : 2
 WEEK_DAY             : 
 YEAR                 : 
 error                : 
 
 Nonterminals, with rules where they appear
 
+key_value            : 
 route_identifiers    : 0
 
 Parsing method: LALR
