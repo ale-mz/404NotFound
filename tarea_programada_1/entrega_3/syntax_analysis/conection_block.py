@@ -350,12 +350,12 @@ Mon Sep 14 17:02:20 2020 B70873/186.177.189.227:10962 SENT CONTROL [B70873]: 'PU
   lexer = lex.lex()
 
 
-  # lexer.input(log_data)
-  # while True:
-  #   tok = lexer.token()
-  #   if not tok: 
-  #     break      # No more input
-  #   print(tok)
+  lexer.input(log_data)
+  while True:
+    tok = lexer.token()
+    if not tok: 
+      break      # No more input
+    print(tok)
 
 
   parser = yacc.yacc()

@@ -49,6 +49,8 @@ tokens = (
 
 # t_STATUS = 'status'
 
+# # Define regex for PROF
+t_PROF = '[A-Za-z]+.[A-Za-z]+'
 # t_POST = 'POST'
 
 ### General Tokens ###
@@ -86,8 +88,6 @@ t_PORT = '(?<=\d)(:\d{5})|(:\d{4})'
 # Define regex for CARNET
 t_CARNET = '[\w]\d{5}'
 
-# # Define regex for PROF
-t_PROF = '[A-Za-z]+.[A-Za-z]+'
 # Define /sbin/ip messages on console
 def t_SBIN_IP_MSG(t):
   r'/sbin/ip([a-z ]+\d?[a-z ]+)'
@@ -298,9 +298,23 @@ def p_log_line(p):
               | date userid CONN_MSG CONN_MSG IP SPECIAL_CHAR SPECIAL_CHAR id SLASH IP PORT
               | date userid SYS_MSG id SLASH IP PORT COLON IP
               | date userid SYS_MSG
-              | date userid SENT_CNT SPECIAL_CHAR id SPECIAL_CHAR COLON SPECIAL_CHAR ROUTE_FLAG VPN_IP IP ROUTE_FLAG VPN_IP IP ROUTE_FLAG VPN_IP TOPOLOGY IP IP SPECIAL_CHAR PEER SPECIAL_CHAR CIPHER SPECIAL_CHAR VAR_SET VAR_VAL
+              | date userid SENT_CNT SPECIAL_CHAR id SPECIAL_CHAR COLON SPECIAL_CHAR routeid TOPOLOGY IP IP SPECIAL_CHAR PEER SPECIAL_CHAR CIPHER SPECIAL_CHAR VAR_SET VAR_VAL
               | date userid CONN_MSG CIPHER
               | date IP PORT PLUGIN_MSG DIR VAR_SET VAR_VAL
+    '''
+    pass
+
+def p_routeid(p):
+    '''
+    routeid : route routeid
+            | route
+    '''
+    pass
+
+def p_route(p):
+    '''
+    route : ROUTE_FLAG VPN_IP IP
+          | ROUTE_FLAG VPN_IP
     '''
     pass
 
