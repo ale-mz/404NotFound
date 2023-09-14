@@ -6,9 +6,9 @@ _tabversion = '3.10'
 
 _lr_method = 'LALR'
 
-_lr_signature = 'CARNET CIPHER CLOCK CN_SET COLON CONN_MSG CRYPTO_MSG DAY DIR FASE_END FLAGS IFCONFIG_END IP IP_PROTOCOL IP_RNG LIB_VER_MSG MONTH OPEN_VPN_MSG PEER PLUGIN_MSG POOL_RET PORT PROF ROUTE_FLAG ROUTE_GATEWAY ROUTE_HEADER SBIN_IP_MSG SENT_CNT SIGTERM_MSG SLASH SPECIAL_CHAR SYS_MSG TCP_MSG TOPOLOGY TUN_TAP_MSG VAR_SET VAR_VAL VPN_IP WEEK_DAY YEARroute_identifiers : ROUTE_HEADERkey_value : VPN_IP IP'
+_lr_signature = 'CARNET CIPHER CLOCK CN_SET COLON CONN_MSG CRYPTO_MSG DAY DIR FASE_END FLAGS IFCONFIG_END IP IP_PROTOCOL IP_RNG LIB_VER_MSG MONTH OPEN_VPN_MSG PEER PLUGIN_MSG POOL_RET PORT POST ROUTE_FLAG ROUTE_GATEWAY ROUTE_HEADER SBIN_IP_MSG SENT_CNT SIGTERM_MSG SLASH SPECIAL_CHAR STATUS SYS_MSG TCP_MSG TOPOLOGY TUN_TAP_MSG VAR_SET VAR_VAL VPN_IP WEEK_DAY YEAR\n    main_rule : log_line main_rule\n              | log_line\n              | empty\n    \n    log_line : WEEK_DAY MONTH DAY CLOCK YEAR PLUGIN_MSG DIR VAR_SET VAR_VAL\n             | WEEK_DAY MONTH DAY CLOCK YEAR SBIN_IP_MSG IP IP_RNG\n    empty :'
     
-_lr_action_items = {'ROUTE_HEADER':([0,],[2,]),'$end':([1,2,],[0,-1,]),}
+_lr_action_items = {'WEEK_DAY':([0,2,15,16,],[4,4,-5,-4,]),'$end':([0,1,2,3,5,15,16,],[-6,0,-2,-3,-1,-5,-4,]),'MONTH':([4,],[6,]),'DAY':([6,],[7,]),'CLOCK':([7,],[8,]),'YEAR':([8,],[9,]),'PLUGIN_MSG':([9,],[10,]),'SBIN_IP_MSG':([9,],[11,]),'DIR':([10,],[12,]),'IP':([11,],[13,]),'VAR_SET':([12,],[14,]),'IP_RNG':([13,],[15,]),'VAR_VAL':([14,],[16,]),}
 
 _lr_action = {}
 for _k, _v in _lr_action_items.items():
@@ -17,7 +17,7 @@ for _k, _v in _lr_action_items.items():
       _lr_action[_x][_k] = _y
 del _lr_action_items
 
-_lr_goto_items = {'route_identifiers':([0,],[1,]),}
+_lr_goto_items = {'main_rule':([0,2,],[1,5,]),'log_line':([0,2,],[2,2,]),'empty':([0,2,],[3,3,]),}
 
 _lr_goto = {}
 for _k, _v in _lr_goto_items.items():
@@ -26,7 +26,11 @@ for _k, _v in _lr_goto_items.items():
        _lr_goto[_x][_k] = _y
 del _lr_goto_items
 _lr_productions = [
-  ("S' -> route_identifiers","S'",1,None,None,None),
-  ('route_identifiers -> ROUTE_HEADER','route_identifiers',1,'p_route_identifiers','mvp.py',251),
-  ('key_value -> VPN_IP IP','key_value',2,'p_key_value','mvp.py',259),
+  ("S' -> main_rule","S'",1,None,None,None),
+  ('main_rule -> log_line main_rule','main_rule',2,'p_main_rule','init_block.py',258),
+  ('main_rule -> log_line','main_rule',1,'p_main_rule','init_block.py',259),
+  ('main_rule -> empty','main_rule',1,'p_main_rule','init_block.py',260),
+  ('log_line -> WEEK_DAY MONTH DAY CLOCK YEAR PLUGIN_MSG DIR VAR_SET VAR_VAL','log_line',9,'p_log_line','init_block.py',268),
+  ('log_line -> WEEK_DAY MONTH DAY CLOCK YEAR SBIN_IP_MSG IP IP_RNG','log_line',8,'p_log_line','init_block.py',269),
+  ('empty -> <empty>','empty',0,'p_empty','init_block.py',317),
 ]

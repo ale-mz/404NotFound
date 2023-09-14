@@ -168,53 +168,6 @@ def t_IP_PROTOCOL(t):
   r'[\w -//]+protocol\.[\w _]+'
   return t
 
-# Define regex for Connection messages on console
-def t_CONN_MSG(t):
-  r'[A-Za-z _]+:'
-  return t
-
-# Define regex for connection pool assign
-def t_POOL_RET(t):
-  r'pool\sreturned'
-  return t
-
-# Define regex for route line head
-def t_SENT_CNT(t):
-  r'SENT\sCONTROL'
-  return t
-
-# Define regex for route flag
-def t_ROUTE_FLAG(t):
-  r'(PUSH_REPLY)?(,route)'
-  return t
-
-# Define regex for status of connection
-def t_TOPOLOGY(t):
-  r',topology[\w ,\-]+(?=\s)'
-  return t
-
-# Define regex for cypher flag on peer
-def t_CIPHER(t):
-  r'([A-Za-z ]+)?(cipher|Cipher)[\' \w\-]+'
-  return t
-
-# Define regex for message at the end of console
-def t_IFCONFIG_END(t):
-  r'[A-Z ]+LIST'
-  return t
-
-# Define regex for message at the end of a phase
-def t_FASE_END(t):
-  r'[A-Za-z ]+Completed'
-  return t
-
-### Connection Tokens ###
-# Define regex for last part of username authentication
-def t_CN_SET(t):
-  r'\[CN\sSET\]'
-  return t
-
-
 ### Special Tokens ###
 # Define regex for undetermined characters
 def t_SPECIAL_CHAR(t):
@@ -243,60 +196,27 @@ def t_error(t):
 
 # ########################################################################################################################################
 # ########################################################################################################################################
-# ########################################################################################################################################
 
-# parsing rules
-  
+# Parsing rules
+
 def p_route_identifiers(p):
-    'route_identifiers : ROUTE_HEADER'
-    pass
+    'route_identifiers : ROUTE_HEADER key_value_list ROUTE_HEADER'
+    p[0] = p[2]
 
-# def p_routes_start(p):
-#     'routes_start : VPN_IP IP'
-#     pass
+def p_key_value_list(p):
+    'key_value_list : key_value_list key_value'
+    p[0] = p[1] + [p[2]]
+
+def p_key_value_list_single(p):
+    'key_value_list : key_value'
+    p[0] = [p[1]]
 
 def p_key_value(p):
     'key_value : VPN_IP IP'
     p[0] = (p[1], p[2])
 
-# def p_key_value_list(p):
-#     'key_value_list : key_value_list key_value'
-#     p[0] = p[1] + [p[2]]
-
-# def p_key_value_list_single(p):
-#     'key_value_list : key_value'
-#     p[0] = [p[1]]
-
-
-# def p_error(p):
-#     print("Syntax error at:", p)
-
-# Parsing rules
-
-# def p_route_identifiers(p):
-#     'route_identifiers : ROUTE_HEADER key_value_list ROUTE_HEADER'
-#     p[0] = p[2]
-
-# def p_key_value_list(p):
-#     'key_value_list : key_value_list key_value'
-#     p[0] = p[1] + [p[2]]
-
-# def p_key_value_list_single(p):
-#     'key_value_list : key_value'
-#     p[0] = [p[1]]
-
-# def p_key_value(p):
-#     'key_value : VPN_IP IP'
-#     p[0] = (p[1], p[2])
-
-# def p_log_line(p):
-#     'log_line : WEEK_DAY MONTH DAY CLOCK YEAR PLUGIN_MSG DIR VAR_SET VAR_VAL'
-#     pass
-
 def p_error(p):
     print("Syntax error at:", p)
-
-
 
 if __name__ == "__main__":
   # Build the lexer
@@ -314,16 +234,16 @@ if __name__ == "__main__":
 
   # print(data)
 
-  # Give the lexer some input
-  lexer.input(data)
+  # # Give the lexer some input
+  # lexer.input(data)
   
-  tokens_output = open("tokens_output.txt", "w")
-  # Tokenize
-  while True:
-    tok = lexer.token()
-    if not tok: 
-      break      # No more input
-    # tokens_output.write(str(tok.value))
-    tokens_output.write(f"{tok}\n")
-    # tokens_output.write(f"{tok.type}: {tok.value}\n")
-  tokens_output.close()
+  # tokens_output = open("tokens_output.txt", "w")
+  # # Tokenize
+  # while True:
+  #   tok = lexer.token()
+  #   if not tok: 
+  #     break      # No more input
+  #   # tokens_output.write(str(tok.value))
+  #   tokens_output.write(f"{tok}\n")
+  #   # tokens_output.write(f"{tok.type}: {tok.value}\n")
+  # tokens_output.close()
