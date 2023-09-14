@@ -4,6 +4,7 @@ import ply.yacc as yacc
 
 tokens = (
   'IP',           # General Tokens
+  'COMPLETED',
   'WEEK_DAY',
   'MONTH',
   'DAY',
@@ -47,6 +48,8 @@ tokens = (
   'COLON'
 )
 
+
+
 # t_STATUS = 'status'
 
 # # Define regex for PROF
@@ -87,6 +90,10 @@ t_PORT = '(?<=\d)(:\d{5})|(:\d{4})'
 
 # Define regex for CARNET
 t_CARNET = '[\w]\d{5}'
+
+def t_COMPLETED(t):
+  r'Initialization Sequence Completed'
+  return t
 
 # Define /sbin/ip messages on console
 def t_SBIN_IP_MSG(t):
@@ -285,22 +292,30 @@ def p_log_line(p):
               | date SYS_MSG SPECIAL_CHAR VAR_SET VAR_VAL VAR_SET VAR_VAL
               | date CONN_MSG VAR_SET IP VAR_SET VAR_VAL SPECIAL_CHAR VAR_SET VAR_VAL
               | date IFCONFIG_END
+              | date COMPLETED
               | date SYS_MSG VAR_SET VAR_VAL VAR_SET VAR_VAL
               | date TCP_MSG IP PORT
               | date IP PORT SYS_MSG FLAGS IP PORT SPECIAL_CHAR VAR_SET VAR_VAL
               | date TCP_MSG IP PORT PLUGIN_MSG DIR VAR_SET VAR_VAL
-              | date IP PORT SYS_MSG SPECIAL_CHAR id SPECIAL_CHAR CN_SET
+              | date IP PORT SYS_MSG slmtrp CN_SET
               | date IP PORT CONN_MSG CRYPTO_MSG
-              | date IP PORT SPECIAL_CHAR id SPECIAL_CHAR PEER IP PORT
+              | date IP PORT slmtrp PEER IP PORT
               | date userid CONN_MSG POOL_RET VAR_SET IP SPECIAL_CHAR VAR_SET VAR_VAL
               | date userid PLUGIN_MSG DIR VAR_SET VAR_VAL
               | date userid CONN_MSG CONN_MSG DIR
               | date userid CONN_MSG CONN_MSG IP SPECIAL_CHAR SPECIAL_CHAR id SLASH IP PORT
               | date userid SYS_MSG id SLASH IP PORT COLON IP
               | date userid SYS_MSG
-              | date userid SENT_CNT SPECIAL_CHAR id SPECIAL_CHAR COLON SPECIAL_CHAR routeid TOPOLOGY IP IP SPECIAL_CHAR PEER SPECIAL_CHAR CIPHER SPECIAL_CHAR VAR_SET VAR_VAL
+              | date userid SENT_CNT slmtrp COLON SPECIAL_CHAR routeid TOPOLOGY IP IP SPECIAL_CHAR PEER SPECIAL_CHAR CIPHER SPECIAL_CHAR VAR_SET VAR_VAL
               | date userid CONN_MSG CIPHER
               | date IP PORT PLUGIN_MSG DIR VAR_SET VAR_VAL
+    '''
+    pass
+
+def p_slmtrp(p):
+    '''
+    slmtrp : SPECIAL_CHAR id SPECIAL_CHAR
+            | FLAGS
     '''
     pass
 
