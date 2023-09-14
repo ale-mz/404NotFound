@@ -6,9 +6,9 @@ _tabversion = '3.10'
 
 _lr_method = 'LALR'
 
-_lr_signature = 'CARNET CIPHER CLOCK CN_SET COLON CONN_MSG CRYPTO_MSG DAY DIR FASE_END FLAGS IFCONFIG_END IP IP_PROTOCOL IP_RNG LIB_VER_MSG MONTH OPEN_VPN_MSG PEER PLUGIN_MSG POOL_RET PORT PROF ROUTE_FLAG ROUTE_GATEWAY ROUTE_HEADER SBIN_IP_MSG SENT_CNT SIGTERM_MSG SLASH SPECIAL_CHAR SYS_MSG TCP_MSG TOPOLOGY TUN_TAP_MSG VAR_SET VAR_VAL VPN_IP WEEK_DAY YEARfile : header init_head connectionheader : ROUTE_HEADER vpnip ROUTE_HEADERvpnip : VPN_IP IP vpnip\n           | emptydate : WEEK_DAY MONTH DAY CLOCK YEAR\n          | YEAR init_head : init_body init_endinit_body : software init_body\n    | hardware init_body\n    | network init_body\n    | emptysoftware : plugin\n    | sbinit\n    | tuntap plugin : date PLUGIN_MSG DIR VAR_SET VAR_VAL\n    | PLUGIN_MSG VAR_SET VAR_VAL\n    | date PLUGIN_MSG\n    | date PLUGIN_MSG DIR\n    | date PLUGIN_MSG DIR SPECIAL_CHAR SPECIAL_CHAR DIR SPECIAL_CHAR FLAGS SPECIAL_CHAR VAR_SET VAR_VALsbinit : date SBIN_IP_MSG IP IP_RNG\n    | date SBIN_IP_MSG IP IP_RNG PEER IP\n    | date SBIN_IP_MSG IP PEER IPtuntap : date TUN_TAP_MSGhardware : date SYS_MSG\n    | date SIGTERM_MSG\n    | date OPEN_VPN_MSG MONTH DAY YEAR\n    | date LIB_VER_MSG DAY MONTH YEAR LIB_VER_MSG\n    | date SYS_MSG VAR_SET VAR_VAL\n    | date VAR_SET VAR_VALnetwork : date crypto\n    | date ROUTE_GATEWAY IP SLASH IP VAR_SET VAR_VAL VAR_SET VAR_VAL\n    | date IP_PROTOCOL\n    | date CONN_MSG VAR_SET VAR_VAL VAR_SET VAR_VAL\n    | date CONN_MSG VAR_SET IP VAR_SET VAR_VAL SPECIAL_CHAR VAR_SET VAR_VAL\n    | date IFCONFIG_ENDconnection : crypto conmutation routing cryptostart : date TCP_MSG IP PORTlogin : date IP PORT SYS_MSG IP PORT SPECIAL_CHAR VAR_SET VAR_VAL\n    | date IP PORT plugin SYS_MSG DIR VAR_SET VAR_VAL\n    | date IP PORT SYS_MSG SPECIAL_CHAR user SPECIAL_CHAR CN_SETcrypto : date IP PORT CONN_MSG CRYPTO_MSG\n    | date user SLASH IP PORT CONN_MSG CIPHER\n    | CRYPTO_MSG\n    | crypto login\n    | startconmutation : date IP PORT SPECIAL_CHAR user SPECIAL_CHAR PORT PEER IP PORT\n    | date user SLASH IP PORT CONN_MSG POOL_RET ipversion\n    | date user SLASH IP PORT PLUGIN_MSG DIR VAR_SET VAR_VAL\n    | date user SLASH IP PORT CONN_MSG CONN_MSG DIR\n    | date user user SLASH IP PORT CONN_MSG CONN_MSG IP SPECIAL_CHAR SPECIAL_CHAR user SLASH IP PORT\n    | date user SLASH IP PORT SYS_MSG user SLASH IP PORT COLON IProute : ROUTE_FLAG VPN_IP route\n    | IP ROUTE_FLAG VPN_IP route\n    | emptyrouting : date user SLASH IP PORT SYS_MSG\n  | date user SLASH IP PORT SENT_CNT SPECIAL_CHAR user SPECIAL_CHAR COLON route TOPOLOGY IP IP SPECIAL_CHAR CIPHER SPECIAL_CHAR VAR_SET VAR_VALconnection : date CARNET SLASH IP PORT\n    | date PROF SLASH IP PORTuser : CARNET\n    | PROFinit_end : date FASE_ENDempty : ipversion : VAR_SET IP VAR_SET VAR_VAL'
+_lr_signature = 'CARNET CIPHER CLOCK CN_SET COLON CONN_MSG CRYPTO_MSG DAY DIR FASE_END FLAGS IFCONFIG_END IP IP_PROTOCOL IP_RNG LIB_VER_MSG MONTH OPEN_VPN_MSG PEER PLUGIN_MSG POOL_RET PORT PROF ROUTE_FLAG ROUTE_GATEWAY ROUTE_HEADER SBIN_IP_MSG SENT_CNT SIGTERM_MSG SLASH SPECIAL_CHAR SYS_MSG TCP_MSG TOPOLOGY TUN_TAP_MSG VAR_SET VAR_VAL VPN_IP WEEK_DAY YEARroute_identifiers : ROUTE_HEADER'
     
-_lr_action_items = {'ROUTE_HEADER':([0,3,17,19,47,70,],[3,-62,46,-4,-62,-3,]),'$end':([1,20,23,24,49,92,101,120,121,122,150,171,172,182,],[0,-1,-43,-45,-44,-36,-37,-57,-41,-58,-42,-40,-39,-38,]),'WEEK_DAY':([2,4,5,6,7,8,9,10,11,12,13,14,21,23,24,25,27,28,29,31,32,36,38,40,41,43,46,48,49,56,62,66,68,71,80,89,92,94,101,102,104,108,111,112,121,124,126,129,150,154,165,166,171,172,174,175,182,185,187,189,195,202,213,218,],[16,16,16,16,16,16,-11,-12,-13,-14,16,-6,16,-43,-45,-7,-8,-9,-10,-24,-25,16,-32,-35,-17,-23,-2,16,-44,-61,-29,-18,-16,16,-28,-20,16,16,-37,-26,16,-15,-22,-5,-41,-27,-33,-21,-42,-55,-31,-34,-40,-39,-49,-47,-38,-48,-19,-46,-63,-51,-50,-56,]),'YEAR':([2,4,5,6,7,8,9,10,11,12,13,14,21,23,24,25,27,28,29,31,32,36,38,40,41,43,46,48,49,56,62,66,68,71,80,81,82,89,91,92,94,101,102,104,108,111,112,121,124,126,129,150,154,165,166,171,172,174,175,182,185,187,189,195,202,213,218,],[14,14,14,14,14,14,-11,-12,-13,-14,14,-6,14,-43,-45,-7,-8,-9,-10,-24,-25,14,-32,-35,-17,-23,-2,14,-44,-61,-29,-18,-16,14,-28,102,103,-20,112,14,14,-37,-26,14,-15,-22,-5,-41,-27,-33,-21,-42,-55,-31,-34,-40,-39,-49,-47,-38,-48,-19,-46,-63,-51,-50,-56,]),'PLUGIN_MSG':([2,6,7,8,10,11,12,13,14,23,24,31,32,36,38,40,41,43,46,49,62,66,68,80,89,94,101,102,104,108,111,112,114,121,124,126,129,136,150,165,166,171,172,182,187,],[15,15,15,15,-12,-13,-14,41,-6,-43,-45,-24,-25,-30,-32,-35,-17,-23,-2,-44,-29,-18,-16,-28,-20,15,-37,-26,15,-15,-22,-5,41,-41,-27,-33,-21,148,-42,-31,-34,-40,-39,-38,-19,]),'VPN_IP':([3,47,199,203,],[18,18,205,207,]),'CRYPTO_MSG':([4,13,14,25,56,71,98,112,154,218,],[23,23,-6,-7,-61,23,121,-5,-55,-56,]),'SYS_MSG':([13,14,41,66,68,94,104,108,112,117,136,141,187,],[31,-6,-17,-18,-16,116,116,-15,-5,134,149,154,-19,]),'SIGTERM_MSG':([13,14,112,],[32,-6,-5,]),'OPEN_VPN_MSG':([13,14,112,],[33,-6,-5,]),'LIB_VER_MSG':([13,14,103,112,],[34,-6,124,-5,]),'VAR_SET':([13,14,15,31,39,66,85,86,105,112,138,139,145,157,162,163,167,184,216,],[35,-6,44,59,65,87,106,107,125,-5,151,152,159,170,176,177,179,191,217,]),'ROUTE_GATEWAY':([13,14,112,],[37,-6,-5,]),'IP_PROTOCOL':([13,14,112,],[38,-6,-5,]),'CONN_MSG':([13,14,76,112,123,136,146,147,160,],[39,-6,98,-5,137,147,160,161,173,]),'IFCONFIG_END':([13,14,112,],[40,-6,-5,]),'SBIN_IP_MSG':([13,14,112,],[42,-6,-5,]),'TUN_TAP_MSG':([13,14,112,],[43,-6,-5,]),'CARNET':([14,22,30,50,57,58,72,74,112,115,133,149,168,194,],[-6,51,57,57,-59,-60,57,57,-5,57,57,57,57,57,]),'PROF':([14,22,30,50,57,58,72,74,112,115,133,149,168,194,],[-6,53,58,58,-59,-60,58,58,-5,58,58,58,58,58,]),'IP':([14,18,22,30,37,42,50,55,63,65,75,77,78,84,90,96,110,112,113,116,118,169,173,176,178,193,196,204,205,206,207,208,],[-6,47,52,52,64,67,73,79,83,86,97,99,100,105,111,119,129,-5,130,132,135,181,183,184,186,197,202,208,197,210,197,212,]),'TCP_MSG':([14,22,30,112,],[-6,55,55,-5,]),'FASE_END':([14,26,112,],[-6,56,-5,]),'MONTH':([16,33,61,],[45,60,82,]),'DAY':([34,45,60,],[61,69,81,]),'VAR_VAL':([35,44,59,65,87,106,107,125,151,152,159,170,177,179,191,217,],[62,68,80,85,108,126,127,138,165,166,172,182,185,187,195,218,]),'DIR':([41,109,134,148,161,],[66,128,145,163,174,]),'SLASH':([51,53,54,57,58,64,74,93,95,164,201,],[75,77,78,-59,-60,84,96,113,118,178,206,]),'PORT':([52,73,79,83,97,99,100,119,130,132,135,142,181,186,210,],[76,94,101,104,120,122,123,136,141,143,146,156,189,192,213,]),'SPECIAL_CHAR':([57,58,66,88,94,116,127,128,131,143,144,153,155,180,183,190,212,215,],[-59,-60,88,109,115,133,139,140,142,157,158,167,168,188,190,194,214,216,]),'IP_RNG':([67,],[89,]),'PEER':([67,89,156,],[90,110,169,]),'CLOCK':([69,],[91,]),'CIPHER':([137,214,],[150,215,]),'FLAGS':([140,],[153,]),'SENT_CNT':([141,],[155,]),'POOL_RET':([147,],[162,]),'CN_SET':([158,],[171,]),'COLON':([188,192,],[193,196,]),'ROUTE_FLAG':([193,197,205,207,],[199,203,199,199,]),'TOPOLOGY':([193,198,200,205,207,209,211,],[-62,204,-54,-62,-62,-52,-53,]),}
+_lr_action_items = {'ROUTE_HEADER':([0,],[2,]),'$end':([1,2,],[0,-1,]),}
 
 _lr_action = {}
 for _k, _v in _lr_action_items.items():
@@ -17,7 +17,7 @@ for _k, _v in _lr_action_items.items():
       _lr_action[_x][_k] = _y
 del _lr_action_items
 
-_lr_goto_items = {'file':([0,],[1,]),'header':([0,],[2,]),'init_head':([2,],[4,]),'init_body':([2,6,7,8,],[5,27,28,29,]),'software':([2,6,7,8,],[6,6,6,6,]),'hardware':([2,6,7,8,],[7,7,7,7,]),'network':([2,6,7,8,],[8,8,8,8,]),'empty':([2,3,6,7,8,47,193,205,207,],[9,19,9,9,9,19,200,200,200,]),'plugin':([2,6,7,8,94,104,],[10,10,10,10,117,117,]),'sbinit':([2,6,7,8,],[11,11,11,11,]),'tuntap':([2,6,7,8,],[12,12,12,12,]),'date':([2,4,5,6,7,8,13,21,36,48,71,92,94,104,],[13,22,26,13,13,13,30,50,63,72,30,63,114,114,]),'vpnip':([3,47,],[17,70,]),'connection':([4,],[20,]),'crypto':([4,13,71,],[21,36,92,]),'start':([4,13,71,],[24,24,24,]),'init_end':([5,],[25,]),'conmutation':([21,],[48,]),'login':([21,36,92,],[49,49,49,]),'user':([22,30,50,72,74,115,133,149,168,194,],[54,54,74,93,95,131,144,164,180,201,]),'routing':([48,],[71,]),'ipversion':([162,],[175,]),'route':([193,205,207,],[198,209,211,]),}
+_lr_goto_items = {'route_identifiers':([0,],[1,]),}
 
 _lr_goto = {}
 for _k, _v in _lr_goto_items.items():
@@ -26,68 +26,6 @@ for _k, _v in _lr_goto_items.items():
        _lr_goto[_x][_k] = _y
 del _lr_goto_items
 _lr_productions = [
-  ("S' -> file","S'",1,None,None,None),
-  ('file -> header init_head connection','file',3,'p_file','regexProve.py',250),
-  ('header -> ROUTE_HEADER vpnip ROUTE_HEADER','header',3,'p_header','regexProve.py',254),
-  ('vpnip -> VPN_IP IP vpnip','vpnip',3,'p_vpnip','regexProve.py',258),
-  ('vpnip -> empty','vpnip',1,'p_vpnip','regexProve.py',259),
-  ('date -> WEEK_DAY MONTH DAY CLOCK YEAR','date',5,'p_date','regexProve.py',263),
-  ('date -> YEAR','date',1,'p_date','regexProve.py',264),
-  ('init_head -> init_body init_end','init_head',2,'p_init_head','regexProve.py',267),
-  ('init_body -> software init_body','init_body',2,'p_init_body','regexProve.py',271),
-  ('init_body -> hardware init_body','init_body',2,'p_init_body','regexProve.py',272),
-  ('init_body -> network init_body','init_body',2,'p_init_body','regexProve.py',273),
-  ('init_body -> empty','init_body',1,'p_init_body','regexProve.py',274),
-  ('software -> plugin','software',1,'p_software','regexProve.py',278),
-  ('software -> sbinit','software',1,'p_software','regexProve.py',279),
-  ('software -> tuntap','software',1,'p_software','regexProve.py',280),
-  ('plugin -> date PLUGIN_MSG DIR VAR_SET VAR_VAL','plugin',5,'p_plugin','regexProve.py',284),
-  ('plugin -> PLUGIN_MSG VAR_SET VAR_VAL','plugin',3,'p_plugin','regexProve.py',285),
-  ('plugin -> date PLUGIN_MSG','plugin',2,'p_plugin','regexProve.py',286),
-  ('plugin -> date PLUGIN_MSG DIR','plugin',3,'p_plugin','regexProve.py',287),
-  ('plugin -> date PLUGIN_MSG DIR SPECIAL_CHAR SPECIAL_CHAR DIR SPECIAL_CHAR FLAGS SPECIAL_CHAR VAR_SET VAR_VAL','plugin',11,'p_plugin','regexProve.py',288),
-  ('sbinit -> date SBIN_IP_MSG IP IP_RNG','sbinit',4,'p_sbinit','regexProve.py',292),
-  ('sbinit -> date SBIN_IP_MSG IP IP_RNG PEER IP','sbinit',6,'p_sbinit','regexProve.py',293),
-  ('sbinit -> date SBIN_IP_MSG IP PEER IP','sbinit',5,'p_sbinit','regexProve.py',294),
-  ('tuntap -> date TUN_TAP_MSG','tuntap',2,'p_tuntap','regexProve.py',298),
-  ('hardware -> date SYS_MSG','hardware',2,'p_hardware','regexProve.py',301),
-  ('hardware -> date SIGTERM_MSG','hardware',2,'p_hardware','regexProve.py',302),
-  ('hardware -> date OPEN_VPN_MSG MONTH DAY YEAR','hardware',5,'p_hardware','regexProve.py',303),
-  ('hardware -> date LIB_VER_MSG DAY MONTH YEAR LIB_VER_MSG','hardware',6,'p_hardware','regexProve.py',304),
-  ('hardware -> date SYS_MSG VAR_SET VAR_VAL','hardware',4,'p_hardware','regexProve.py',305),
-  ('hardware -> date VAR_SET VAR_VAL','hardware',3,'p_hardware','regexProve.py',306),
-  ('network -> date crypto','network',2,'p_network','regexProve.py',310),
-  ('network -> date ROUTE_GATEWAY IP SLASH IP VAR_SET VAR_VAL VAR_SET VAR_VAL','network',9,'p_network','regexProve.py',311),
-  ('network -> date IP_PROTOCOL','network',2,'p_network','regexProve.py',312),
-  ('network -> date CONN_MSG VAR_SET VAR_VAL VAR_SET VAR_VAL','network',6,'p_network','regexProve.py',313),
-  ('network -> date CONN_MSG VAR_SET IP VAR_SET VAR_VAL SPECIAL_CHAR VAR_SET VAR_VAL','network',9,'p_network','regexProve.py',314),
-  ('network -> date IFCONFIG_END','network',2,'p_network','regexProve.py',315),
-  ('connection -> crypto conmutation routing crypto','connection',4,'p_connection','regexProve.py',319),
-  ('start -> date TCP_MSG IP PORT','start',4,'p_start','regexProve.py',323),
-  ('login -> date IP PORT SYS_MSG IP PORT SPECIAL_CHAR VAR_SET VAR_VAL','login',9,'p_login','regexProve.py',327),
-  ('login -> date IP PORT plugin SYS_MSG DIR VAR_SET VAR_VAL','login',8,'p_login','regexProve.py',328),
-  ('login -> date IP PORT SYS_MSG SPECIAL_CHAR user SPECIAL_CHAR CN_SET','login',8,'p_login','regexProve.py',329),
-  ('crypto -> date IP PORT CONN_MSG CRYPTO_MSG','crypto',5,'p_crypto','regexProve.py',333),
-  ('crypto -> date user SLASH IP PORT CONN_MSG CIPHER','crypto',7,'p_crypto','regexProve.py',334),
-  ('crypto -> CRYPTO_MSG','crypto',1,'p_crypto','regexProve.py',335),
-  ('crypto -> crypto login','crypto',2,'p_crypto','regexProve.py',336),
-  ('crypto -> start','crypto',1,'p_crypto','regexProve.py',337),
-  ('conmutation -> date IP PORT SPECIAL_CHAR user SPECIAL_CHAR PORT PEER IP PORT','conmutation',10,'p_conmutation','regexProve.py',341),
-  ('conmutation -> date user SLASH IP PORT CONN_MSG POOL_RET ipversion','conmutation',8,'p_conmutation','regexProve.py',342),
-  ('conmutation -> date user SLASH IP PORT PLUGIN_MSG DIR VAR_SET VAR_VAL','conmutation',9,'p_conmutation','regexProve.py',343),
-  ('conmutation -> date user SLASH IP PORT CONN_MSG CONN_MSG DIR','conmutation',8,'p_conmutation','regexProve.py',344),
-  ('conmutation -> date user user SLASH IP PORT CONN_MSG CONN_MSG IP SPECIAL_CHAR SPECIAL_CHAR user SLASH IP PORT','conmutation',15,'p_conmutation','regexProve.py',345),
-  ('conmutation -> date user SLASH IP PORT SYS_MSG user SLASH IP PORT COLON IP','conmutation',12,'p_conmutation','regexProve.py',346),
-  ('route -> ROUTE_FLAG VPN_IP route','route',3,'p_route','regexProve.py',350),
-  ('route -> IP ROUTE_FLAG VPN_IP route','route',4,'p_route','regexProve.py',351),
-  ('route -> empty','route',1,'p_route','regexProve.py',352),
-  ('routing -> date user SLASH IP PORT SYS_MSG','routing',6,'p_routing','regexProve.py',356),
-  ('routing -> date user SLASH IP PORT SENT_CNT SPECIAL_CHAR user SPECIAL_CHAR COLON route TOPOLOGY IP IP SPECIAL_CHAR CIPHER SPECIAL_CHAR VAR_SET VAR_VAL','routing',19,'p_routing','regexProve.py',357),
-  ('connection -> date CARNET SLASH IP PORT','connection',5,'p_connectionID','regexProve.py',361),
-  ('connection -> date PROF SLASH IP PORT','connection',5,'p_connectionID','regexProve.py',362),
-  ('user -> CARNET','user',1,'p_user','regexProve.py',366),
-  ('user -> PROF','user',1,'p_user','regexProve.py',367),
-  ('init_end -> date FASE_END','init_end',2,'p_init_end','regexProve.py',371),
-  ('empty -> <empty>','empty',0,'p_empty','regexProve.py',375),
-  ('ipversion -> VAR_SET IP VAR_SET VAR_VAL','ipversion',4,'p_ipversion','regexProve.py',379),
+  ("S' -> route_identifiers","S'",1,None,None,None),
+  ('route_identifiers -> ROUTE_HEADER','route_identifiers',1,'p_route_identifiers','mvp.py',251),
 ]
