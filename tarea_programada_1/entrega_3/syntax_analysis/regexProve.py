@@ -1,5 +1,6 @@
 # Import ply library
 import ply.lex as lex
+import ply.yacc as yacc
 
 tokens = (
   'IP',           # General Tokens
@@ -134,7 +135,7 @@ def t_SBIN_IP_MSG(t):
 
 # Define TUN/TAP messages on console
 def t_TUN_TAP_MSG(t):
-  r'([\w ]+)?TUN/TAP[\w ]+'
+  r'([A-Za-z ]+)?TUN/TAP[\w ]+'
   return t
 
 # Define SIGTERM messages on console
@@ -154,7 +155,7 @@ def t_LIB_VER_MSG(t):
 
 # Define regex for cryto messages on console
 def t_CRYPTO_MSG(t):
-  r'[\w \-\.,\/]+ bit\s(key|RSA)'
+  r'(Diffie[\w\- ]+)|([\w \-\.,\/]+ bit\s(RSA))'
   return t
 
 # Define regex for Route Gateway head line
@@ -242,70 +243,167 @@ def t_error(t):
 
 # Parsing rules
 precedence = (
-    ('left','PLUS','MINUS'),
-    ('left','TIMES','DIVIDE'),
-    ('right','UMINUS'),
+    # WIP
     )
 
+def p_file(t):
+  'file : header init_head connection'
+  pass
+
+def p_header(t):
+  'header : ROUTE_HEADER vpnip ROUTE_HEADER'
 
 
+def p_vpnip(t):
+  '''vpnip : VPN_IP IP vpnip
+           | empty'''
+
+
+def p_date(t):
+  '''date : WEEK_DAY MONTH DAY CLOCK YEAR
+          | YEAR '''
+
+def p_init_head(t):
+  'init_head : init_body init_end'
+  pass
+
+def p_init_body(t):
+ '''init_body : software init_body
+    | hardware init_body
+    | network init_body
+    | empty'''
+ pass
+
+def p_software(t):
+  '''software : plugin
+    | sbinit
+    | tuntap'''
+  pass
+
+def p_plugin(t):
+  ''' plugin : date PLUGIN_MSG DIR VAR_SET VAR_VAL
+    | PLUGIN_MSG VAR_SET VAR_VAL
+    | date PLUGIN_MSG
+    | date PLUGIN_MSG DIR
+    | date PLUGIN_MSG DIR SPECIAL_CHAR SPECIAL_CHAR DIR SPECIAL_CHAR FLAGS SPECIAL_CHAR VAR_SET VAR_VAL'''
+  pass
+
+def p_sbinit(t):
+  '''sbinit : date SBIN_IP_MSG IP IP_RNG
+    | date SBIN_IP_MSG IP IP_RNG PEER IP
+    | date SBIN_IP_MSG IP PEER IP'''
+  pass
+
+def p_tuntap(t):
+  'tuntap : date TUN_TAP_MSG'
+
+def p_hardware(t):
+  '''hardware : date SYS_MSG
+    | date SIGTERM_MSG
+    | date OPEN_VPN_MSG MONTH DAY YEAR
+    | date LIB_VER_MSG DAY MONTH YEAR LIB_VER_MSG
+    | date SYS_MSG VAR_SET VAR_VAL
+    | date VAR_SET VAR_VAL'''
+  pass
+   
+def p_network(t):
+  '''network : date crypto
+    | date ROUTE_GATEWAY IP SLASH IP VAR_SET VAR_VAL VAR_SET VAR_VAL
+    | date IP_PROTOCOL
+    | date CONN_MSG VAR_SET VAR_VAL VAR_SET VAR_VAL
+    | date CONN_MSG VAR_SET IP VAR_SET VAR_VAL SPECIAL_CHAR VAR_SET VAR_VAL
+    | date IFCONFIG_END'''
+  pass
+
+def p_connection(t):
+  'connection : crypto conmutation routing crypto'
+  pass
+
+def p_start(t):
+  'start : date TCP_MSG IP PORT'
+  pass
+
+def p_login(t):
+  '''login : date IP PORT SYS_MSG IP PORT SPECIAL_CHAR VAR_SET VAR_VAL
+    | date IP PORT plugin SYS_MSG DIR VAR_SET VAR_VAL
+    | date IP PORT SYS_MSG SPECIAL_CHAR user SPECIAL_CHAR CN_SET'''
+  pass
+
+def p_crypto(t):
+  '''crypto : date IP PORT CONN_MSG CRYPTO_MSG
+    | date user SLASH IP PORT CONN_MSG CIPHER
+    | CRYPTO_MSG
+    | crypto login
+    | start'''
+  pass
+
+def p_conmutation(t):
+  '''conmutation : date IP PORT SPECIAL_CHAR user SPECIAL_CHAR PORT PEER IP PORT
+    | date user SLASH IP PORT CONN_MSG POOL_RET ipversion
+    | date user SLASH IP PORT PLUGIN_MSG DIR VAR_SET VAR_VAL
+    | date user SLASH IP PORT CONN_MSG CONN_MSG DIR
+    | date user user SLASH IP PORT CONN_MSG CONN_MSG IP SPECIAL_CHAR SPECIAL_CHAR user SLASH IP PORT
+    | date user SLASH IP PORT SYS_MSG user SLASH IP PORT COLON IP'''
+  pass
+
+def p_route(t):
+  '''route : ROUTE_FLAG VPN_IP route
+    | IP ROUTE_FLAG VPN_IP route
+    | empty'''
+  pass
+
+def p_routing(t):
+  '''routing : date user SLASH IP PORT SYS_MSG
+  | date user SLASH IP PORT SENT_CNT SPECIAL_CHAR user SPECIAL_CHAR COLON route TOPOLOGY IP IP SPECIAL_CHAR CIPHER SPECIAL_CHAR VAR_SET VAR_VAL'''
+  pass
+
+def p_connectionID(t):
+  '''connection : date CARNET SLASH IP PORT
+    | date PROF SLASH IP PORT'''
+  t[0] = t[4]
+
+def p_user(t):
+  '''user : CARNET
+    | PROF'''
+  pass
+
+def p_init_end(t):
+  'init_end : date FASE_END'
+  pass
+
+def p_empty(t):
+  'empty : '
+  pass
+
+def p_ipversion(t):
+  'ipversion : VAR_SET IP VAR_SET VAR_VAL'
+  t[0] = t[2]
+  
+
+ 
 # dictionary of names
 names = { }
 
-def p_statement_assign(t):
-    'statement : NAME EQUALS expression'
-    names[t[1]] = t[3]
-
-def p_statement_expr(t):
-    'statement : expression'
-    print(t[1])
-
-def p_expression_binop(t):
-    '''expression : expression PLUS expression
-                  | expression MINUS expression
-                  | expression TIMES expression
-                  | expression DIVIDE expression'''
-    if t[2] == '+'  : t[0] = t[1] + t[3]
-    elif t[2] == '-': t[0] = t[1] - t[3]
-    elif t[2] == '*': t[0] = t[1] * t[3]
-    elif t[2] == '/': t[0] = t[1] / t[3]
-
-def p_expression_uminus(t):
-    'expression : MINUS expression %prec UMINUS'
-    t[0] = -t[2]
-
-def p_expression_group(t):
-    'expression : LPAREN expression RPAREN'
-    t[0] = t[2]
-
-def p_expression_number(t):
-    'expression : NUMBER'
-    t[0] = t[1]
-
-def p_expression_name(t):
-    'expression : NAME'
-    try:
-        t[0] = names[t[1]]
-    except LookupError:
-        print("Undefined name '%s'" % t[1])
-        t[0] = 0
-
+# parse
 def p_error(t):
-    print("Syntax error at '%s'" % t.value)
+    print(f"Syntax error at '{t.value}'")
+    print(t)
 
 
 if __name__ == "__main__":
   # Build the lexer
+  file = open("vpn-logs-2020-modified-abb-revMM.txt")
+  data = file.read()
   lexer = lex.lex()
-
+  parser = yacc.yacc()
+  parser.parse(data)
+  
   # Open file for analize
   # NOTE: Consider the path that you execute. Depending the terminal from
   #       what you are executing you should change this path
   # TODO: For the moment the file direction is hardcoded, but in future versions
   #       it should be a parameter reveiced via the UI
-  file = open("vpn-logs-2020-modified-abb-revMM.txt")
 
-  data = file.read()
   # print(data)
 
   # Give the lexer some input
@@ -318,5 +416,6 @@ if __name__ == "__main__":
     if not tok: 
       break      # No more input
     # tokens_output.write(str(tok.value))
-    tokens_output.write(f"{tok.type}: {tok.value}\n")
+    tokens_output.write(f"{tok}\n")
+    # tokens_output.write(f"{tok.type}: {tok.value}\n")
   tokens_output.close()
