@@ -272,22 +272,6 @@ def p_log_line(p):
   
 
 
-# def p_route_identifiers(p):
-#     'route_identifiers : ROUTE_HEADER key_value_list ROUTE_HEADER'
-#     p[0] = p[2]
-
-# def p_key_value_list(p):
-#     'key_value_list : key_value_list key_value'
-#     p[0] = p[1] + [p[2]]
-
-# def p_key_value_list_single(p):
-#     'key_value_list : key_value'
-#     p[0] = [p[1]]
-
-# def p_key_value(p):
-#     'key_value : VPN_IP IP'
-#     p[0] = (p[1], p[2])
-
 def p_empty(p):
     'empty :'
     pass
