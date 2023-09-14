@@ -6,30 +6,15 @@ Unused terminals:
     CIPHER
     CN_SET
     COLON
-    CONN_MSG
-    CRYPTO_MSG
     FASE_END
-    FLAGS
-    IFCONFIG_END
-    IP_PROTOCOL
-    LIB_VER_MSG
-    OPEN_VPN_MSG
-    PEER
     POOL_RET
     PORT
     POST
     ROUTE_FLAG
-    ROUTE_GATEWAY
     ROUTE_HEADER
     SENT_CNT
-    SIGTERM_MSG
-    SLASH
-    SPECIAL_CHAR
     STATUS
-    SYS_MSG
-    TCP_MSG
     TOPOLOGY
-    TUN_TAP_MSG
     VPN_IP
 
 Grammar
@@ -38,214 +23,80 @@ Rule 0     S' -> main_rule
 Rule 1     main_rule -> log_line main_rule
 Rule 2     main_rule -> log_line
 Rule 3     main_rule -> empty
-Rule 4     log_line -> WEEK_DAY MONTH DAY CLOCK YEAR PLUGIN_MSG DIR VAR_SET VAR_VAL
-Rule 5     log_line -> WEEK_DAY MONTH DAY CLOCK YEAR SBIN_IP_MSG IP IP_RNG
-Rule 6     empty -> <empty>
+Rule 4     log_line -> date PLUGIN_MSG DIR VAR_SET VAR_VAL
+Rule 5     log_line -> date SBIN_IP_MSG IP IP_RNG
+Rule 6     log_line -> date TUN_TAP_MSG
+Rule 7     log_line -> date SBIN_IP_MSG IP PEER IP
+Rule 8     log_line -> date SIGTERM_MSG
+Rule 9     log_line -> date OPEN_VPN_MSG MONTH DAY YEAR
+Rule 10    log_line -> date LIB_VER_MSG DAY MONTH YEAR LIB_VER_MSG
+Rule 11    log_line -> date SYS_MSG
+Rule 12    log_line -> date PLUGIN_MSG DIR SPECIAL_CHAR SPECIAL_CHAR DIR SPECIAL_CHAR FLAGS SPECIAL_CHAR VAR_SET VAR_VAL
+Rule 13    log_line -> date CRYPTO_MSG
+Rule 14    log_line -> date ROUTE_GATEWAY IP SLASH IP VAR_SET VAR_VAL VAR_SET VAR_VAL
+Rule 15    log_line -> date SBIN_IP_MSG DAY DAY
+Rule 16    log_line -> date SBIN_IP_MSG IP IP_RNG PEER IP
+Rule 17    log_line -> date IP_PROTOCOL
+Rule 18    log_line -> date CONN_MSG VAR_SET VAR_VAL VAR_SET VAR_VAL
+Rule 19    log_line -> date TCP_MSG
+Rule 20    log_line -> date SYS_MSG SPECIAL_CHAR VAR_SET VAR_VAL VAR_SET VAR_VAL
+Rule 21    log_line -> date CONN_MSG VAR_SET IP VAR_SET VAR_VAL SPECIAL_CHAR VAR_SET VAR_VAL
+Rule 22    log_line -> date IFCONFIG_END
+Rule 23    log_line -> date SYS_MS VAR_SET VAR_VAL VAR_SET VAR_VAL
+Rule 24    date -> WEEK_DAY MONTH DAY CLOCK YEAR
+Rule 25    date -> WEEK_DAY MONTH DAY CLOCK
+Rule 26    empty -> <empty>
 
 Terminals, with rules where they appear
 
 CARNET               : 
 CIPHER               : 
-CLOCK                : 4 5
+CLOCK                : 24 25
 CN_SET               : 
 COLON                : 
-CONN_MSG             : 
-CRYPTO_MSG           : 
-DAY                  : 4 5
-DIR                  : 4
+CONN_MSG             : 18 21
+CRYPTO_MSG           : 13
+DAY                  : 9 10 15 15 24 25
+DIR                  : 4 12 12
 FASE_END             : 
-FLAGS                : 
-IFCONFIG_END         : 
-IP                   : 5
-IP_PROTOCOL          : 
-IP_RNG               : 5
-LIB_VER_MSG          : 
-MONTH                : 4 5
-OPEN_VPN_MSG         : 
-PEER                 : 
-PLUGIN_MSG           : 4
+FLAGS                : 12
+IFCONFIG_END         : 22
+IP                   : 5 7 7 14 14 16 16 21
+IP_PROTOCOL          : 17
+IP_RNG               : 5 16
+LIB_VER_MSG          : 10 10
+MONTH                : 9 10 24 25
+OPEN_VPN_MSG         : 9
+PEER                 : 7 16
+PLUGIN_MSG           : 4 12
 POOL_RET             : 
 PORT                 : 
 POST                 : 
 ROUTE_FLAG           : 
-ROUTE_GATEWAY        : 
+ROUTE_GATEWAY        : 14
 ROUTE_HEADER         : 
-SBIN_IP_MSG          : 5
+SBIN_IP_MSG          : 5 7 15 16
 SENT_CNT             : 
-SIGTERM_MSG          : 
-SLASH                : 
-SPECIAL_CHAR         : 
+SIGTERM_MSG          : 8
+SLASH                : 14
+SPECIAL_CHAR         : 12 12 12 12 20 21
 STATUS               : 
-SYS_MSG              : 
-TCP_MSG              : 
+SYS_MSG              : 11 20
+TCP_MSG              : 19
 TOPOLOGY             : 
-TUN_TAP_MSG          : 
-VAR_SET              : 4
-VAR_VAL              : 4
+TUN_TAP_MSG          : 6
+VAR_SET              : 4 12 14 14 18 18 20 20 21 21 21 23 23
+VAR_VAL              : 4 12 14 14 18 18 20 20 21 21 23 23
 VPN_IP               : 
-WEEK_DAY             : 4 5
-YEAR                 : 4 5
+WEEK_DAY             : 24 25
+YEAR                 : 9 10 24
 error                : 
 
 Nonterminals, with rules where they appear
 
+SYS_MS               : 23
+date                 : 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23
 empty                : 3
 log_line             : 1 2
 main_rule            : 1 0
 
-Parsing method: LALR
-
-state 0
-
-    (0) S' -> . main_rule
-    (1) main_rule -> . log_line main_rule
-    (2) main_rule -> . log_line
-    (3) main_rule -> . empty
-    (4) log_line -> . WEEK_DAY MONTH DAY CLOCK YEAR PLUGIN_MSG DIR VAR_SET VAR_VAL
-    (5) log_line -> . WEEK_DAY MONTH DAY CLOCK YEAR SBIN_IP_MSG IP IP_RNG
-    (6) empty -> .
-
-    WEEK_DAY        shift and go to state 4
-    $end            reduce using rule 6 (empty -> .)
-
-    main_rule                      shift and go to state 1
-    log_line                       shift and go to state 2
-    empty                          shift and go to state 3
-
-state 1
-
-    (0) S' -> main_rule .
-
-
-
-state 2
-
-    (1) main_rule -> log_line . main_rule
-    (2) main_rule -> log_line .
-    (1) main_rule -> . log_line main_rule
-    (2) main_rule -> . log_line
-    (3) main_rule -> . empty
-    (4) log_line -> . WEEK_DAY MONTH DAY CLOCK YEAR PLUGIN_MSG DIR VAR_SET VAR_VAL
-    (5) log_line -> . WEEK_DAY MONTH DAY CLOCK YEAR SBIN_IP_MSG IP IP_RNG
-    (6) empty -> .
-
-  ! reduce/reduce conflict for $end resolved using rule 2 (main_rule -> log_line .)
-    $end            reduce using rule 2 (main_rule -> log_line .)
-    WEEK_DAY        shift and go to state 4
-
-  ! $end            [ reduce using rule 6 (empty -> .) ]
-
-    log_line                       shift and go to state 2
-    main_rule                      shift and go to state 5
-    empty                          shift and go to state 3
-
-state 3
-
-    (3) main_rule -> empty .
-
-    $end            reduce using rule 3 (main_rule -> empty .)
-
-
-state 4
-
-    (4) log_line -> WEEK_DAY . MONTH DAY CLOCK YEAR PLUGIN_MSG DIR VAR_SET VAR_VAL
-    (5) log_line -> WEEK_DAY . MONTH DAY CLOCK YEAR SBIN_IP_MSG IP IP_RNG
-
-    MONTH           shift and go to state 6
-
-
-state 5
-
-    (1) main_rule -> log_line main_rule .
-
-    $end            reduce using rule 1 (main_rule -> log_line main_rule .)
-
-
-state 6
-
-    (4) log_line -> WEEK_DAY MONTH . DAY CLOCK YEAR PLUGIN_MSG DIR VAR_SET VAR_VAL
-    (5) log_line -> WEEK_DAY MONTH . DAY CLOCK YEAR SBIN_IP_MSG IP IP_RNG
-
-    DAY             shift and go to state 7
-
-
-state 7
-
-    (4) log_line -> WEEK_DAY MONTH DAY . CLOCK YEAR PLUGIN_MSG DIR VAR_SET VAR_VAL
-    (5) log_line -> WEEK_DAY MONTH DAY . CLOCK YEAR SBIN_IP_MSG IP IP_RNG
-
-    CLOCK           shift and go to state 8
-
-
-state 8
-
-    (4) log_line -> WEEK_DAY MONTH DAY CLOCK . YEAR PLUGIN_MSG DIR VAR_SET VAR_VAL
-    (5) log_line -> WEEK_DAY MONTH DAY CLOCK . YEAR SBIN_IP_MSG IP IP_RNG
-
-    YEAR            shift and go to state 9
-
-
-state 9
-
-    (4) log_line -> WEEK_DAY MONTH DAY CLOCK YEAR . PLUGIN_MSG DIR VAR_SET VAR_VAL
-    (5) log_line -> WEEK_DAY MONTH DAY CLOCK YEAR . SBIN_IP_MSG IP IP_RNG
-
-    PLUGIN_MSG      shift and go to state 10
-    SBIN_IP_MSG     shift and go to state 11
-
-
-state 10
-
-    (4) log_line -> WEEK_DAY MONTH DAY CLOCK YEAR PLUGIN_MSG . DIR VAR_SET VAR_VAL
-
-    DIR             shift and go to state 12
-
-
-state 11
-
-    (5) log_line -> WEEK_DAY MONTH DAY CLOCK YEAR SBIN_IP_MSG . IP IP_RNG
-
-    IP              shift and go to state 13
-
-
-state 12
-
-    (4) log_line -> WEEK_DAY MONTH DAY CLOCK YEAR PLUGIN_MSG DIR . VAR_SET VAR_VAL
-
-    VAR_SET         shift and go to state 14
-
-
-state 13
-
-    (5) log_line -> WEEK_DAY MONTH DAY CLOCK YEAR SBIN_IP_MSG IP . IP_RNG
-
-    IP_RNG          shift and go to state 15
-
-
-state 14
-
-    (4) log_line -> WEEK_DAY MONTH DAY CLOCK YEAR PLUGIN_MSG DIR VAR_SET . VAR_VAL
-
-    VAR_VAL         shift and go to state 16
-
-
-state 15
-
-    (5) log_line -> WEEK_DAY MONTH DAY CLOCK YEAR SBIN_IP_MSG IP IP_RNG .
-
-    WEEK_DAY        reduce using rule 5 (log_line -> WEEK_DAY MONTH DAY CLOCK YEAR SBIN_IP_MSG IP IP_RNG .)
-    $end            reduce using rule 5 (log_line -> WEEK_DAY MONTH DAY CLOCK YEAR SBIN_IP_MSG IP IP_RNG .)
-
-
-state 16
-
-    (4) log_line -> WEEK_DAY MONTH DAY CLOCK YEAR PLUGIN_MSG DIR VAR_SET VAR_VAL .
-
-    WEEK_DAY        reduce using rule 4 (log_line -> WEEK_DAY MONTH DAY CLOCK YEAR PLUGIN_MSG DIR VAR_SET VAR_VAL .)
-    $end            reduce using rule 4 (log_line -> WEEK_DAY MONTH DAY CLOCK YEAR PLUGIN_MSG DIR VAR_SET VAR_VAL .)
-
-WARNING: 
-WARNING: Conflicts:
-WARNING: 
-WARNING: reduce/reduce conflict in state 2 resolved using rule (main_rule -> log_line)
-WARNING: rejected rule (empty -> <empty>) in state 2

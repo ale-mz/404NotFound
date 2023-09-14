@@ -265,12 +265,35 @@ def p_main_rule(p):
 
 def p_log_line(p):
     '''
-    log_line : WEEK_DAY MONTH DAY CLOCK YEAR PLUGIN_MSG DIR VAR_SET VAR_VAL
-             | WEEK_DAY MONTH DAY CLOCK YEAR SBIN_IP_MSG IP IP_RNG
+    log_line : date PLUGIN_MSG DIR VAR_SET VAR_VAL
+              | date SBIN_IP_MSG IP IP_RNG
+              | date TUN_TAP_MSG
+              | date SBIN_IP_MSG IP PEER IP
+              | date SIGTERM_MSG 
+              | date OPEN_VPN_MSG MONTH DAY YEAR
+              | date LIB_VER_MSG DAY MONTH YEAR LIB_VER_MSG
+              | date SYS_MSG
+              | date PLUGIN_MSG DIR SPECIAL_CHAR SPECIAL_CHAR DIR SPECIAL_CHAR FLAGS SPECIAL_CHAR VAR_SET VAR_VAL
+              | date CRYPTO_MSG
+              | date ROUTE_GATEWAY IP SLASH IP VAR_SET VAR_VAL VAR_SET VAR_VAL
+              | date SBIN_IP_MSG DAY DAY
+              | date SBIN_IP_MSG IP IP_RNG PEER IP
+              | date IP_PROTOCOL
+              | date CONN_MSG VAR_SET VAR_VAL VAR_SET VAR_VAL
+              | date TCP_MSG 
+              | date SYS_MSG SPECIAL_CHAR VAR_SET VAR_VAL VAR_SET VAR_VAL
+              | date CONN_MSG VAR_SET IP VAR_SET VAR_VAL SPECIAL_CHAR VAR_SET VAR_VAL
+              | date IFCONFIG_END
+              | date SYS_MS VAR_SET VAR_VAL VAR_SET VAR_VAL
     '''
     pass
-  
 
+def p_date(p):
+    '''
+    date : WEEK_DAY MONTH DAY CLOCK YEAR
+          | WEEK_DAY MONTH DAY CLOCK
+    '''
+    pass
 
 def p_empty(p):
     'empty :'
@@ -320,7 +343,6 @@ if __name__ == "__main__":
     Sun Sep 13 17:02:16 2020 Initialization Sequence Completed
     '''
 
-
   parser.parse(log_data)
   
   # Open file for analize
@@ -335,12 +357,14 @@ if __name__ == "__main__":
   
   # tokens_output = open("tokens_output.txt", "w")
   # # Tokenize
-  lexer.input(log_data)
-  while True:
-    tok = lexer.token()
-    if not tok: 
-      break      # No more input
-    print(tok)
+
+  # lexer.input(log_data)
+  # while True:
+  #   tok = lexer.token()
+  #   if not tok: 
+  #     break      # No more input
+  #   print(tok)
+
   #   # tokens_output.write(str(tok.value))
   #   tokens_output.write(f"{tok}\n")
   #   # tokens_output.write(f"{tok.type}: {tok.value}\n")
