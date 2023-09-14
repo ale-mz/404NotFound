@@ -12,8 +12,9 @@ tokens = (
   'DIR',
   'PEER',
   'IP_RNG',
-  # 'PORT',
-  # 'CARNET',
+  'PORT',
+  'CARNET',
+  'PROF',
   # 'STATUS',
   # 'POST',
   'PLUGIN_MSG',   # Body Tokens
@@ -35,15 +36,15 @@ tokens = (
   'CONN_MSG',
   'IFCONFIG_END',
   # 'FASE_END',
-  # 'CN_SET',       # Connection Tokens
-  # 'POOL_RET',
-  # 'SENT_CNT',
-  # 'ROUTE_FLAG',
-  # 'TOPOLOGY',
-  # 'CIPHER',
+  'CN_SET',       # Connection Tokens
+  'POOL_RET',
+  'SENT_CNT',
+  'ROUTE_FLAG',
+  'TOPOLOGY',
+  'CIPHER',
   'SPECIAL_CHAR', # Special Tokens
   'SLASH',
-  # 'COLON'
+  'COLON'
 )
 
 # t_STATUS = 'status'
@@ -80,13 +81,13 @@ t_PEER = '(peer(-id\s\d)?|via)|(Peer[\]A-Za-z \[_]+)'
 t_IP_RNG = '\/\d{2}\s'
 
 # Define regex for PORT IP
-# t_PORT = '(?<=\d)(:\d{5})|(:\d{4})'
+t_PORT = '(?<=\d)(:\d{5})|(:\d{4})'
 
 # Define regex for CARNET
-# t_CARNET = '[\w]\d{5}'
+t_CARNET = '[\w]\d{5}'
 
 # # Define regex for PROF
-# t_PROF = '[A-Za-z]+.[A-Za-z]+'
+t_PROF = '[A-Za-z]+.[A-Za-z]+'
 # Define /sbin/ip messages on console
 def t_SBIN_IP_MSG(t):
   r'/sbin/ip([a-z ]+\d?[a-z ]+)'
@@ -103,8 +104,8 @@ def t_PLUGIN_MSG(t):
 
 # Define tokens for route header
 def t_ROUTE_HEADER(t):
-  r'<\/?route-identifiers>'
-  return t
+   r'<\/?route-identifiers>'
+   return t
 
 # Define regex for specified variable set action
 def t_VAR_SET(t):
@@ -181,45 +182,45 @@ def t_CONN_MSG(t):
   return t
 
 # Define regex for connection pool assign
-# def t_POOL_RET(t):
-#   r'pool\sreturned'
-#   return t
+def t_POOL_RET(t):
+  r'pool\sreturned'
+  return t
 
 # Define regex for route line head
-# def t_SENT_CNT(t):
-#   r'SENT\sCONTROL'
-#   return t
+def t_SENT_CNT(t):
+  r'SENT\sCONTROL'
+  return t
 
 # Define regex for route flag
-# def t_ROUTE_FLAG(t):
-#   r'(PUSH_REPLY)?(,route)'
-#   return t
+def t_ROUTE_FLAG(t):
+  r'(PUSH_REPLY)?(,route)'
+  return t
 
 # Define regex for status of connection
-# def t_TOPOLOGY(t):
-#   r',topology[\w ,\-]+(?=\s)'
-#   return t
+def t_TOPOLOGY(t):
+  r',topology[\w ,\-]+(?=\s)'
+  return t
 
-# # Define regex for cypher flag on peer
-# def t_CIPHER(t):
-#   r'([A-Za-z ]+)?(cipher|Cipher)[\' \w\-]+'
-#   return t
+# Define regex for cypher flag on peer
+def t_CIPHER(t):
+  r'([A-Za-z ]+)?(cipher|Cipher)[\' \w\-]+'
+  return t
 
 # Define regex for message at the end of console
 def t_IFCONFIG_END(t):
   r'[A-Z ]+LIST'
   return t
 
-# # Define regex for message at the end of a phase
+# Define regex for message at the end of a phase
 # def t_FASE_END(t):
 #   r'[A-Za-z ]+Completed'
 #   return t
 
 ### Connection Tokens ###
 # Define regex for last part of username authentication
-# def t_CN_SET(t):
-#   r'\[CN\sSET\]'
-#   return t
+def t_CN_SET(t):
+  r'\[CN\sSET\]'
+  return t
 
 
 ### Special Tokens ###
@@ -232,7 +233,7 @@ def t_SPECIAL_CHAR(t):
 t_SLASH = r'\/'
 
 # Define regex for colon
-# t_COLON = r':(?=(\s|\'))'
+t_COLON = r':(?=(\s|\'))'
 
 # Define a rule so we can track line numbers
 def t_newline(t):
@@ -280,11 +281,32 @@ def p_log_line(p):
               | date SBIN_IP_MSG IP IP_RNG PEER IP
               | date IP_PROTOCOL
               | date CONN_MSG VAR_SET VAR_VAL VAR_SET VAR_VAL
-              | date TCP_MSG 
+              | date TCP_MSG
               | date SYS_MSG SPECIAL_CHAR VAR_SET VAR_VAL VAR_SET VAR_VAL
               | date CONN_MSG VAR_SET IP VAR_SET VAR_VAL SPECIAL_CHAR VAR_SET VAR_VAL
               | date IFCONFIG_END
               | date SYS_MSG VAR_SET VAR_VAL VAR_SET VAR_VAL
+              | date TCP_MSG IP PORT
+              | date IP PORT SYS_MSG FLAGS IP PORT SPECIAL_CHAR VAR_SET VAR_VAL
+              | date TCP_MSG IP PORT PLUGIN_MSG DIR VAR_SET VAR_VAL
+              | date IP PORT SYS_MSG SPECIAL_CHAR CARNET SPECIAL_CHAR CN_SET
+              | date IP PORT CONN_MSG CRYPTO_MSG
+              | date IP PORT SPECIAL_CHAR CARNET SPECIAL_CHAR PEER IP PORT
+              | date userid CONN_MSG POOL_RET VAR_SET IP SPECIAL_CHAR VAR_SET VAR_VAL
+              | date userid PLUGIN_MSG DIR VAR_SET VAR_VAL
+              | date userid CONN_MSG CONN_MSG DIR
+              | date userid CONN_MSG CONN_MSG IP SPECIAL_CHAR SPECIAL_CHAR CARNET SLASH IP PORT
+              | date userid SYS_MSG CARNET SLASH IP PORT COLON IP
+              | date userid SYS_MSG
+              | date userid SENT_CNT SPECIAL_CHAR CARNET SPECIAL_CHAR COLON SPECIAL_CHAR ROUTE_FLAG VPN_IP IP ROUTE_FLAG VPN_IP IP ROUTE_FLAG VPN_IP TOPOLOGY IP IP SPECIAL_CHAR PEER SPECIAL_CHAR CIPHER SPECIAL_CHAR VAR_SET VAR_VAL
+              | date userid CONN_MSG CIPHER
+              | date IP PORT PLUGIN_MSG DIR VAR_SET VAR_VAL
+    '''
+    pass
+
+def p_userid(p):
+    '''
+    userid : CARNET SLASH IP PORT
     '''
     pass
 

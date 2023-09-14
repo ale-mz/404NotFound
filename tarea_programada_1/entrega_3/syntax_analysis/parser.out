@@ -1,154 +1,172 @@
 Created by PLY version 3.11 (http://www.dabeaz.com/ply)
 
+Unused terminals:
+
+    PROF
+
 Grammar
 
 Rule 0     S' -> main_rule
-Rule 1     main_rule -> log_line main_rule
-Rule 2     main_rule -> log_line
-Rule 3     main_rule -> empty
-Rule 4     log_line -> date PLUGIN_MSG DIR VAR_SET VAR_VAL
-Rule 5     log_line -> date SBIN_IP_MSG IP IP_RNG
-Rule 6     log_line -> date TUN_TAP_MSG
-Rule 7     log_line -> date SBIN_IP_MSG IP PEER IP
-Rule 8     log_line -> date SIGTERM_MSG
-Rule 9     log_line -> date OPEN_VPN_MSG MONTH DAY YEAR
-Rule 10    log_line -> date LIB_VER_MSG DAY MONTH YEAR LIB_VER_MSG
-Rule 11    log_line -> date SYS_MSG
-Rule 12    log_line -> date PLUGIN_MSG DIR SPECIAL_CHAR SPECIAL_CHAR DIR SPECIAL_CHAR FLAGS SPECIAL_CHAR VAR_SET VAR_VAL
-Rule 13    log_line -> date CRYPTO_MSG
-Rule 14    log_line -> date ROUTE_GATEWAY IP SLASH IP VAR_SET VAR_VAL VAR_SET VAR_VAL
-Rule 15    log_line -> date SBIN_IP_MSG DAY DAY
-Rule 16    log_line -> date SBIN_IP_MSG IP IP_RNG PEER IP
-Rule 17    log_line -> date IP_PROTOCOL
-Rule 18    log_line -> date CONN_MSG VAR_SET VAR_VAL VAR_SET VAR_VAL
-Rule 19    log_line -> date TCP_MSG
-Rule 20    log_line -> date SYS_MSG SPECIAL_CHAR VAR_SET VAR_VAL VAR_SET VAR_VAL
-Rule 21    log_line -> date CONN_MSG VAR_SET IP VAR_SET VAR_VAL SPECIAL_CHAR VAR_SET VAR_VAL
-Rule 22    log_line -> date IFCONFIG_END
-Rule 23    log_line -> date SYS_MSG VAR_SET VAR_VAL VAR_SET VAR_VAL
-Rule 24    log_line -> date TCP_MSG IP PORT
-Rule 25    log_line -> date IP PORT SYS_MSG FLAGS IP PORT SPECIAL_CHAR VAR_SET VAR_VAL
-Rule 26    log_line -> date TCP_MSG IP PORT PLUGIN_MSG DIR VAR_SET VAR_VAL
-Rule 27    log_line -> date IP PORT SYS_MSG SPECIAL_CHAR CARNET SPECIAL_CHAR CN_SET
-Rule 28    log_line -> date IP PORT CONN_MSG CRYPTO_MSG
-Rule 29    log_line -> date IP PORT SPECIAL_CHAR CARNET SPECIAL_CHAR PEER IP PORT
-Rule 30    log_line -> date userid CONN_MSG POOL_RET VAR_SET IP SPECIAL_CHAR VAR_SET VAR_VAL
-Rule 31    log_line -> date userid PLUGIN_MSG DIR VAR_SET VAR_VAL
-Rule 32    log_line -> date userid CONN_MSG CONN_MSG DIR
-Rule 33    log_line -> date userid CONN_MSG CONN_MSG IP SPECIAL_CHAR SPECIAL_CHAR CARNET SLASH IP PORT
-Rule 34    log_line -> date userid SYS_MSG CARNET SLASH IP PORT COLON IP
-Rule 35    log_line -> date userid SYS_MSG
-Rule 36    log_line -> date userid SENT_CNT SPECIAL_CHAR CARNET SPECIAL_CHAR COLON SPECIAL_CHAR ROUTE_FLAG VPN_IP IP ROUTE_FLAG VPN_IP IP ROUTE_FLAG VPN_IP TOPOLOGY IP IP SPECIAL_CHAR PEER SPECIAL_CHAR CIPHER SPECIAL_CHAR VAR_SET VAR_VAL
-Rule 37    log_line -> date userid CONN_MSG CIPHER
-Rule 38    log_line -> date IP PORT PLUGIN_MSG DIR VAR_SET VAR_VAL
-Rule 39    userid -> CARNET SLASH IP PORT
-Rule 40    date -> WEEK_DAY MONTH DAY CLOCK YEAR
-Rule 41    date -> WEEK_DAY MONTH DAY CLOCK
-Rule 42    empty -> <empty>
+Rule 1     main_rule -> route_identifiers main_rule
+Rule 2     main_rule -> log_line main_rule
+Rule 3     main_rule -> log_line
+Rule 4     main_rule -> empty
+Rule 5     log_line -> date PLUGIN_MSG DIR VAR_SET VAR_VAL
+Rule 6     log_line -> date SBIN_IP_MSG IP IP_RNG
+Rule 7     log_line -> date TUN_TAP_MSG
+Rule 8     log_line -> date SBIN_IP_MSG IP PEER IP
+Rule 9     log_line -> date SIGTERM_MSG
+Rule 10    log_line -> date OPEN_VPN_MSG MONTH DAY YEAR
+Rule 11    log_line -> date LIB_VER_MSG DAY MONTH YEAR LIB_VER_MSG
+Rule 12    log_line -> date SYS_MSG
+Rule 13    log_line -> date PLUGIN_MSG DIR SPECIAL_CHAR SPECIAL_CHAR DIR SPECIAL_CHAR FLAGS SPECIAL_CHAR VAR_SET VAR_VAL
+Rule 14    log_line -> date CRYPTO_MSG
+Rule 15    log_line -> date ROUTE_GATEWAY IP SLASH IP VAR_SET VAR_VAL VAR_SET VAR_VAL
+Rule 16    log_line -> date SBIN_IP_MSG DAY DAY
+Rule 17    log_line -> date SBIN_IP_MSG IP IP_RNG PEER IP
+Rule 18    log_line -> date IP_PROTOCOL
+Rule 19    log_line -> date CONN_MSG VAR_SET VAR_VAL VAR_SET VAR_VAL
+Rule 20    log_line -> date TCP_MSG
+Rule 21    log_line -> date SYS_MSG SPECIAL_CHAR VAR_SET VAR_VAL VAR_SET VAR_VAL
+Rule 22    log_line -> date CONN_MSG VAR_SET IP VAR_SET VAR_VAL SPECIAL_CHAR VAR_SET VAR_VAL
+Rule 23    log_line -> date IFCONFIG_END
+Rule 24    log_line -> date SYS_MSG VAR_SET VAR_VAL VAR_SET VAR_VAL
+Rule 25    log_line -> date TCP_MSG IP PORT
+Rule 26    log_line -> date IP PORT SYS_MSG FLAGS IP PORT SPECIAL_CHAR VAR_SET VAR_VAL
+Rule 27    log_line -> date TCP_MSG IP PORT PLUGIN_MSG DIR VAR_SET VAR_VAL
+Rule 28    log_line -> date IP PORT SYS_MSG SPECIAL_CHAR CARNET SPECIAL_CHAR CN_SET
+Rule 29    log_line -> date IP PORT CONN_MSG CRYPTO_MSG
+Rule 30    log_line -> date IP PORT SPECIAL_CHAR CARNET SPECIAL_CHAR PEER IP PORT
+Rule 31    log_line -> date userid CONN_MSG POOL_RET VAR_SET IP SPECIAL_CHAR VAR_SET VAR_VAL
+Rule 32    log_line -> date userid PLUGIN_MSG DIR VAR_SET VAR_VAL
+Rule 33    log_line -> date userid CONN_MSG CONN_MSG DIR
+Rule 34    log_line -> date userid CONN_MSG CONN_MSG IP SPECIAL_CHAR SPECIAL_CHAR CARNET SLASH IP PORT
+Rule 35    log_line -> date userid SYS_MSG CARNET SLASH IP PORT COLON IP
+Rule 36    log_line -> date userid SYS_MSG
+Rule 37    log_line -> date userid SENT_CNT SPECIAL_CHAR CARNET SPECIAL_CHAR COLON SPECIAL_CHAR ROUTE_FLAG VPN_IP IP ROUTE_FLAG VPN_IP IP ROUTE_FLAG VPN_IP TOPOLOGY IP IP SPECIAL_CHAR PEER SPECIAL_CHAR CIPHER SPECIAL_CHAR VAR_SET VAR_VAL
+Rule 38    log_line -> date userid CONN_MSG CIPHER
+Rule 39    log_line -> date IP PORT PLUGIN_MSG DIR VAR_SET VAR_VAL
+Rule 40    userid -> CARNET SLASH IP PORT
+Rule 41    date -> WEEK_DAY MONTH DAY CLOCK YEAR
+Rule 42    date -> WEEK_DAY MONTH DAY CLOCK
+Rule 43    route_identifiers -> ROUTE_HEADER key_value_list ROUTE_HEADER
+Rule 44    key_value_list -> key_value_list key_value
+Rule 45    key_value_list -> key_value
+Rule 46    key_value -> VPN_IP IP
+Rule 47    empty -> <empty>
 
 Terminals, with rules where they appear
 
-CARNET               : 27 29 33 34 36 39
-CIPHER               : 36 37
-CLOCK                : 40 41
-CN_SET               : 27
-COLON                : 34 36
-CONN_MSG             : 18 21 28 30 32 32 33 33 37
-CRYPTO_MSG           : 13 28
-DAY                  : 9 10 15 15 40 41
-DIR                  : 4 12 12 26 31 32 38
-FLAGS                : 12 25
-IFCONFIG_END         : 22
-IP                   : 5 7 7 14 14 16 16 21 24 25 25 26 27 28 29 29 30 33 33 34 34 36 36 36 36 38 39
-IP_PROTOCOL          : 17
-IP_RNG               : 5 16
-LIB_VER_MSG          : 10 10
-MONTH                : 9 10 40 41
-OPEN_VPN_MSG         : 9
-PEER                 : 7 16 29 36
-PLUGIN_MSG           : 4 12 26 31 38
-POOL_RET             : 30
-PORT                 : 24 25 25 26 27 28 29 29 33 34 38 39
-ROUTE_FLAG           : 36 36 36
-ROUTE_GATEWAY        : 14
-SBIN_IP_MSG          : 5 7 15 16
-SENT_CNT             : 36
-SIGTERM_MSG          : 8
-SLASH                : 14 33 34 39
-SPECIAL_CHAR         : 12 12 12 12 20 21 25 27 27 29 29 30 33 33 36 36 36 36 36 36
-SYS_MSG              : 11 20 23 25 27 34 35
-TCP_MSG              : 19 24 26
-TOPOLOGY             : 36
-TUN_TAP_MSG          : 6
-VAR_SET              : 4 12 14 14 18 18 20 20 21 21 21 23 23 25 26 30 30 31 36 38
-VAR_VAL              : 4 12 14 14 18 18 20 20 21 21 23 23 25 26 30 31 36 38
-VPN_IP               : 36 36 36
-WEEK_DAY             : 40 41
-YEAR                 : 9 10 40
+CARNET               : 28 30 34 35 37 40
+CIPHER               : 37 38
+CLOCK                : 41 42
+CN_SET               : 28
+COLON                : 35 37
+CONN_MSG             : 19 22 29 31 33 33 34 34 38
+CRYPTO_MSG           : 14 29
+DAY                  : 10 11 16 16 41 42
+DIR                  : 5 13 13 27 32 33 39
+FLAGS                : 13 26
+IFCONFIG_END         : 23
+IP                   : 6 8 8 15 15 17 17 22 25 26 26 27 28 29 30 30 31 34 34 35 35 37 37 37 37 39 40 46
+IP_PROTOCOL          : 18
+IP_RNG               : 6 17
+LIB_VER_MSG          : 11 11
+MONTH                : 10 11 41 42
+OPEN_VPN_MSG         : 10
+PEER                 : 8 17 30 37
+PLUGIN_MSG           : 5 13 27 32 39
+POOL_RET             : 31
+PORT                 : 25 26 26 27 28 29 30 30 34 35 39 40
+PROF                 : 
+ROUTE_FLAG           : 37 37 37
+ROUTE_GATEWAY        : 15
+ROUTE_HEADER         : 43 43
+SBIN_IP_MSG          : 6 8 16 17
+SENT_CNT             : 37
+SIGTERM_MSG          : 9
+SLASH                : 15 34 35 40
+SPECIAL_CHAR         : 13 13 13 13 21 22 26 28 28 30 30 31 34 34 37 37 37 37 37 37
+SYS_MSG              : 12 21 24 26 28 35 36
+TCP_MSG              : 20 25 27
+TOPOLOGY             : 37
+TUN_TAP_MSG          : 7
+VAR_SET              : 5 13 15 15 19 19 21 21 22 22 22 24 24 26 27 31 31 32 37 39
+VAR_VAL              : 5 13 15 15 19 19 21 21 22 22 24 24 26 27 31 32 37 39
+VPN_IP               : 37 37 37 46
+WEEK_DAY             : 41 42
+YEAR                 : 10 11 41
 error                : 
 
 Nonterminals, with rules where they appear
 
-date                 : 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 30 31 32 33 34 35 36 37 38
-empty                : 3
-log_line             : 1 2
-main_rule            : 1 0
-userid               : 30 31 32 33 34 35 36 37
+date                 : 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 30 31 32 33 34 35 36 37 38 39
+empty                : 4
+key_value            : 44 45
+key_value_list       : 43 44
+log_line             : 2 3
+main_rule            : 1 2 0
+route_identifiers    : 1
+userid               : 31 32 33 34 35 36 37 38
 
 Parsing method: LALR
 
 state 0
 
     (0) S' -> . main_rule
-    (1) main_rule -> . log_line main_rule
-    (2) main_rule -> . log_line
-    (3) main_rule -> . empty
-    (4) log_line -> . date PLUGIN_MSG DIR VAR_SET VAR_VAL
-    (5) log_line -> . date SBIN_IP_MSG IP IP_RNG
-    (6) log_line -> . date TUN_TAP_MSG
-    (7) log_line -> . date SBIN_IP_MSG IP PEER IP
-    (8) log_line -> . date SIGTERM_MSG
-    (9) log_line -> . date OPEN_VPN_MSG MONTH DAY YEAR
-    (10) log_line -> . date LIB_VER_MSG DAY MONTH YEAR LIB_VER_MSG
-    (11) log_line -> . date SYS_MSG
-    (12) log_line -> . date PLUGIN_MSG DIR SPECIAL_CHAR SPECIAL_CHAR DIR SPECIAL_CHAR FLAGS SPECIAL_CHAR VAR_SET VAR_VAL
-    (13) log_line -> . date CRYPTO_MSG
-    (14) log_line -> . date ROUTE_GATEWAY IP SLASH IP VAR_SET VAR_VAL VAR_SET VAR_VAL
-    (15) log_line -> . date SBIN_IP_MSG DAY DAY
-    (16) log_line -> . date SBIN_IP_MSG IP IP_RNG PEER IP
-    (17) log_line -> . date IP_PROTOCOL
-    (18) log_line -> . date CONN_MSG VAR_SET VAR_VAL VAR_SET VAR_VAL
-    (19) log_line -> . date TCP_MSG
-    (20) log_line -> . date SYS_MSG SPECIAL_CHAR VAR_SET VAR_VAL VAR_SET VAR_VAL
-    (21) log_line -> . date CONN_MSG VAR_SET IP VAR_SET VAR_VAL SPECIAL_CHAR VAR_SET VAR_VAL
-    (22) log_line -> . date IFCONFIG_END
-    (23) log_line -> . date SYS_MSG VAR_SET VAR_VAL VAR_SET VAR_VAL
-    (24) log_line -> . date TCP_MSG IP PORT
-    (25) log_line -> . date IP PORT SYS_MSG FLAGS IP PORT SPECIAL_CHAR VAR_SET VAR_VAL
-    (26) log_line -> . date TCP_MSG IP PORT PLUGIN_MSG DIR VAR_SET VAR_VAL
-    (27) log_line -> . date IP PORT SYS_MSG SPECIAL_CHAR CARNET SPECIAL_CHAR CN_SET
-    (28) log_line -> . date IP PORT CONN_MSG CRYPTO_MSG
-    (29) log_line -> . date IP PORT SPECIAL_CHAR CARNET SPECIAL_CHAR PEER IP PORT
-    (30) log_line -> . date userid CONN_MSG POOL_RET VAR_SET IP SPECIAL_CHAR VAR_SET VAR_VAL
-    (31) log_line -> . date userid PLUGIN_MSG DIR VAR_SET VAR_VAL
-    (32) log_line -> . date userid CONN_MSG CONN_MSG DIR
-    (33) log_line -> . date userid CONN_MSG CONN_MSG IP SPECIAL_CHAR SPECIAL_CHAR CARNET SLASH IP PORT
-    (34) log_line -> . date userid SYS_MSG CARNET SLASH IP PORT COLON IP
-    (35) log_line -> . date userid SYS_MSG
-    (36) log_line -> . date userid SENT_CNT SPECIAL_CHAR CARNET SPECIAL_CHAR COLON SPECIAL_CHAR ROUTE_FLAG VPN_IP IP ROUTE_FLAG VPN_IP IP ROUTE_FLAG VPN_IP TOPOLOGY IP IP SPECIAL_CHAR PEER SPECIAL_CHAR CIPHER SPECIAL_CHAR VAR_SET VAR_VAL
-    (37) log_line -> . date userid CONN_MSG CIPHER
-    (38) log_line -> . date IP PORT PLUGIN_MSG DIR VAR_SET VAR_VAL
-    (42) empty -> .
-    (40) date -> . WEEK_DAY MONTH DAY CLOCK YEAR
-    (41) date -> . WEEK_DAY MONTH DAY CLOCK
+    (1) main_rule -> . route_identifiers main_rule
+    (2) main_rule -> . log_line main_rule
+    (3) main_rule -> . log_line
+    (4) main_rule -> . empty
+    (43) route_identifiers -> . ROUTE_HEADER key_value_list ROUTE_HEADER
+    (5) log_line -> . date PLUGIN_MSG DIR VAR_SET VAR_VAL
+    (6) log_line -> . date SBIN_IP_MSG IP IP_RNG
+    (7) log_line -> . date TUN_TAP_MSG
+    (8) log_line -> . date SBIN_IP_MSG IP PEER IP
+    (9) log_line -> . date SIGTERM_MSG
+    (10) log_line -> . date OPEN_VPN_MSG MONTH DAY YEAR
+    (11) log_line -> . date LIB_VER_MSG DAY MONTH YEAR LIB_VER_MSG
+    (12) log_line -> . date SYS_MSG
+    (13) log_line -> . date PLUGIN_MSG DIR SPECIAL_CHAR SPECIAL_CHAR DIR SPECIAL_CHAR FLAGS SPECIAL_CHAR VAR_SET VAR_VAL
+    (14) log_line -> . date CRYPTO_MSG
+    (15) log_line -> . date ROUTE_GATEWAY IP SLASH IP VAR_SET VAR_VAL VAR_SET VAR_VAL
+    (16) log_line -> . date SBIN_IP_MSG DAY DAY
+    (17) log_line -> . date SBIN_IP_MSG IP IP_RNG PEER IP
+    (18) log_line -> . date IP_PROTOCOL
+    (19) log_line -> . date CONN_MSG VAR_SET VAR_VAL VAR_SET VAR_VAL
+    (20) log_line -> . date TCP_MSG
+    (21) log_line -> . date SYS_MSG SPECIAL_CHAR VAR_SET VAR_VAL VAR_SET VAR_VAL
+    (22) log_line -> . date CONN_MSG VAR_SET IP VAR_SET VAR_VAL SPECIAL_CHAR VAR_SET VAR_VAL
+    (23) log_line -> . date IFCONFIG_END
+    (24) log_line -> . date SYS_MSG VAR_SET VAR_VAL VAR_SET VAR_VAL
+    (25) log_line -> . date TCP_MSG IP PORT
+    (26) log_line -> . date IP PORT SYS_MSG FLAGS IP PORT SPECIAL_CHAR VAR_SET VAR_VAL
+    (27) log_line -> . date TCP_MSG IP PORT PLUGIN_MSG DIR VAR_SET VAR_VAL
+    (28) log_line -> . date IP PORT SYS_MSG SPECIAL_CHAR CARNET SPECIAL_CHAR CN_SET
+    (29) log_line -> . date IP PORT CONN_MSG CRYPTO_MSG
+    (30) log_line -> . date IP PORT SPECIAL_CHAR CARNET SPECIAL_CHAR PEER IP PORT
+    (31) log_line -> . date userid CONN_MSG POOL_RET VAR_SET IP SPECIAL_CHAR VAR_SET VAR_VAL
+    (32) log_line -> . date userid PLUGIN_MSG DIR VAR_SET VAR_VAL
+    (33) log_line -> . date userid CONN_MSG CONN_MSG DIR
+    (34) log_line -> . date userid CONN_MSG CONN_MSG IP SPECIAL_CHAR SPECIAL_CHAR CARNET SLASH IP PORT
+    (35) log_line -> . date userid SYS_MSG CARNET SLASH IP PORT COLON IP
+    (36) log_line -> . date userid SYS_MSG
+    (37) log_line -> . date userid SENT_CNT SPECIAL_CHAR CARNET SPECIAL_CHAR COLON SPECIAL_CHAR ROUTE_FLAG VPN_IP IP ROUTE_FLAG VPN_IP IP ROUTE_FLAG VPN_IP TOPOLOGY IP IP SPECIAL_CHAR PEER SPECIAL_CHAR CIPHER SPECIAL_CHAR VAR_SET VAR_VAL
+    (38) log_line -> . date userid CONN_MSG CIPHER
+    (39) log_line -> . date IP PORT PLUGIN_MSG DIR VAR_SET VAR_VAL
+    (47) empty -> .
+    (41) date -> . WEEK_DAY MONTH DAY CLOCK YEAR
+    (42) date -> . WEEK_DAY MONTH DAY CLOCK
 
-    $end            reduce using rule 42 (empty -> .)
-    WEEK_DAY        shift and go to state 5
+    ROUTE_HEADER    shift and go to state 5
+    $end            reduce using rule 47 (empty -> .)
+    WEEK_DAY        shift and go to state 7
 
     main_rule                      shift and go to state 1
-    log_line                       shift and go to state 2
-    empty                          shift and go to state 3
-    date                           shift and go to state 4
+    route_identifiers              shift and go to state 2
+    log_line                       shift and go to state 3
+    empty                          shift and go to state 4
+    date                           shift and go to state 6
 
 state 1
 
@@ -158,1367 +176,1533 @@ state 1
 
 state 2
 
-    (1) main_rule -> log_line . main_rule
-    (2) main_rule -> log_line .
-    (1) main_rule -> . log_line main_rule
-    (2) main_rule -> . log_line
-    (3) main_rule -> . empty
-    (4) log_line -> . date PLUGIN_MSG DIR VAR_SET VAR_VAL
-    (5) log_line -> . date SBIN_IP_MSG IP IP_RNG
-    (6) log_line -> . date TUN_TAP_MSG
-    (7) log_line -> . date SBIN_IP_MSG IP PEER IP
-    (8) log_line -> . date SIGTERM_MSG
-    (9) log_line -> . date OPEN_VPN_MSG MONTH DAY YEAR
-    (10) log_line -> . date LIB_VER_MSG DAY MONTH YEAR LIB_VER_MSG
-    (11) log_line -> . date SYS_MSG
-    (12) log_line -> . date PLUGIN_MSG DIR SPECIAL_CHAR SPECIAL_CHAR DIR SPECIAL_CHAR FLAGS SPECIAL_CHAR VAR_SET VAR_VAL
-    (13) log_line -> . date CRYPTO_MSG
-    (14) log_line -> . date ROUTE_GATEWAY IP SLASH IP VAR_SET VAR_VAL VAR_SET VAR_VAL
-    (15) log_line -> . date SBIN_IP_MSG DAY DAY
-    (16) log_line -> . date SBIN_IP_MSG IP IP_RNG PEER IP
-    (17) log_line -> . date IP_PROTOCOL
-    (18) log_line -> . date CONN_MSG VAR_SET VAR_VAL VAR_SET VAR_VAL
-    (19) log_line -> . date TCP_MSG
-    (20) log_line -> . date SYS_MSG SPECIAL_CHAR VAR_SET VAR_VAL VAR_SET VAR_VAL
-    (21) log_line -> . date CONN_MSG VAR_SET IP VAR_SET VAR_VAL SPECIAL_CHAR VAR_SET VAR_VAL
-    (22) log_line -> . date IFCONFIG_END
-    (23) log_line -> . date SYS_MSG VAR_SET VAR_VAL VAR_SET VAR_VAL
-    (24) log_line -> . date TCP_MSG IP PORT
-    (25) log_line -> . date IP PORT SYS_MSG FLAGS IP PORT SPECIAL_CHAR VAR_SET VAR_VAL
-    (26) log_line -> . date TCP_MSG IP PORT PLUGIN_MSG DIR VAR_SET VAR_VAL
-    (27) log_line -> . date IP PORT SYS_MSG SPECIAL_CHAR CARNET SPECIAL_CHAR CN_SET
-    (28) log_line -> . date IP PORT CONN_MSG CRYPTO_MSG
-    (29) log_line -> . date IP PORT SPECIAL_CHAR CARNET SPECIAL_CHAR PEER IP PORT
-    (30) log_line -> . date userid CONN_MSG POOL_RET VAR_SET IP SPECIAL_CHAR VAR_SET VAR_VAL
-    (31) log_line -> . date userid PLUGIN_MSG DIR VAR_SET VAR_VAL
-    (32) log_line -> . date userid CONN_MSG CONN_MSG DIR
-    (33) log_line -> . date userid CONN_MSG CONN_MSG IP SPECIAL_CHAR SPECIAL_CHAR CARNET SLASH IP PORT
-    (34) log_line -> . date userid SYS_MSG CARNET SLASH IP PORT COLON IP
-    (35) log_line -> . date userid SYS_MSG
-    (36) log_line -> . date userid SENT_CNT SPECIAL_CHAR CARNET SPECIAL_CHAR COLON SPECIAL_CHAR ROUTE_FLAG VPN_IP IP ROUTE_FLAG VPN_IP IP ROUTE_FLAG VPN_IP TOPOLOGY IP IP SPECIAL_CHAR PEER SPECIAL_CHAR CIPHER SPECIAL_CHAR VAR_SET VAR_VAL
-    (37) log_line -> . date userid CONN_MSG CIPHER
-    (38) log_line -> . date IP PORT PLUGIN_MSG DIR VAR_SET VAR_VAL
-    (42) empty -> .
-    (40) date -> . WEEK_DAY MONTH DAY CLOCK YEAR
-    (41) date -> . WEEK_DAY MONTH DAY CLOCK
+    (1) main_rule -> route_identifiers . main_rule
+    (1) main_rule -> . route_identifiers main_rule
+    (2) main_rule -> . log_line main_rule
+    (3) main_rule -> . log_line
+    (4) main_rule -> . empty
+    (43) route_identifiers -> . ROUTE_HEADER key_value_list ROUTE_HEADER
+    (5) log_line -> . date PLUGIN_MSG DIR VAR_SET VAR_VAL
+    (6) log_line -> . date SBIN_IP_MSG IP IP_RNG
+    (7) log_line -> . date TUN_TAP_MSG
+    (8) log_line -> . date SBIN_IP_MSG IP PEER IP
+    (9) log_line -> . date SIGTERM_MSG
+    (10) log_line -> . date OPEN_VPN_MSG MONTH DAY YEAR
+    (11) log_line -> . date LIB_VER_MSG DAY MONTH YEAR LIB_VER_MSG
+    (12) log_line -> . date SYS_MSG
+    (13) log_line -> . date PLUGIN_MSG DIR SPECIAL_CHAR SPECIAL_CHAR DIR SPECIAL_CHAR FLAGS SPECIAL_CHAR VAR_SET VAR_VAL
+    (14) log_line -> . date CRYPTO_MSG
+    (15) log_line -> . date ROUTE_GATEWAY IP SLASH IP VAR_SET VAR_VAL VAR_SET VAR_VAL
+    (16) log_line -> . date SBIN_IP_MSG DAY DAY
+    (17) log_line -> . date SBIN_IP_MSG IP IP_RNG PEER IP
+    (18) log_line -> . date IP_PROTOCOL
+    (19) log_line -> . date CONN_MSG VAR_SET VAR_VAL VAR_SET VAR_VAL
+    (20) log_line -> . date TCP_MSG
+    (21) log_line -> . date SYS_MSG SPECIAL_CHAR VAR_SET VAR_VAL VAR_SET VAR_VAL
+    (22) log_line -> . date CONN_MSG VAR_SET IP VAR_SET VAR_VAL SPECIAL_CHAR VAR_SET VAR_VAL
+    (23) log_line -> . date IFCONFIG_END
+    (24) log_line -> . date SYS_MSG VAR_SET VAR_VAL VAR_SET VAR_VAL
+    (25) log_line -> . date TCP_MSG IP PORT
+    (26) log_line -> . date IP PORT SYS_MSG FLAGS IP PORT SPECIAL_CHAR VAR_SET VAR_VAL
+    (27) log_line -> . date TCP_MSG IP PORT PLUGIN_MSG DIR VAR_SET VAR_VAL
+    (28) log_line -> . date IP PORT SYS_MSG SPECIAL_CHAR CARNET SPECIAL_CHAR CN_SET
+    (29) log_line -> . date IP PORT CONN_MSG CRYPTO_MSG
+    (30) log_line -> . date IP PORT SPECIAL_CHAR CARNET SPECIAL_CHAR PEER IP PORT
+    (31) log_line -> . date userid CONN_MSG POOL_RET VAR_SET IP SPECIAL_CHAR VAR_SET VAR_VAL
+    (32) log_line -> . date userid PLUGIN_MSG DIR VAR_SET VAR_VAL
+    (33) log_line -> . date userid CONN_MSG CONN_MSG DIR
+    (34) log_line -> . date userid CONN_MSG CONN_MSG IP SPECIAL_CHAR SPECIAL_CHAR CARNET SLASH IP PORT
+    (35) log_line -> . date userid SYS_MSG CARNET SLASH IP PORT COLON IP
+    (36) log_line -> . date userid SYS_MSG
+    (37) log_line -> . date userid SENT_CNT SPECIAL_CHAR CARNET SPECIAL_CHAR COLON SPECIAL_CHAR ROUTE_FLAG VPN_IP IP ROUTE_FLAG VPN_IP IP ROUTE_FLAG VPN_IP TOPOLOGY IP IP SPECIAL_CHAR PEER SPECIAL_CHAR CIPHER SPECIAL_CHAR VAR_SET VAR_VAL
+    (38) log_line -> . date userid CONN_MSG CIPHER
+    (39) log_line -> . date IP PORT PLUGIN_MSG DIR VAR_SET VAR_VAL
+    (47) empty -> .
+    (41) date -> . WEEK_DAY MONTH DAY CLOCK YEAR
+    (42) date -> . WEEK_DAY MONTH DAY CLOCK
 
-  ! reduce/reduce conflict for $end resolved using rule 2 (main_rule -> log_line .)
-    $end            reduce using rule 2 (main_rule -> log_line .)
-    WEEK_DAY        shift and go to state 5
+    ROUTE_HEADER    shift and go to state 5
+    $end            reduce using rule 47 (empty -> .)
+    WEEK_DAY        shift and go to state 7
 
-  ! $end            [ reduce using rule 42 (empty -> .) ]
-
-    log_line                       shift and go to state 2
-    main_rule                      shift and go to state 6
-    empty                          shift and go to state 3
-    date                           shift and go to state 4
+    route_identifiers              shift and go to state 2
+    main_rule                      shift and go to state 8
+    log_line                       shift and go to state 3
+    empty                          shift and go to state 4
+    date                           shift and go to state 6
 
 state 3
 
-    (3) main_rule -> empty .
+    (2) main_rule -> log_line . main_rule
+    (3) main_rule -> log_line .
+    (1) main_rule -> . route_identifiers main_rule
+    (2) main_rule -> . log_line main_rule
+    (3) main_rule -> . log_line
+    (4) main_rule -> . empty
+    (43) route_identifiers -> . ROUTE_HEADER key_value_list ROUTE_HEADER
+    (5) log_line -> . date PLUGIN_MSG DIR VAR_SET VAR_VAL
+    (6) log_line -> . date SBIN_IP_MSG IP IP_RNG
+    (7) log_line -> . date TUN_TAP_MSG
+    (8) log_line -> . date SBIN_IP_MSG IP PEER IP
+    (9) log_line -> . date SIGTERM_MSG
+    (10) log_line -> . date OPEN_VPN_MSG MONTH DAY YEAR
+    (11) log_line -> . date LIB_VER_MSG DAY MONTH YEAR LIB_VER_MSG
+    (12) log_line -> . date SYS_MSG
+    (13) log_line -> . date PLUGIN_MSG DIR SPECIAL_CHAR SPECIAL_CHAR DIR SPECIAL_CHAR FLAGS SPECIAL_CHAR VAR_SET VAR_VAL
+    (14) log_line -> . date CRYPTO_MSG
+    (15) log_line -> . date ROUTE_GATEWAY IP SLASH IP VAR_SET VAR_VAL VAR_SET VAR_VAL
+    (16) log_line -> . date SBIN_IP_MSG DAY DAY
+    (17) log_line -> . date SBIN_IP_MSG IP IP_RNG PEER IP
+    (18) log_line -> . date IP_PROTOCOL
+    (19) log_line -> . date CONN_MSG VAR_SET VAR_VAL VAR_SET VAR_VAL
+    (20) log_line -> . date TCP_MSG
+    (21) log_line -> . date SYS_MSG SPECIAL_CHAR VAR_SET VAR_VAL VAR_SET VAR_VAL
+    (22) log_line -> . date CONN_MSG VAR_SET IP VAR_SET VAR_VAL SPECIAL_CHAR VAR_SET VAR_VAL
+    (23) log_line -> . date IFCONFIG_END
+    (24) log_line -> . date SYS_MSG VAR_SET VAR_VAL VAR_SET VAR_VAL
+    (25) log_line -> . date TCP_MSG IP PORT
+    (26) log_line -> . date IP PORT SYS_MSG FLAGS IP PORT SPECIAL_CHAR VAR_SET VAR_VAL
+    (27) log_line -> . date TCP_MSG IP PORT PLUGIN_MSG DIR VAR_SET VAR_VAL
+    (28) log_line -> . date IP PORT SYS_MSG SPECIAL_CHAR CARNET SPECIAL_CHAR CN_SET
+    (29) log_line -> . date IP PORT CONN_MSG CRYPTO_MSG
+    (30) log_line -> . date IP PORT SPECIAL_CHAR CARNET SPECIAL_CHAR PEER IP PORT
+    (31) log_line -> . date userid CONN_MSG POOL_RET VAR_SET IP SPECIAL_CHAR VAR_SET VAR_VAL
+    (32) log_line -> . date userid PLUGIN_MSG DIR VAR_SET VAR_VAL
+    (33) log_line -> . date userid CONN_MSG CONN_MSG DIR
+    (34) log_line -> . date userid CONN_MSG CONN_MSG IP SPECIAL_CHAR SPECIAL_CHAR CARNET SLASH IP PORT
+    (35) log_line -> . date userid SYS_MSG CARNET SLASH IP PORT COLON IP
+    (36) log_line -> . date userid SYS_MSG
+    (37) log_line -> . date userid SENT_CNT SPECIAL_CHAR CARNET SPECIAL_CHAR COLON SPECIAL_CHAR ROUTE_FLAG VPN_IP IP ROUTE_FLAG VPN_IP IP ROUTE_FLAG VPN_IP TOPOLOGY IP IP SPECIAL_CHAR PEER SPECIAL_CHAR CIPHER SPECIAL_CHAR VAR_SET VAR_VAL
+    (38) log_line -> . date userid CONN_MSG CIPHER
+    (39) log_line -> . date IP PORT PLUGIN_MSG DIR VAR_SET VAR_VAL
+    (47) empty -> .
+    (41) date -> . WEEK_DAY MONTH DAY CLOCK YEAR
+    (42) date -> . WEEK_DAY MONTH DAY CLOCK
 
-    $end            reduce using rule 3 (main_rule -> empty .)
+  ! reduce/reduce conflict for $end resolved using rule 3 (main_rule -> log_line .)
+    $end            reduce using rule 3 (main_rule -> log_line .)
+    ROUTE_HEADER    shift and go to state 5
+    WEEK_DAY        shift and go to state 7
 
+  ! $end            [ reduce using rule 47 (empty -> .) ]
+
+    log_line                       shift and go to state 3
+    main_rule                      shift and go to state 9
+    route_identifiers              shift and go to state 2
+    empty                          shift and go to state 4
+    date                           shift and go to state 6
 
 state 4
 
-    (4) log_line -> date . PLUGIN_MSG DIR VAR_SET VAR_VAL
-    (5) log_line -> date . SBIN_IP_MSG IP IP_RNG
-    (6) log_line -> date . TUN_TAP_MSG
-    (7) log_line -> date . SBIN_IP_MSG IP PEER IP
-    (8) log_line -> date . SIGTERM_MSG
-    (9) log_line -> date . OPEN_VPN_MSG MONTH DAY YEAR
-    (10) log_line -> date . LIB_VER_MSG DAY MONTH YEAR LIB_VER_MSG
-    (11) log_line -> date . SYS_MSG
-    (12) log_line -> date . PLUGIN_MSG DIR SPECIAL_CHAR SPECIAL_CHAR DIR SPECIAL_CHAR FLAGS SPECIAL_CHAR VAR_SET VAR_VAL
-    (13) log_line -> date . CRYPTO_MSG
-    (14) log_line -> date . ROUTE_GATEWAY IP SLASH IP VAR_SET VAR_VAL VAR_SET VAR_VAL
-    (15) log_line -> date . SBIN_IP_MSG DAY DAY
-    (16) log_line -> date . SBIN_IP_MSG IP IP_RNG PEER IP
-    (17) log_line -> date . IP_PROTOCOL
-    (18) log_line -> date . CONN_MSG VAR_SET VAR_VAL VAR_SET VAR_VAL
-    (19) log_line -> date . TCP_MSG
-    (20) log_line -> date . SYS_MSG SPECIAL_CHAR VAR_SET VAR_VAL VAR_SET VAR_VAL
-    (21) log_line -> date . CONN_MSG VAR_SET IP VAR_SET VAR_VAL SPECIAL_CHAR VAR_SET VAR_VAL
-    (22) log_line -> date . IFCONFIG_END
-    (23) log_line -> date . SYS_MSG VAR_SET VAR_VAL VAR_SET VAR_VAL
-    (24) log_line -> date . TCP_MSG IP PORT
-    (25) log_line -> date . IP PORT SYS_MSG FLAGS IP PORT SPECIAL_CHAR VAR_SET VAR_VAL
-    (26) log_line -> date . TCP_MSG IP PORT PLUGIN_MSG DIR VAR_SET VAR_VAL
-    (27) log_line -> date . IP PORT SYS_MSG SPECIAL_CHAR CARNET SPECIAL_CHAR CN_SET
-    (28) log_line -> date . IP PORT CONN_MSG CRYPTO_MSG
-    (29) log_line -> date . IP PORT SPECIAL_CHAR CARNET SPECIAL_CHAR PEER IP PORT
-    (30) log_line -> date . userid CONN_MSG POOL_RET VAR_SET IP SPECIAL_CHAR VAR_SET VAR_VAL
-    (31) log_line -> date . userid PLUGIN_MSG DIR VAR_SET VAR_VAL
-    (32) log_line -> date . userid CONN_MSG CONN_MSG DIR
-    (33) log_line -> date . userid CONN_MSG CONN_MSG IP SPECIAL_CHAR SPECIAL_CHAR CARNET SLASH IP PORT
-    (34) log_line -> date . userid SYS_MSG CARNET SLASH IP PORT COLON IP
-    (35) log_line -> date . userid SYS_MSG
-    (36) log_line -> date . userid SENT_CNT SPECIAL_CHAR CARNET SPECIAL_CHAR COLON SPECIAL_CHAR ROUTE_FLAG VPN_IP IP ROUTE_FLAG VPN_IP IP ROUTE_FLAG VPN_IP TOPOLOGY IP IP SPECIAL_CHAR PEER SPECIAL_CHAR CIPHER SPECIAL_CHAR VAR_SET VAR_VAL
-    (37) log_line -> date . userid CONN_MSG CIPHER
-    (38) log_line -> date . IP PORT PLUGIN_MSG DIR VAR_SET VAR_VAL
-    (39) userid -> . CARNET SLASH IP PORT
+    (4) main_rule -> empty .
 
-    PLUGIN_MSG      shift and go to state 7
-    SBIN_IP_MSG     shift and go to state 8
-    TUN_TAP_MSG     shift and go to state 10
-    SIGTERM_MSG     shift and go to state 11
-    OPEN_VPN_MSG    shift and go to state 12
-    LIB_VER_MSG     shift and go to state 13
-    SYS_MSG         shift and go to state 14
-    CRYPTO_MSG      shift and go to state 15
-    ROUTE_GATEWAY   shift and go to state 16
-    IP_PROTOCOL     shift and go to state 17
-    CONN_MSG        shift and go to state 18
-    TCP_MSG         shift and go to state 19
-    IFCONFIG_END    shift and go to state 20
-    IP              shift and go to state 9
-    CARNET          shift and go to state 21
+    $end            reduce using rule 4 (main_rule -> empty .)
 
-    userid                         shift and go to state 22
 
 state 5
 
-    (40) date -> WEEK_DAY . MONTH DAY CLOCK YEAR
-    (41) date -> WEEK_DAY . MONTH DAY CLOCK
+    (43) route_identifiers -> ROUTE_HEADER . key_value_list ROUTE_HEADER
+    (44) key_value_list -> . key_value_list key_value
+    (45) key_value_list -> . key_value
+    (46) key_value -> . VPN_IP IP
 
-    MONTH           shift and go to state 23
+    VPN_IP          shift and go to state 12
 
+    key_value_list                 shift and go to state 10
+    key_value                      shift and go to state 11
 
 state 6
 
-    (1) main_rule -> log_line main_rule .
+    (5) log_line -> date . PLUGIN_MSG DIR VAR_SET VAR_VAL
+    (6) log_line -> date . SBIN_IP_MSG IP IP_RNG
+    (7) log_line -> date . TUN_TAP_MSG
+    (8) log_line -> date . SBIN_IP_MSG IP PEER IP
+    (9) log_line -> date . SIGTERM_MSG
+    (10) log_line -> date . OPEN_VPN_MSG MONTH DAY YEAR
+    (11) log_line -> date . LIB_VER_MSG DAY MONTH YEAR LIB_VER_MSG
+    (12) log_line -> date . SYS_MSG
+    (13) log_line -> date . PLUGIN_MSG DIR SPECIAL_CHAR SPECIAL_CHAR DIR SPECIAL_CHAR FLAGS SPECIAL_CHAR VAR_SET VAR_VAL
+    (14) log_line -> date . CRYPTO_MSG
+    (15) log_line -> date . ROUTE_GATEWAY IP SLASH IP VAR_SET VAR_VAL VAR_SET VAR_VAL
+    (16) log_line -> date . SBIN_IP_MSG DAY DAY
+    (17) log_line -> date . SBIN_IP_MSG IP IP_RNG PEER IP
+    (18) log_line -> date . IP_PROTOCOL
+    (19) log_line -> date . CONN_MSG VAR_SET VAR_VAL VAR_SET VAR_VAL
+    (20) log_line -> date . TCP_MSG
+    (21) log_line -> date . SYS_MSG SPECIAL_CHAR VAR_SET VAR_VAL VAR_SET VAR_VAL
+    (22) log_line -> date . CONN_MSG VAR_SET IP VAR_SET VAR_VAL SPECIAL_CHAR VAR_SET VAR_VAL
+    (23) log_line -> date . IFCONFIG_END
+    (24) log_line -> date . SYS_MSG VAR_SET VAR_VAL VAR_SET VAR_VAL
+    (25) log_line -> date . TCP_MSG IP PORT
+    (26) log_line -> date . IP PORT SYS_MSG FLAGS IP PORT SPECIAL_CHAR VAR_SET VAR_VAL
+    (27) log_line -> date . TCP_MSG IP PORT PLUGIN_MSG DIR VAR_SET VAR_VAL
+    (28) log_line -> date . IP PORT SYS_MSG SPECIAL_CHAR CARNET SPECIAL_CHAR CN_SET
+    (29) log_line -> date . IP PORT CONN_MSG CRYPTO_MSG
+    (30) log_line -> date . IP PORT SPECIAL_CHAR CARNET SPECIAL_CHAR PEER IP PORT
+    (31) log_line -> date . userid CONN_MSG POOL_RET VAR_SET IP SPECIAL_CHAR VAR_SET VAR_VAL
+    (32) log_line -> date . userid PLUGIN_MSG DIR VAR_SET VAR_VAL
+    (33) log_line -> date . userid CONN_MSG CONN_MSG DIR
+    (34) log_line -> date . userid CONN_MSG CONN_MSG IP SPECIAL_CHAR SPECIAL_CHAR CARNET SLASH IP PORT
+    (35) log_line -> date . userid SYS_MSG CARNET SLASH IP PORT COLON IP
+    (36) log_line -> date . userid SYS_MSG
+    (37) log_line -> date . userid SENT_CNT SPECIAL_CHAR CARNET SPECIAL_CHAR COLON SPECIAL_CHAR ROUTE_FLAG VPN_IP IP ROUTE_FLAG VPN_IP IP ROUTE_FLAG VPN_IP TOPOLOGY IP IP SPECIAL_CHAR PEER SPECIAL_CHAR CIPHER SPECIAL_CHAR VAR_SET VAR_VAL
+    (38) log_line -> date . userid CONN_MSG CIPHER
+    (39) log_line -> date . IP PORT PLUGIN_MSG DIR VAR_SET VAR_VAL
+    (40) userid -> . CARNET SLASH IP PORT
 
-    $end            reduce using rule 1 (main_rule -> log_line main_rule .)
+    PLUGIN_MSG      shift and go to state 13
+    SBIN_IP_MSG     shift and go to state 14
+    TUN_TAP_MSG     shift and go to state 16
+    SIGTERM_MSG     shift and go to state 17
+    OPEN_VPN_MSG    shift and go to state 18
+    LIB_VER_MSG     shift and go to state 19
+    SYS_MSG         shift and go to state 20
+    CRYPTO_MSG      shift and go to state 21
+    ROUTE_GATEWAY   shift and go to state 22
+    IP_PROTOCOL     shift and go to state 23
+    CONN_MSG        shift and go to state 24
+    TCP_MSG         shift and go to state 25
+    IFCONFIG_END    shift and go to state 26
+    IP              shift and go to state 15
+    CARNET          shift and go to state 27
 
+    userid                         shift and go to state 28
 
 state 7
 
-    (4) log_line -> date PLUGIN_MSG . DIR VAR_SET VAR_VAL
-    (12) log_line -> date PLUGIN_MSG . DIR SPECIAL_CHAR SPECIAL_CHAR DIR SPECIAL_CHAR FLAGS SPECIAL_CHAR VAR_SET VAR_VAL
+    (41) date -> WEEK_DAY . MONTH DAY CLOCK YEAR
+    (42) date -> WEEK_DAY . MONTH DAY CLOCK
 
-    DIR             shift and go to state 24
+    MONTH           shift and go to state 29
 
 
 state 8
 
-    (5) log_line -> date SBIN_IP_MSG . IP IP_RNG
-    (7) log_line -> date SBIN_IP_MSG . IP PEER IP
-    (15) log_line -> date SBIN_IP_MSG . DAY DAY
-    (16) log_line -> date SBIN_IP_MSG . IP IP_RNG PEER IP
+    (1) main_rule -> route_identifiers main_rule .
 
-    IP              shift and go to state 25
-    DAY             shift and go to state 26
+    $end            reduce using rule 1 (main_rule -> route_identifiers main_rule .)
 
 
 state 9
 
-    (25) log_line -> date IP . PORT SYS_MSG FLAGS IP PORT SPECIAL_CHAR VAR_SET VAR_VAL
-    (27) log_line -> date IP . PORT SYS_MSG SPECIAL_CHAR CARNET SPECIAL_CHAR CN_SET
-    (28) log_line -> date IP . PORT CONN_MSG CRYPTO_MSG
-    (29) log_line -> date IP . PORT SPECIAL_CHAR CARNET SPECIAL_CHAR PEER IP PORT
-    (38) log_line -> date IP . PORT PLUGIN_MSG DIR VAR_SET VAR_VAL
+    (2) main_rule -> log_line main_rule .
 
-    PORT            shift and go to state 27
+    $end            reduce using rule 2 (main_rule -> log_line main_rule .)
 
 
 state 10
 
-    (6) log_line -> date TUN_TAP_MSG .
+    (43) route_identifiers -> ROUTE_HEADER key_value_list . ROUTE_HEADER
+    (44) key_value_list -> key_value_list . key_value
+    (46) key_value -> . VPN_IP IP
 
-    WEEK_DAY        reduce using rule 6 (log_line -> date TUN_TAP_MSG .)
-    $end            reduce using rule 6 (log_line -> date TUN_TAP_MSG .)
+    ROUTE_HEADER    shift and go to state 30
+    VPN_IP          shift and go to state 12
 
+    key_value                      shift and go to state 31
 
 state 11
 
-    (8) log_line -> date SIGTERM_MSG .
+    (45) key_value_list -> key_value .
 
-    WEEK_DAY        reduce using rule 8 (log_line -> date SIGTERM_MSG .)
-    $end            reduce using rule 8 (log_line -> date SIGTERM_MSG .)
+    ROUTE_HEADER    reduce using rule 45 (key_value_list -> key_value .)
+    VPN_IP          reduce using rule 45 (key_value_list -> key_value .)
 
 
 state 12
 
-    (9) log_line -> date OPEN_VPN_MSG . MONTH DAY YEAR
-
-    MONTH           shift and go to state 28
-
-
-state 13
-
-    (10) log_line -> date LIB_VER_MSG . DAY MONTH YEAR LIB_VER_MSG
-
-    DAY             shift and go to state 29
-
-
-state 14
-
-    (11) log_line -> date SYS_MSG .
-    (20) log_line -> date SYS_MSG . SPECIAL_CHAR VAR_SET VAR_VAL VAR_SET VAR_VAL
-    (23) log_line -> date SYS_MSG . VAR_SET VAR_VAL VAR_SET VAR_VAL
-
-    WEEK_DAY        reduce using rule 11 (log_line -> date SYS_MSG .)
-    $end            reduce using rule 11 (log_line -> date SYS_MSG .)
-    SPECIAL_CHAR    shift and go to state 30
-    VAR_SET         shift and go to state 31
-
-
-state 15
-
-    (13) log_line -> date CRYPTO_MSG .
-
-    WEEK_DAY        reduce using rule 13 (log_line -> date CRYPTO_MSG .)
-    $end            reduce using rule 13 (log_line -> date CRYPTO_MSG .)
-
-
-state 16
-
-    (14) log_line -> date ROUTE_GATEWAY . IP SLASH IP VAR_SET VAR_VAL VAR_SET VAR_VAL
+    (46) key_value -> VPN_IP . IP
 
     IP              shift and go to state 32
 
 
+state 13
+
+    (5) log_line -> date PLUGIN_MSG . DIR VAR_SET VAR_VAL
+    (13) log_line -> date PLUGIN_MSG . DIR SPECIAL_CHAR SPECIAL_CHAR DIR SPECIAL_CHAR FLAGS SPECIAL_CHAR VAR_SET VAR_VAL
+
+    DIR             shift and go to state 33
+
+
+state 14
+
+    (6) log_line -> date SBIN_IP_MSG . IP IP_RNG
+    (8) log_line -> date SBIN_IP_MSG . IP PEER IP
+    (16) log_line -> date SBIN_IP_MSG . DAY DAY
+    (17) log_line -> date SBIN_IP_MSG . IP IP_RNG PEER IP
+
+    IP              shift and go to state 34
+    DAY             shift and go to state 35
+
+
+state 15
+
+    (26) log_line -> date IP . PORT SYS_MSG FLAGS IP PORT SPECIAL_CHAR VAR_SET VAR_VAL
+    (28) log_line -> date IP . PORT SYS_MSG SPECIAL_CHAR CARNET SPECIAL_CHAR CN_SET
+    (29) log_line -> date IP . PORT CONN_MSG CRYPTO_MSG
+    (30) log_line -> date IP . PORT SPECIAL_CHAR CARNET SPECIAL_CHAR PEER IP PORT
+    (39) log_line -> date IP . PORT PLUGIN_MSG DIR VAR_SET VAR_VAL
+
+    PORT            shift and go to state 36
+
+
+state 16
+
+    (7) log_line -> date TUN_TAP_MSG .
+
+    ROUTE_HEADER    reduce using rule 7 (log_line -> date TUN_TAP_MSG .)
+    WEEK_DAY        reduce using rule 7 (log_line -> date TUN_TAP_MSG .)
+    $end            reduce using rule 7 (log_line -> date TUN_TAP_MSG .)
+
+
 state 17
 
-    (17) log_line -> date IP_PROTOCOL .
+    (9) log_line -> date SIGTERM_MSG .
 
-    WEEK_DAY        reduce using rule 17 (log_line -> date IP_PROTOCOL .)
-    $end            reduce using rule 17 (log_line -> date IP_PROTOCOL .)
+    ROUTE_HEADER    reduce using rule 9 (log_line -> date SIGTERM_MSG .)
+    WEEK_DAY        reduce using rule 9 (log_line -> date SIGTERM_MSG .)
+    $end            reduce using rule 9 (log_line -> date SIGTERM_MSG .)
 
 
 state 18
 
-    (18) log_line -> date CONN_MSG . VAR_SET VAR_VAL VAR_SET VAR_VAL
-    (21) log_line -> date CONN_MSG . VAR_SET IP VAR_SET VAR_VAL SPECIAL_CHAR VAR_SET VAR_VAL
+    (10) log_line -> date OPEN_VPN_MSG . MONTH DAY YEAR
 
-    VAR_SET         shift and go to state 33
+    MONTH           shift and go to state 37
 
 
 state 19
 
-    (19) log_line -> date TCP_MSG .
-    (24) log_line -> date TCP_MSG . IP PORT
-    (26) log_line -> date TCP_MSG . IP PORT PLUGIN_MSG DIR VAR_SET VAR_VAL
+    (11) log_line -> date LIB_VER_MSG . DAY MONTH YEAR LIB_VER_MSG
 
-    WEEK_DAY        reduce using rule 19 (log_line -> date TCP_MSG .)
-    $end            reduce using rule 19 (log_line -> date TCP_MSG .)
-    IP              shift and go to state 34
+    DAY             shift and go to state 38
 
 
 state 20
 
-    (22) log_line -> date IFCONFIG_END .
+    (12) log_line -> date SYS_MSG .
+    (21) log_line -> date SYS_MSG . SPECIAL_CHAR VAR_SET VAR_VAL VAR_SET VAR_VAL
+    (24) log_line -> date SYS_MSG . VAR_SET VAR_VAL VAR_SET VAR_VAL
 
-    WEEK_DAY        reduce using rule 22 (log_line -> date IFCONFIG_END .)
-    $end            reduce using rule 22 (log_line -> date IFCONFIG_END .)
+    ROUTE_HEADER    reduce using rule 12 (log_line -> date SYS_MSG .)
+    WEEK_DAY        reduce using rule 12 (log_line -> date SYS_MSG .)
+    $end            reduce using rule 12 (log_line -> date SYS_MSG .)
+    SPECIAL_CHAR    shift and go to state 39
+    VAR_SET         shift and go to state 40
 
 
 state 21
 
-    (39) userid -> CARNET . SLASH IP PORT
+    (14) log_line -> date CRYPTO_MSG .
 
-    SLASH           shift and go to state 35
+    ROUTE_HEADER    reduce using rule 14 (log_line -> date CRYPTO_MSG .)
+    WEEK_DAY        reduce using rule 14 (log_line -> date CRYPTO_MSG .)
+    $end            reduce using rule 14 (log_line -> date CRYPTO_MSG .)
 
 
 state 22
 
-    (30) log_line -> date userid . CONN_MSG POOL_RET VAR_SET IP SPECIAL_CHAR VAR_SET VAR_VAL
-    (31) log_line -> date userid . PLUGIN_MSG DIR VAR_SET VAR_VAL
-    (32) log_line -> date userid . CONN_MSG CONN_MSG DIR
-    (33) log_line -> date userid . CONN_MSG CONN_MSG IP SPECIAL_CHAR SPECIAL_CHAR CARNET SLASH IP PORT
-    (34) log_line -> date userid . SYS_MSG CARNET SLASH IP PORT COLON IP
-    (35) log_line -> date userid . SYS_MSG
-    (36) log_line -> date userid . SENT_CNT SPECIAL_CHAR CARNET SPECIAL_CHAR COLON SPECIAL_CHAR ROUTE_FLAG VPN_IP IP ROUTE_FLAG VPN_IP IP ROUTE_FLAG VPN_IP TOPOLOGY IP IP SPECIAL_CHAR PEER SPECIAL_CHAR CIPHER SPECIAL_CHAR VAR_SET VAR_VAL
-    (37) log_line -> date userid . CONN_MSG CIPHER
+    (15) log_line -> date ROUTE_GATEWAY . IP SLASH IP VAR_SET VAR_VAL VAR_SET VAR_VAL
 
-    CONN_MSG        shift and go to state 36
-    PLUGIN_MSG      shift and go to state 37
-    SYS_MSG         shift and go to state 38
-    SENT_CNT        shift and go to state 39
+    IP              shift and go to state 41
 
 
 state 23
 
-    (40) date -> WEEK_DAY MONTH . DAY CLOCK YEAR
-    (41) date -> WEEK_DAY MONTH . DAY CLOCK
+    (18) log_line -> date IP_PROTOCOL .
 
-    DAY             shift and go to state 40
+    ROUTE_HEADER    reduce using rule 18 (log_line -> date IP_PROTOCOL .)
+    WEEK_DAY        reduce using rule 18 (log_line -> date IP_PROTOCOL .)
+    $end            reduce using rule 18 (log_line -> date IP_PROTOCOL .)
 
 
 state 24
 
-    (4) log_line -> date PLUGIN_MSG DIR . VAR_SET VAR_VAL
-    (12) log_line -> date PLUGIN_MSG DIR . SPECIAL_CHAR SPECIAL_CHAR DIR SPECIAL_CHAR FLAGS SPECIAL_CHAR VAR_SET VAR_VAL
+    (19) log_line -> date CONN_MSG . VAR_SET VAR_VAL VAR_SET VAR_VAL
+    (22) log_line -> date CONN_MSG . VAR_SET IP VAR_SET VAR_VAL SPECIAL_CHAR VAR_SET VAR_VAL
 
-    VAR_SET         shift and go to state 41
-    SPECIAL_CHAR    shift and go to state 42
+    VAR_SET         shift and go to state 42
 
 
 state 25
 
-    (5) log_line -> date SBIN_IP_MSG IP . IP_RNG
-    (7) log_line -> date SBIN_IP_MSG IP . PEER IP
-    (16) log_line -> date SBIN_IP_MSG IP . IP_RNG PEER IP
+    (20) log_line -> date TCP_MSG .
+    (25) log_line -> date TCP_MSG . IP PORT
+    (27) log_line -> date TCP_MSG . IP PORT PLUGIN_MSG DIR VAR_SET VAR_VAL
 
-    IP_RNG          shift and go to state 43
-    PEER            shift and go to state 44
+    ROUTE_HEADER    reduce using rule 20 (log_line -> date TCP_MSG .)
+    WEEK_DAY        reduce using rule 20 (log_line -> date TCP_MSG .)
+    $end            reduce using rule 20 (log_line -> date TCP_MSG .)
+    IP              shift and go to state 43
 
 
 state 26
 
-    (15) log_line -> date SBIN_IP_MSG DAY . DAY
+    (23) log_line -> date IFCONFIG_END .
 
-    DAY             shift and go to state 45
+    ROUTE_HEADER    reduce using rule 23 (log_line -> date IFCONFIG_END .)
+    WEEK_DAY        reduce using rule 23 (log_line -> date IFCONFIG_END .)
+    $end            reduce using rule 23 (log_line -> date IFCONFIG_END .)
 
 
 state 27
 
-    (25) log_line -> date IP PORT . SYS_MSG FLAGS IP PORT SPECIAL_CHAR VAR_SET VAR_VAL
-    (27) log_line -> date IP PORT . SYS_MSG SPECIAL_CHAR CARNET SPECIAL_CHAR CN_SET
-    (28) log_line -> date IP PORT . CONN_MSG CRYPTO_MSG
-    (29) log_line -> date IP PORT . SPECIAL_CHAR CARNET SPECIAL_CHAR PEER IP PORT
-    (38) log_line -> date IP PORT . PLUGIN_MSG DIR VAR_SET VAR_VAL
+    (40) userid -> CARNET . SLASH IP PORT
 
-    SYS_MSG         shift and go to state 46
-    CONN_MSG        shift and go to state 48
-    SPECIAL_CHAR    shift and go to state 47
-    PLUGIN_MSG      shift and go to state 49
+    SLASH           shift and go to state 44
 
 
 state 28
 
-    (9) log_line -> date OPEN_VPN_MSG MONTH . DAY YEAR
+    (31) log_line -> date userid . CONN_MSG POOL_RET VAR_SET IP SPECIAL_CHAR VAR_SET VAR_VAL
+    (32) log_line -> date userid . PLUGIN_MSG DIR VAR_SET VAR_VAL
+    (33) log_line -> date userid . CONN_MSG CONN_MSG DIR
+    (34) log_line -> date userid . CONN_MSG CONN_MSG IP SPECIAL_CHAR SPECIAL_CHAR CARNET SLASH IP PORT
+    (35) log_line -> date userid . SYS_MSG CARNET SLASH IP PORT COLON IP
+    (36) log_line -> date userid . SYS_MSG
+    (37) log_line -> date userid . SENT_CNT SPECIAL_CHAR CARNET SPECIAL_CHAR COLON SPECIAL_CHAR ROUTE_FLAG VPN_IP IP ROUTE_FLAG VPN_IP IP ROUTE_FLAG VPN_IP TOPOLOGY IP IP SPECIAL_CHAR PEER SPECIAL_CHAR CIPHER SPECIAL_CHAR VAR_SET VAR_VAL
+    (38) log_line -> date userid . CONN_MSG CIPHER
 
-    DAY             shift and go to state 50
+    CONN_MSG        shift and go to state 45
+    PLUGIN_MSG      shift and go to state 46
+    SYS_MSG         shift and go to state 47
+    SENT_CNT        shift and go to state 48
 
 
 state 29
 
-    (10) log_line -> date LIB_VER_MSG DAY . MONTH YEAR LIB_VER_MSG
+    (41) date -> WEEK_DAY MONTH . DAY CLOCK YEAR
+    (42) date -> WEEK_DAY MONTH . DAY CLOCK
 
-    MONTH           shift and go to state 51
+    DAY             shift and go to state 49
 
 
 state 30
 
-    (20) log_line -> date SYS_MSG SPECIAL_CHAR . VAR_SET VAR_VAL VAR_SET VAR_VAL
+    (43) route_identifiers -> ROUTE_HEADER key_value_list ROUTE_HEADER .
 
-    VAR_SET         shift and go to state 52
+    ROUTE_HEADER    reduce using rule 43 (route_identifiers -> ROUTE_HEADER key_value_list ROUTE_HEADER .)
+    WEEK_DAY        reduce using rule 43 (route_identifiers -> ROUTE_HEADER key_value_list ROUTE_HEADER .)
+    $end            reduce using rule 43 (route_identifiers -> ROUTE_HEADER key_value_list ROUTE_HEADER .)
 
 
 state 31
 
-    (23) log_line -> date SYS_MSG VAR_SET . VAR_VAL VAR_SET VAR_VAL
+    (44) key_value_list -> key_value_list key_value .
 
-    VAR_VAL         shift and go to state 53
+    ROUTE_HEADER    reduce using rule 44 (key_value_list -> key_value_list key_value .)
+    VPN_IP          reduce using rule 44 (key_value_list -> key_value_list key_value .)
 
 
 state 32
 
-    (14) log_line -> date ROUTE_GATEWAY IP . SLASH IP VAR_SET VAR_VAL VAR_SET VAR_VAL
+    (46) key_value -> VPN_IP IP .
 
-    SLASH           shift and go to state 54
+    ROUTE_HEADER    reduce using rule 46 (key_value -> VPN_IP IP .)
+    VPN_IP          reduce using rule 46 (key_value -> VPN_IP IP .)
 
 
 state 33
 
-    (18) log_line -> date CONN_MSG VAR_SET . VAR_VAL VAR_SET VAR_VAL
-    (21) log_line -> date CONN_MSG VAR_SET . IP VAR_SET VAR_VAL SPECIAL_CHAR VAR_SET VAR_VAL
+    (5) log_line -> date PLUGIN_MSG DIR . VAR_SET VAR_VAL
+    (13) log_line -> date PLUGIN_MSG DIR . SPECIAL_CHAR SPECIAL_CHAR DIR SPECIAL_CHAR FLAGS SPECIAL_CHAR VAR_SET VAR_VAL
 
-    VAR_VAL         shift and go to state 55
-    IP              shift and go to state 56
+    VAR_SET         shift and go to state 50
+    SPECIAL_CHAR    shift and go to state 51
 
 
 state 34
 
-    (24) log_line -> date TCP_MSG IP . PORT
-    (26) log_line -> date TCP_MSG IP . PORT PLUGIN_MSG DIR VAR_SET VAR_VAL
+    (6) log_line -> date SBIN_IP_MSG IP . IP_RNG
+    (8) log_line -> date SBIN_IP_MSG IP . PEER IP
+    (17) log_line -> date SBIN_IP_MSG IP . IP_RNG PEER IP
 
-    PORT            shift and go to state 57
+    IP_RNG          shift and go to state 52
+    PEER            shift and go to state 53
 
 
 state 35
 
-    (39) userid -> CARNET SLASH . IP PORT
+    (16) log_line -> date SBIN_IP_MSG DAY . DAY
 
-    IP              shift and go to state 58
+    DAY             shift and go to state 54
 
 
 state 36
 
-    (30) log_line -> date userid CONN_MSG . POOL_RET VAR_SET IP SPECIAL_CHAR VAR_SET VAR_VAL
-    (32) log_line -> date userid CONN_MSG . CONN_MSG DIR
-    (33) log_line -> date userid CONN_MSG . CONN_MSG IP SPECIAL_CHAR SPECIAL_CHAR CARNET SLASH IP PORT
-    (37) log_line -> date userid CONN_MSG . CIPHER
+    (26) log_line -> date IP PORT . SYS_MSG FLAGS IP PORT SPECIAL_CHAR VAR_SET VAR_VAL
+    (28) log_line -> date IP PORT . SYS_MSG SPECIAL_CHAR CARNET SPECIAL_CHAR CN_SET
+    (29) log_line -> date IP PORT . CONN_MSG CRYPTO_MSG
+    (30) log_line -> date IP PORT . SPECIAL_CHAR CARNET SPECIAL_CHAR PEER IP PORT
+    (39) log_line -> date IP PORT . PLUGIN_MSG DIR VAR_SET VAR_VAL
 
-    POOL_RET        shift and go to state 60
-    CONN_MSG        shift and go to state 59
-    CIPHER          shift and go to state 61
+    SYS_MSG         shift and go to state 55
+    CONN_MSG        shift and go to state 57
+    SPECIAL_CHAR    shift and go to state 56
+    PLUGIN_MSG      shift and go to state 58
 
 
 state 37
 
-    (31) log_line -> date userid PLUGIN_MSG . DIR VAR_SET VAR_VAL
+    (10) log_line -> date OPEN_VPN_MSG MONTH . DAY YEAR
 
-    DIR             shift and go to state 62
+    DAY             shift and go to state 59
 
 
 state 38
 
-    (34) log_line -> date userid SYS_MSG . CARNET SLASH IP PORT COLON IP
-    (35) log_line -> date userid SYS_MSG .
+    (11) log_line -> date LIB_VER_MSG DAY . MONTH YEAR LIB_VER_MSG
 
-    CARNET          shift and go to state 63
-    WEEK_DAY        reduce using rule 35 (log_line -> date userid SYS_MSG .)
-    $end            reduce using rule 35 (log_line -> date userid SYS_MSG .)
+    MONTH           shift and go to state 60
 
 
 state 39
 
-    (36) log_line -> date userid SENT_CNT . SPECIAL_CHAR CARNET SPECIAL_CHAR COLON SPECIAL_CHAR ROUTE_FLAG VPN_IP IP ROUTE_FLAG VPN_IP IP ROUTE_FLAG VPN_IP TOPOLOGY IP IP SPECIAL_CHAR PEER SPECIAL_CHAR CIPHER SPECIAL_CHAR VAR_SET VAR_VAL
+    (21) log_line -> date SYS_MSG SPECIAL_CHAR . VAR_SET VAR_VAL VAR_SET VAR_VAL
 
-    SPECIAL_CHAR    shift and go to state 64
+    VAR_SET         shift and go to state 61
 
 
 state 40
 
-    (40) date -> WEEK_DAY MONTH DAY . CLOCK YEAR
-    (41) date -> WEEK_DAY MONTH DAY . CLOCK
+    (24) log_line -> date SYS_MSG VAR_SET . VAR_VAL VAR_SET VAR_VAL
 
-    CLOCK           shift and go to state 65
+    VAR_VAL         shift and go to state 62
 
 
 state 41
 
-    (4) log_line -> date PLUGIN_MSG DIR VAR_SET . VAR_VAL
+    (15) log_line -> date ROUTE_GATEWAY IP . SLASH IP VAR_SET VAR_VAL VAR_SET VAR_VAL
 
-    VAR_VAL         shift and go to state 66
+    SLASH           shift and go to state 63
 
 
 state 42
 
-    (12) log_line -> date PLUGIN_MSG DIR SPECIAL_CHAR . SPECIAL_CHAR DIR SPECIAL_CHAR FLAGS SPECIAL_CHAR VAR_SET VAR_VAL
+    (19) log_line -> date CONN_MSG VAR_SET . VAR_VAL VAR_SET VAR_VAL
+    (22) log_line -> date CONN_MSG VAR_SET . IP VAR_SET VAR_VAL SPECIAL_CHAR VAR_SET VAR_VAL
 
-    SPECIAL_CHAR    shift and go to state 67
+    VAR_VAL         shift and go to state 64
+    IP              shift and go to state 65
 
 
 state 43
 
-    (5) log_line -> date SBIN_IP_MSG IP IP_RNG .
-    (16) log_line -> date SBIN_IP_MSG IP IP_RNG . PEER IP
+    (25) log_line -> date TCP_MSG IP . PORT
+    (27) log_line -> date TCP_MSG IP . PORT PLUGIN_MSG DIR VAR_SET VAR_VAL
 
-    WEEK_DAY        reduce using rule 5 (log_line -> date SBIN_IP_MSG IP IP_RNG .)
-    $end            reduce using rule 5 (log_line -> date SBIN_IP_MSG IP IP_RNG .)
-    PEER            shift and go to state 68
+    PORT            shift and go to state 66
 
 
 state 44
 
-    (7) log_line -> date SBIN_IP_MSG IP PEER . IP
+    (40) userid -> CARNET SLASH . IP PORT
 
-    IP              shift and go to state 69
+    IP              shift and go to state 67
 
 
 state 45
 
-    (15) log_line -> date SBIN_IP_MSG DAY DAY .
+    (31) log_line -> date userid CONN_MSG . POOL_RET VAR_SET IP SPECIAL_CHAR VAR_SET VAR_VAL
+    (33) log_line -> date userid CONN_MSG . CONN_MSG DIR
+    (34) log_line -> date userid CONN_MSG . CONN_MSG IP SPECIAL_CHAR SPECIAL_CHAR CARNET SLASH IP PORT
+    (38) log_line -> date userid CONN_MSG . CIPHER
 
-    WEEK_DAY        reduce using rule 15 (log_line -> date SBIN_IP_MSG DAY DAY .)
-    $end            reduce using rule 15 (log_line -> date SBIN_IP_MSG DAY DAY .)
+    POOL_RET        shift and go to state 69
+    CONN_MSG        shift and go to state 68
+    CIPHER          shift and go to state 70
 
 
 state 46
 
-    (25) log_line -> date IP PORT SYS_MSG . FLAGS IP PORT SPECIAL_CHAR VAR_SET VAR_VAL
-    (27) log_line -> date IP PORT SYS_MSG . SPECIAL_CHAR CARNET SPECIAL_CHAR CN_SET
+    (32) log_line -> date userid PLUGIN_MSG . DIR VAR_SET VAR_VAL
 
-    FLAGS           shift and go to state 70
-    SPECIAL_CHAR    shift and go to state 71
+    DIR             shift and go to state 71
 
 
 state 47
 
-    (29) log_line -> date IP PORT SPECIAL_CHAR . CARNET SPECIAL_CHAR PEER IP PORT
+    (35) log_line -> date userid SYS_MSG . CARNET SLASH IP PORT COLON IP
+    (36) log_line -> date userid SYS_MSG .
 
     CARNET          shift and go to state 72
+    ROUTE_HEADER    reduce using rule 36 (log_line -> date userid SYS_MSG .)
+    WEEK_DAY        reduce using rule 36 (log_line -> date userid SYS_MSG .)
+    $end            reduce using rule 36 (log_line -> date userid SYS_MSG .)
 
 
 state 48
 
-    (28) log_line -> date IP PORT CONN_MSG . CRYPTO_MSG
+    (37) log_line -> date userid SENT_CNT . SPECIAL_CHAR CARNET SPECIAL_CHAR COLON SPECIAL_CHAR ROUTE_FLAG VPN_IP IP ROUTE_FLAG VPN_IP IP ROUTE_FLAG VPN_IP TOPOLOGY IP IP SPECIAL_CHAR PEER SPECIAL_CHAR CIPHER SPECIAL_CHAR VAR_SET VAR_VAL
 
-    CRYPTO_MSG      shift and go to state 73
+    SPECIAL_CHAR    shift and go to state 73
 
 
 state 49
 
-    (38) log_line -> date IP PORT PLUGIN_MSG . DIR VAR_SET VAR_VAL
+    (41) date -> WEEK_DAY MONTH DAY . CLOCK YEAR
+    (42) date -> WEEK_DAY MONTH DAY . CLOCK
 
-    DIR             shift and go to state 74
+    CLOCK           shift and go to state 74
 
 
 state 50
 
-    (9) log_line -> date OPEN_VPN_MSG MONTH DAY . YEAR
+    (5) log_line -> date PLUGIN_MSG DIR VAR_SET . VAR_VAL
 
-    YEAR            shift and go to state 75
+    VAR_VAL         shift and go to state 75
 
 
 state 51
 
-    (10) log_line -> date LIB_VER_MSG DAY MONTH . YEAR LIB_VER_MSG
+    (13) log_line -> date PLUGIN_MSG DIR SPECIAL_CHAR . SPECIAL_CHAR DIR SPECIAL_CHAR FLAGS SPECIAL_CHAR VAR_SET VAR_VAL
 
-    YEAR            shift and go to state 76
+    SPECIAL_CHAR    shift and go to state 76
 
 
 state 52
 
-    (20) log_line -> date SYS_MSG SPECIAL_CHAR VAR_SET . VAR_VAL VAR_SET VAR_VAL
+    (6) log_line -> date SBIN_IP_MSG IP IP_RNG .
+    (17) log_line -> date SBIN_IP_MSG IP IP_RNG . PEER IP
 
-    VAR_VAL         shift and go to state 77
+    ROUTE_HEADER    reduce using rule 6 (log_line -> date SBIN_IP_MSG IP IP_RNG .)
+    WEEK_DAY        reduce using rule 6 (log_line -> date SBIN_IP_MSG IP IP_RNG .)
+    $end            reduce using rule 6 (log_line -> date SBIN_IP_MSG IP IP_RNG .)
+    PEER            shift and go to state 77
 
 
 state 53
 
-    (23) log_line -> date SYS_MSG VAR_SET VAR_VAL . VAR_SET VAR_VAL
+    (8) log_line -> date SBIN_IP_MSG IP PEER . IP
 
-    VAR_SET         shift and go to state 78
+    IP              shift and go to state 78
 
 
 state 54
 
-    (14) log_line -> date ROUTE_GATEWAY IP SLASH . IP VAR_SET VAR_VAL VAR_SET VAR_VAL
+    (16) log_line -> date SBIN_IP_MSG DAY DAY .
 
-    IP              shift and go to state 79
+    ROUTE_HEADER    reduce using rule 16 (log_line -> date SBIN_IP_MSG DAY DAY .)
+    WEEK_DAY        reduce using rule 16 (log_line -> date SBIN_IP_MSG DAY DAY .)
+    $end            reduce using rule 16 (log_line -> date SBIN_IP_MSG DAY DAY .)
 
 
 state 55
 
-    (18) log_line -> date CONN_MSG VAR_SET VAR_VAL . VAR_SET VAR_VAL
+    (26) log_line -> date IP PORT SYS_MSG . FLAGS IP PORT SPECIAL_CHAR VAR_SET VAR_VAL
+    (28) log_line -> date IP PORT SYS_MSG . SPECIAL_CHAR CARNET SPECIAL_CHAR CN_SET
 
-    VAR_SET         shift and go to state 80
+    FLAGS           shift and go to state 79
+    SPECIAL_CHAR    shift and go to state 80
 
 
 state 56
 
-    (21) log_line -> date CONN_MSG VAR_SET IP . VAR_SET VAR_VAL SPECIAL_CHAR VAR_SET VAR_VAL
+    (30) log_line -> date IP PORT SPECIAL_CHAR . CARNET SPECIAL_CHAR PEER IP PORT
 
-    VAR_SET         shift and go to state 81
+    CARNET          shift and go to state 81
 
 
 state 57
 
-    (24) log_line -> date TCP_MSG IP PORT .
-    (26) log_line -> date TCP_MSG IP PORT . PLUGIN_MSG DIR VAR_SET VAR_VAL
+    (29) log_line -> date IP PORT CONN_MSG . CRYPTO_MSG
 
-    WEEK_DAY        reduce using rule 24 (log_line -> date TCP_MSG IP PORT .)
-    $end            reduce using rule 24 (log_line -> date TCP_MSG IP PORT .)
-    PLUGIN_MSG      shift and go to state 82
+    CRYPTO_MSG      shift and go to state 82
 
 
 state 58
 
-    (39) userid -> CARNET SLASH IP . PORT
+    (39) log_line -> date IP PORT PLUGIN_MSG . DIR VAR_SET VAR_VAL
 
-    PORT            shift and go to state 83
+    DIR             shift and go to state 83
 
 
 state 59
 
-    (32) log_line -> date userid CONN_MSG CONN_MSG . DIR
-    (33) log_line -> date userid CONN_MSG CONN_MSG . IP SPECIAL_CHAR SPECIAL_CHAR CARNET SLASH IP PORT
+    (10) log_line -> date OPEN_VPN_MSG MONTH DAY . YEAR
 
-    DIR             shift and go to state 84
-    IP              shift and go to state 85
+    YEAR            shift and go to state 84
 
 
 state 60
 
-    (30) log_line -> date userid CONN_MSG POOL_RET . VAR_SET IP SPECIAL_CHAR VAR_SET VAR_VAL
+    (11) log_line -> date LIB_VER_MSG DAY MONTH . YEAR LIB_VER_MSG
 
-    VAR_SET         shift and go to state 86
+    YEAR            shift and go to state 85
 
 
 state 61
 
-    (37) log_line -> date userid CONN_MSG CIPHER .
+    (21) log_line -> date SYS_MSG SPECIAL_CHAR VAR_SET . VAR_VAL VAR_SET VAR_VAL
 
-    WEEK_DAY        reduce using rule 37 (log_line -> date userid CONN_MSG CIPHER .)
-    $end            reduce using rule 37 (log_line -> date userid CONN_MSG CIPHER .)
+    VAR_VAL         shift and go to state 86
 
 
 state 62
 
-    (31) log_line -> date userid PLUGIN_MSG DIR . VAR_SET VAR_VAL
+    (24) log_line -> date SYS_MSG VAR_SET VAR_VAL . VAR_SET VAR_VAL
 
     VAR_SET         shift and go to state 87
 
 
 state 63
 
-    (34) log_line -> date userid SYS_MSG CARNET . SLASH IP PORT COLON IP
+    (15) log_line -> date ROUTE_GATEWAY IP SLASH . IP VAR_SET VAR_VAL VAR_SET VAR_VAL
 
-    SLASH           shift and go to state 88
+    IP              shift and go to state 88
 
 
 state 64
 
-    (36) log_line -> date userid SENT_CNT SPECIAL_CHAR . CARNET SPECIAL_CHAR COLON SPECIAL_CHAR ROUTE_FLAG VPN_IP IP ROUTE_FLAG VPN_IP IP ROUTE_FLAG VPN_IP TOPOLOGY IP IP SPECIAL_CHAR PEER SPECIAL_CHAR CIPHER SPECIAL_CHAR VAR_SET VAR_VAL
+    (19) log_line -> date CONN_MSG VAR_SET VAR_VAL . VAR_SET VAR_VAL
 
-    CARNET          shift and go to state 89
+    VAR_SET         shift and go to state 89
 
 
 state 65
 
-    (40) date -> WEEK_DAY MONTH DAY CLOCK . YEAR
-    (41) date -> WEEK_DAY MONTH DAY CLOCK .
+    (22) log_line -> date CONN_MSG VAR_SET IP . VAR_SET VAR_VAL SPECIAL_CHAR VAR_SET VAR_VAL
 
-    YEAR            shift and go to state 90
-    PLUGIN_MSG      reduce using rule 41 (date -> WEEK_DAY MONTH DAY CLOCK .)
-    SBIN_IP_MSG     reduce using rule 41 (date -> WEEK_DAY MONTH DAY CLOCK .)
-    TUN_TAP_MSG     reduce using rule 41 (date -> WEEK_DAY MONTH DAY CLOCK .)
-    SIGTERM_MSG     reduce using rule 41 (date -> WEEK_DAY MONTH DAY CLOCK .)
-    OPEN_VPN_MSG    reduce using rule 41 (date -> WEEK_DAY MONTH DAY CLOCK .)
-    LIB_VER_MSG     reduce using rule 41 (date -> WEEK_DAY MONTH DAY CLOCK .)
-    SYS_MSG         reduce using rule 41 (date -> WEEK_DAY MONTH DAY CLOCK .)
-    CRYPTO_MSG      reduce using rule 41 (date -> WEEK_DAY MONTH DAY CLOCK .)
-    ROUTE_GATEWAY   reduce using rule 41 (date -> WEEK_DAY MONTH DAY CLOCK .)
-    IP_PROTOCOL     reduce using rule 41 (date -> WEEK_DAY MONTH DAY CLOCK .)
-    CONN_MSG        reduce using rule 41 (date -> WEEK_DAY MONTH DAY CLOCK .)
-    TCP_MSG         reduce using rule 41 (date -> WEEK_DAY MONTH DAY CLOCK .)
-    IFCONFIG_END    reduce using rule 41 (date -> WEEK_DAY MONTH DAY CLOCK .)
-    IP              reduce using rule 41 (date -> WEEK_DAY MONTH DAY CLOCK .)
-    CARNET          reduce using rule 41 (date -> WEEK_DAY MONTH DAY CLOCK .)
+    VAR_SET         shift and go to state 90
 
 
 state 66
 
-    (4) log_line -> date PLUGIN_MSG DIR VAR_SET VAR_VAL .
+    (25) log_line -> date TCP_MSG IP PORT .
+    (27) log_line -> date TCP_MSG IP PORT . PLUGIN_MSG DIR VAR_SET VAR_VAL
 
-    WEEK_DAY        reduce using rule 4 (log_line -> date PLUGIN_MSG DIR VAR_SET VAR_VAL .)
-    $end            reduce using rule 4 (log_line -> date PLUGIN_MSG DIR VAR_SET VAR_VAL .)
+    ROUTE_HEADER    reduce using rule 25 (log_line -> date TCP_MSG IP PORT .)
+    WEEK_DAY        reduce using rule 25 (log_line -> date TCP_MSG IP PORT .)
+    $end            reduce using rule 25 (log_line -> date TCP_MSG IP PORT .)
+    PLUGIN_MSG      shift and go to state 91
 
 
 state 67
 
-    (12) log_line -> date PLUGIN_MSG DIR SPECIAL_CHAR SPECIAL_CHAR . DIR SPECIAL_CHAR FLAGS SPECIAL_CHAR VAR_SET VAR_VAL
+    (40) userid -> CARNET SLASH IP . PORT
 
-    DIR             shift and go to state 91
+    PORT            shift and go to state 92
 
 
 state 68
 
-    (16) log_line -> date SBIN_IP_MSG IP IP_RNG PEER . IP
+    (33) log_line -> date userid CONN_MSG CONN_MSG . DIR
+    (34) log_line -> date userid CONN_MSG CONN_MSG . IP SPECIAL_CHAR SPECIAL_CHAR CARNET SLASH IP PORT
 
-    IP              shift and go to state 92
+    DIR             shift and go to state 93
+    IP              shift and go to state 94
 
 
 state 69
 
-    (7) log_line -> date SBIN_IP_MSG IP PEER IP .
+    (31) log_line -> date userid CONN_MSG POOL_RET . VAR_SET IP SPECIAL_CHAR VAR_SET VAR_VAL
 
-    WEEK_DAY        reduce using rule 7 (log_line -> date SBIN_IP_MSG IP PEER IP .)
-    $end            reduce using rule 7 (log_line -> date SBIN_IP_MSG IP PEER IP .)
+    VAR_SET         shift and go to state 95
 
 
 state 70
 
-    (25) log_line -> date IP PORT SYS_MSG FLAGS . IP PORT SPECIAL_CHAR VAR_SET VAR_VAL
+    (38) log_line -> date userid CONN_MSG CIPHER .
 
-    IP              shift and go to state 93
+    ROUTE_HEADER    reduce using rule 38 (log_line -> date userid CONN_MSG CIPHER .)
+    WEEK_DAY        reduce using rule 38 (log_line -> date userid CONN_MSG CIPHER .)
+    $end            reduce using rule 38 (log_line -> date userid CONN_MSG CIPHER .)
 
 
 state 71
 
-    (27) log_line -> date IP PORT SYS_MSG SPECIAL_CHAR . CARNET SPECIAL_CHAR CN_SET
-
-    CARNET          shift and go to state 94
-
-
-state 72
-
-    (29) log_line -> date IP PORT SPECIAL_CHAR CARNET . SPECIAL_CHAR PEER IP PORT
-
-    SPECIAL_CHAR    shift and go to state 95
-
-
-state 73
-
-    (28) log_line -> date IP PORT CONN_MSG CRYPTO_MSG .
-
-    WEEK_DAY        reduce using rule 28 (log_line -> date IP PORT CONN_MSG CRYPTO_MSG .)
-    $end            reduce using rule 28 (log_line -> date IP PORT CONN_MSG CRYPTO_MSG .)
-
-
-state 74
-
-    (38) log_line -> date IP PORT PLUGIN_MSG DIR . VAR_SET VAR_VAL
+    (32) log_line -> date userid PLUGIN_MSG DIR . VAR_SET VAR_VAL
 
     VAR_SET         shift and go to state 96
 
 
+state 72
+
+    (35) log_line -> date userid SYS_MSG CARNET . SLASH IP PORT COLON IP
+
+    SLASH           shift and go to state 97
+
+
+state 73
+
+    (37) log_line -> date userid SENT_CNT SPECIAL_CHAR . CARNET SPECIAL_CHAR COLON SPECIAL_CHAR ROUTE_FLAG VPN_IP IP ROUTE_FLAG VPN_IP IP ROUTE_FLAG VPN_IP TOPOLOGY IP IP SPECIAL_CHAR PEER SPECIAL_CHAR CIPHER SPECIAL_CHAR VAR_SET VAR_VAL
+
+    CARNET          shift and go to state 98
+
+
+state 74
+
+    (41) date -> WEEK_DAY MONTH DAY CLOCK . YEAR
+    (42) date -> WEEK_DAY MONTH DAY CLOCK .
+
+    YEAR            shift and go to state 99
+    PLUGIN_MSG      reduce using rule 42 (date -> WEEK_DAY MONTH DAY CLOCK .)
+    SBIN_IP_MSG     reduce using rule 42 (date -> WEEK_DAY MONTH DAY CLOCK .)
+    TUN_TAP_MSG     reduce using rule 42 (date -> WEEK_DAY MONTH DAY CLOCK .)
+    SIGTERM_MSG     reduce using rule 42 (date -> WEEK_DAY MONTH DAY CLOCK .)
+    OPEN_VPN_MSG    reduce using rule 42 (date -> WEEK_DAY MONTH DAY CLOCK .)
+    LIB_VER_MSG     reduce using rule 42 (date -> WEEK_DAY MONTH DAY CLOCK .)
+    SYS_MSG         reduce using rule 42 (date -> WEEK_DAY MONTH DAY CLOCK .)
+    CRYPTO_MSG      reduce using rule 42 (date -> WEEK_DAY MONTH DAY CLOCK .)
+    ROUTE_GATEWAY   reduce using rule 42 (date -> WEEK_DAY MONTH DAY CLOCK .)
+    IP_PROTOCOL     reduce using rule 42 (date -> WEEK_DAY MONTH DAY CLOCK .)
+    CONN_MSG        reduce using rule 42 (date -> WEEK_DAY MONTH DAY CLOCK .)
+    TCP_MSG         reduce using rule 42 (date -> WEEK_DAY MONTH DAY CLOCK .)
+    IFCONFIG_END    reduce using rule 42 (date -> WEEK_DAY MONTH DAY CLOCK .)
+    IP              reduce using rule 42 (date -> WEEK_DAY MONTH DAY CLOCK .)
+    CARNET          reduce using rule 42 (date -> WEEK_DAY MONTH DAY CLOCK .)
+
+
 state 75
 
-    (9) log_line -> date OPEN_VPN_MSG MONTH DAY YEAR .
+    (5) log_line -> date PLUGIN_MSG DIR VAR_SET VAR_VAL .
 
-    WEEK_DAY        reduce using rule 9 (log_line -> date OPEN_VPN_MSG MONTH DAY YEAR .)
-    $end            reduce using rule 9 (log_line -> date OPEN_VPN_MSG MONTH DAY YEAR .)
+    ROUTE_HEADER    reduce using rule 5 (log_line -> date PLUGIN_MSG DIR VAR_SET VAR_VAL .)
+    WEEK_DAY        reduce using rule 5 (log_line -> date PLUGIN_MSG DIR VAR_SET VAR_VAL .)
+    $end            reduce using rule 5 (log_line -> date PLUGIN_MSG DIR VAR_SET VAR_VAL .)
 
 
 state 76
 
-    (10) log_line -> date LIB_VER_MSG DAY MONTH YEAR . LIB_VER_MSG
+    (13) log_line -> date PLUGIN_MSG DIR SPECIAL_CHAR SPECIAL_CHAR . DIR SPECIAL_CHAR FLAGS SPECIAL_CHAR VAR_SET VAR_VAL
 
-    LIB_VER_MSG     shift and go to state 97
+    DIR             shift and go to state 100
 
 
 state 77
 
-    (20) log_line -> date SYS_MSG SPECIAL_CHAR VAR_SET VAR_VAL . VAR_SET VAR_VAL
+    (17) log_line -> date SBIN_IP_MSG IP IP_RNG PEER . IP
 
-    VAR_SET         shift and go to state 98
+    IP              shift and go to state 101
 
 
 state 78
 
-    (23) log_line -> date SYS_MSG VAR_SET VAR_VAL VAR_SET . VAR_VAL
+    (8) log_line -> date SBIN_IP_MSG IP PEER IP .
 
-    VAR_VAL         shift and go to state 99
+    ROUTE_HEADER    reduce using rule 8 (log_line -> date SBIN_IP_MSG IP PEER IP .)
+    WEEK_DAY        reduce using rule 8 (log_line -> date SBIN_IP_MSG IP PEER IP .)
+    $end            reduce using rule 8 (log_line -> date SBIN_IP_MSG IP PEER IP .)
 
 
 state 79
 
-    (14) log_line -> date ROUTE_GATEWAY IP SLASH IP . VAR_SET VAR_VAL VAR_SET VAR_VAL
+    (26) log_line -> date IP PORT SYS_MSG FLAGS . IP PORT SPECIAL_CHAR VAR_SET VAR_VAL
 
-    VAR_SET         shift and go to state 100
+    IP              shift and go to state 102
 
 
 state 80
 
-    (18) log_line -> date CONN_MSG VAR_SET VAR_VAL VAR_SET . VAR_VAL
+    (28) log_line -> date IP PORT SYS_MSG SPECIAL_CHAR . CARNET SPECIAL_CHAR CN_SET
 
-    VAR_VAL         shift and go to state 101
+    CARNET          shift and go to state 103
 
 
 state 81
 
-    (21) log_line -> date CONN_MSG VAR_SET IP VAR_SET . VAR_VAL SPECIAL_CHAR VAR_SET VAR_VAL
-
-    VAR_VAL         shift and go to state 102
-
-
-state 82
-
-    (26) log_line -> date TCP_MSG IP PORT PLUGIN_MSG . DIR VAR_SET VAR_VAL
-
-    DIR             shift and go to state 103
-
-
-state 83
-
-    (39) userid -> CARNET SLASH IP PORT .
-
-    CONN_MSG        reduce using rule 39 (userid -> CARNET SLASH IP PORT .)
-    PLUGIN_MSG      reduce using rule 39 (userid -> CARNET SLASH IP PORT .)
-    SYS_MSG         reduce using rule 39 (userid -> CARNET SLASH IP PORT .)
-    SENT_CNT        reduce using rule 39 (userid -> CARNET SLASH IP PORT .)
-
-
-state 84
-
-    (32) log_line -> date userid CONN_MSG CONN_MSG DIR .
-
-    WEEK_DAY        reduce using rule 32 (log_line -> date userid CONN_MSG CONN_MSG DIR .)
-    $end            reduce using rule 32 (log_line -> date userid CONN_MSG CONN_MSG DIR .)
-
-
-state 85
-
-    (33) log_line -> date userid CONN_MSG CONN_MSG IP . SPECIAL_CHAR SPECIAL_CHAR CARNET SLASH IP PORT
+    (30) log_line -> date IP PORT SPECIAL_CHAR CARNET . SPECIAL_CHAR PEER IP PORT
 
     SPECIAL_CHAR    shift and go to state 104
 
 
+state 82
+
+    (29) log_line -> date IP PORT CONN_MSG CRYPTO_MSG .
+
+    ROUTE_HEADER    reduce using rule 29 (log_line -> date IP PORT CONN_MSG CRYPTO_MSG .)
+    WEEK_DAY        reduce using rule 29 (log_line -> date IP PORT CONN_MSG CRYPTO_MSG .)
+    $end            reduce using rule 29 (log_line -> date IP PORT CONN_MSG CRYPTO_MSG .)
+
+
+state 83
+
+    (39) log_line -> date IP PORT PLUGIN_MSG DIR . VAR_SET VAR_VAL
+
+    VAR_SET         shift and go to state 105
+
+
+state 84
+
+    (10) log_line -> date OPEN_VPN_MSG MONTH DAY YEAR .
+
+    ROUTE_HEADER    reduce using rule 10 (log_line -> date OPEN_VPN_MSG MONTH DAY YEAR .)
+    WEEK_DAY        reduce using rule 10 (log_line -> date OPEN_VPN_MSG MONTH DAY YEAR .)
+    $end            reduce using rule 10 (log_line -> date OPEN_VPN_MSG MONTH DAY YEAR .)
+
+
+state 85
+
+    (11) log_line -> date LIB_VER_MSG DAY MONTH YEAR . LIB_VER_MSG
+
+    LIB_VER_MSG     shift and go to state 106
+
+
 state 86
 
-    (30) log_line -> date userid CONN_MSG POOL_RET VAR_SET . IP SPECIAL_CHAR VAR_SET VAR_VAL
+    (21) log_line -> date SYS_MSG SPECIAL_CHAR VAR_SET VAR_VAL . VAR_SET VAR_VAL
 
-    IP              shift and go to state 105
+    VAR_SET         shift and go to state 107
 
 
 state 87
 
-    (31) log_line -> date userid PLUGIN_MSG DIR VAR_SET . VAR_VAL
+    (24) log_line -> date SYS_MSG VAR_SET VAR_VAL VAR_SET . VAR_VAL
 
-    VAR_VAL         shift and go to state 106
+    VAR_VAL         shift and go to state 108
 
 
 state 88
 
-    (34) log_line -> date userid SYS_MSG CARNET SLASH . IP PORT COLON IP
+    (15) log_line -> date ROUTE_GATEWAY IP SLASH IP . VAR_SET VAR_VAL VAR_SET VAR_VAL
 
-    IP              shift and go to state 107
+    VAR_SET         shift and go to state 109
 
 
 state 89
 
-    (36) log_line -> date userid SENT_CNT SPECIAL_CHAR CARNET . SPECIAL_CHAR COLON SPECIAL_CHAR ROUTE_FLAG VPN_IP IP ROUTE_FLAG VPN_IP IP ROUTE_FLAG VPN_IP TOPOLOGY IP IP SPECIAL_CHAR PEER SPECIAL_CHAR CIPHER SPECIAL_CHAR VAR_SET VAR_VAL
+    (19) log_line -> date CONN_MSG VAR_SET VAR_VAL VAR_SET . VAR_VAL
 
-    SPECIAL_CHAR    shift and go to state 108
+    VAR_VAL         shift and go to state 110
 
 
 state 90
 
-    (40) date -> WEEK_DAY MONTH DAY CLOCK YEAR .
+    (22) log_line -> date CONN_MSG VAR_SET IP VAR_SET . VAR_VAL SPECIAL_CHAR VAR_SET VAR_VAL
 
-    PLUGIN_MSG      reduce using rule 40 (date -> WEEK_DAY MONTH DAY CLOCK YEAR .)
-    SBIN_IP_MSG     reduce using rule 40 (date -> WEEK_DAY MONTH DAY CLOCK YEAR .)
-    TUN_TAP_MSG     reduce using rule 40 (date -> WEEK_DAY MONTH DAY CLOCK YEAR .)
-    SIGTERM_MSG     reduce using rule 40 (date -> WEEK_DAY MONTH DAY CLOCK YEAR .)
-    OPEN_VPN_MSG    reduce using rule 40 (date -> WEEK_DAY MONTH DAY CLOCK YEAR .)
-    LIB_VER_MSG     reduce using rule 40 (date -> WEEK_DAY MONTH DAY CLOCK YEAR .)
-    SYS_MSG         reduce using rule 40 (date -> WEEK_DAY MONTH DAY CLOCK YEAR .)
-    CRYPTO_MSG      reduce using rule 40 (date -> WEEK_DAY MONTH DAY CLOCK YEAR .)
-    ROUTE_GATEWAY   reduce using rule 40 (date -> WEEK_DAY MONTH DAY CLOCK YEAR .)
-    IP_PROTOCOL     reduce using rule 40 (date -> WEEK_DAY MONTH DAY CLOCK YEAR .)
-    CONN_MSG        reduce using rule 40 (date -> WEEK_DAY MONTH DAY CLOCK YEAR .)
-    TCP_MSG         reduce using rule 40 (date -> WEEK_DAY MONTH DAY CLOCK YEAR .)
-    IFCONFIG_END    reduce using rule 40 (date -> WEEK_DAY MONTH DAY CLOCK YEAR .)
-    IP              reduce using rule 40 (date -> WEEK_DAY MONTH DAY CLOCK YEAR .)
-    CARNET          reduce using rule 40 (date -> WEEK_DAY MONTH DAY CLOCK YEAR .)
+    VAR_VAL         shift and go to state 111
 
 
 state 91
 
-    (12) log_line -> date PLUGIN_MSG DIR SPECIAL_CHAR SPECIAL_CHAR DIR . SPECIAL_CHAR FLAGS SPECIAL_CHAR VAR_SET VAR_VAL
+    (27) log_line -> date TCP_MSG IP PORT PLUGIN_MSG . DIR VAR_SET VAR_VAL
 
-    SPECIAL_CHAR    shift and go to state 109
+    DIR             shift and go to state 112
 
 
 state 92
 
-    (16) log_line -> date SBIN_IP_MSG IP IP_RNG PEER IP .
+    (40) userid -> CARNET SLASH IP PORT .
 
-    WEEK_DAY        reduce using rule 16 (log_line -> date SBIN_IP_MSG IP IP_RNG PEER IP .)
-    $end            reduce using rule 16 (log_line -> date SBIN_IP_MSG IP IP_RNG PEER IP .)
+    CONN_MSG        reduce using rule 40 (userid -> CARNET SLASH IP PORT .)
+    PLUGIN_MSG      reduce using rule 40 (userid -> CARNET SLASH IP PORT .)
+    SYS_MSG         reduce using rule 40 (userid -> CARNET SLASH IP PORT .)
+    SENT_CNT        reduce using rule 40 (userid -> CARNET SLASH IP PORT .)
 
 
 state 93
 
-    (25) log_line -> date IP PORT SYS_MSG FLAGS IP . PORT SPECIAL_CHAR VAR_SET VAR_VAL
+    (33) log_line -> date userid CONN_MSG CONN_MSG DIR .
 
-    PORT            shift and go to state 110
+    ROUTE_HEADER    reduce using rule 33 (log_line -> date userid CONN_MSG CONN_MSG DIR .)
+    WEEK_DAY        reduce using rule 33 (log_line -> date userid CONN_MSG CONN_MSG DIR .)
+    $end            reduce using rule 33 (log_line -> date userid CONN_MSG CONN_MSG DIR .)
 
 
 state 94
 
-    (27) log_line -> date IP PORT SYS_MSG SPECIAL_CHAR CARNET . SPECIAL_CHAR CN_SET
+    (34) log_line -> date userid CONN_MSG CONN_MSG IP . SPECIAL_CHAR SPECIAL_CHAR CARNET SLASH IP PORT
 
-    SPECIAL_CHAR    shift and go to state 111
+    SPECIAL_CHAR    shift and go to state 113
 
 
 state 95
 
-    (29) log_line -> date IP PORT SPECIAL_CHAR CARNET SPECIAL_CHAR . PEER IP PORT
+    (31) log_line -> date userid CONN_MSG POOL_RET VAR_SET . IP SPECIAL_CHAR VAR_SET VAR_VAL
 
-    PEER            shift and go to state 112
+    IP              shift and go to state 114
 
 
 state 96
 
-    (38) log_line -> date IP PORT PLUGIN_MSG DIR VAR_SET . VAR_VAL
-
-    VAR_VAL         shift and go to state 113
-
-
-state 97
-
-    (10) log_line -> date LIB_VER_MSG DAY MONTH YEAR LIB_VER_MSG .
-
-    WEEK_DAY        reduce using rule 10 (log_line -> date LIB_VER_MSG DAY MONTH YEAR LIB_VER_MSG .)
-    $end            reduce using rule 10 (log_line -> date LIB_VER_MSG DAY MONTH YEAR LIB_VER_MSG .)
-
-
-state 98
-
-    (20) log_line -> date SYS_MSG SPECIAL_CHAR VAR_SET VAR_VAL VAR_SET . VAR_VAL
-
-    VAR_VAL         shift and go to state 114
-
-
-state 99
-
-    (23) log_line -> date SYS_MSG VAR_SET VAR_VAL VAR_SET VAR_VAL .
-
-    WEEK_DAY        reduce using rule 23 (log_line -> date SYS_MSG VAR_SET VAR_VAL VAR_SET VAR_VAL .)
-    $end            reduce using rule 23 (log_line -> date SYS_MSG VAR_SET VAR_VAL VAR_SET VAR_VAL .)
-
-
-state 100
-
-    (14) log_line -> date ROUTE_GATEWAY IP SLASH IP VAR_SET . VAR_VAL VAR_SET VAR_VAL
+    (32) log_line -> date userid PLUGIN_MSG DIR VAR_SET . VAR_VAL
 
     VAR_VAL         shift and go to state 115
 
 
-state 101
+state 97
 
-    (18) log_line -> date CONN_MSG VAR_SET VAR_VAL VAR_SET VAR_VAL .
+    (35) log_line -> date userid SYS_MSG CARNET SLASH . IP PORT COLON IP
 
-    WEEK_DAY        reduce using rule 18 (log_line -> date CONN_MSG VAR_SET VAR_VAL VAR_SET VAR_VAL .)
-    $end            reduce using rule 18 (log_line -> date CONN_MSG VAR_SET VAR_VAL VAR_SET VAR_VAL .)
-
-
-state 102
-
-    (21) log_line -> date CONN_MSG VAR_SET IP VAR_SET VAR_VAL . SPECIAL_CHAR VAR_SET VAR_VAL
-
-    SPECIAL_CHAR    shift and go to state 116
+    IP              shift and go to state 116
 
 
-state 103
+state 98
 
-    (26) log_line -> date TCP_MSG IP PORT PLUGIN_MSG DIR . VAR_SET VAR_VAL
+    (37) log_line -> date userid SENT_CNT SPECIAL_CHAR CARNET . SPECIAL_CHAR COLON SPECIAL_CHAR ROUTE_FLAG VPN_IP IP ROUTE_FLAG VPN_IP IP ROUTE_FLAG VPN_IP TOPOLOGY IP IP SPECIAL_CHAR PEER SPECIAL_CHAR CIPHER SPECIAL_CHAR VAR_SET VAR_VAL
 
-    VAR_SET         shift and go to state 117
+    SPECIAL_CHAR    shift and go to state 117
 
 
-state 104
+state 99
 
-    (33) log_line -> date userid CONN_MSG CONN_MSG IP SPECIAL_CHAR . SPECIAL_CHAR CARNET SLASH IP PORT
+    (41) date -> WEEK_DAY MONTH DAY CLOCK YEAR .
+
+    PLUGIN_MSG      reduce using rule 41 (date -> WEEK_DAY MONTH DAY CLOCK YEAR .)
+    SBIN_IP_MSG     reduce using rule 41 (date -> WEEK_DAY MONTH DAY CLOCK YEAR .)
+    TUN_TAP_MSG     reduce using rule 41 (date -> WEEK_DAY MONTH DAY CLOCK YEAR .)
+    SIGTERM_MSG     reduce using rule 41 (date -> WEEK_DAY MONTH DAY CLOCK YEAR .)
+    OPEN_VPN_MSG    reduce using rule 41 (date -> WEEK_DAY MONTH DAY CLOCK YEAR .)
+    LIB_VER_MSG     reduce using rule 41 (date -> WEEK_DAY MONTH DAY CLOCK YEAR .)
+    SYS_MSG         reduce using rule 41 (date -> WEEK_DAY MONTH DAY CLOCK YEAR .)
+    CRYPTO_MSG      reduce using rule 41 (date -> WEEK_DAY MONTH DAY CLOCK YEAR .)
+    ROUTE_GATEWAY   reduce using rule 41 (date -> WEEK_DAY MONTH DAY CLOCK YEAR .)
+    IP_PROTOCOL     reduce using rule 41 (date -> WEEK_DAY MONTH DAY CLOCK YEAR .)
+    CONN_MSG        reduce using rule 41 (date -> WEEK_DAY MONTH DAY CLOCK YEAR .)
+    TCP_MSG         reduce using rule 41 (date -> WEEK_DAY MONTH DAY CLOCK YEAR .)
+    IFCONFIG_END    reduce using rule 41 (date -> WEEK_DAY MONTH DAY CLOCK YEAR .)
+    IP              reduce using rule 41 (date -> WEEK_DAY MONTH DAY CLOCK YEAR .)
+    CARNET          reduce using rule 41 (date -> WEEK_DAY MONTH DAY CLOCK YEAR .)
+
+
+state 100
+
+    (13) log_line -> date PLUGIN_MSG DIR SPECIAL_CHAR SPECIAL_CHAR DIR . SPECIAL_CHAR FLAGS SPECIAL_CHAR VAR_SET VAR_VAL
 
     SPECIAL_CHAR    shift and go to state 118
 
 
+state 101
+
+    (17) log_line -> date SBIN_IP_MSG IP IP_RNG PEER IP .
+
+    ROUTE_HEADER    reduce using rule 17 (log_line -> date SBIN_IP_MSG IP IP_RNG PEER IP .)
+    WEEK_DAY        reduce using rule 17 (log_line -> date SBIN_IP_MSG IP IP_RNG PEER IP .)
+    $end            reduce using rule 17 (log_line -> date SBIN_IP_MSG IP IP_RNG PEER IP .)
+
+
+state 102
+
+    (26) log_line -> date IP PORT SYS_MSG FLAGS IP . PORT SPECIAL_CHAR VAR_SET VAR_VAL
+
+    PORT            shift and go to state 119
+
+
+state 103
+
+    (28) log_line -> date IP PORT SYS_MSG SPECIAL_CHAR CARNET . SPECIAL_CHAR CN_SET
+
+    SPECIAL_CHAR    shift and go to state 120
+
+
+state 104
+
+    (30) log_line -> date IP PORT SPECIAL_CHAR CARNET SPECIAL_CHAR . PEER IP PORT
+
+    PEER            shift and go to state 121
+
+
 state 105
 
-    (30) log_line -> date userid CONN_MSG POOL_RET VAR_SET IP . SPECIAL_CHAR VAR_SET VAR_VAL
+    (39) log_line -> date IP PORT PLUGIN_MSG DIR VAR_SET . VAR_VAL
 
-    SPECIAL_CHAR    shift and go to state 119
+    VAR_VAL         shift and go to state 122
 
 
 state 106
 
-    (31) log_line -> date userid PLUGIN_MSG DIR VAR_SET VAR_VAL .
+    (11) log_line -> date LIB_VER_MSG DAY MONTH YEAR LIB_VER_MSG .
 
-    WEEK_DAY        reduce using rule 31 (log_line -> date userid PLUGIN_MSG DIR VAR_SET VAR_VAL .)
-    $end            reduce using rule 31 (log_line -> date userid PLUGIN_MSG DIR VAR_SET VAR_VAL .)
+    ROUTE_HEADER    reduce using rule 11 (log_line -> date LIB_VER_MSG DAY MONTH YEAR LIB_VER_MSG .)
+    WEEK_DAY        reduce using rule 11 (log_line -> date LIB_VER_MSG DAY MONTH YEAR LIB_VER_MSG .)
+    $end            reduce using rule 11 (log_line -> date LIB_VER_MSG DAY MONTH YEAR LIB_VER_MSG .)
 
 
 state 107
 
-    (34) log_line -> date userid SYS_MSG CARNET SLASH IP . PORT COLON IP
+    (21) log_line -> date SYS_MSG SPECIAL_CHAR VAR_SET VAR_VAL VAR_SET . VAR_VAL
 
-    PORT            shift and go to state 120
+    VAR_VAL         shift and go to state 123
 
 
 state 108
 
-    (36) log_line -> date userid SENT_CNT SPECIAL_CHAR CARNET SPECIAL_CHAR . COLON SPECIAL_CHAR ROUTE_FLAG VPN_IP IP ROUTE_FLAG VPN_IP IP ROUTE_FLAG VPN_IP TOPOLOGY IP IP SPECIAL_CHAR PEER SPECIAL_CHAR CIPHER SPECIAL_CHAR VAR_SET VAR_VAL
+    (24) log_line -> date SYS_MSG VAR_SET VAR_VAL VAR_SET VAR_VAL .
 
-    COLON           shift and go to state 121
+    ROUTE_HEADER    reduce using rule 24 (log_line -> date SYS_MSG VAR_SET VAR_VAL VAR_SET VAR_VAL .)
+    WEEK_DAY        reduce using rule 24 (log_line -> date SYS_MSG VAR_SET VAR_VAL VAR_SET VAR_VAL .)
+    $end            reduce using rule 24 (log_line -> date SYS_MSG VAR_SET VAR_VAL VAR_SET VAR_VAL .)
 
 
 state 109
 
-    (12) log_line -> date PLUGIN_MSG DIR SPECIAL_CHAR SPECIAL_CHAR DIR SPECIAL_CHAR . FLAGS SPECIAL_CHAR VAR_SET VAR_VAL
+    (15) log_line -> date ROUTE_GATEWAY IP SLASH IP VAR_SET . VAR_VAL VAR_SET VAR_VAL
 
-    FLAGS           shift and go to state 122
+    VAR_VAL         shift and go to state 124
 
 
 state 110
 
-    (25) log_line -> date IP PORT SYS_MSG FLAGS IP PORT . SPECIAL_CHAR VAR_SET VAR_VAL
+    (19) log_line -> date CONN_MSG VAR_SET VAR_VAL VAR_SET VAR_VAL .
 
-    SPECIAL_CHAR    shift and go to state 123
+    ROUTE_HEADER    reduce using rule 19 (log_line -> date CONN_MSG VAR_SET VAR_VAL VAR_SET VAR_VAL .)
+    WEEK_DAY        reduce using rule 19 (log_line -> date CONN_MSG VAR_SET VAR_VAL VAR_SET VAR_VAL .)
+    $end            reduce using rule 19 (log_line -> date CONN_MSG VAR_SET VAR_VAL VAR_SET VAR_VAL .)
 
 
 state 111
 
-    (27) log_line -> date IP PORT SYS_MSG SPECIAL_CHAR CARNET SPECIAL_CHAR . CN_SET
+    (22) log_line -> date CONN_MSG VAR_SET IP VAR_SET VAR_VAL . SPECIAL_CHAR VAR_SET VAR_VAL
 
-    CN_SET          shift and go to state 124
+    SPECIAL_CHAR    shift and go to state 125
 
 
 state 112
 
-    (29) log_line -> date IP PORT SPECIAL_CHAR CARNET SPECIAL_CHAR PEER . IP PORT
-
-    IP              shift and go to state 125
-
-
-state 113
-
-    (38) log_line -> date IP PORT PLUGIN_MSG DIR VAR_SET VAR_VAL .
-
-    WEEK_DAY        reduce using rule 38 (log_line -> date IP PORT PLUGIN_MSG DIR VAR_SET VAR_VAL .)
-    $end            reduce using rule 38 (log_line -> date IP PORT PLUGIN_MSG DIR VAR_SET VAR_VAL .)
-
-
-state 114
-
-    (20) log_line -> date SYS_MSG SPECIAL_CHAR VAR_SET VAR_VAL VAR_SET VAR_VAL .
-
-    WEEK_DAY        reduce using rule 20 (log_line -> date SYS_MSG SPECIAL_CHAR VAR_SET VAR_VAL VAR_SET VAR_VAL .)
-    $end            reduce using rule 20 (log_line -> date SYS_MSG SPECIAL_CHAR VAR_SET VAR_VAL VAR_SET VAR_VAL .)
-
-
-state 115
-
-    (14) log_line -> date ROUTE_GATEWAY IP SLASH IP VAR_SET VAR_VAL . VAR_SET VAR_VAL
+    (27) log_line -> date TCP_MSG IP PORT PLUGIN_MSG DIR . VAR_SET VAR_VAL
 
     VAR_SET         shift and go to state 126
 
 
+state 113
+
+    (34) log_line -> date userid CONN_MSG CONN_MSG IP SPECIAL_CHAR . SPECIAL_CHAR CARNET SLASH IP PORT
+
+    SPECIAL_CHAR    shift and go to state 127
+
+
+state 114
+
+    (31) log_line -> date userid CONN_MSG POOL_RET VAR_SET IP . SPECIAL_CHAR VAR_SET VAR_VAL
+
+    SPECIAL_CHAR    shift and go to state 128
+
+
+state 115
+
+    (32) log_line -> date userid PLUGIN_MSG DIR VAR_SET VAR_VAL .
+
+    ROUTE_HEADER    reduce using rule 32 (log_line -> date userid PLUGIN_MSG DIR VAR_SET VAR_VAL .)
+    WEEK_DAY        reduce using rule 32 (log_line -> date userid PLUGIN_MSG DIR VAR_SET VAR_VAL .)
+    $end            reduce using rule 32 (log_line -> date userid PLUGIN_MSG DIR VAR_SET VAR_VAL .)
+
+
 state 116
 
-    (21) log_line -> date CONN_MSG VAR_SET IP VAR_SET VAR_VAL SPECIAL_CHAR . VAR_SET VAR_VAL
+    (35) log_line -> date userid SYS_MSG CARNET SLASH IP . PORT COLON IP
 
-    VAR_SET         shift and go to state 127
+    PORT            shift and go to state 129
 
 
 state 117
 
-    (26) log_line -> date TCP_MSG IP PORT PLUGIN_MSG DIR VAR_SET . VAR_VAL
+    (37) log_line -> date userid SENT_CNT SPECIAL_CHAR CARNET SPECIAL_CHAR . COLON SPECIAL_CHAR ROUTE_FLAG VPN_IP IP ROUTE_FLAG VPN_IP IP ROUTE_FLAG VPN_IP TOPOLOGY IP IP SPECIAL_CHAR PEER SPECIAL_CHAR CIPHER SPECIAL_CHAR VAR_SET VAR_VAL
 
-    VAR_VAL         shift and go to state 128
+    COLON           shift and go to state 130
 
 
 state 118
 
-    (33) log_line -> date userid CONN_MSG CONN_MSG IP SPECIAL_CHAR SPECIAL_CHAR . CARNET SLASH IP PORT
+    (13) log_line -> date PLUGIN_MSG DIR SPECIAL_CHAR SPECIAL_CHAR DIR SPECIAL_CHAR . FLAGS SPECIAL_CHAR VAR_SET VAR_VAL
 
-    CARNET          shift and go to state 129
+    FLAGS           shift and go to state 131
 
 
 state 119
 
-    (30) log_line -> date userid CONN_MSG POOL_RET VAR_SET IP SPECIAL_CHAR . VAR_SET VAR_VAL
-
-    VAR_SET         shift and go to state 130
-
-
-state 120
-
-    (34) log_line -> date userid SYS_MSG CARNET SLASH IP PORT . COLON IP
-
-    COLON           shift and go to state 131
-
-
-state 121
-
-    (36) log_line -> date userid SENT_CNT SPECIAL_CHAR CARNET SPECIAL_CHAR COLON . SPECIAL_CHAR ROUTE_FLAG VPN_IP IP ROUTE_FLAG VPN_IP IP ROUTE_FLAG VPN_IP TOPOLOGY IP IP SPECIAL_CHAR PEER SPECIAL_CHAR CIPHER SPECIAL_CHAR VAR_SET VAR_VAL
+    (26) log_line -> date IP PORT SYS_MSG FLAGS IP PORT . SPECIAL_CHAR VAR_SET VAR_VAL
 
     SPECIAL_CHAR    shift and go to state 132
 
 
+state 120
+
+    (28) log_line -> date IP PORT SYS_MSG SPECIAL_CHAR CARNET SPECIAL_CHAR . CN_SET
+
+    CN_SET          shift and go to state 133
+
+
+state 121
+
+    (30) log_line -> date IP PORT SPECIAL_CHAR CARNET SPECIAL_CHAR PEER . IP PORT
+
+    IP              shift and go to state 134
+
+
 state 122
 
-    (12) log_line -> date PLUGIN_MSG DIR SPECIAL_CHAR SPECIAL_CHAR DIR SPECIAL_CHAR FLAGS . SPECIAL_CHAR VAR_SET VAR_VAL
+    (39) log_line -> date IP PORT PLUGIN_MSG DIR VAR_SET VAR_VAL .
 
-    SPECIAL_CHAR    shift and go to state 133
+    ROUTE_HEADER    reduce using rule 39 (log_line -> date IP PORT PLUGIN_MSG DIR VAR_SET VAR_VAL .)
+    WEEK_DAY        reduce using rule 39 (log_line -> date IP PORT PLUGIN_MSG DIR VAR_SET VAR_VAL .)
+    $end            reduce using rule 39 (log_line -> date IP PORT PLUGIN_MSG DIR VAR_SET VAR_VAL .)
 
 
 state 123
 
-    (25) log_line -> date IP PORT SYS_MSG FLAGS IP PORT SPECIAL_CHAR . VAR_SET VAR_VAL
+    (21) log_line -> date SYS_MSG SPECIAL_CHAR VAR_SET VAR_VAL VAR_SET VAR_VAL .
 
-    VAR_SET         shift and go to state 134
+    ROUTE_HEADER    reduce using rule 21 (log_line -> date SYS_MSG SPECIAL_CHAR VAR_SET VAR_VAL VAR_SET VAR_VAL .)
+    WEEK_DAY        reduce using rule 21 (log_line -> date SYS_MSG SPECIAL_CHAR VAR_SET VAR_VAL VAR_SET VAR_VAL .)
+    $end            reduce using rule 21 (log_line -> date SYS_MSG SPECIAL_CHAR VAR_SET VAR_VAL VAR_SET VAR_VAL .)
 
 
 state 124
 
-    (27) log_line -> date IP PORT SYS_MSG SPECIAL_CHAR CARNET SPECIAL_CHAR CN_SET .
+    (15) log_line -> date ROUTE_GATEWAY IP SLASH IP VAR_SET VAR_VAL . VAR_SET VAR_VAL
 
-    WEEK_DAY        reduce using rule 27 (log_line -> date IP PORT SYS_MSG SPECIAL_CHAR CARNET SPECIAL_CHAR CN_SET .)
-    $end            reduce using rule 27 (log_line -> date IP PORT SYS_MSG SPECIAL_CHAR CARNET SPECIAL_CHAR CN_SET .)
+    VAR_SET         shift and go to state 135
 
 
 state 125
 
-    (29) log_line -> date IP PORT SPECIAL_CHAR CARNET SPECIAL_CHAR PEER IP . PORT
+    (22) log_line -> date CONN_MSG VAR_SET IP VAR_SET VAR_VAL SPECIAL_CHAR . VAR_SET VAR_VAL
 
-    PORT            shift and go to state 135
+    VAR_SET         shift and go to state 136
 
 
 state 126
 
-    (14) log_line -> date ROUTE_GATEWAY IP SLASH IP VAR_SET VAR_VAL VAR_SET . VAR_VAL
-
-    VAR_VAL         shift and go to state 136
-
-
-state 127
-
-    (21) log_line -> date CONN_MSG VAR_SET IP VAR_SET VAR_VAL SPECIAL_CHAR VAR_SET . VAR_VAL
+    (27) log_line -> date TCP_MSG IP PORT PLUGIN_MSG DIR VAR_SET . VAR_VAL
 
     VAR_VAL         shift and go to state 137
 
 
+state 127
+
+    (34) log_line -> date userid CONN_MSG CONN_MSG IP SPECIAL_CHAR SPECIAL_CHAR . CARNET SLASH IP PORT
+
+    CARNET          shift and go to state 138
+
+
 state 128
 
-    (26) log_line -> date TCP_MSG IP PORT PLUGIN_MSG DIR VAR_SET VAR_VAL .
+    (31) log_line -> date userid CONN_MSG POOL_RET VAR_SET IP SPECIAL_CHAR . VAR_SET VAR_VAL
 
-    WEEK_DAY        reduce using rule 26 (log_line -> date TCP_MSG IP PORT PLUGIN_MSG DIR VAR_SET VAR_VAL .)
-    $end            reduce using rule 26 (log_line -> date TCP_MSG IP PORT PLUGIN_MSG DIR VAR_SET VAR_VAL .)
+    VAR_SET         shift and go to state 139
 
 
 state 129
 
-    (33) log_line -> date userid CONN_MSG CONN_MSG IP SPECIAL_CHAR SPECIAL_CHAR CARNET . SLASH IP PORT
+    (35) log_line -> date userid SYS_MSG CARNET SLASH IP PORT . COLON IP
 
-    SLASH           shift and go to state 138
+    COLON           shift and go to state 140
 
 
 state 130
 
-    (30) log_line -> date userid CONN_MSG POOL_RET VAR_SET IP SPECIAL_CHAR VAR_SET . VAR_VAL
+    (37) log_line -> date userid SENT_CNT SPECIAL_CHAR CARNET SPECIAL_CHAR COLON . SPECIAL_CHAR ROUTE_FLAG VPN_IP IP ROUTE_FLAG VPN_IP IP ROUTE_FLAG VPN_IP TOPOLOGY IP IP SPECIAL_CHAR PEER SPECIAL_CHAR CIPHER SPECIAL_CHAR VAR_SET VAR_VAL
 
-    VAR_VAL         shift and go to state 139
+    SPECIAL_CHAR    shift and go to state 141
 
 
 state 131
 
-    (34) log_line -> date userid SYS_MSG CARNET SLASH IP PORT COLON . IP
+    (13) log_line -> date PLUGIN_MSG DIR SPECIAL_CHAR SPECIAL_CHAR DIR SPECIAL_CHAR FLAGS . SPECIAL_CHAR VAR_SET VAR_VAL
 
-    IP              shift and go to state 140
+    SPECIAL_CHAR    shift and go to state 142
 
 
 state 132
 
-    (36) log_line -> date userid SENT_CNT SPECIAL_CHAR CARNET SPECIAL_CHAR COLON SPECIAL_CHAR . ROUTE_FLAG VPN_IP IP ROUTE_FLAG VPN_IP IP ROUTE_FLAG VPN_IP TOPOLOGY IP IP SPECIAL_CHAR PEER SPECIAL_CHAR CIPHER SPECIAL_CHAR VAR_SET VAR_VAL
+    (26) log_line -> date IP PORT SYS_MSG FLAGS IP PORT SPECIAL_CHAR . VAR_SET VAR_VAL
 
-    ROUTE_FLAG      shift and go to state 141
+    VAR_SET         shift and go to state 143
 
 
 state 133
 
-    (12) log_line -> date PLUGIN_MSG DIR SPECIAL_CHAR SPECIAL_CHAR DIR SPECIAL_CHAR FLAGS SPECIAL_CHAR . VAR_SET VAR_VAL
+    (28) log_line -> date IP PORT SYS_MSG SPECIAL_CHAR CARNET SPECIAL_CHAR CN_SET .
 
-    VAR_SET         shift and go to state 142
+    ROUTE_HEADER    reduce using rule 28 (log_line -> date IP PORT SYS_MSG SPECIAL_CHAR CARNET SPECIAL_CHAR CN_SET .)
+    WEEK_DAY        reduce using rule 28 (log_line -> date IP PORT SYS_MSG SPECIAL_CHAR CARNET SPECIAL_CHAR CN_SET .)
+    $end            reduce using rule 28 (log_line -> date IP PORT SYS_MSG SPECIAL_CHAR CARNET SPECIAL_CHAR CN_SET .)
 
 
 state 134
 
-    (25) log_line -> date IP PORT SYS_MSG FLAGS IP PORT SPECIAL_CHAR VAR_SET . VAR_VAL
+    (30) log_line -> date IP PORT SPECIAL_CHAR CARNET SPECIAL_CHAR PEER IP . PORT
 
-    VAR_VAL         shift and go to state 143
+    PORT            shift and go to state 144
 
 
 state 135
 
-    (29) log_line -> date IP PORT SPECIAL_CHAR CARNET SPECIAL_CHAR PEER IP PORT .
+    (15) log_line -> date ROUTE_GATEWAY IP SLASH IP VAR_SET VAR_VAL VAR_SET . VAR_VAL
 
-    WEEK_DAY        reduce using rule 29 (log_line -> date IP PORT SPECIAL_CHAR CARNET SPECIAL_CHAR PEER IP PORT .)
-    $end            reduce using rule 29 (log_line -> date IP PORT SPECIAL_CHAR CARNET SPECIAL_CHAR PEER IP PORT .)
+    VAR_VAL         shift and go to state 145
 
 
 state 136
 
-    (14) log_line -> date ROUTE_GATEWAY IP SLASH IP VAR_SET VAR_VAL VAR_SET VAR_VAL .
-
-    WEEK_DAY        reduce using rule 14 (log_line -> date ROUTE_GATEWAY IP SLASH IP VAR_SET VAR_VAL VAR_SET VAR_VAL .)
-    $end            reduce using rule 14 (log_line -> date ROUTE_GATEWAY IP SLASH IP VAR_SET VAR_VAL VAR_SET VAR_VAL .)
-
-
-state 137
-
-    (21) log_line -> date CONN_MSG VAR_SET IP VAR_SET VAR_VAL SPECIAL_CHAR VAR_SET VAR_VAL .
-
-    WEEK_DAY        reduce using rule 21 (log_line -> date CONN_MSG VAR_SET IP VAR_SET VAR_VAL SPECIAL_CHAR VAR_SET VAR_VAL .)
-    $end            reduce using rule 21 (log_line -> date CONN_MSG VAR_SET IP VAR_SET VAR_VAL SPECIAL_CHAR VAR_SET VAR_VAL .)
-
-
-state 138
-
-    (33) log_line -> date userid CONN_MSG CONN_MSG IP SPECIAL_CHAR SPECIAL_CHAR CARNET SLASH . IP PORT
-
-    IP              shift and go to state 144
-
-
-state 139
-
-    (30) log_line -> date userid CONN_MSG POOL_RET VAR_SET IP SPECIAL_CHAR VAR_SET VAR_VAL .
-
-    WEEK_DAY        reduce using rule 30 (log_line -> date userid CONN_MSG POOL_RET VAR_SET IP SPECIAL_CHAR VAR_SET VAR_VAL .)
-    $end            reduce using rule 30 (log_line -> date userid CONN_MSG POOL_RET VAR_SET IP SPECIAL_CHAR VAR_SET VAR_VAL .)
-
-
-state 140
-
-    (34) log_line -> date userid SYS_MSG CARNET SLASH IP PORT COLON IP .
-
-    WEEK_DAY        reduce using rule 34 (log_line -> date userid SYS_MSG CARNET SLASH IP PORT COLON IP .)
-    $end            reduce using rule 34 (log_line -> date userid SYS_MSG CARNET SLASH IP PORT COLON IP .)
-
-
-state 141
-
-    (36) log_line -> date userid SENT_CNT SPECIAL_CHAR CARNET SPECIAL_CHAR COLON SPECIAL_CHAR ROUTE_FLAG . VPN_IP IP ROUTE_FLAG VPN_IP IP ROUTE_FLAG VPN_IP TOPOLOGY IP IP SPECIAL_CHAR PEER SPECIAL_CHAR CIPHER SPECIAL_CHAR VAR_SET VAR_VAL
-
-    VPN_IP          shift and go to state 145
-
-
-state 142
-
-    (12) log_line -> date PLUGIN_MSG DIR SPECIAL_CHAR SPECIAL_CHAR DIR SPECIAL_CHAR FLAGS SPECIAL_CHAR VAR_SET . VAR_VAL
+    (22) log_line -> date CONN_MSG VAR_SET IP VAR_SET VAR_VAL SPECIAL_CHAR VAR_SET . VAR_VAL
 
     VAR_VAL         shift and go to state 146
 
 
+state 137
+
+    (27) log_line -> date TCP_MSG IP PORT PLUGIN_MSG DIR VAR_SET VAR_VAL .
+
+    ROUTE_HEADER    reduce using rule 27 (log_line -> date TCP_MSG IP PORT PLUGIN_MSG DIR VAR_SET VAR_VAL .)
+    WEEK_DAY        reduce using rule 27 (log_line -> date TCP_MSG IP PORT PLUGIN_MSG DIR VAR_SET VAR_VAL .)
+    $end            reduce using rule 27 (log_line -> date TCP_MSG IP PORT PLUGIN_MSG DIR VAR_SET VAR_VAL .)
+
+
+state 138
+
+    (34) log_line -> date userid CONN_MSG CONN_MSG IP SPECIAL_CHAR SPECIAL_CHAR CARNET . SLASH IP PORT
+
+    SLASH           shift and go to state 147
+
+
+state 139
+
+    (31) log_line -> date userid CONN_MSG POOL_RET VAR_SET IP SPECIAL_CHAR VAR_SET . VAR_VAL
+
+    VAR_VAL         shift and go to state 148
+
+
+state 140
+
+    (35) log_line -> date userid SYS_MSG CARNET SLASH IP PORT COLON . IP
+
+    IP              shift and go to state 149
+
+
+state 141
+
+    (37) log_line -> date userid SENT_CNT SPECIAL_CHAR CARNET SPECIAL_CHAR COLON SPECIAL_CHAR . ROUTE_FLAG VPN_IP IP ROUTE_FLAG VPN_IP IP ROUTE_FLAG VPN_IP TOPOLOGY IP IP SPECIAL_CHAR PEER SPECIAL_CHAR CIPHER SPECIAL_CHAR VAR_SET VAR_VAL
+
+    ROUTE_FLAG      shift and go to state 150
+
+
+state 142
+
+    (13) log_line -> date PLUGIN_MSG DIR SPECIAL_CHAR SPECIAL_CHAR DIR SPECIAL_CHAR FLAGS SPECIAL_CHAR . VAR_SET VAR_VAL
+
+    VAR_SET         shift and go to state 151
+
+
 state 143
 
-    (25) log_line -> date IP PORT SYS_MSG FLAGS IP PORT SPECIAL_CHAR VAR_SET VAR_VAL .
+    (26) log_line -> date IP PORT SYS_MSG FLAGS IP PORT SPECIAL_CHAR VAR_SET . VAR_VAL
 
-    WEEK_DAY        reduce using rule 25 (log_line -> date IP PORT SYS_MSG FLAGS IP PORT SPECIAL_CHAR VAR_SET VAR_VAL .)
-    $end            reduce using rule 25 (log_line -> date IP PORT SYS_MSG FLAGS IP PORT SPECIAL_CHAR VAR_SET VAR_VAL .)
+    VAR_VAL         shift and go to state 152
 
 
 state 144
 
-    (33) log_line -> date userid CONN_MSG CONN_MSG IP SPECIAL_CHAR SPECIAL_CHAR CARNET SLASH IP . PORT
+    (30) log_line -> date IP PORT SPECIAL_CHAR CARNET SPECIAL_CHAR PEER IP PORT .
 
-    PORT            shift and go to state 147
+    ROUTE_HEADER    reduce using rule 30 (log_line -> date IP PORT SPECIAL_CHAR CARNET SPECIAL_CHAR PEER IP PORT .)
+    WEEK_DAY        reduce using rule 30 (log_line -> date IP PORT SPECIAL_CHAR CARNET SPECIAL_CHAR PEER IP PORT .)
+    $end            reduce using rule 30 (log_line -> date IP PORT SPECIAL_CHAR CARNET SPECIAL_CHAR PEER IP PORT .)
 
 
 state 145
 
-    (36) log_line -> date userid SENT_CNT SPECIAL_CHAR CARNET SPECIAL_CHAR COLON SPECIAL_CHAR ROUTE_FLAG VPN_IP . IP ROUTE_FLAG VPN_IP IP ROUTE_FLAG VPN_IP TOPOLOGY IP IP SPECIAL_CHAR PEER SPECIAL_CHAR CIPHER SPECIAL_CHAR VAR_SET VAR_VAL
+    (15) log_line -> date ROUTE_GATEWAY IP SLASH IP VAR_SET VAR_VAL VAR_SET VAR_VAL .
 
-    IP              shift and go to state 148
+    ROUTE_HEADER    reduce using rule 15 (log_line -> date ROUTE_GATEWAY IP SLASH IP VAR_SET VAR_VAL VAR_SET VAR_VAL .)
+    WEEK_DAY        reduce using rule 15 (log_line -> date ROUTE_GATEWAY IP SLASH IP VAR_SET VAR_VAL VAR_SET VAR_VAL .)
+    $end            reduce using rule 15 (log_line -> date ROUTE_GATEWAY IP SLASH IP VAR_SET VAR_VAL VAR_SET VAR_VAL .)
 
 
 state 146
 
-    (12) log_line -> date PLUGIN_MSG DIR SPECIAL_CHAR SPECIAL_CHAR DIR SPECIAL_CHAR FLAGS SPECIAL_CHAR VAR_SET VAR_VAL .
+    (22) log_line -> date CONN_MSG VAR_SET IP VAR_SET VAR_VAL SPECIAL_CHAR VAR_SET VAR_VAL .
 
-    WEEK_DAY        reduce using rule 12 (log_line -> date PLUGIN_MSG DIR SPECIAL_CHAR SPECIAL_CHAR DIR SPECIAL_CHAR FLAGS SPECIAL_CHAR VAR_SET VAR_VAL .)
-    $end            reduce using rule 12 (log_line -> date PLUGIN_MSG DIR SPECIAL_CHAR SPECIAL_CHAR DIR SPECIAL_CHAR FLAGS SPECIAL_CHAR VAR_SET VAR_VAL .)
+    ROUTE_HEADER    reduce using rule 22 (log_line -> date CONN_MSG VAR_SET IP VAR_SET VAR_VAL SPECIAL_CHAR VAR_SET VAR_VAL .)
+    WEEK_DAY        reduce using rule 22 (log_line -> date CONN_MSG VAR_SET IP VAR_SET VAR_VAL SPECIAL_CHAR VAR_SET VAR_VAL .)
+    $end            reduce using rule 22 (log_line -> date CONN_MSG VAR_SET IP VAR_SET VAR_VAL SPECIAL_CHAR VAR_SET VAR_VAL .)
 
 
 state 147
 
-    (33) log_line -> date userid CONN_MSG CONN_MSG IP SPECIAL_CHAR SPECIAL_CHAR CARNET SLASH IP PORT .
+    (34) log_line -> date userid CONN_MSG CONN_MSG IP SPECIAL_CHAR SPECIAL_CHAR CARNET SLASH . IP PORT
 
-    WEEK_DAY        reduce using rule 33 (log_line -> date userid CONN_MSG CONN_MSG IP SPECIAL_CHAR SPECIAL_CHAR CARNET SLASH IP PORT .)
-    $end            reduce using rule 33 (log_line -> date userid CONN_MSG CONN_MSG IP SPECIAL_CHAR SPECIAL_CHAR CARNET SLASH IP PORT .)
+    IP              shift and go to state 153
 
 
 state 148
 
-    (36) log_line -> date userid SENT_CNT SPECIAL_CHAR CARNET SPECIAL_CHAR COLON SPECIAL_CHAR ROUTE_FLAG VPN_IP IP . ROUTE_FLAG VPN_IP IP ROUTE_FLAG VPN_IP TOPOLOGY IP IP SPECIAL_CHAR PEER SPECIAL_CHAR CIPHER SPECIAL_CHAR VAR_SET VAR_VAL
+    (31) log_line -> date userid CONN_MSG POOL_RET VAR_SET IP SPECIAL_CHAR VAR_SET VAR_VAL .
 
-    ROUTE_FLAG      shift and go to state 149
+    ROUTE_HEADER    reduce using rule 31 (log_line -> date userid CONN_MSG POOL_RET VAR_SET IP SPECIAL_CHAR VAR_SET VAR_VAL .)
+    WEEK_DAY        reduce using rule 31 (log_line -> date userid CONN_MSG POOL_RET VAR_SET IP SPECIAL_CHAR VAR_SET VAR_VAL .)
+    $end            reduce using rule 31 (log_line -> date userid CONN_MSG POOL_RET VAR_SET IP SPECIAL_CHAR VAR_SET VAR_VAL .)
 
 
 state 149
 
-    (36) log_line -> date userid SENT_CNT SPECIAL_CHAR CARNET SPECIAL_CHAR COLON SPECIAL_CHAR ROUTE_FLAG VPN_IP IP ROUTE_FLAG . VPN_IP IP ROUTE_FLAG VPN_IP TOPOLOGY IP IP SPECIAL_CHAR PEER SPECIAL_CHAR CIPHER SPECIAL_CHAR VAR_SET VAR_VAL
+    (35) log_line -> date userid SYS_MSG CARNET SLASH IP PORT COLON IP .
 
-    VPN_IP          shift and go to state 150
+    ROUTE_HEADER    reduce using rule 35 (log_line -> date userid SYS_MSG CARNET SLASH IP PORT COLON IP .)
+    WEEK_DAY        reduce using rule 35 (log_line -> date userid SYS_MSG CARNET SLASH IP PORT COLON IP .)
+    $end            reduce using rule 35 (log_line -> date userid SYS_MSG CARNET SLASH IP PORT COLON IP .)
 
 
 state 150
 
-    (36) log_line -> date userid SENT_CNT SPECIAL_CHAR CARNET SPECIAL_CHAR COLON SPECIAL_CHAR ROUTE_FLAG VPN_IP IP ROUTE_FLAG VPN_IP . IP ROUTE_FLAG VPN_IP TOPOLOGY IP IP SPECIAL_CHAR PEER SPECIAL_CHAR CIPHER SPECIAL_CHAR VAR_SET VAR_VAL
+    (37) log_line -> date userid SENT_CNT SPECIAL_CHAR CARNET SPECIAL_CHAR COLON SPECIAL_CHAR ROUTE_FLAG . VPN_IP IP ROUTE_FLAG VPN_IP IP ROUTE_FLAG VPN_IP TOPOLOGY IP IP SPECIAL_CHAR PEER SPECIAL_CHAR CIPHER SPECIAL_CHAR VAR_SET VAR_VAL
 
-    IP              shift and go to state 151
+    VPN_IP          shift and go to state 154
 
 
 state 151
 
-    (36) log_line -> date userid SENT_CNT SPECIAL_CHAR CARNET SPECIAL_CHAR COLON SPECIAL_CHAR ROUTE_FLAG VPN_IP IP ROUTE_FLAG VPN_IP IP . ROUTE_FLAG VPN_IP TOPOLOGY IP IP SPECIAL_CHAR PEER SPECIAL_CHAR CIPHER SPECIAL_CHAR VAR_SET VAR_VAL
+    (13) log_line -> date PLUGIN_MSG DIR SPECIAL_CHAR SPECIAL_CHAR DIR SPECIAL_CHAR FLAGS SPECIAL_CHAR VAR_SET . VAR_VAL
 
-    ROUTE_FLAG      shift and go to state 152
+    VAR_VAL         shift and go to state 155
 
 
 state 152
 
-    (36) log_line -> date userid SENT_CNT SPECIAL_CHAR CARNET SPECIAL_CHAR COLON SPECIAL_CHAR ROUTE_FLAG VPN_IP IP ROUTE_FLAG VPN_IP IP ROUTE_FLAG . VPN_IP TOPOLOGY IP IP SPECIAL_CHAR PEER SPECIAL_CHAR CIPHER SPECIAL_CHAR VAR_SET VAR_VAL
+    (26) log_line -> date IP PORT SYS_MSG FLAGS IP PORT SPECIAL_CHAR VAR_SET VAR_VAL .
 
-    VPN_IP          shift and go to state 153
+    ROUTE_HEADER    reduce using rule 26 (log_line -> date IP PORT SYS_MSG FLAGS IP PORT SPECIAL_CHAR VAR_SET VAR_VAL .)
+    WEEK_DAY        reduce using rule 26 (log_line -> date IP PORT SYS_MSG FLAGS IP PORT SPECIAL_CHAR VAR_SET VAR_VAL .)
+    $end            reduce using rule 26 (log_line -> date IP PORT SYS_MSG FLAGS IP PORT SPECIAL_CHAR VAR_SET VAR_VAL .)
 
 
 state 153
 
-    (36) log_line -> date userid SENT_CNT SPECIAL_CHAR CARNET SPECIAL_CHAR COLON SPECIAL_CHAR ROUTE_FLAG VPN_IP IP ROUTE_FLAG VPN_IP IP ROUTE_FLAG VPN_IP . TOPOLOGY IP IP SPECIAL_CHAR PEER SPECIAL_CHAR CIPHER SPECIAL_CHAR VAR_SET VAR_VAL
+    (34) log_line -> date userid CONN_MSG CONN_MSG IP SPECIAL_CHAR SPECIAL_CHAR CARNET SLASH IP . PORT
 
-    TOPOLOGY        shift and go to state 154
+    PORT            shift and go to state 156
 
 
 state 154
 
-    (36) log_line -> date userid SENT_CNT SPECIAL_CHAR CARNET SPECIAL_CHAR COLON SPECIAL_CHAR ROUTE_FLAG VPN_IP IP ROUTE_FLAG VPN_IP IP ROUTE_FLAG VPN_IP TOPOLOGY . IP IP SPECIAL_CHAR PEER SPECIAL_CHAR CIPHER SPECIAL_CHAR VAR_SET VAR_VAL
+    (37) log_line -> date userid SENT_CNT SPECIAL_CHAR CARNET SPECIAL_CHAR COLON SPECIAL_CHAR ROUTE_FLAG VPN_IP . IP ROUTE_FLAG VPN_IP IP ROUTE_FLAG VPN_IP TOPOLOGY IP IP SPECIAL_CHAR PEER SPECIAL_CHAR CIPHER SPECIAL_CHAR VAR_SET VAR_VAL
 
-    IP              shift and go to state 155
+    IP              shift and go to state 157
 
 
 state 155
 
-    (36) log_line -> date userid SENT_CNT SPECIAL_CHAR CARNET SPECIAL_CHAR COLON SPECIAL_CHAR ROUTE_FLAG VPN_IP IP ROUTE_FLAG VPN_IP IP ROUTE_FLAG VPN_IP TOPOLOGY IP . IP SPECIAL_CHAR PEER SPECIAL_CHAR CIPHER SPECIAL_CHAR VAR_SET VAR_VAL
+    (13) log_line -> date PLUGIN_MSG DIR SPECIAL_CHAR SPECIAL_CHAR DIR SPECIAL_CHAR FLAGS SPECIAL_CHAR VAR_SET VAR_VAL .
 
-    IP              shift and go to state 156
+    ROUTE_HEADER    reduce using rule 13 (log_line -> date PLUGIN_MSG DIR SPECIAL_CHAR SPECIAL_CHAR DIR SPECIAL_CHAR FLAGS SPECIAL_CHAR VAR_SET VAR_VAL .)
+    WEEK_DAY        reduce using rule 13 (log_line -> date PLUGIN_MSG DIR SPECIAL_CHAR SPECIAL_CHAR DIR SPECIAL_CHAR FLAGS SPECIAL_CHAR VAR_SET VAR_VAL .)
+    $end            reduce using rule 13 (log_line -> date PLUGIN_MSG DIR SPECIAL_CHAR SPECIAL_CHAR DIR SPECIAL_CHAR FLAGS SPECIAL_CHAR VAR_SET VAR_VAL .)
 
 
 state 156
 
-    (36) log_line -> date userid SENT_CNT SPECIAL_CHAR CARNET SPECIAL_CHAR COLON SPECIAL_CHAR ROUTE_FLAG VPN_IP IP ROUTE_FLAG VPN_IP IP ROUTE_FLAG VPN_IP TOPOLOGY IP IP . SPECIAL_CHAR PEER SPECIAL_CHAR CIPHER SPECIAL_CHAR VAR_SET VAR_VAL
+    (34) log_line -> date userid CONN_MSG CONN_MSG IP SPECIAL_CHAR SPECIAL_CHAR CARNET SLASH IP PORT .
 
-    SPECIAL_CHAR    shift and go to state 157
+    ROUTE_HEADER    reduce using rule 34 (log_line -> date userid CONN_MSG CONN_MSG IP SPECIAL_CHAR SPECIAL_CHAR CARNET SLASH IP PORT .)
+    WEEK_DAY        reduce using rule 34 (log_line -> date userid CONN_MSG CONN_MSG IP SPECIAL_CHAR SPECIAL_CHAR CARNET SLASH IP PORT .)
+    $end            reduce using rule 34 (log_line -> date userid CONN_MSG CONN_MSG IP SPECIAL_CHAR SPECIAL_CHAR CARNET SLASH IP PORT .)
 
 
 state 157
 
-    (36) log_line -> date userid SENT_CNT SPECIAL_CHAR CARNET SPECIAL_CHAR COLON SPECIAL_CHAR ROUTE_FLAG VPN_IP IP ROUTE_FLAG VPN_IP IP ROUTE_FLAG VPN_IP TOPOLOGY IP IP SPECIAL_CHAR . PEER SPECIAL_CHAR CIPHER SPECIAL_CHAR VAR_SET VAR_VAL
+    (37) log_line -> date userid SENT_CNT SPECIAL_CHAR CARNET SPECIAL_CHAR COLON SPECIAL_CHAR ROUTE_FLAG VPN_IP IP . ROUTE_FLAG VPN_IP IP ROUTE_FLAG VPN_IP TOPOLOGY IP IP SPECIAL_CHAR PEER SPECIAL_CHAR CIPHER SPECIAL_CHAR VAR_SET VAR_VAL
 
-    PEER            shift and go to state 158
+    ROUTE_FLAG      shift and go to state 158
 
 
 state 158
 
-    (36) log_line -> date userid SENT_CNT SPECIAL_CHAR CARNET SPECIAL_CHAR COLON SPECIAL_CHAR ROUTE_FLAG VPN_IP IP ROUTE_FLAG VPN_IP IP ROUTE_FLAG VPN_IP TOPOLOGY IP IP SPECIAL_CHAR PEER . SPECIAL_CHAR CIPHER SPECIAL_CHAR VAR_SET VAR_VAL
+    (37) log_line -> date userid SENT_CNT SPECIAL_CHAR CARNET SPECIAL_CHAR COLON SPECIAL_CHAR ROUTE_FLAG VPN_IP IP ROUTE_FLAG . VPN_IP IP ROUTE_FLAG VPN_IP TOPOLOGY IP IP SPECIAL_CHAR PEER SPECIAL_CHAR CIPHER SPECIAL_CHAR VAR_SET VAR_VAL
 
-    SPECIAL_CHAR    shift and go to state 159
+    VPN_IP          shift and go to state 159
 
 
 state 159
 
-    (36) log_line -> date userid SENT_CNT SPECIAL_CHAR CARNET SPECIAL_CHAR COLON SPECIAL_CHAR ROUTE_FLAG VPN_IP IP ROUTE_FLAG VPN_IP IP ROUTE_FLAG VPN_IP TOPOLOGY IP IP SPECIAL_CHAR PEER SPECIAL_CHAR . CIPHER SPECIAL_CHAR VAR_SET VAR_VAL
+    (37) log_line -> date userid SENT_CNT SPECIAL_CHAR CARNET SPECIAL_CHAR COLON SPECIAL_CHAR ROUTE_FLAG VPN_IP IP ROUTE_FLAG VPN_IP . IP ROUTE_FLAG VPN_IP TOPOLOGY IP IP SPECIAL_CHAR PEER SPECIAL_CHAR CIPHER SPECIAL_CHAR VAR_SET VAR_VAL
 
-    CIPHER          shift and go to state 160
+    IP              shift and go to state 160
 
 
 state 160
 
-    (36) log_line -> date userid SENT_CNT SPECIAL_CHAR CARNET SPECIAL_CHAR COLON SPECIAL_CHAR ROUTE_FLAG VPN_IP IP ROUTE_FLAG VPN_IP IP ROUTE_FLAG VPN_IP TOPOLOGY IP IP SPECIAL_CHAR PEER SPECIAL_CHAR CIPHER . SPECIAL_CHAR VAR_SET VAR_VAL
+    (37) log_line -> date userid SENT_CNT SPECIAL_CHAR CARNET SPECIAL_CHAR COLON SPECIAL_CHAR ROUTE_FLAG VPN_IP IP ROUTE_FLAG VPN_IP IP . ROUTE_FLAG VPN_IP TOPOLOGY IP IP SPECIAL_CHAR PEER SPECIAL_CHAR CIPHER SPECIAL_CHAR VAR_SET VAR_VAL
 
-    SPECIAL_CHAR    shift and go to state 161
+    ROUTE_FLAG      shift and go to state 161
 
 
 state 161
 
-    (36) log_line -> date userid SENT_CNT SPECIAL_CHAR CARNET SPECIAL_CHAR COLON SPECIAL_CHAR ROUTE_FLAG VPN_IP IP ROUTE_FLAG VPN_IP IP ROUTE_FLAG VPN_IP TOPOLOGY IP IP SPECIAL_CHAR PEER SPECIAL_CHAR CIPHER SPECIAL_CHAR . VAR_SET VAR_VAL
+    (37) log_line -> date userid SENT_CNT SPECIAL_CHAR CARNET SPECIAL_CHAR COLON SPECIAL_CHAR ROUTE_FLAG VPN_IP IP ROUTE_FLAG VPN_IP IP ROUTE_FLAG . VPN_IP TOPOLOGY IP IP SPECIAL_CHAR PEER SPECIAL_CHAR CIPHER SPECIAL_CHAR VAR_SET VAR_VAL
 
-    VAR_SET         shift and go to state 162
+    VPN_IP          shift and go to state 162
 
 
 state 162
 
-    (36) log_line -> date userid SENT_CNT SPECIAL_CHAR CARNET SPECIAL_CHAR COLON SPECIAL_CHAR ROUTE_FLAG VPN_IP IP ROUTE_FLAG VPN_IP IP ROUTE_FLAG VPN_IP TOPOLOGY IP IP SPECIAL_CHAR PEER SPECIAL_CHAR CIPHER SPECIAL_CHAR VAR_SET . VAR_VAL
+    (37) log_line -> date userid SENT_CNT SPECIAL_CHAR CARNET SPECIAL_CHAR COLON SPECIAL_CHAR ROUTE_FLAG VPN_IP IP ROUTE_FLAG VPN_IP IP ROUTE_FLAG VPN_IP . TOPOLOGY IP IP SPECIAL_CHAR PEER SPECIAL_CHAR CIPHER SPECIAL_CHAR VAR_SET VAR_VAL
 
-    VAR_VAL         shift and go to state 163
+    TOPOLOGY        shift and go to state 163
 
 
 state 163
 
-    (36) log_line -> date userid SENT_CNT SPECIAL_CHAR CARNET SPECIAL_CHAR COLON SPECIAL_CHAR ROUTE_FLAG VPN_IP IP ROUTE_FLAG VPN_IP IP ROUTE_FLAG VPN_IP TOPOLOGY IP IP SPECIAL_CHAR PEER SPECIAL_CHAR CIPHER SPECIAL_CHAR VAR_SET VAR_VAL .
+    (37) log_line -> date userid SENT_CNT SPECIAL_CHAR CARNET SPECIAL_CHAR COLON SPECIAL_CHAR ROUTE_FLAG VPN_IP IP ROUTE_FLAG VPN_IP IP ROUTE_FLAG VPN_IP TOPOLOGY . IP IP SPECIAL_CHAR PEER SPECIAL_CHAR CIPHER SPECIAL_CHAR VAR_SET VAR_VAL
 
-    WEEK_DAY        reduce using rule 36 (log_line -> date userid SENT_CNT SPECIAL_CHAR CARNET SPECIAL_CHAR COLON SPECIAL_CHAR ROUTE_FLAG VPN_IP IP ROUTE_FLAG VPN_IP IP ROUTE_FLAG VPN_IP TOPOLOGY IP IP SPECIAL_CHAR PEER SPECIAL_CHAR CIPHER SPECIAL_CHAR VAR_SET VAR_VAL .)
-    $end            reduce using rule 36 (log_line -> date userid SENT_CNT SPECIAL_CHAR CARNET SPECIAL_CHAR COLON SPECIAL_CHAR ROUTE_FLAG VPN_IP IP ROUTE_FLAG VPN_IP IP ROUTE_FLAG VPN_IP TOPOLOGY IP IP SPECIAL_CHAR PEER SPECIAL_CHAR CIPHER SPECIAL_CHAR VAR_SET VAR_VAL .)
+    IP              shift and go to state 164
+
+
+state 164
+
+    (37) log_line -> date userid SENT_CNT SPECIAL_CHAR CARNET SPECIAL_CHAR COLON SPECIAL_CHAR ROUTE_FLAG VPN_IP IP ROUTE_FLAG VPN_IP IP ROUTE_FLAG VPN_IP TOPOLOGY IP . IP SPECIAL_CHAR PEER SPECIAL_CHAR CIPHER SPECIAL_CHAR VAR_SET VAR_VAL
+
+    IP              shift and go to state 165
+
+
+state 165
+
+    (37) log_line -> date userid SENT_CNT SPECIAL_CHAR CARNET SPECIAL_CHAR COLON SPECIAL_CHAR ROUTE_FLAG VPN_IP IP ROUTE_FLAG VPN_IP IP ROUTE_FLAG VPN_IP TOPOLOGY IP IP . SPECIAL_CHAR PEER SPECIAL_CHAR CIPHER SPECIAL_CHAR VAR_SET VAR_VAL
+
+    SPECIAL_CHAR    shift and go to state 166
+
+
+state 166
+
+    (37) log_line -> date userid SENT_CNT SPECIAL_CHAR CARNET SPECIAL_CHAR COLON SPECIAL_CHAR ROUTE_FLAG VPN_IP IP ROUTE_FLAG VPN_IP IP ROUTE_FLAG VPN_IP TOPOLOGY IP IP SPECIAL_CHAR . PEER SPECIAL_CHAR CIPHER SPECIAL_CHAR VAR_SET VAR_VAL
+
+    PEER            shift and go to state 167
+
+
+state 167
+
+    (37) log_line -> date userid SENT_CNT SPECIAL_CHAR CARNET SPECIAL_CHAR COLON SPECIAL_CHAR ROUTE_FLAG VPN_IP IP ROUTE_FLAG VPN_IP IP ROUTE_FLAG VPN_IP TOPOLOGY IP IP SPECIAL_CHAR PEER . SPECIAL_CHAR CIPHER SPECIAL_CHAR VAR_SET VAR_VAL
+
+    SPECIAL_CHAR    shift and go to state 168
+
+
+state 168
+
+    (37) log_line -> date userid SENT_CNT SPECIAL_CHAR CARNET SPECIAL_CHAR COLON SPECIAL_CHAR ROUTE_FLAG VPN_IP IP ROUTE_FLAG VPN_IP IP ROUTE_FLAG VPN_IP TOPOLOGY IP IP SPECIAL_CHAR PEER SPECIAL_CHAR . CIPHER SPECIAL_CHAR VAR_SET VAR_VAL
+
+    CIPHER          shift and go to state 169
+
+
+state 169
+
+    (37) log_line -> date userid SENT_CNT SPECIAL_CHAR CARNET SPECIAL_CHAR COLON SPECIAL_CHAR ROUTE_FLAG VPN_IP IP ROUTE_FLAG VPN_IP IP ROUTE_FLAG VPN_IP TOPOLOGY IP IP SPECIAL_CHAR PEER SPECIAL_CHAR CIPHER . SPECIAL_CHAR VAR_SET VAR_VAL
+
+    SPECIAL_CHAR    shift and go to state 170
+
+
+state 170
+
+    (37) log_line -> date userid SENT_CNT SPECIAL_CHAR CARNET SPECIAL_CHAR COLON SPECIAL_CHAR ROUTE_FLAG VPN_IP IP ROUTE_FLAG VPN_IP IP ROUTE_FLAG VPN_IP TOPOLOGY IP IP SPECIAL_CHAR PEER SPECIAL_CHAR CIPHER SPECIAL_CHAR . VAR_SET VAR_VAL
+
+    VAR_SET         shift and go to state 171
+
+
+state 171
+
+    (37) log_line -> date userid SENT_CNT SPECIAL_CHAR CARNET SPECIAL_CHAR COLON SPECIAL_CHAR ROUTE_FLAG VPN_IP IP ROUTE_FLAG VPN_IP IP ROUTE_FLAG VPN_IP TOPOLOGY IP IP SPECIAL_CHAR PEER SPECIAL_CHAR CIPHER SPECIAL_CHAR VAR_SET . VAR_VAL
+
+    VAR_VAL         shift and go to state 172
+
+
+state 172
+
+    (37) log_line -> date userid SENT_CNT SPECIAL_CHAR CARNET SPECIAL_CHAR COLON SPECIAL_CHAR ROUTE_FLAG VPN_IP IP ROUTE_FLAG VPN_IP IP ROUTE_FLAG VPN_IP TOPOLOGY IP IP SPECIAL_CHAR PEER SPECIAL_CHAR CIPHER SPECIAL_CHAR VAR_SET VAR_VAL .
+
+    ROUTE_HEADER    reduce using rule 37 (log_line -> date userid SENT_CNT SPECIAL_CHAR CARNET SPECIAL_CHAR COLON SPECIAL_CHAR ROUTE_FLAG VPN_IP IP ROUTE_FLAG VPN_IP IP ROUTE_FLAG VPN_IP TOPOLOGY IP IP SPECIAL_CHAR PEER SPECIAL_CHAR CIPHER SPECIAL_CHAR VAR_SET VAR_VAL .)
+    WEEK_DAY        reduce using rule 37 (log_line -> date userid SENT_CNT SPECIAL_CHAR CARNET SPECIAL_CHAR COLON SPECIAL_CHAR ROUTE_FLAG VPN_IP IP ROUTE_FLAG VPN_IP IP ROUTE_FLAG VPN_IP TOPOLOGY IP IP SPECIAL_CHAR PEER SPECIAL_CHAR CIPHER SPECIAL_CHAR VAR_SET VAR_VAL .)
+    $end            reduce using rule 37 (log_line -> date userid SENT_CNT SPECIAL_CHAR CARNET SPECIAL_CHAR COLON SPECIAL_CHAR ROUTE_FLAG VPN_IP IP ROUTE_FLAG VPN_IP IP ROUTE_FLAG VPN_IP TOPOLOGY IP IP SPECIAL_CHAR PEER SPECIAL_CHAR CIPHER SPECIAL_CHAR VAR_SET VAR_VAL .)
 
 WARNING: 
 WARNING: Conflicts:
 WARNING: 
-WARNING: reduce/reduce conflict in state 2 resolved using rule (main_rule -> log_line)
-WARNING: rejected rule (empty -> <empty>) in state 2
+WARNING: reduce/reduce conflict in state 3 resolved using rule (main_rule -> log_line)
+WARNING: rejected rule (empty -> <empty>) in state 3
