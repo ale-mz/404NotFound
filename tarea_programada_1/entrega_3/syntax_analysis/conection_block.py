@@ -15,15 +15,15 @@ tokens = (
   'PORT',
   'CARNET',
   # 'PROF',
-  'STATUS',
-  'POST',
+  # 'STATUS',
+  # 'POST',
   'PLUGIN_MSG',   # Body Tokens
   'VAR_SET',
   'VAR_VAL',
   'SYS_MSG',
   'FLAGS',
   'TCP_MSG',
-  'ROUTE_HEADER', # Header Tokens
+  # 'ROUTE_HEADER', # Header Tokens
   'VPN_IP',
   'SBIN_IP_MSG',  # Initialization Tokens
   'TUN_TAP_MSG',
@@ -35,7 +35,7 @@ tokens = (
   'IP_PROTOCOL',
   'CONN_MSG',
   'IFCONFIG_END',
-  'FASE_END',
+  # 'FASE_END',
   'CN_SET',       # Connection Tokens
   'POOL_RET',
   'SENT_CNT',
@@ -47,9 +47,9 @@ tokens = (
   'COLON'
 )
 
-t_STATUS = 'status'
+# t_STATUS = 'status'
 
-t_POST = 'POST'
+# t_POST = 'POST'
 
 ### General Tokens ###
 # Define regex for IP tokens
@@ -103,9 +103,9 @@ def t_PLUGIN_MSG(t):
 
 
 # Define tokens for route header
-def t_ROUTE_HEADER(t):
-  r'<\/?route-identifiers>'
-  return t
+# def t_ROUTE_HEADER(t):
+#   r'<\/?route-identifiers>'
+#   return t
 
 # Define regex for specified variable set action
 def t_VAR_SET(t):
@@ -212,9 +212,9 @@ def t_IFCONFIG_END(t):
   return t
 
 # Define regex for message at the end of a phase
-def t_FASE_END(t):
-  r'[A-Za-z ]+Completed'
-  return t
+# def t_FASE_END(t):
+#   r'[A-Za-z ]+Completed'
+#   return t
 
 ### Connection Tokens ###
 # Define regex for last part of username authentication
@@ -284,7 +284,7 @@ def p_log_line(p):
               | date SYS_MSG SPECIAL_CHAR VAR_SET VAR_VAL VAR_SET VAR_VAL
               | date CONN_MSG VAR_SET IP VAR_SET VAR_VAL SPECIAL_CHAR VAR_SET VAR_VAL
               | date IFCONFIG_END
-              | date SYS_MS VAR_SET VAR_VAL VAR_SET VAR_VAL
+              | date SYS_MSG VAR_SET VAR_VAL VAR_SET VAR_VAL
               | date TCP_MSG IP PORT
               | date IP PORT SYS_MSG FLAGS IP PORT SPECIAL_CHAR VAR_SET VAR_VAL
               | date TCP_MSG IP PORT PLUGIN_MSG DIR VAR_SET VAR_VAL
@@ -296,6 +296,10 @@ def p_log_line(p):
               | date userid CONN_MSG CONN_MSG DIR
               | date userid CONN_MSG CONN_MSG IP SPECIAL_CHAR SPECIAL_CHAR CARNET SLASH IP PORT
               | date userid SYS_MSG CARNET SLASH IP PORT COLON IP
+              | date userid SYS_MSG
+              | date userid SENT_CNT SPECIAL_CHAR CARNET SPECIAL_CHAR COLON SPECIAL_CHAR ROUTE_FLAG VPN_IP IP ROUTE_FLAG VPN_IP IP ROUTE_FLAG VPN_IP TOPOLOGY IP IP SPECIAL_CHAR PEER SPECIAL_CHAR CIPHER SPECIAL_CHAR VAR_SET VAR_VAL
+              | date userid CONN_MSG CIPHER
+              | date IP PORT PLUGIN_MSG DIR VAR_SET VAR_VAL
     '''
     pass
 
@@ -321,6 +325,7 @@ def p_error(p):
 
 if __name__ == "__main__":
   
+
 # Mon Sep 14 17:02:20 2020 TCP connection established with [AF_INET]186.177.189.227:10962
 # Mon Sep 14 17:02:20 2020 186.177.189.227:10962 TLS: Initial packet from [AF_INET]186.177.189.227:10962, sid=5af262df 36e0e149
 # Mon Sep 14 17:02:20 2020 186.177.189.227:10962 PLUGIN_CALL: POST /usr/lib64/openvpn/plugin/lib/openvpn-auth-ldap.so/PLUGIN_AUTH_USER_PASS_VERIFY status=0
@@ -332,41 +337,25 @@ if __name__ == "__main__":
 # Mon Sep 14 17:02:20 2020 B70873/186.177.189.227:10962 OPTIONS IMPORT: reading client specific options from: /tmp/openvpn_cc_118cc3b5e611d52f3075658b231ff102.tmp
 # Mon Sep 14 17:02:20 2020 B70873/186.177.189.227:10962 MULTI: Learn: 192.168.68.6 -> B70873/186.177.189.227:10962
 # Mon Sep 14 17:02:20 2020 B70873/186.177.189.227:10962 MULTI: primary virtual IP for B70873/186.177.189.227:10962: 192.168.68.6
+# Mon Sep 14 17:02:20 2020 B70873/186.177.189.227:10962 PUSH: Received control message: 'PUSH_REQUEST'
   log_data = '''
-Mon Sep 14 17:02:20 2020 B70873/186.177.189.227:10962 PUSH: Received control message: 'PUSH_REQUEST'
 Mon Sep 14 17:02:20 2020 B70873/186.177.189.227:10962 SENT CONTROL [B70873]: 'PUSH_REPLY,route ::vpn-net:: 255.255.255.0,route ::priv-net-2:: 255.255.255.0,route ::vpn-gat::,topology net30,ping 10,ping-restart 120,ifconfig 192.168.68.6 192.168.68.5,peer-id 0,cipher AES-256-GCM' (status=1)
-Mon Sep 14 17:02:20 2020 B70873/186.177.189.227:10962 Data Channel: using negotiated cipher 'AES-256-GCM'
-Mon Sep 14 17:02:20 2020 B70873/186.177.189.227:10962 Outgoing Data Channel: Cipher 'AES-256-GCM' initialized with 256 bit key
-Mon Sep 14 17:02:20 2020 B70873/186.177.189.227:10962 Incoming Data Channel: Cipher 'AES-256-GCM' initialized with 256 bit key
-Tue Feb 16 17:02:22 2021 TCP connection established with [AF_INET]186.26.117.95:26132
-Tue Feb 16 17:02:22 2021 186.26.117.95:26132 TLS: Initial packet from [AF_INET]186.26.117.95:26132, sid=1d9f7f93 8f03de14
-Tue Feb 16 17:02:22 2021 186.26.117.95:26132 PLUGIN_CALL: POST /usr/lib64/openvpn/plugin/lib/openvpn-auth-ldap.so/PLUGIN_AUTH_USER_PASS_VERIFY status=0
-Tue Feb 16 17:02:22 2021 186.26.117.95:26132 TLS: Username/Password authentication succeeded for username 'B62804' [CN SET]
-Tue Feb 16 17:02:22 2021 186.26.117.95:26132 Control Channel: TLSv1.2, cipher TLSv1/SSLv3 ECDHE-RSA-AES256-GCM-SHA384, 2048 bit RSA
-Tue Feb 16 17:02:22 2021 186.26.117.95:26132 [B62804] Peer Connection Initiated with [AF_INET]186.26.117.95:26132
-Tue Feb 16 17:02:22 2021 B62804/186.26.117.95:26132 MULTI_sva: pool returned IPv4=192.168.68.10, IPv6=(Not enabled)
-Tue Feb 16 17:02:22 2021 B62804/186.26.117.95:26132 PLUGIN_CALL: POST /usr/lib64/openvpn/plugin/lib/openvpn-auth-ldap.so/PLUGIN_CLIENT_CONNECT status=0
-Tue Feb 16 17:02:22 2021 B62804/186.26.117.95:26132 OPTIONS IMPORT: reading client specific options from: /tmp/openvpn_cc_5c9a80ee849940e6449d0544b93ca1c5.tmp
-Tue Feb 16 17:02:22 2021 B62804/186.26.117.95:26132 MULTI: Learn: 192.168.68.10 -> B62804/186.26.117.95:26132
-Tue Feb 16 17:02:22 2021 B62804/186.26.117.95:26132 MULTI: primary virtual IP for B62804/186.26.117.95:26132: 192.168.68.10
-Tue Feb 16 17:02:22 2021 B62804/186.26.117.95:26132 PUSH: Received control message: 'PUSH_REQUEST'
-Tue Feb 16 17:02:22 2021 B62804/186.26.117.95:26132 SENT CONTROL [B62804]: 'PUSH_REPLY,route ::vpn-net:: 255.255.255.0,route ::priv-net-1::,route ::priv-net-2:: 255.255.255.0,route ::priv-net-3::,route ::priv-net-4:: 255.255.255.0,route ::vpn-gat::,topology net30,ping 10,ping-restart 120,ifconfig 192.168.68.10 192.168.68.9,peer-id 0,cipher AES-256-GCM' (status=1)
-Tue Feb 16 17:02:22 2021 B62804/186.26.117.95:26132 Data Channel: using negotiated cipher 'AES-256-GCM'
-Tue Feb 16 17:02:22 2021 B62804/186.26.117.95:26132 Outgoing Data Channel: Cipher 'AES-256-GCM' initialized with 256 bit key
-Tue Feb 16 17:02:22 2021 B62804/186.26.117.95:26132 Incoming Data Channel: Cipher 'AES-256-GCM' initialized with 256 bit key
-    '''
+ '''
+# Mon Sep 14 17:02:20 2020 B70873/186.177.189.227:10962 Data Channel: using negotiated cipher 'AES-256-GCM'
+# Mon Sep 14 17:02:20 2020 B70873/186.177.189.227:10962 Outgoing Data Channel: Cipher 'AES-256-GCM' initialized with 256 bit key
+# Mon Sep 14 17:02:20 2020 B70873/186.177.189.227:10962 Incoming Data Channel: Cipher 'AES-256-GCM' initialized with 256 bit key
   # Build the lexer
   # file = open("vpn-logs-2020-modified-abb-revMM.txt")
   #  data = file.read()
   lexer = lex.lex()
 
 
-  lexer.input(log_data)
-  while True:
-    tok = lexer.token()
-    if not tok: 
-      break      # No more input
-    print(tok)
+  # lexer.input(log_data)
+  # while True:
+  #   tok = lexer.token()
+  #   if not tok: 
+  #     break      # No more input
+  #   print(tok)
 
 
   parser = yacc.yacc()
