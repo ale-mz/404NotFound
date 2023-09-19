@@ -39,7 +39,6 @@ Mon Sep 14 17:02:16 2020 IFCONFIG POOL: base=192.168.68.4 size=62, ipv6=0
 Sun Sep 13 17:02:16 2020 IFCONFIG POOL LIST
 Sun Sep 13 17:02:16 2020 MULTI: TCP INIT maxclients=1024 maxevents=1028
 Sun Sep 13 17:02:16 2020 Initialization Sequence Completed
-
 Sun Sep 13 17:02:18 2020 TCP connection established with [AF_INET]186.177.189.227:10962
 Sun Sep 13 17:02:18 2020 186.177.189.227:10962 TLS: Initial packet from [AF_INET]186.177.189.227:10962, sid=5af262df 36e0e149
 Sun Sep 13 17:02:20 2020 186.177.189.227:10962 PLUGIN_CALL: POST /usr/lib64/openvpn/plugin/lib/openvpn-auth-ldap.so/PLUGIN_AUTH_USER_PASS_VERIFY status=0
