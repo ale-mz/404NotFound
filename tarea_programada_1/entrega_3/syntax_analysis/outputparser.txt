@@ -1,0 +1,2 @@
+Syntax error at: LexToken(WEEK_DAY,'Sun',19,1149)
+Syntax error at: LexToken(PROF,'Completed',40,3020)
