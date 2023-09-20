@@ -2,6 +2,9 @@
 import ply.lex as lex
 import ply.yacc as yacc
 
+# Table with conections
+listcon = []
+
 tokens = (
   'IP',           # General Tokens
   'WEEK_DAY',
@@ -250,6 +253,8 @@ caught_tokens = []
 def p_file(t):
   'file : header init listcon'
   print("All file consumed\n")
+  for i in range(len(listcon)):
+    print(listcon[i])
   pass
 
 def p_header(t):
@@ -328,21 +333,28 @@ def p_listconnections(t):
   ("All connections detected\n")
   
 def p_conection(t):
-  'conection : start login peering conline end'
+  'conection : start coninit login peering conline end'
+  connection = [t[3][0], t[3][1], t[5]]
+  listcon.append(connection)
+
 
 def p_start(t):
   'start : date TCP_MSG IP PORT'
 
-def p_login(t):
-  '''login : login loginmsg
-           | loginmsg'''
+def p_coninit(t):
+  '''coninit : coninit conmsg
+           | conmsg'''
   
-def p_loginmsg(t):
-  '''loginmsg : date IP PORT SYS_MSG FLAGS IP PORT SPECIAL_CHAR VAR_SET VAR_VAL
+def p_conmsg(t):
+  '''conmsg : date IP PORT SYS_MSG FLAGS IP PORT SPECIAL_CHAR VAR_SET VAR_VAL
               | date plugin
               | date IP PORT SYS_MSG SPECIAL_CHAR user SPECIAL_CHAR CN_SET
-              | date IP PORT CONN_MSG CRYPTO_MSG
-              | date IP PORT SPECIAL_CHAR user SPECIAL_CHAR PEER IP PORT'''
+              | date IP PORT CONN_MSG CRYPTO_MSG'''
+  
+def p_login(t):
+  'login : date IP PORT SPECIAL_CHAR user SPECIAL_CHAR PEER IP PORT'
+  t[0] = (t[2],t[5])
+
   
 def p_peering(t):
   '''peering : peering peermsg
@@ -358,6 +370,7 @@ def p_peermsg(t):
   
 def p_conline(t):
   '''conline : routehead routing routend'''
+  t[0] = t[2]
 
 def p_routhead(t):
   'routehead : peercon SENT_CNT SPECIAL_CHAR user SPECIAL_CHAR COLON SPECIAL_CHAR'
@@ -368,10 +381,18 @@ def p_routend(t):
 def p_routing(t):
   '''routing : routing route
              | route'''
+  if len(t) == 3:
+    t[0] = t[1] + t[2]
+  else :
+    t[0] = t[1]
 
 def p_route(t):
   '''route : ROUTE_FLAG VPN_IP IP
            | ROUTE_FLAG VPN_IP'''
+  if len(t) == 4:
+    t[0] = t[1] + t[2] + t[3]
+  else :
+    t[0] = t[1] + t[2]
   
 def p_end(t):
   '''end : endmsg endmsg endmsg'''
@@ -389,6 +410,7 @@ def p_date(t):
 def p_user(t):
   '''user : CARNET
           | PROF'''
+  t[0] = t[1]
   pass
 
   
