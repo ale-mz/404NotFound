@@ -3,7 +3,8 @@ import ply.lex as lex
 import ply.yacc as yacc
 
 # Table with conections
-listcon = []
+raw_data = []
+dataframe =[]
 
 tokens = (
   'IP',           # General Tokens
@@ -253,8 +254,60 @@ caught_tokens = []
 def p_file(t):
   'file : header init listcon'
   print("All file consumed\n")
-  for i in range(len(listcon)):
-    print(listcon[i])
+
+  # Print the table with all raw data extracted
+  for i in range(len(raw_data)):
+    print(raw_data[i])
+
+  print("\n")
+  # Pass all to a new table
+  for i in range(len(raw_data)):
+
+    # Look if the user was previously append
+    userbool = False
+    for j in range(len(dataframe)):
+      if (dataframe[j][0] == raw_data[i][0]):
+        userbool = True
+      
+    if userbool == False:
+      # IP(s)
+      IPs = [raw_data[i][1]]
+      # Route(s) list
+      RTs = [raw_data[i][2]]
+
+      # Append to the new table all data from the old one
+      # User / IP(s) / Route(s) / Conection(s) / #IP(s) / #Route(s)
+      input = [raw_data[i][0], IPs, RTs, 0, 1, 1]
+      dataframe.append(input)
+
+      for j in range(len(raw_data)):
+        # Same user
+        last = len(dataframe) -1
+        if (dataframe[last][0] == raw_data[j][0]):
+          # New Conection
+          dataframe[last][3] += 1
+          # If the IP associate is new append it in new table
+          conf = False
+          for k in range(len(dataframe[last][1])) :
+            if (dataframe[last][1][k] == raw_data[j][1]):
+              conf = True
+          
+          if conf == False:
+            dataframe[last][1].append(raw_data[j][1])
+            dataframe[last][4] += 1
+
+          conf = False
+          for k in range(len(dataframe[last][2])) :
+            if (dataframe[last][2][k] == raw_data[j][2]):
+              conf = True
+          
+          if conf == False:
+            dataframe[last][2].append(raw_data[j][2])
+            dataframe[last][5] += 1
+
+  for i in range(len(dataframe)):
+    print(dataframe[i])
+
   pass
 
 def p_header(t):
@@ -334,8 +387,8 @@ def p_listconnections(t):
   
 def p_conection(t):
   'conection : start coninit login peering conline end'
-  connection = [t[3][0], t[3][1], t[5]]
-  listcon.append(connection)
+  connection = [t[3][1], t[3][0], t[5]]
+  raw_data.append(connection)
 
 
 def p_start(t):
