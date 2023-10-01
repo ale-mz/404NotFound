@@ -1,7 +1,8 @@
 import tkinter as tk
 from tkinter import ttk
 from tkinter import filedialog
-
+from matplotlib.figure import Figure
+from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg
 
 class myApp():
     def __init__(self):
@@ -52,7 +53,7 @@ class myApp():
         self.root.geometry(f"{window_width}x{window_height}+{x_position}+{y_position}")
 
     def choose_file(self):
-        file_path = filedialog.askopenfilename(title="Choose a File")
+        file_path = filedialog.askopenfilename(title="Choose a File") 
         if file_path:
             self.file_label.config(text="Selected File: " + file_path)
         else:
@@ -61,7 +62,9 @@ class myApp():
     def analyze_file(self):
         file_path = self.file_label.cget("text")[15:]
         if file_path:
+            print("Analyzing file: " + file_path)
             # call function from analyzer.py
+
             self.result_label.config(text="Analysis complete.")
         else:
             self.result_label.config(text="No file selected")
@@ -70,10 +73,12 @@ class myApp():
         self.root.mainloop()
 
 
-int main():
+
+
+def main():
     app = myApp()
     app.run()
-    return 0
+
 
 if __name__ == '__main__':
     main()
