@@ -4,6 +4,7 @@ import ply.yacc as yacc
 
 # Table with conections
 raw_data = []
+# TODO: Emigrar funciones dataFrame
 dataframe =[]
 
 tokens = (
@@ -253,61 +254,6 @@ caught_tokens = []
 
 def p_file(t):
   'file : header init listcon'
-  print("All file consumed\n")
-
-  # Print the table with all raw data extracted
-  for i in range(len(raw_data)):
-    print(raw_data[i])
-
-  print("\n")
-  # Pass all to a new table
-  for i in range(len(raw_data)):
-
-    # Look if the user was previously append
-    userbool = False
-    for j in range(len(dataframe)):
-      if (dataframe[j][0] == raw_data[i][0]):
-        userbool = True
-      
-    if userbool == False:
-      # IP(s)
-      IPs = [raw_data[i][1]]
-      # Route(s) list
-      RTs = [raw_data[i][2]]
-
-      # Append to the new table all data from the old one
-      # User / IP(s) / Route(s) / Conection(s) / #IP(s) / #Route(s)
-      input = [raw_data[i][0], IPs, RTs, 0, 1, 1]
-      dataframe.append(input)
-
-      for j in range(len(raw_data)):
-        # Same user
-        last = len(dataframe) -1
-        if (dataframe[last][0] == raw_data[j][0]):
-          # New Conection
-          dataframe[last][3] += 1
-          # If the IP associate is new append it in new table
-          conf = False
-          for k in range(len(dataframe[last][1])) :
-            if (dataframe[last][1][k] == raw_data[j][1]):
-              conf = True
-          
-          if conf == False:
-            dataframe[last][1].append(raw_data[j][1])
-            dataframe[last][4] += 1
-
-          conf = False
-          for k in range(len(dataframe[last][2])) :
-            if (dataframe[last][2][k] == raw_data[j][2]):
-              conf = True
-          
-          if conf == False:
-            dataframe[last][2].append(raw_data[j][2])
-            dataframe[last][5] += 1
-
-  for i in range(len(dataframe)):
-    print(dataframe[i])
-
   pass
 
 def p_header(t):
@@ -479,10 +425,9 @@ def p_error(t):
     print(f"Syntax error at '{t.value}'")
     print(t)
 
-
-if __name__ == "__main__":
+def analyze(file_path):
   # Build the lexer
-  file = open("vpn-logs-2020-modified-abb-revMM.txt")
+  file = open("vpn-logs-2020-modified-abb-revMM.txt") #(file_path)
   data = file.read()
   lexer = lex.lex()
   parser = yacc.yacc()
@@ -493,7 +438,6 @@ if __name__ == "__main__":
   #       what you are executing you should change this path
   # TODO: For the moment the file direction is hardcoded, but in future versions
   #       it should be a parameter reveiced via the UI
-
   # print(data)
 
   # Give the lexer some input
@@ -509,3 +453,6 @@ if __name__ == "__main__":
     tokens_output.write(f"{tok}\n")
     # tokens_output.write(f"{tok.type}: {tok.value}\n")
   tokens_output.close()
+  return raw_data
+# if __name__ == "__main__":
+  
