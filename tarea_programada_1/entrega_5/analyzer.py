@@ -333,7 +333,7 @@ def p_listconnections(t):
   
 def p_conection(t):
   'conection : start coninit login peering conline end'
-  connection = [t[3][1], t[3][0], t[5]]
+  connection = [t[3][2], t[3][1], t[3][0], t[5]]
   raw_data.append(connection)
 
 
@@ -350,9 +350,14 @@ def p_conmsg(t):
               | date IP PORT SYS_MSG SPECIAL_CHAR user SPECIAL_CHAR CN_SET
               | date IP PORT CONN_MSG CRYPTO_MSG'''
   
-def p_login(t):
-  'login : date IP PORT SPECIAL_CHAR user SPECIAL_CHAR PEER IP PORT'
-  t[0] = (t[2],t[5])
+def p_loginPR(t):
+  'login : date IP PORT SPECIAL_CHAR PROF SPECIAL_CHAR PEER IP PORT'
+  t[0] = (t[2],t[5],0)
+
+def p_loginST(t):
+  'login : date IP PORT SPECIAL_CHAR CARNET SPECIAL_CHAR PEER IP PORT'
+  t[0] = (t[2],t[5],1)
+
 
   
 def p_peering(t):
@@ -427,7 +432,7 @@ def p_error(t):
 
 def analyze(file_path):
   # Build the lexer
-  file = open("vpn-logs-2020-modified-abb-revMM.txt") #(file_path)
+  file = open(file_path) #(file_path)
   data = file.read()
   lexer = lex.lex()
   parser = yacc.yacc()

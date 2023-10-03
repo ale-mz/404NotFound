@@ -52,72 +52,73 @@ Rule 46    conmsg -> date IP PORT SYS_MSG FLAGS IP PORT SPECIAL_CHAR VAR_SET VAR
 Rule 47    conmsg -> date plugin
 Rule 48    conmsg -> date IP PORT SYS_MSG SPECIAL_CHAR user SPECIAL_CHAR CN_SET
 Rule 49    conmsg -> date IP PORT CONN_MSG CRYPTO_MSG
-Rule 50    login -> date IP PORT SPECIAL_CHAR user SPECIAL_CHAR PEER IP PORT
-Rule 51    peering -> peering peermsg
-Rule 52    peering -> peermsg
-Rule 53    peermsg -> peercon CONN_MSG POOL_RET VAR_SET IP SPECIAL_CHAR VAR_SET VAR_VAL
-Rule 54    peermsg -> peercon plugin
-Rule 55    peermsg -> peercon CONN_MSG CONN_MSG DIR
-Rule 56    peermsg -> peercon CONN_MSG CONN_MSG IP SPECIAL_CHAR SPECIAL_CHAR user SLASH IP PORT
-Rule 57    peermsg -> peercon SYS_MSG user SLASH IP PORT COLON IP
-Rule 58    peermsg -> peercon SYS_MSG
-Rule 59    conline -> routehead routing routend
-Rule 60    routehead -> peercon SENT_CNT SPECIAL_CHAR user SPECIAL_CHAR COLON SPECIAL_CHAR
-Rule 61    routend -> TOPOLOGY IP IP SPECIAL_CHAR PEER SPECIAL_CHAR CIPHER SPECIAL_CHAR VAR_SET VAR_VAL
-Rule 62    routing -> routing route
-Rule 63    routing -> route
-Rule 64    route -> ROUTE_FLAG VPN_IP IP
-Rule 65    route -> ROUTE_FLAG VPN_IP
-Rule 66    end -> endmsg endmsg endmsg
-Rule 67    endmsg -> peercon CONN_MSG CIPHER
-Rule 68    peercon -> date user SLASH IP PORT
-Rule 69    date -> WEEK_DAY MONTH DAY CLOCK YEAR
-Rule 70    user -> CARNET
-Rule 71    user -> PROF
-Rule 72    empty -> <empty>
+Rule 50    login -> date IP PORT SPECIAL_CHAR PROF SPECIAL_CHAR PEER IP PORT
+Rule 51    login -> date IP PORT SPECIAL_CHAR CARNET SPECIAL_CHAR PEER IP PORT
+Rule 52    peering -> peering peermsg
+Rule 53    peering -> peermsg
+Rule 54    peermsg -> peercon CONN_MSG POOL_RET VAR_SET IP SPECIAL_CHAR VAR_SET VAR_VAL
+Rule 55    peermsg -> peercon plugin
+Rule 56    peermsg -> peercon CONN_MSG CONN_MSG DIR
+Rule 57    peermsg -> peercon CONN_MSG CONN_MSG IP SPECIAL_CHAR SPECIAL_CHAR user SLASH IP PORT
+Rule 58    peermsg -> peercon SYS_MSG user SLASH IP PORT COLON IP
+Rule 59    peermsg -> peercon SYS_MSG
+Rule 60    conline -> routehead routing routend
+Rule 61    routehead -> peercon SENT_CNT SPECIAL_CHAR user SPECIAL_CHAR COLON SPECIAL_CHAR
+Rule 62    routend -> TOPOLOGY IP IP SPECIAL_CHAR PEER SPECIAL_CHAR CIPHER SPECIAL_CHAR VAR_SET VAR_VAL
+Rule 63    routing -> routing route
+Rule 64    routing -> route
+Rule 65    route -> ROUTE_FLAG VPN_IP IP
+Rule 66    route -> ROUTE_FLAG VPN_IP
+Rule 67    end -> endmsg endmsg endmsg
+Rule 68    endmsg -> peercon CONN_MSG CIPHER
+Rule 69    peercon -> date user SLASH IP PORT
+Rule 70    date -> WEEK_DAY MONTH DAY CLOCK YEAR
+Rule 71    user -> CARNET
+Rule 72    user -> PROF
+Rule 73    empty -> <empty>
 
 Terminals, with rules where they appear
 
-CARNET               : 70
-CIPHER               : 61 67
-CLOCK                : 69
+CARNET               : 51 71
+CIPHER               : 62 68
+CLOCK                : 70
 CN_SET               : 48
-COLON                : 57 60
-CONN_MSG             : 17 18 20 49 53 55 55 56 56 67
+COLON                : 58 61
+CONN_MSG             : 17 18 20 49 54 56 56 57 57 68
 CRYPTO_MSG           : 14 49
-DAY                  : 25 26 69
-DIR                  : 34 35 35 36 38 55
+DAY                  : 25 26 70
+DIR                  : 34 35 35 36 38 56
 FASE_END             : 5
 FLAGS                : 35 46
 IFCONFIG_END         : 19
-IP                   : 3 15 15 18 29 30 30 31 31 38 43 46 46 48 49 50 50 53 56 56 57 57 61 61 64 68
+IP                   : 3 15 15 18 29 30 30 31 31 38 43 46 46 48 49 50 50 51 51 54 57 57 58 58 62 62 65 69
 IP_PROTOCOL          : 16
 IP_RNG               : 29 30
 LIB_VER_MSG          : 26 26
-MONTH                : 25 26 69
+MONTH                : 25 26 70
 OPEN_VPN_MSG         : 25
-PEER                 : 30 31 50 61
+PEER                 : 30 31 50 51 62
 PLUGIN_MSG           : 34 35 36 37 38
-POOL_RET             : 53
-PORT                 : 38 43 46 46 48 49 50 50 56 57 68
-PROF                 : 71
-ROUTE_FLAG           : 64 65
+POOL_RET             : 54
+PORT                 : 38 43 46 46 48 49 50 50 51 51 57 58 69
+PROF                 : 50 72
+ROUTE_FLAG           : 65 66
 ROUTE_GATEWAY        : 15
 ROUTE_HEADER         : 2 2
 SBIN_IP_MSG          : 29 30 31 32
-SENT_CNT             : 60
+SENT_CNT             : 61
 SIGTERM_MSG          : 24
-SLASH                : 15 56 57 68
-SPECIAL_CHAR         : 11 18 35 35 35 35 46 48 48 50 50 53 56 56 60 60 60 61 61 61
-SYS_MSG              : 11 22 23 27 46 48 57 58
+SLASH                : 15 57 58 69
+SPECIAL_CHAR         : 11 18 35 35 35 35 46 48 48 50 50 51 51 54 57 57 61 61 61 62 62 62
+SYS_MSG              : 11 22 23 27 46 48 58 59
 TCP_MSG              : 21 43
-TOPOLOGY             : 61
+TOPOLOGY             : 62
 TUN_TAP_MSG          : 39
-VAR_SET              : 11 11 15 15 17 17 18 18 18 22 22 27 28 34 35 38 46 53 53 61
-VAR_VAL              : 11 11 15 15 17 17 18 18 22 22 27 28 34 35 38 46 53 61
-VPN_IP               : 3 64 65
-WEEK_DAY             : 69
-YEAR                 : 25 26 69
+VAR_SET              : 11 11 15 15 17 17 18 18 18 22 22 27 28 34 35 38 46 54 54 62
+VAR_VAL              : 11 11 15 15 17 17 18 18 22 22 27 28 34 35 38 46 54 62
+VPN_IP               : 3 65 66
+WEEK_DAY             : 70
+YEAR                 : 25 26 70
 error                : 
 
 Nonterminals, with rules where they appear
@@ -126,10 +127,10 @@ conection            : 40 41
 coninit              : 42 44
 conline              : 42
 conmsg               : 44 45
-date                 : 6 7 8 43 46 47 48 49 50 68
+date                 : 6 7 8 43 46 47 48 49 50 51 69
 empty                : 4 9 33
 end                  : 42
-endmsg               : 66 66 66
+endmsg               : 67 67 67
 file                 : 0
 hardware             : 8
 header               : 1
@@ -138,19 +139,19 @@ initbody             : 5 6 7 8
 listcon              : 1 40
 login                : 42
 network              : 7
-peercon              : 53 54 55 56 57 58 60 67
-peering              : 42 51
-peermsg              : 51 52
-plugin               : 10 47 54
-route                : 62 63
-routehead            : 59
-routend              : 59
-routing              : 59 62
+peercon              : 54 55 56 57 58 59 61 68
+peering              : 42 52
+peermsg              : 52 53
+plugin               : 10 47 55
+route                : 63 64
+routehead            : 60
+routend              : 60
+routing              : 60 63
 sbinit               : 12
 software             : 6
 start                : 42
 tuntap               : 13
-user                 : 48 50 56 57 60 68
+user                 : 48 57 58 61 69
 vpnip                : 2 3
 
 Parsing method: LALR
@@ -180,11 +181,11 @@ state 2
     (7) initbody -> . date network initbody
     (8) initbody -> . date hardware initbody
     (9) initbody -> . empty
-    (69) date -> . WEEK_DAY MONTH DAY CLOCK YEAR
-    (72) empty -> .
+    (70) date -> . WEEK_DAY MONTH DAY CLOCK YEAR
+    (73) empty -> .
 
     WEEK_DAY        shift and go to state 8
-    FASE_END        reduce using rule 72 (empty -> .)
+    FASE_END        reduce using rule 73 (empty -> .)
 
     init                           shift and go to state 4
     initbody                       shift and go to state 5
@@ -196,10 +197,10 @@ state 3
     (2) header -> ROUTE_HEADER . vpnip ROUTE_HEADER
     (3) vpnip -> . VPN_IP IP vpnip
     (4) vpnip -> . empty
-    (72) empty -> .
+    (73) empty -> .
 
     VPN_IP          shift and go to state 10
-    ROUTE_HEADER    reduce using rule 72 (empty -> .)
+    ROUTE_HEADER    reduce using rule 73 (empty -> .)
 
     vpnip                          shift and go to state 9
     empty                          shift and go to state 11
@@ -211,7 +212,7 @@ state 4
     (41) listcon -> . conection
     (42) conection -> . start coninit login peering conline end
     (43) start -> . date TCP_MSG IP PORT
-    (69) date -> . WEEK_DAY MONTH DAY CLOCK YEAR
+    (70) date -> . WEEK_DAY MONTH DAY CLOCK YEAR
 
     WEEK_DAY        shift and go to state 8
 
@@ -262,7 +263,7 @@ state 6
     (32) sbinit -> . SBIN_IP_MSG
     (33) sbinit -> . empty
     (39) tuntap -> . TUN_TAP_MSG
-    (72) empty -> .
+    (73) empty -> .
 
     SYS_MSG         shift and go to state 21
     CRYPTO_MSG      shift and go to state 25
@@ -279,8 +280,8 @@ state 6
     IP              shift and go to state 27
     SBIN_IP_MSG     shift and go to state 36
     TUN_TAP_MSG     shift and go to state 38
-    WEEK_DAY        reduce using rule 72 (empty -> .)
-    FASE_END        reduce using rule 72 (empty -> .)
+    WEEK_DAY        reduce using rule 73 (empty -> .)
+    FASE_END        reduce using rule 73 (empty -> .)
 
     software                       shift and go to state 17
     network                        shift and go to state 18
@@ -299,7 +300,7 @@ state 7
 
 state 8
 
-    (69) date -> WEEK_DAY . MONTH DAY CLOCK YEAR
+    (70) date -> WEEK_DAY . MONTH DAY CLOCK YEAR
 
     MONTH           shift and go to state 39
 
@@ -331,7 +332,7 @@ state 12
     (40) listcon -> listcon . conection
     (42) conection -> . start coninit login peering conline end
     (43) start -> . date TCP_MSG IP PORT
-    (69) date -> . WEEK_DAY MONTH DAY CLOCK YEAR
+    (70) date -> . WEEK_DAY MONTH DAY CLOCK YEAR
 
     $end            reduce using rule 1 (file -> header init listcon .)
     WEEK_DAY        shift and go to state 8
@@ -357,7 +358,7 @@ state 14
     (47) conmsg -> . date plugin
     (48) conmsg -> . date IP PORT SYS_MSG SPECIAL_CHAR user SPECIAL_CHAR CN_SET
     (49) conmsg -> . date IP PORT CONN_MSG CRYPTO_MSG
-    (69) date -> . WEEK_DAY MONTH DAY CLOCK YEAR
+    (70) date -> . WEEK_DAY MONTH DAY CLOCK YEAR
 
     WEEK_DAY        shift and go to state 8
 
@@ -386,11 +387,11 @@ state 17
     (7) initbody -> . date network initbody
     (8) initbody -> . date hardware initbody
     (9) initbody -> . empty
-    (69) date -> . WEEK_DAY MONTH DAY CLOCK YEAR
-    (72) empty -> .
+    (70) date -> . WEEK_DAY MONTH DAY CLOCK YEAR
+    (73) empty -> .
 
     WEEK_DAY        shift and go to state 8
-    FASE_END        reduce using rule 72 (empty -> .)
+    FASE_END        reduce using rule 73 (empty -> .)
 
     date                           shift and go to state 6
     initbody                       shift and go to state 47
@@ -403,11 +404,11 @@ state 18
     (7) initbody -> . date network initbody
     (8) initbody -> . date hardware initbody
     (9) initbody -> . empty
-    (69) date -> . WEEK_DAY MONTH DAY CLOCK YEAR
-    (72) empty -> .
+    (70) date -> . WEEK_DAY MONTH DAY CLOCK YEAR
+    (73) empty -> .
 
     WEEK_DAY        shift and go to state 8
-    FASE_END        reduce using rule 72 (empty -> .)
+    FASE_END        reduce using rule 73 (empty -> .)
 
     date                           shift and go to state 6
     initbody                       shift and go to state 48
@@ -420,11 +421,11 @@ state 19
     (7) initbody -> . date network initbody
     (8) initbody -> . date hardware initbody
     (9) initbody -> . empty
-    (69) date -> . WEEK_DAY MONTH DAY CLOCK YEAR
-    (72) empty -> .
+    (70) date -> . WEEK_DAY MONTH DAY CLOCK YEAR
+    (73) empty -> .
 
     WEEK_DAY        shift and go to state 8
-    FASE_END        reduce using rule 72 (empty -> .)
+    FASE_END        reduce using rule 73 (empty -> .)
 
     date                           shift and go to state 6
     initbody                       shift and go to state 49
@@ -595,7 +596,7 @@ state 38
 
 state 39
 
-    (69) date -> WEEK_DAY MONTH . DAY CLOCK YEAR
+    (70) date -> WEEK_DAY MONTH . DAY CLOCK YEAR
 
     DAY             shift and go to state 60
 
@@ -613,10 +614,10 @@ state 41
     (3) vpnip -> VPN_IP IP . vpnip
     (3) vpnip -> . VPN_IP IP vpnip
     (4) vpnip -> . empty
-    (72) empty -> .
+    (73) empty -> .
 
     VPN_IP          shift and go to state 10
-    ROUTE_HEADER    reduce using rule 72 (empty -> .)
+    ROUTE_HEADER    reduce using rule 73 (empty -> .)
 
     vpnip                          shift and go to state 61
     empty                          shift and go to state 11
@@ -633,12 +634,13 @@ state 43
 
     (42) conection -> start coninit . login peering conline end
     (44) coninit -> coninit . conmsg
-    (50) login -> . date IP PORT SPECIAL_CHAR user SPECIAL_CHAR PEER IP PORT
+    (50) login -> . date IP PORT SPECIAL_CHAR PROF SPECIAL_CHAR PEER IP PORT
+    (51) login -> . date IP PORT SPECIAL_CHAR CARNET SPECIAL_CHAR PEER IP PORT
     (46) conmsg -> . date IP PORT SYS_MSG FLAGS IP PORT SPECIAL_CHAR VAR_SET VAR_VAL
     (47) conmsg -> . date plugin
     (48) conmsg -> . date IP PORT SYS_MSG SPECIAL_CHAR user SPECIAL_CHAR CN_SET
     (49) conmsg -> . date IP PORT CONN_MSG CRYPTO_MSG
-    (69) date -> . WEEK_DAY MONTH DAY CLOCK YEAR
+    (70) date -> . WEEK_DAY MONTH DAY CLOCK YEAR
 
     WEEK_DAY        shift and go to state 8
 
@@ -782,7 +784,7 @@ state 59
 
 state 60
 
-    (69) date -> WEEK_DAY MONTH DAY . CLOCK YEAR
+    (70) date -> WEEK_DAY MONTH DAY . CLOCK YEAR
 
     CLOCK           shift and go to state 80
 
@@ -797,16 +799,16 @@ state 61
 state 62
 
     (42) conection -> start coninit login . peering conline end
-    (51) peering -> . peering peermsg
-    (52) peering -> . peermsg
-    (53) peermsg -> . peercon CONN_MSG POOL_RET VAR_SET IP SPECIAL_CHAR VAR_SET VAR_VAL
-    (54) peermsg -> . peercon plugin
-    (55) peermsg -> . peercon CONN_MSG CONN_MSG DIR
-    (56) peermsg -> . peercon CONN_MSG CONN_MSG IP SPECIAL_CHAR SPECIAL_CHAR user SLASH IP PORT
-    (57) peermsg -> . peercon SYS_MSG user SLASH IP PORT COLON IP
-    (58) peermsg -> . peercon SYS_MSG
-    (68) peercon -> . date user SLASH IP PORT
-    (69) date -> . WEEK_DAY MONTH DAY CLOCK YEAR
+    (52) peering -> . peering peermsg
+    (53) peering -> . peermsg
+    (54) peermsg -> . peercon CONN_MSG POOL_RET VAR_SET IP SPECIAL_CHAR VAR_SET VAR_VAL
+    (55) peermsg -> . peercon plugin
+    (56) peermsg -> . peercon CONN_MSG CONN_MSG DIR
+    (57) peermsg -> . peercon CONN_MSG CONN_MSG IP SPECIAL_CHAR SPECIAL_CHAR user SLASH IP PORT
+    (58) peermsg -> . peercon SYS_MSG user SLASH IP PORT COLON IP
+    (59) peermsg -> . peercon SYS_MSG
+    (69) peercon -> . date user SLASH IP PORT
+    (70) date -> . WEEK_DAY MONTH DAY CLOCK YEAR
 
     WEEK_DAY        shift and go to state 8
 
@@ -824,7 +826,8 @@ state 63
 
 state 64
 
-    (50) login -> date . IP PORT SPECIAL_CHAR user SPECIAL_CHAR PEER IP PORT
+    (50) login -> date . IP PORT SPECIAL_CHAR PROF SPECIAL_CHAR PEER IP PORT
+    (51) login -> date . IP PORT SPECIAL_CHAR CARNET SPECIAL_CHAR PEER IP PORT
     (46) conmsg -> date . IP PORT SYS_MSG FLAGS IP PORT SPECIAL_CHAR VAR_SET VAR_VAL
     (47) conmsg -> date . plugin
     (48) conmsg -> date . IP PORT SYS_MSG SPECIAL_CHAR user SPECIAL_CHAR CN_SET
@@ -956,7 +959,7 @@ state 79
 
 state 80
 
-    (69) date -> WEEK_DAY MONTH DAY CLOCK . YEAR
+    (70) date -> WEEK_DAY MONTH DAY CLOCK . YEAR
 
     YEAR            shift and go to state 100
 
@@ -964,17 +967,17 @@ state 80
 state 81
 
     (42) conection -> start coninit login peering . conline end
-    (51) peering -> peering . peermsg
-    (59) conline -> . routehead routing routend
-    (53) peermsg -> . peercon CONN_MSG POOL_RET VAR_SET IP SPECIAL_CHAR VAR_SET VAR_VAL
-    (54) peermsg -> . peercon plugin
-    (55) peermsg -> . peercon CONN_MSG CONN_MSG DIR
-    (56) peermsg -> . peercon CONN_MSG CONN_MSG IP SPECIAL_CHAR SPECIAL_CHAR user SLASH IP PORT
-    (57) peermsg -> . peercon SYS_MSG user SLASH IP PORT COLON IP
-    (58) peermsg -> . peercon SYS_MSG
-    (60) routehead -> . peercon SENT_CNT SPECIAL_CHAR user SPECIAL_CHAR COLON SPECIAL_CHAR
-    (68) peercon -> . date user SLASH IP PORT
-    (69) date -> . WEEK_DAY MONTH DAY CLOCK YEAR
+    (52) peering -> peering . peermsg
+    (60) conline -> . routehead routing routend
+    (54) peermsg -> . peercon CONN_MSG POOL_RET VAR_SET IP SPECIAL_CHAR VAR_SET VAR_VAL
+    (55) peermsg -> . peercon plugin
+    (56) peermsg -> . peercon CONN_MSG CONN_MSG DIR
+    (57) peermsg -> . peercon CONN_MSG CONN_MSG IP SPECIAL_CHAR SPECIAL_CHAR user SLASH IP PORT
+    (58) peermsg -> . peercon SYS_MSG user SLASH IP PORT COLON IP
+    (59) peermsg -> . peercon SYS_MSG
+    (61) routehead -> . peercon SENT_CNT SPECIAL_CHAR user SPECIAL_CHAR COLON SPECIAL_CHAR
+    (69) peercon -> . date user SLASH IP PORT
+    (70) date -> . WEEK_DAY MONTH DAY CLOCK YEAR
 
     WEEK_DAY        shift and go to state 8
 
@@ -986,19 +989,19 @@ state 81
 
 state 82
 
-    (52) peering -> peermsg .
+    (53) peering -> peermsg .
 
-    WEEK_DAY        reduce using rule 52 (peering -> peermsg .)
+    WEEK_DAY        reduce using rule 53 (peering -> peermsg .)
 
 
 state 83
 
-    (53) peermsg -> peercon . CONN_MSG POOL_RET VAR_SET IP SPECIAL_CHAR VAR_SET VAR_VAL
-    (54) peermsg -> peercon . plugin
-    (55) peermsg -> peercon . CONN_MSG CONN_MSG DIR
-    (56) peermsg -> peercon . CONN_MSG CONN_MSG IP SPECIAL_CHAR SPECIAL_CHAR user SLASH IP PORT
-    (57) peermsg -> peercon . SYS_MSG user SLASH IP PORT COLON IP
-    (58) peermsg -> peercon . SYS_MSG
+    (54) peermsg -> peercon . CONN_MSG POOL_RET VAR_SET IP SPECIAL_CHAR VAR_SET VAR_VAL
+    (55) peermsg -> peercon . plugin
+    (56) peermsg -> peercon . CONN_MSG CONN_MSG DIR
+    (57) peermsg -> peercon . CONN_MSG CONN_MSG IP SPECIAL_CHAR SPECIAL_CHAR user SLASH IP PORT
+    (58) peermsg -> peercon . SYS_MSG user SLASH IP PORT COLON IP
+    (59) peermsg -> peercon . SYS_MSG
     (34) plugin -> . PLUGIN_MSG DIR VAR_SET VAR_VAL
     (35) plugin -> . PLUGIN_MSG DIR SPECIAL_CHAR SPECIAL_CHAR DIR SPECIAL_CHAR FLAGS SPECIAL_CHAR VAR_SET VAR_VAL
     (36) plugin -> . PLUGIN_MSG DIR
@@ -1014,9 +1017,9 @@ state 83
 
 state 84
 
-    (68) peercon -> date . user SLASH IP PORT
-    (70) user -> . CARNET
-    (71) user -> . PROF
+    (69) peercon -> date . user SLASH IP PORT
+    (71) user -> . CARNET
+    (72) user -> . PROF
 
     CARNET          shift and go to state 109
     PROF            shift and go to state 110
@@ -1025,7 +1028,8 @@ state 84
 
 state 85
 
-    (50) login -> date IP . PORT SPECIAL_CHAR user SPECIAL_CHAR PEER IP PORT
+    (50) login -> date IP . PORT SPECIAL_CHAR PROF SPECIAL_CHAR PEER IP PORT
+    (51) login -> date IP . PORT SPECIAL_CHAR CARNET SPECIAL_CHAR PEER IP PORT
     (46) conmsg -> date IP . PORT SYS_MSG FLAGS IP PORT SPECIAL_CHAR VAR_SET VAR_VAL
     (48) conmsg -> date IP . PORT SYS_MSG SPECIAL_CHAR user SPECIAL_CHAR CN_SET
     (49) conmsg -> date IP . PORT CONN_MSG CRYPTO_MSG
@@ -1142,36 +1146,36 @@ state 99
 
 state 100
 
-    (69) date -> WEEK_DAY MONTH DAY CLOCK YEAR .
+    (70) date -> WEEK_DAY MONTH DAY CLOCK YEAR .
 
-    SYS_MSG         reduce using rule 69 (date -> WEEK_DAY MONTH DAY CLOCK YEAR .)
-    CRYPTO_MSG      reduce using rule 69 (date -> WEEK_DAY MONTH DAY CLOCK YEAR .)
-    ROUTE_GATEWAY   reduce using rule 69 (date -> WEEK_DAY MONTH DAY CLOCK YEAR .)
-    IP_PROTOCOL     reduce using rule 69 (date -> WEEK_DAY MONTH DAY CLOCK YEAR .)
-    CONN_MSG        reduce using rule 69 (date -> WEEK_DAY MONTH DAY CLOCK YEAR .)
-    IFCONFIG_END    reduce using rule 69 (date -> WEEK_DAY MONTH DAY CLOCK YEAR .)
-    TCP_MSG         reduce using rule 69 (date -> WEEK_DAY MONTH DAY CLOCK YEAR .)
-    SIGTERM_MSG     reduce using rule 69 (date -> WEEK_DAY MONTH DAY CLOCK YEAR .)
-    OPEN_VPN_MSG    reduce using rule 69 (date -> WEEK_DAY MONTH DAY CLOCK YEAR .)
-    LIB_VER_MSG     reduce using rule 69 (date -> WEEK_DAY MONTH DAY CLOCK YEAR .)
-    VAR_SET         reduce using rule 69 (date -> WEEK_DAY MONTH DAY CLOCK YEAR .)
-    PLUGIN_MSG      reduce using rule 69 (date -> WEEK_DAY MONTH DAY CLOCK YEAR .)
-    IP              reduce using rule 69 (date -> WEEK_DAY MONTH DAY CLOCK YEAR .)
-    SBIN_IP_MSG     reduce using rule 69 (date -> WEEK_DAY MONTH DAY CLOCK YEAR .)
-    TUN_TAP_MSG     reduce using rule 69 (date -> WEEK_DAY MONTH DAY CLOCK YEAR .)
-    WEEK_DAY        reduce using rule 69 (date -> WEEK_DAY MONTH DAY CLOCK YEAR .)
-    FASE_END        reduce using rule 69 (date -> WEEK_DAY MONTH DAY CLOCK YEAR .)
-    CARNET          reduce using rule 69 (date -> WEEK_DAY MONTH DAY CLOCK YEAR .)
-    PROF            reduce using rule 69 (date -> WEEK_DAY MONTH DAY CLOCK YEAR .)
+    SYS_MSG         reduce using rule 70 (date -> WEEK_DAY MONTH DAY CLOCK YEAR .)
+    CRYPTO_MSG      reduce using rule 70 (date -> WEEK_DAY MONTH DAY CLOCK YEAR .)
+    ROUTE_GATEWAY   reduce using rule 70 (date -> WEEK_DAY MONTH DAY CLOCK YEAR .)
+    IP_PROTOCOL     reduce using rule 70 (date -> WEEK_DAY MONTH DAY CLOCK YEAR .)
+    CONN_MSG        reduce using rule 70 (date -> WEEK_DAY MONTH DAY CLOCK YEAR .)
+    IFCONFIG_END    reduce using rule 70 (date -> WEEK_DAY MONTH DAY CLOCK YEAR .)
+    TCP_MSG         reduce using rule 70 (date -> WEEK_DAY MONTH DAY CLOCK YEAR .)
+    SIGTERM_MSG     reduce using rule 70 (date -> WEEK_DAY MONTH DAY CLOCK YEAR .)
+    OPEN_VPN_MSG    reduce using rule 70 (date -> WEEK_DAY MONTH DAY CLOCK YEAR .)
+    LIB_VER_MSG     reduce using rule 70 (date -> WEEK_DAY MONTH DAY CLOCK YEAR .)
+    VAR_SET         reduce using rule 70 (date -> WEEK_DAY MONTH DAY CLOCK YEAR .)
+    PLUGIN_MSG      reduce using rule 70 (date -> WEEK_DAY MONTH DAY CLOCK YEAR .)
+    IP              reduce using rule 70 (date -> WEEK_DAY MONTH DAY CLOCK YEAR .)
+    SBIN_IP_MSG     reduce using rule 70 (date -> WEEK_DAY MONTH DAY CLOCK YEAR .)
+    TUN_TAP_MSG     reduce using rule 70 (date -> WEEK_DAY MONTH DAY CLOCK YEAR .)
+    WEEK_DAY        reduce using rule 70 (date -> WEEK_DAY MONTH DAY CLOCK YEAR .)
+    FASE_END        reduce using rule 70 (date -> WEEK_DAY MONTH DAY CLOCK YEAR .)
+    CARNET          reduce using rule 70 (date -> WEEK_DAY MONTH DAY CLOCK YEAR .)
+    PROF            reduce using rule 70 (date -> WEEK_DAY MONTH DAY CLOCK YEAR .)
 
 
 state 101
 
     (42) conection -> start coninit login peering conline . end
-    (66) end -> . endmsg endmsg endmsg
-    (67) endmsg -> . peercon CONN_MSG CIPHER
-    (68) peercon -> . date user SLASH IP PORT
-    (69) date -> . WEEK_DAY MONTH DAY CLOCK YEAR
+    (67) end -> . endmsg endmsg endmsg
+    (68) endmsg -> . peercon CONN_MSG CIPHER
+    (69) peercon -> . date user SLASH IP PORT
+    (70) date -> . WEEK_DAY MONTH DAY CLOCK YEAR
 
     WEEK_DAY        shift and go to state 8
 
@@ -1182,18 +1186,18 @@ state 101
 
 state 102
 
-    (51) peering -> peering peermsg .
+    (52) peering -> peering peermsg .
 
-    WEEK_DAY        reduce using rule 51 (peering -> peering peermsg .)
+    WEEK_DAY        reduce using rule 52 (peering -> peering peermsg .)
 
 
 state 103
 
-    (59) conline -> routehead . routing routend
-    (62) routing -> . routing route
-    (63) routing -> . route
-    (64) route -> . ROUTE_FLAG VPN_IP IP
-    (65) route -> . ROUTE_FLAG VPN_IP
+    (60) conline -> routehead . routing routend
+    (63) routing -> . routing route
+    (64) routing -> . route
+    (65) route -> . ROUTE_FLAG VPN_IP IP
+    (66) route -> . ROUTE_FLAG VPN_IP
 
     ROUTE_FLAG      shift and go to state 128
 
@@ -1202,13 +1206,13 @@ state 103
 
 state 104
 
-    (53) peermsg -> peercon . CONN_MSG POOL_RET VAR_SET IP SPECIAL_CHAR VAR_SET VAR_VAL
-    (54) peermsg -> peercon . plugin
-    (55) peermsg -> peercon . CONN_MSG CONN_MSG DIR
-    (56) peermsg -> peercon . CONN_MSG CONN_MSG IP SPECIAL_CHAR SPECIAL_CHAR user SLASH IP PORT
-    (57) peermsg -> peercon . SYS_MSG user SLASH IP PORT COLON IP
-    (58) peermsg -> peercon . SYS_MSG
-    (60) routehead -> peercon . SENT_CNT SPECIAL_CHAR user SPECIAL_CHAR COLON SPECIAL_CHAR
+    (54) peermsg -> peercon . CONN_MSG POOL_RET VAR_SET IP SPECIAL_CHAR VAR_SET VAR_VAL
+    (55) peermsg -> peercon . plugin
+    (56) peermsg -> peercon . CONN_MSG CONN_MSG DIR
+    (57) peermsg -> peercon . CONN_MSG CONN_MSG IP SPECIAL_CHAR SPECIAL_CHAR user SLASH IP PORT
+    (58) peermsg -> peercon . SYS_MSG user SLASH IP PORT COLON IP
+    (59) peermsg -> peercon . SYS_MSG
+    (61) routehead -> peercon . SENT_CNT SPECIAL_CHAR user SPECIAL_CHAR COLON SPECIAL_CHAR
     (34) plugin -> . PLUGIN_MSG DIR VAR_SET VAR_VAL
     (35) plugin -> . PLUGIN_MSG DIR SPECIAL_CHAR SPECIAL_CHAR DIR SPECIAL_CHAR FLAGS SPECIAL_CHAR VAR_SET VAR_VAL
     (36) plugin -> . PLUGIN_MSG DIR
@@ -1225,9 +1229,9 @@ state 104
 
 state 105
 
-    (53) peermsg -> peercon CONN_MSG . POOL_RET VAR_SET IP SPECIAL_CHAR VAR_SET VAR_VAL
-    (55) peermsg -> peercon CONN_MSG . CONN_MSG DIR
-    (56) peermsg -> peercon CONN_MSG . CONN_MSG IP SPECIAL_CHAR SPECIAL_CHAR user SLASH IP PORT
+    (54) peermsg -> peercon CONN_MSG . POOL_RET VAR_SET IP SPECIAL_CHAR VAR_SET VAR_VAL
+    (56) peermsg -> peercon CONN_MSG . CONN_MSG DIR
+    (57) peermsg -> peercon CONN_MSG . CONN_MSG IP SPECIAL_CHAR SPECIAL_CHAR user SLASH IP PORT
 
     POOL_RET        shift and go to state 131
     CONN_MSG        shift and go to state 130
@@ -1235,19 +1239,19 @@ state 105
 
 state 106
 
-    (54) peermsg -> peercon plugin .
+    (55) peermsg -> peercon plugin .
 
-    WEEK_DAY        reduce using rule 54 (peermsg -> peercon plugin .)
+    WEEK_DAY        reduce using rule 55 (peermsg -> peercon plugin .)
 
 
 state 107
 
-    (57) peermsg -> peercon SYS_MSG . user SLASH IP PORT COLON IP
-    (58) peermsg -> peercon SYS_MSG .
-    (70) user -> . CARNET
-    (71) user -> . PROF
+    (58) peermsg -> peercon SYS_MSG . user SLASH IP PORT COLON IP
+    (59) peermsg -> peercon SYS_MSG .
+    (71) user -> . CARNET
+    (72) user -> . PROF
 
-    WEEK_DAY        reduce using rule 58 (peermsg -> peercon SYS_MSG .)
+    WEEK_DAY        reduce using rule 59 (peermsg -> peercon SYS_MSG .)
     CARNET          shift and go to state 109
     PROF            shift and go to state 110
 
@@ -1255,30 +1259,31 @@ state 107
 
 state 108
 
-    (68) peercon -> date user . SLASH IP PORT
+    (69) peercon -> date user . SLASH IP PORT
 
     SLASH           shift and go to state 133
 
 
 state 109
 
-    (70) user -> CARNET .
+    (71) user -> CARNET .
 
-    SLASH           reduce using rule 70 (user -> CARNET .)
-    SPECIAL_CHAR    reduce using rule 70 (user -> CARNET .)
+    SLASH           reduce using rule 71 (user -> CARNET .)
+    SPECIAL_CHAR    reduce using rule 71 (user -> CARNET .)
 
 
 state 110
 
-    (71) user -> PROF .
+    (72) user -> PROF .
 
-    SLASH           reduce using rule 71 (user -> PROF .)
-    SPECIAL_CHAR    reduce using rule 71 (user -> PROF .)
+    SLASH           reduce using rule 72 (user -> PROF .)
+    SPECIAL_CHAR    reduce using rule 72 (user -> PROF .)
 
 
 state 111
 
-    (50) login -> date IP PORT . SPECIAL_CHAR user SPECIAL_CHAR PEER IP PORT
+    (50) login -> date IP PORT . SPECIAL_CHAR PROF SPECIAL_CHAR PEER IP PORT
+    (51) login -> date IP PORT . SPECIAL_CHAR CARNET SPECIAL_CHAR PEER IP PORT
     (46) conmsg -> date IP PORT . SYS_MSG FLAGS IP PORT SPECIAL_CHAR VAR_SET VAR_VAL
     (48) conmsg -> date IP PORT . SYS_MSG SPECIAL_CHAR user SPECIAL_CHAR CN_SET
     (49) conmsg -> date IP PORT . CONN_MSG CRYPTO_MSG
@@ -1383,10 +1388,10 @@ state 123
 
 state 124
 
-    (66) end -> endmsg . endmsg endmsg
-    (67) endmsg -> . peercon CONN_MSG CIPHER
-    (68) peercon -> . date user SLASH IP PORT
-    (69) date -> . WEEK_DAY MONTH DAY CLOCK YEAR
+    (67) end -> endmsg . endmsg endmsg
+    (68) endmsg -> . peercon CONN_MSG CIPHER
+    (69) peercon -> . date user SLASH IP PORT
+    (70) date -> . WEEK_DAY MONTH DAY CLOCK YEAR
 
     WEEK_DAY        shift and go to state 8
 
@@ -1396,18 +1401,18 @@ state 124
 
 state 125
 
-    (67) endmsg -> peercon . CONN_MSG CIPHER
+    (68) endmsg -> peercon . CONN_MSG CIPHER
 
     CONN_MSG        shift and go to state 144
 
 
 state 126
 
-    (59) conline -> routehead routing . routend
-    (62) routing -> routing . route
-    (61) routend -> . TOPOLOGY IP IP SPECIAL_CHAR PEER SPECIAL_CHAR CIPHER SPECIAL_CHAR VAR_SET VAR_VAL
-    (64) route -> . ROUTE_FLAG VPN_IP IP
-    (65) route -> . ROUTE_FLAG VPN_IP
+    (60) conline -> routehead routing . routend
+    (63) routing -> routing . route
+    (62) routend -> . TOPOLOGY IP IP SPECIAL_CHAR PEER SPECIAL_CHAR CIPHER SPECIAL_CHAR VAR_SET VAR_VAL
+    (65) route -> . ROUTE_FLAG VPN_IP IP
+    (66) route -> . ROUTE_FLAG VPN_IP
 
     TOPOLOGY        shift and go to state 147
     ROUTE_FLAG      shift and go to state 128
@@ -1417,31 +1422,31 @@ state 126
 
 state 127
 
-    (63) routing -> route .
+    (64) routing -> route .
 
-    TOPOLOGY        reduce using rule 63 (routing -> route .)
-    ROUTE_FLAG      reduce using rule 63 (routing -> route .)
+    TOPOLOGY        reduce using rule 64 (routing -> route .)
+    ROUTE_FLAG      reduce using rule 64 (routing -> route .)
 
 
 state 128
 
-    (64) route -> ROUTE_FLAG . VPN_IP IP
-    (65) route -> ROUTE_FLAG . VPN_IP
+    (65) route -> ROUTE_FLAG . VPN_IP IP
+    (66) route -> ROUTE_FLAG . VPN_IP
 
     VPN_IP          shift and go to state 148
 
 
 state 129
 
-    (60) routehead -> peercon SENT_CNT . SPECIAL_CHAR user SPECIAL_CHAR COLON SPECIAL_CHAR
+    (61) routehead -> peercon SENT_CNT . SPECIAL_CHAR user SPECIAL_CHAR COLON SPECIAL_CHAR
 
     SPECIAL_CHAR    shift and go to state 149
 
 
 state 130
 
-    (55) peermsg -> peercon CONN_MSG CONN_MSG . DIR
-    (56) peermsg -> peercon CONN_MSG CONN_MSG . IP SPECIAL_CHAR SPECIAL_CHAR user SLASH IP PORT
+    (56) peermsg -> peercon CONN_MSG CONN_MSG . DIR
+    (57) peermsg -> peercon CONN_MSG CONN_MSG . IP SPECIAL_CHAR SPECIAL_CHAR user SLASH IP PORT
 
     DIR             shift and go to state 150
     IP              shift and go to state 151
@@ -1449,53 +1454,51 @@ state 130
 
 state 131
 
-    (53) peermsg -> peercon CONN_MSG POOL_RET . VAR_SET IP SPECIAL_CHAR VAR_SET VAR_VAL
+    (54) peermsg -> peercon CONN_MSG POOL_RET . VAR_SET IP SPECIAL_CHAR VAR_SET VAR_VAL
 
     VAR_SET         shift and go to state 152
 
 
 state 132
 
-    (57) peermsg -> peercon SYS_MSG user . SLASH IP PORT COLON IP
+    (58) peermsg -> peercon SYS_MSG user . SLASH IP PORT COLON IP
 
     SLASH           shift and go to state 153
 
 
 state 133
 
-    (68) peercon -> date user SLASH . IP PORT
+    (69) peercon -> date user SLASH . IP PORT
 
     IP              shift and go to state 154
 
 
 state 134
 
-    (50) login -> date IP PORT SPECIAL_CHAR . user SPECIAL_CHAR PEER IP PORT
-    (70) user -> . CARNET
-    (71) user -> . PROF
+    (50) login -> date IP PORT SPECIAL_CHAR . PROF SPECIAL_CHAR PEER IP PORT
+    (51) login -> date IP PORT SPECIAL_CHAR . CARNET SPECIAL_CHAR PEER IP PORT
 
-    CARNET          shift and go to state 109
-    PROF            shift and go to state 110
+    PROF            shift and go to state 155
+    CARNET          shift and go to state 156
 
-    user                           shift and go to state 155
 
 state 135
 
     (46) conmsg -> date IP PORT SYS_MSG FLAGS . IP PORT SPECIAL_CHAR VAR_SET VAR_VAL
 
-    IP              shift and go to state 156
+    IP              shift and go to state 157
 
 
 state 136
 
     (48) conmsg -> date IP PORT SYS_MSG SPECIAL_CHAR . user SPECIAL_CHAR CN_SET
-    (70) user -> . CARNET
-    (71) user -> . PROF
+    (71) user -> . CARNET
+    (72) user -> . PROF
 
     CARNET          shift and go to state 109
     PROF            shift and go to state 110
 
-    user                           shift and go to state 157
+    user                           shift and go to state 158
 
 state 137
 
@@ -1516,7 +1519,7 @@ state 139
 
     (15) network -> ROUTE_GATEWAY IP SLASH IP VAR_SET VAR_VAL . VAR_SET VAR_VAL
 
-    VAR_SET         shift and go to state 158
+    VAR_SET         shift and go to state 159
 
 
 state 140
@@ -1531,248 +1534,262 @@ state 141
 
     (18) network -> CONN_MSG VAR_SET IP VAR_SET VAR_VAL SPECIAL_CHAR . VAR_SET VAR_VAL
 
-    VAR_SET         shift and go to state 159
+    VAR_SET         shift and go to state 160
 
 
 state 142
 
     (35) plugin -> PLUGIN_MSG DIR SPECIAL_CHAR SPECIAL_CHAR DIR SPECIAL_CHAR . FLAGS SPECIAL_CHAR VAR_SET VAR_VAL
 
-    FLAGS           shift and go to state 160
+    FLAGS           shift and go to state 161
 
 
 state 143
 
-    (66) end -> endmsg endmsg . endmsg
-    (67) endmsg -> . peercon CONN_MSG CIPHER
-    (68) peercon -> . date user SLASH IP PORT
-    (69) date -> . WEEK_DAY MONTH DAY CLOCK YEAR
+    (67) end -> endmsg endmsg . endmsg
+    (68) endmsg -> . peercon CONN_MSG CIPHER
+    (69) peercon -> . date user SLASH IP PORT
+    (70) date -> . WEEK_DAY MONTH DAY CLOCK YEAR
 
     WEEK_DAY        shift and go to state 8
 
-    endmsg                         shift and go to state 161
+    endmsg                         shift and go to state 162
     peercon                        shift and go to state 125
     date                           shift and go to state 84
 
 state 144
 
-    (67) endmsg -> peercon CONN_MSG . CIPHER
+    (68) endmsg -> peercon CONN_MSG . CIPHER
 
-    CIPHER          shift and go to state 162
+    CIPHER          shift and go to state 163
 
 
 state 145
 
-    (59) conline -> routehead routing routend .
+    (60) conline -> routehead routing routend .
 
-    WEEK_DAY        reduce using rule 59 (conline -> routehead routing routend .)
+    WEEK_DAY        reduce using rule 60 (conline -> routehead routing routend .)
 
 
 state 146
 
-    (62) routing -> routing route .
+    (63) routing -> routing route .
 
-    TOPOLOGY        reduce using rule 62 (routing -> routing route .)
-    ROUTE_FLAG      reduce using rule 62 (routing -> routing route .)
+    TOPOLOGY        reduce using rule 63 (routing -> routing route .)
+    ROUTE_FLAG      reduce using rule 63 (routing -> routing route .)
 
 
 state 147
 
-    (61) routend -> TOPOLOGY . IP IP SPECIAL_CHAR PEER SPECIAL_CHAR CIPHER SPECIAL_CHAR VAR_SET VAR_VAL
+    (62) routend -> TOPOLOGY . IP IP SPECIAL_CHAR PEER SPECIAL_CHAR CIPHER SPECIAL_CHAR VAR_SET VAR_VAL
 
-    IP              shift and go to state 163
+    IP              shift and go to state 164
 
 
 state 148
 
-    (64) route -> ROUTE_FLAG VPN_IP . IP
-    (65) route -> ROUTE_FLAG VPN_IP .
+    (65) route -> ROUTE_FLAG VPN_IP . IP
+    (66) route -> ROUTE_FLAG VPN_IP .
 
-    IP              shift and go to state 164
-    TOPOLOGY        reduce using rule 65 (route -> ROUTE_FLAG VPN_IP .)
-    ROUTE_FLAG      reduce using rule 65 (route -> ROUTE_FLAG VPN_IP .)
+    IP              shift and go to state 165
+    TOPOLOGY        reduce using rule 66 (route -> ROUTE_FLAG VPN_IP .)
+    ROUTE_FLAG      reduce using rule 66 (route -> ROUTE_FLAG VPN_IP .)
 
 
 state 149
 
-    (60) routehead -> peercon SENT_CNT SPECIAL_CHAR . user SPECIAL_CHAR COLON SPECIAL_CHAR
-    (70) user -> . CARNET
-    (71) user -> . PROF
+    (61) routehead -> peercon SENT_CNT SPECIAL_CHAR . user SPECIAL_CHAR COLON SPECIAL_CHAR
+    (71) user -> . CARNET
+    (72) user -> . PROF
 
     CARNET          shift and go to state 109
     PROF            shift and go to state 110
 
-    user                           shift and go to state 165
+    user                           shift and go to state 166
 
 state 150
 
-    (55) peermsg -> peercon CONN_MSG CONN_MSG DIR .
+    (56) peermsg -> peercon CONN_MSG CONN_MSG DIR .
 
-    WEEK_DAY        reduce using rule 55 (peermsg -> peercon CONN_MSG CONN_MSG DIR .)
+    WEEK_DAY        reduce using rule 56 (peermsg -> peercon CONN_MSG CONN_MSG DIR .)
 
 
 state 151
 
-    (56) peermsg -> peercon CONN_MSG CONN_MSG IP . SPECIAL_CHAR SPECIAL_CHAR user SLASH IP PORT
+    (57) peermsg -> peercon CONN_MSG CONN_MSG IP . SPECIAL_CHAR SPECIAL_CHAR user SLASH IP PORT
 
-    SPECIAL_CHAR    shift and go to state 166
+    SPECIAL_CHAR    shift and go to state 167
 
 
 state 152
 
-    (53) peermsg -> peercon CONN_MSG POOL_RET VAR_SET . IP SPECIAL_CHAR VAR_SET VAR_VAL
-
-    IP              shift and go to state 167
-
-
-state 153
-
-    (57) peermsg -> peercon SYS_MSG user SLASH . IP PORT COLON IP
+    (54) peermsg -> peercon CONN_MSG POOL_RET VAR_SET . IP SPECIAL_CHAR VAR_SET VAR_VAL
 
     IP              shift and go to state 168
 
 
+state 153
+
+    (58) peermsg -> peercon SYS_MSG user SLASH . IP PORT COLON IP
+
+    IP              shift and go to state 169
+
+
 state 154
 
-    (68) peercon -> date user SLASH IP . PORT
+    (69) peercon -> date user SLASH IP . PORT
 
-    PORT            shift and go to state 169
+    PORT            shift and go to state 170
 
 
 state 155
 
-    (50) login -> date IP PORT SPECIAL_CHAR user . SPECIAL_CHAR PEER IP PORT
+    (50) login -> date IP PORT SPECIAL_CHAR PROF . SPECIAL_CHAR PEER IP PORT
 
-    SPECIAL_CHAR    shift and go to state 170
+    SPECIAL_CHAR    shift and go to state 171
 
 
 state 156
 
-    (46) conmsg -> date IP PORT SYS_MSG FLAGS IP . PORT SPECIAL_CHAR VAR_SET VAR_VAL
-
-    PORT            shift and go to state 171
-
-
-state 157
-
-    (48) conmsg -> date IP PORT SYS_MSG SPECIAL_CHAR user . SPECIAL_CHAR CN_SET
+    (51) login -> date IP PORT SPECIAL_CHAR CARNET . SPECIAL_CHAR PEER IP PORT
 
     SPECIAL_CHAR    shift and go to state 172
 
 
+state 157
+
+    (46) conmsg -> date IP PORT SYS_MSG FLAGS IP . PORT SPECIAL_CHAR VAR_SET VAR_VAL
+
+    PORT            shift and go to state 173
+
+
 state 158
 
-    (15) network -> ROUTE_GATEWAY IP SLASH IP VAR_SET VAR_VAL VAR_SET . VAR_VAL
+    (48) conmsg -> date IP PORT SYS_MSG SPECIAL_CHAR user . SPECIAL_CHAR CN_SET
 
-    VAR_VAL         shift and go to state 173
+    SPECIAL_CHAR    shift and go to state 174
 
 
 state 159
 
-    (18) network -> CONN_MSG VAR_SET IP VAR_SET VAR_VAL SPECIAL_CHAR VAR_SET . VAR_VAL
+    (15) network -> ROUTE_GATEWAY IP SLASH IP VAR_SET VAR_VAL VAR_SET . VAR_VAL
 
-    VAR_VAL         shift and go to state 174
+    VAR_VAL         shift and go to state 175
 
 
 state 160
 
-    (35) plugin -> PLUGIN_MSG DIR SPECIAL_CHAR SPECIAL_CHAR DIR SPECIAL_CHAR FLAGS . SPECIAL_CHAR VAR_SET VAR_VAL
+    (18) network -> CONN_MSG VAR_SET IP VAR_SET VAR_VAL SPECIAL_CHAR VAR_SET . VAR_VAL
 
-    SPECIAL_CHAR    shift and go to state 175
+    VAR_VAL         shift and go to state 176
 
 
 state 161
 
-    (66) end -> endmsg endmsg endmsg .
-
-    WEEK_DAY        reduce using rule 66 (end -> endmsg endmsg endmsg .)
-    $end            reduce using rule 66 (end -> endmsg endmsg endmsg .)
-
-
-state 162
-
-    (67) endmsg -> peercon CONN_MSG CIPHER .
-
-    WEEK_DAY        reduce using rule 67 (endmsg -> peercon CONN_MSG CIPHER .)
-    $end            reduce using rule 67 (endmsg -> peercon CONN_MSG CIPHER .)
-
-
-state 163
-
-    (61) routend -> TOPOLOGY IP . IP SPECIAL_CHAR PEER SPECIAL_CHAR CIPHER SPECIAL_CHAR VAR_SET VAR_VAL
-
-    IP              shift and go to state 176
-
-
-state 164
-
-    (64) route -> ROUTE_FLAG VPN_IP IP .
-
-    TOPOLOGY        reduce using rule 64 (route -> ROUTE_FLAG VPN_IP IP .)
-    ROUTE_FLAG      reduce using rule 64 (route -> ROUTE_FLAG VPN_IP IP .)
-
-
-state 165
-
-    (60) routehead -> peercon SENT_CNT SPECIAL_CHAR user . SPECIAL_CHAR COLON SPECIAL_CHAR
+    (35) plugin -> PLUGIN_MSG DIR SPECIAL_CHAR SPECIAL_CHAR DIR SPECIAL_CHAR FLAGS . SPECIAL_CHAR VAR_SET VAR_VAL
 
     SPECIAL_CHAR    shift and go to state 177
 
 
+state 162
+
+    (67) end -> endmsg endmsg endmsg .
+
+    WEEK_DAY        reduce using rule 67 (end -> endmsg endmsg endmsg .)
+    $end            reduce using rule 67 (end -> endmsg endmsg endmsg .)
+
+
+state 163
+
+    (68) endmsg -> peercon CONN_MSG CIPHER .
+
+    WEEK_DAY        reduce using rule 68 (endmsg -> peercon CONN_MSG CIPHER .)
+    $end            reduce using rule 68 (endmsg -> peercon CONN_MSG CIPHER .)
+
+
+state 164
+
+    (62) routend -> TOPOLOGY IP . IP SPECIAL_CHAR PEER SPECIAL_CHAR CIPHER SPECIAL_CHAR VAR_SET VAR_VAL
+
+    IP              shift and go to state 178
+
+
+state 165
+
+    (65) route -> ROUTE_FLAG VPN_IP IP .
+
+    TOPOLOGY        reduce using rule 65 (route -> ROUTE_FLAG VPN_IP IP .)
+    ROUTE_FLAG      reduce using rule 65 (route -> ROUTE_FLAG VPN_IP IP .)
+
+
 state 166
 
-    (56) peermsg -> peercon CONN_MSG CONN_MSG IP SPECIAL_CHAR . SPECIAL_CHAR user SLASH IP PORT
-
-    SPECIAL_CHAR    shift and go to state 178
-
-
-state 167
-
-    (53) peermsg -> peercon CONN_MSG POOL_RET VAR_SET IP . SPECIAL_CHAR VAR_SET VAR_VAL
+    (61) routehead -> peercon SENT_CNT SPECIAL_CHAR user . SPECIAL_CHAR COLON SPECIAL_CHAR
 
     SPECIAL_CHAR    shift and go to state 179
 
 
+state 167
+
+    (57) peermsg -> peercon CONN_MSG CONN_MSG IP SPECIAL_CHAR . SPECIAL_CHAR user SLASH IP PORT
+
+    SPECIAL_CHAR    shift and go to state 180
+
+
 state 168
 
-    (57) peermsg -> peercon SYS_MSG user SLASH IP . PORT COLON IP
+    (54) peermsg -> peercon CONN_MSG POOL_RET VAR_SET IP . SPECIAL_CHAR VAR_SET VAR_VAL
 
-    PORT            shift and go to state 180
+    SPECIAL_CHAR    shift and go to state 181
 
 
 state 169
 
-    (68) peercon -> date user SLASH IP PORT .
+    (58) peermsg -> peercon SYS_MSG user SLASH IP . PORT COLON IP
 
-    CONN_MSG        reduce using rule 68 (peercon -> date user SLASH IP PORT .)
-    SYS_MSG         reduce using rule 68 (peercon -> date user SLASH IP PORT .)
-    PLUGIN_MSG      reduce using rule 68 (peercon -> date user SLASH IP PORT .)
-    IP              reduce using rule 68 (peercon -> date user SLASH IP PORT .)
-    SENT_CNT        reduce using rule 68 (peercon -> date user SLASH IP PORT .)
+    PORT            shift and go to state 182
 
 
 state 170
 
-    (50) login -> date IP PORT SPECIAL_CHAR user SPECIAL_CHAR . PEER IP PORT
+    (69) peercon -> date user SLASH IP PORT .
 
-    PEER            shift and go to state 181
+    CONN_MSG        reduce using rule 69 (peercon -> date user SLASH IP PORT .)
+    SYS_MSG         reduce using rule 69 (peercon -> date user SLASH IP PORT .)
+    PLUGIN_MSG      reduce using rule 69 (peercon -> date user SLASH IP PORT .)
+    IP              reduce using rule 69 (peercon -> date user SLASH IP PORT .)
+    SENT_CNT        reduce using rule 69 (peercon -> date user SLASH IP PORT .)
 
 
 state 171
 
-    (46) conmsg -> date IP PORT SYS_MSG FLAGS IP PORT . SPECIAL_CHAR VAR_SET VAR_VAL
+    (50) login -> date IP PORT SPECIAL_CHAR PROF SPECIAL_CHAR . PEER IP PORT
 
-    SPECIAL_CHAR    shift and go to state 182
+    PEER            shift and go to state 183
 
 
 state 172
 
-    (48) conmsg -> date IP PORT SYS_MSG SPECIAL_CHAR user SPECIAL_CHAR . CN_SET
+    (51) login -> date IP PORT SPECIAL_CHAR CARNET SPECIAL_CHAR . PEER IP PORT
 
-    CN_SET          shift and go to state 183
+    PEER            shift and go to state 184
 
 
 state 173
+
+    (46) conmsg -> date IP PORT SYS_MSG FLAGS IP PORT . SPECIAL_CHAR VAR_SET VAR_VAL
+
+    SPECIAL_CHAR    shift and go to state 185
+
+
+state 174
+
+    (48) conmsg -> date IP PORT SYS_MSG SPECIAL_CHAR user SPECIAL_CHAR . CN_SET
+
+    CN_SET          shift and go to state 186
+
+
+state 175
 
     (15) network -> ROUTE_GATEWAY IP SLASH IP VAR_SET VAR_VAL VAR_SET VAR_VAL .
 
@@ -1780,7 +1797,7 @@ state 173
     FASE_END        reduce using rule 15 (network -> ROUTE_GATEWAY IP SLASH IP VAR_SET VAR_VAL VAR_SET VAR_VAL .)
 
 
-state 174
+state 176
 
     (18) network -> CONN_MSG VAR_SET IP VAR_SET VAR_VAL SPECIAL_CHAR VAR_SET VAR_VAL .
 
@@ -1788,130 +1805,144 @@ state 174
     FASE_END        reduce using rule 18 (network -> CONN_MSG VAR_SET IP VAR_SET VAR_VAL SPECIAL_CHAR VAR_SET VAR_VAL .)
 
 
-state 175
+state 177
 
     (35) plugin -> PLUGIN_MSG DIR SPECIAL_CHAR SPECIAL_CHAR DIR SPECIAL_CHAR FLAGS SPECIAL_CHAR . VAR_SET VAR_VAL
 
-    VAR_SET         shift and go to state 184
-
-
-state 176
-
-    (61) routend -> TOPOLOGY IP IP . SPECIAL_CHAR PEER SPECIAL_CHAR CIPHER SPECIAL_CHAR VAR_SET VAR_VAL
-
-    SPECIAL_CHAR    shift and go to state 185
-
-
-state 177
-
-    (60) routehead -> peercon SENT_CNT SPECIAL_CHAR user SPECIAL_CHAR . COLON SPECIAL_CHAR
-
-    COLON           shift and go to state 186
+    VAR_SET         shift and go to state 187
 
 
 state 178
 
-    (56) peermsg -> peercon CONN_MSG CONN_MSG IP SPECIAL_CHAR SPECIAL_CHAR . user SLASH IP PORT
-    (70) user -> . CARNET
-    (71) user -> . PROF
+    (62) routend -> TOPOLOGY IP IP . SPECIAL_CHAR PEER SPECIAL_CHAR CIPHER SPECIAL_CHAR VAR_SET VAR_VAL
 
-    CARNET          shift and go to state 109
-    PROF            shift and go to state 110
+    SPECIAL_CHAR    shift and go to state 188
 
-    user                           shift and go to state 187
 
 state 179
 
-    (53) peermsg -> peercon CONN_MSG POOL_RET VAR_SET IP SPECIAL_CHAR . VAR_SET VAR_VAL
-
-    VAR_SET         shift and go to state 188
-
-
-state 180
-
-    (57) peermsg -> peercon SYS_MSG user SLASH IP PORT . COLON IP
+    (61) routehead -> peercon SENT_CNT SPECIAL_CHAR user SPECIAL_CHAR . COLON SPECIAL_CHAR
 
     COLON           shift and go to state 189
 
 
+state 180
+
+    (57) peermsg -> peercon CONN_MSG CONN_MSG IP SPECIAL_CHAR SPECIAL_CHAR . user SLASH IP PORT
+    (71) user -> . CARNET
+    (72) user -> . PROF
+
+    CARNET          shift and go to state 109
+    PROF            shift and go to state 110
+
+    user                           shift and go to state 190
+
 state 181
 
-    (50) login -> date IP PORT SPECIAL_CHAR user SPECIAL_CHAR PEER . IP PORT
-
-    IP              shift and go to state 190
-
-
-state 182
-
-    (46) conmsg -> date IP PORT SYS_MSG FLAGS IP PORT SPECIAL_CHAR . VAR_SET VAR_VAL
+    (54) peermsg -> peercon CONN_MSG POOL_RET VAR_SET IP SPECIAL_CHAR . VAR_SET VAR_VAL
 
     VAR_SET         shift and go to state 191
 
 
+state 182
+
+    (58) peermsg -> peercon SYS_MSG user SLASH IP PORT . COLON IP
+
+    COLON           shift and go to state 192
+
+
 state 183
+
+    (50) login -> date IP PORT SPECIAL_CHAR PROF SPECIAL_CHAR PEER . IP PORT
+
+    IP              shift and go to state 193
+
+
+state 184
+
+    (51) login -> date IP PORT SPECIAL_CHAR CARNET SPECIAL_CHAR PEER . IP PORT
+
+    IP              shift and go to state 194
+
+
+state 185
+
+    (46) conmsg -> date IP PORT SYS_MSG FLAGS IP PORT SPECIAL_CHAR . VAR_SET VAR_VAL
+
+    VAR_SET         shift and go to state 195
+
+
+state 186
 
     (48) conmsg -> date IP PORT SYS_MSG SPECIAL_CHAR user SPECIAL_CHAR CN_SET .
 
     WEEK_DAY        reduce using rule 48 (conmsg -> date IP PORT SYS_MSG SPECIAL_CHAR user SPECIAL_CHAR CN_SET .)
 
 
-state 184
-
-    (35) plugin -> PLUGIN_MSG DIR SPECIAL_CHAR SPECIAL_CHAR DIR SPECIAL_CHAR FLAGS SPECIAL_CHAR VAR_SET . VAR_VAL
-
-    VAR_VAL         shift and go to state 192
-
-
-state 185
-
-    (61) routend -> TOPOLOGY IP IP SPECIAL_CHAR . PEER SPECIAL_CHAR CIPHER SPECIAL_CHAR VAR_SET VAR_VAL
-
-    PEER            shift and go to state 193
-
-
-state 186
-
-    (60) routehead -> peercon SENT_CNT SPECIAL_CHAR user SPECIAL_CHAR COLON . SPECIAL_CHAR
-
-    SPECIAL_CHAR    shift and go to state 194
-
-
 state 187
 
-    (56) peermsg -> peercon CONN_MSG CONN_MSG IP SPECIAL_CHAR SPECIAL_CHAR user . SLASH IP PORT
-
-    SLASH           shift and go to state 195
-
-
-state 188
-
-    (53) peermsg -> peercon CONN_MSG POOL_RET VAR_SET IP SPECIAL_CHAR VAR_SET . VAR_VAL
+    (35) plugin -> PLUGIN_MSG DIR SPECIAL_CHAR SPECIAL_CHAR DIR SPECIAL_CHAR FLAGS SPECIAL_CHAR VAR_SET . VAR_VAL
 
     VAR_VAL         shift and go to state 196
 
 
+state 188
+
+    (62) routend -> TOPOLOGY IP IP SPECIAL_CHAR . PEER SPECIAL_CHAR CIPHER SPECIAL_CHAR VAR_SET VAR_VAL
+
+    PEER            shift and go to state 197
+
+
 state 189
 
-    (57) peermsg -> peercon SYS_MSG user SLASH IP PORT COLON . IP
+    (61) routehead -> peercon SENT_CNT SPECIAL_CHAR user SPECIAL_CHAR COLON . SPECIAL_CHAR
 
-    IP              shift and go to state 197
+    SPECIAL_CHAR    shift and go to state 198
 
 
 state 190
 
-    (50) login -> date IP PORT SPECIAL_CHAR user SPECIAL_CHAR PEER IP . PORT
+    (57) peermsg -> peercon CONN_MSG CONN_MSG IP SPECIAL_CHAR SPECIAL_CHAR user . SLASH IP PORT
 
-    PORT            shift and go to state 198
+    SLASH           shift and go to state 199
 
 
 state 191
 
-    (46) conmsg -> date IP PORT SYS_MSG FLAGS IP PORT SPECIAL_CHAR VAR_SET . VAR_VAL
+    (54) peermsg -> peercon CONN_MSG POOL_RET VAR_SET IP SPECIAL_CHAR VAR_SET . VAR_VAL
 
-    VAR_VAL         shift and go to state 199
+    VAR_VAL         shift and go to state 200
 
 
 state 192
+
+    (58) peermsg -> peercon SYS_MSG user SLASH IP PORT COLON . IP
+
+    IP              shift and go to state 201
+
+
+state 193
+
+    (50) login -> date IP PORT SPECIAL_CHAR PROF SPECIAL_CHAR PEER IP . PORT
+
+    PORT            shift and go to state 202
+
+
+state 194
+
+    (51) login -> date IP PORT SPECIAL_CHAR CARNET SPECIAL_CHAR PEER IP . PORT
+
+    PORT            shift and go to state 203
+
+
+state 195
+
+    (46) conmsg -> date IP PORT SYS_MSG FLAGS IP PORT SPECIAL_CHAR VAR_SET . VAR_VAL
+
+    VAR_VAL         shift and go to state 204
+
+
+state 196
 
     (35) plugin -> PLUGIN_MSG DIR SPECIAL_CHAR SPECIAL_CHAR DIR SPECIAL_CHAR FLAGS SPECIAL_CHAR VAR_SET VAR_VAL .
 
@@ -1919,100 +1950,107 @@ state 192
     FASE_END        reduce using rule 35 (plugin -> PLUGIN_MSG DIR SPECIAL_CHAR SPECIAL_CHAR DIR SPECIAL_CHAR FLAGS SPECIAL_CHAR VAR_SET VAR_VAL .)
 
 
-state 193
-
-    (61) routend -> TOPOLOGY IP IP SPECIAL_CHAR PEER . SPECIAL_CHAR CIPHER SPECIAL_CHAR VAR_SET VAR_VAL
-
-    SPECIAL_CHAR    shift and go to state 200
-
-
-state 194
-
-    (60) routehead -> peercon SENT_CNT SPECIAL_CHAR user SPECIAL_CHAR COLON SPECIAL_CHAR .
-
-    ROUTE_FLAG      reduce using rule 60 (routehead -> peercon SENT_CNT SPECIAL_CHAR user SPECIAL_CHAR COLON SPECIAL_CHAR .)
-
-
-state 195
-
-    (56) peermsg -> peercon CONN_MSG CONN_MSG IP SPECIAL_CHAR SPECIAL_CHAR user SLASH . IP PORT
-
-    IP              shift and go to state 201
-
-
-state 196
-
-    (53) peermsg -> peercon CONN_MSG POOL_RET VAR_SET IP SPECIAL_CHAR VAR_SET VAR_VAL .
-
-    WEEK_DAY        reduce using rule 53 (peermsg -> peercon CONN_MSG POOL_RET VAR_SET IP SPECIAL_CHAR VAR_SET VAR_VAL .)
-
-
 state 197
 
-    (57) peermsg -> peercon SYS_MSG user SLASH IP PORT COLON IP .
+    (62) routend -> TOPOLOGY IP IP SPECIAL_CHAR PEER . SPECIAL_CHAR CIPHER SPECIAL_CHAR VAR_SET VAR_VAL
 
-    WEEK_DAY        reduce using rule 57 (peermsg -> peercon SYS_MSG user SLASH IP PORT COLON IP .)
+    SPECIAL_CHAR    shift and go to state 205
 
 
 state 198
 
-    (50) login -> date IP PORT SPECIAL_CHAR user SPECIAL_CHAR PEER IP PORT .
+    (61) routehead -> peercon SENT_CNT SPECIAL_CHAR user SPECIAL_CHAR COLON SPECIAL_CHAR .
 
-    WEEK_DAY        reduce using rule 50 (login -> date IP PORT SPECIAL_CHAR user SPECIAL_CHAR PEER IP PORT .)
+    ROUTE_FLAG      reduce using rule 61 (routehead -> peercon SENT_CNT SPECIAL_CHAR user SPECIAL_CHAR COLON SPECIAL_CHAR .)
 
 
 state 199
+
+    (57) peermsg -> peercon CONN_MSG CONN_MSG IP SPECIAL_CHAR SPECIAL_CHAR user SLASH . IP PORT
+
+    IP              shift and go to state 206
+
+
+state 200
+
+    (54) peermsg -> peercon CONN_MSG POOL_RET VAR_SET IP SPECIAL_CHAR VAR_SET VAR_VAL .
+
+    WEEK_DAY        reduce using rule 54 (peermsg -> peercon CONN_MSG POOL_RET VAR_SET IP SPECIAL_CHAR VAR_SET VAR_VAL .)
+
+
+state 201
+
+    (58) peermsg -> peercon SYS_MSG user SLASH IP PORT COLON IP .
+
+    WEEK_DAY        reduce using rule 58 (peermsg -> peercon SYS_MSG user SLASH IP PORT COLON IP .)
+
+
+state 202
+
+    (50) login -> date IP PORT SPECIAL_CHAR PROF SPECIAL_CHAR PEER IP PORT .
+
+    WEEK_DAY        reduce using rule 50 (login -> date IP PORT SPECIAL_CHAR PROF SPECIAL_CHAR PEER IP PORT .)
+
+
+state 203
+
+    (51) login -> date IP PORT SPECIAL_CHAR CARNET SPECIAL_CHAR PEER IP PORT .
+
+    WEEK_DAY        reduce using rule 51 (login -> date IP PORT SPECIAL_CHAR CARNET SPECIAL_CHAR PEER IP PORT .)
+
+
+state 204
 
     (46) conmsg -> date IP PORT SYS_MSG FLAGS IP PORT SPECIAL_CHAR VAR_SET VAR_VAL .
 
     WEEK_DAY        reduce using rule 46 (conmsg -> date IP PORT SYS_MSG FLAGS IP PORT SPECIAL_CHAR VAR_SET VAR_VAL .)
 
 
-state 200
-
-    (61) routend -> TOPOLOGY IP IP SPECIAL_CHAR PEER SPECIAL_CHAR . CIPHER SPECIAL_CHAR VAR_SET VAR_VAL
-
-    CIPHER          shift and go to state 202
-
-
-state 201
-
-    (56) peermsg -> peercon CONN_MSG CONN_MSG IP SPECIAL_CHAR SPECIAL_CHAR user SLASH IP . PORT
-
-    PORT            shift and go to state 203
-
-
-state 202
-
-    (61) routend -> TOPOLOGY IP IP SPECIAL_CHAR PEER SPECIAL_CHAR CIPHER . SPECIAL_CHAR VAR_SET VAR_VAL
-
-    SPECIAL_CHAR    shift and go to state 204
-
-
-state 203
-
-    (56) peermsg -> peercon CONN_MSG CONN_MSG IP SPECIAL_CHAR SPECIAL_CHAR user SLASH IP PORT .
-
-    WEEK_DAY        reduce using rule 56 (peermsg -> peercon CONN_MSG CONN_MSG IP SPECIAL_CHAR SPECIAL_CHAR user SLASH IP PORT .)
-
-
-state 204
-
-    (61) routend -> TOPOLOGY IP IP SPECIAL_CHAR PEER SPECIAL_CHAR CIPHER SPECIAL_CHAR . VAR_SET VAR_VAL
-
-    VAR_SET         shift and go to state 205
-
-
 state 205
 
-    (61) routend -> TOPOLOGY IP IP SPECIAL_CHAR PEER SPECIAL_CHAR CIPHER SPECIAL_CHAR VAR_SET . VAR_VAL
+    (62) routend -> TOPOLOGY IP IP SPECIAL_CHAR PEER SPECIAL_CHAR . CIPHER SPECIAL_CHAR VAR_SET VAR_VAL
 
-    VAR_VAL         shift and go to state 206
+    CIPHER          shift and go to state 207
 
 
 state 206
 
-    (61) routend -> TOPOLOGY IP IP SPECIAL_CHAR PEER SPECIAL_CHAR CIPHER SPECIAL_CHAR VAR_SET VAR_VAL .
+    (57) peermsg -> peercon CONN_MSG CONN_MSG IP SPECIAL_CHAR SPECIAL_CHAR user SLASH IP . PORT
 
-    WEEK_DAY        reduce using rule 61 (routend -> TOPOLOGY IP IP SPECIAL_CHAR PEER SPECIAL_CHAR CIPHER SPECIAL_CHAR VAR_SET VAR_VAL .)
+    PORT            shift and go to state 208
+
+
+state 207
+
+    (62) routend -> TOPOLOGY IP IP SPECIAL_CHAR PEER SPECIAL_CHAR CIPHER . SPECIAL_CHAR VAR_SET VAR_VAL
+
+    SPECIAL_CHAR    shift and go to state 209
+
+
+state 208
+
+    (57) peermsg -> peercon CONN_MSG CONN_MSG IP SPECIAL_CHAR SPECIAL_CHAR user SLASH IP PORT .
+
+    WEEK_DAY        reduce using rule 57 (peermsg -> peercon CONN_MSG CONN_MSG IP SPECIAL_CHAR SPECIAL_CHAR user SLASH IP PORT .)
+
+
+state 209
+
+    (62) routend -> TOPOLOGY IP IP SPECIAL_CHAR PEER SPECIAL_CHAR CIPHER SPECIAL_CHAR . VAR_SET VAR_VAL
+
+    VAR_SET         shift and go to state 210
+
+
+state 210
+
+    (62) routend -> TOPOLOGY IP IP SPECIAL_CHAR PEER SPECIAL_CHAR CIPHER SPECIAL_CHAR VAR_SET . VAR_VAL
+
+    VAR_VAL         shift and go to state 211
+
+
+state 211
+
+    (62) routend -> TOPOLOGY IP IP SPECIAL_CHAR PEER SPECIAL_CHAR CIPHER SPECIAL_CHAR VAR_SET VAR_VAL .
+
+    WEEK_DAY        reduce using rule 62 (routend -> TOPOLOGY IP IP SPECIAL_CHAR PEER SPECIAL_CHAR CIPHER SPECIAL_CHAR VAR_SET VAR_VAL .)
 

@@ -5,6 +5,7 @@ from matplotlib.figure import Figure
 from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg
 from matplotlib.figure import Figure
 from matplotlib.widgets import Slider
+import matplotlib.pyplot as plt
 import analyzer
 
 dataframe = []
@@ -185,9 +186,11 @@ def create_graphs(dataframe):
     connections_counter = 0
     for i in range(len(dataframe)):
         connections_counter += dataframe[i][3]
+    
     # 2. Cuántos estudiantes y cuántos profesores usaron el servicio. Tome en cuenta que un mismo usuario podría haberse conectado en ocasiones diferentes.
     students_counter = 0
     teachers_counter = 0
+
 
     # 3. Lista de direcciones IP desde las cuáles se conectaron los usuarios.
     # create a list of all the IPs
@@ -198,6 +201,7 @@ def create_graphs(dataframe):
 
     # 4. Cuántas conexiones por cada ruta se establecieron (mostrar un gráfico).
     # list of pairs (route, counter)
+    # TODO: revisar que todo esta en orden 
     routes_list = []
     for i in range(len(dataframe)):
         for j in range(len(dataframe[i][2])):
@@ -205,7 +209,22 @@ def create_graphs(dataframe):
 
     # 5. Los 5 usuarios con más conexiones realizadas (mostrar un gráfico).
     
+    # list of pairs (user, counter)
+    top_5_users = sorted(dataframe.items(), key=lambda x: x[1], reverse=True)
+    data_users = dataframe[0][0]
+    data_amount = dataframe[0][5]
+    plt.plot(data_users, label="Line 1")
+    plt.plot(data_amount, label="Line 2")
 
+    plt.title("Chart of users with more connections")
+    plt.xlabel("Users")
+    plt.ylabel("Connection per users")
+    plt.grid(True)
+
+    #change later, dont show maybe
+    plt.show()
+
+    plt.savefig('Connections_per_user.png')
 
 def main():
     appmenu = menu()
