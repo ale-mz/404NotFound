@@ -129,9 +129,8 @@ class menu():
         else:
             self.result_label.config(text="No file selected")
 
-
-def run(self):
-    self.root.mainloop()
+    def run(self):
+        self.root.mainloop()
 
 def clean_tables(raw_data):
     # Pass all to a new table
