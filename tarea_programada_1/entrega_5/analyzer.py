@@ -4,8 +4,11 @@ import ply.yacc as yacc
 
 # Table with conections
 raw_data = []
-# TODO: Emigrar funciones dataFrame
-dataframe =[]
+# Table with vpn
+vpn_data = []
+# Table with vpn per connection
+vpn_connection = []
+vpn_unid = []
 
 tokens = (
   'IP',           # General Tokens
@@ -258,12 +261,18 @@ def p_file(t):
 
 def p_header(t):
   'header : ROUTE_HEADER vpnip ROUTE_HEADER'
+
   print("Header complete\n")
   pass
 
+def p_vpnipEM(t):
+  '''vpnip : empty'''
+  pass
+
 def p_vpnip(t):
-  '''vpnip : VPN_IP IP vpnip
-           | empty'''
+  'vpnip : VPN_IP IP vpnip'
+  vpn = [len(vpn_data), t[1], t[2]]
+  vpn_data.append(vpn)
   pass
   
 def p_init(t):
@@ -390,13 +399,24 @@ def p_routing(t):
   else :
     t[0] = t[1]
 
+    passer = []
+    for i in range(len(vpn_unid)):
+      passer.append(vpn_unid[i])
+    
+    vpn_connection.append(passer)
+    # Clean list
+    vpn_unid.clear()
+
+
 def p_route(t):
   '''route : ROUTE_FLAG VPN_IP IP
            | ROUTE_FLAG VPN_IP'''
   if len(t) == 4:
     t[0] = t[1] + t[2] + t[3]
+    vpn_unid.insert(0,t[2])
   else :
     t[0] = t[1] + t[2]
+    vpn_unid.insert(0,t[2])
   
 def p_end(t):
   '''end : endmsg endmsg endmsg'''
@@ -460,4 +480,10 @@ def analyze(file_path):
   tokens_output.close()
   return raw_data
 # if __name__ == "__main__":
+
+def vpn_table():
+  return vpn_data
+
+def vpn_con():
+  return vpn_connection
   

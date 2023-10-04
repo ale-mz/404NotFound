@@ -5,8 +5,8 @@ Grammar
 Rule 0     S' -> file
 Rule 1     file -> header init listcon
 Rule 2     header -> ROUTE_HEADER vpnip ROUTE_HEADER
-Rule 3     vpnip -> VPN_IP IP vpnip
-Rule 4     vpnip -> empty
+Rule 3     vpnip -> empty
+Rule 4     vpnip -> VPN_IP IP vpnip
 Rule 5     init -> initbody FASE_END
 Rule 6     initbody -> date software initbody
 Rule 7     initbody -> date network initbody
@@ -91,7 +91,7 @@ DIR                  : 34 35 35 36 38 56
 FASE_END             : 5
 FLAGS                : 35 46
 IFCONFIG_END         : 19
-IP                   : 3 15 15 18 29 30 30 31 31 38 43 46 46 48 49 50 50 51 51 54 57 57 58 58 62 62 65 69
+IP                   : 4 15 15 18 29 30 30 31 31 38 43 46 46 48 49 50 50 51 51 54 57 57 58 58 62 62 65 69
 IP_PROTOCOL          : 16
 IP_RNG               : 29 30
 LIB_VER_MSG          : 26 26
@@ -116,7 +116,7 @@ TOPOLOGY             : 62
 TUN_TAP_MSG          : 39
 VAR_SET              : 11 11 15 15 17 17 18 18 18 22 22 27 28 34 35 38 46 54 54 62
 VAR_VAL              : 11 11 15 15 17 17 18 18 22 22 27 28 34 35 38 46 54 62
-VPN_IP               : 3 65 66
+VPN_IP               : 4 65 66
 WEEK_DAY             : 70
 YEAR                 : 25 26 70
 error                : 
@@ -128,7 +128,7 @@ coninit              : 42 44
 conline              : 42
 conmsg               : 44 45
 date                 : 6 7 8 43 46 47 48 49 50 51 69
-empty                : 4 9 33
+empty                : 3 9 33
 end                  : 42
 endmsg               : 67 67 67
 file                 : 0
@@ -152,7 +152,7 @@ software             : 6
 start                : 42
 tuntap               : 13
 user                 : 48 57 58 61 69
-vpnip                : 2 3
+vpnip                : 2 4
 
 Parsing method: LALR
 
@@ -195,15 +195,15 @@ state 2
 state 3
 
     (2) header -> ROUTE_HEADER . vpnip ROUTE_HEADER
-    (3) vpnip -> . VPN_IP IP vpnip
-    (4) vpnip -> . empty
+    (3) vpnip -> . empty
+    (4) vpnip -> . VPN_IP IP vpnip
     (73) empty -> .
 
-    VPN_IP          shift and go to state 10
+    VPN_IP          shift and go to state 11
     ROUTE_HEADER    reduce using rule 73 (empty -> .)
 
     vpnip                          shift and go to state 9
-    empty                          shift and go to state 11
+    empty                          shift and go to state 10
 
 state 4
 
@@ -314,16 +314,16 @@ state 9
 
 state 10
 
-    (3) vpnip -> VPN_IP . IP vpnip
+    (3) vpnip -> empty .
 
-    IP              shift and go to state 41
+    ROUTE_HEADER    reduce using rule 3 (vpnip -> empty .)
 
 
 state 11
 
-    (4) vpnip -> empty .
+    (4) vpnip -> VPN_IP . IP vpnip
 
-    ROUTE_HEADER    reduce using rule 4 (vpnip -> empty .)
+    IP              shift and go to state 41
 
 
 state 12
@@ -611,16 +611,16 @@ state 40
 
 state 41
 
-    (3) vpnip -> VPN_IP IP . vpnip
-    (3) vpnip -> . VPN_IP IP vpnip
-    (4) vpnip -> . empty
+    (4) vpnip -> VPN_IP IP . vpnip
+    (3) vpnip -> . empty
+    (4) vpnip -> . VPN_IP IP vpnip
     (73) empty -> .
 
-    VPN_IP          shift and go to state 10
+    VPN_IP          shift and go to state 11
     ROUTE_HEADER    reduce using rule 73 (empty -> .)
 
     vpnip                          shift and go to state 61
-    empty                          shift and go to state 11
+    empty                          shift and go to state 10
 
 state 42
 
@@ -791,9 +791,9 @@ state 60
 
 state 61
 
-    (3) vpnip -> VPN_IP IP vpnip .
+    (4) vpnip -> VPN_IP IP vpnip .
 
-    ROUTE_HEADER    reduce using rule 3 (vpnip -> VPN_IP IP vpnip .)
+    ROUTE_HEADER    reduce using rule 4 (vpnip -> VPN_IP IP vpnip .)
 
 
 state 62

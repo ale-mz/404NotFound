@@ -1,14 +1,11 @@
 import tkinter as tk
 from tkinter import ttk
 from tkinter import filedialog
-from matplotlib.figure import Figure
 from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg
 from matplotlib.figure import Figure
 from matplotlib.widgets import Slider
 import matplotlib.pyplot as plt
 import analyzer
-
-dataframe = []
 
 class datas():
     def __init__(self):
@@ -133,51 +130,52 @@ class menu():
         self.root.mainloop()
 
 def clean_tables(raw_data):
-    # Pass all to a new table
+    dataframe = []
 
+    # Pass all to a new table
     for i in range(len(raw_data)):
 
         # Look if the user was previously append
         userbool = False
         for j in range(len(dataframe)):
-            if (dataframe[j][0] == raw_data[i][0]):
+            if (dataframe[j][1] == raw_data[i][1]):
                 userbool = True
-            
-            if userbool == False:
-                # IP(s)
-                IPs = [raw_data[i][1]]
-                # Route(s) list
-                RTs = [raw_data[i][2]]
+        
+        if userbool == False:
+            # IP(s)
+            IPs = [raw_data[i][2]]
+            # Route(s) list
+            RTs = [raw_data[i][3]]
 
-                # Append to the new table all data from the old one
-                # User / IP(s) / Route(s) / Conection(s) / #IP(s) / #Route(s)
-                input = [raw_data[i][0], IPs, RTs, 0, 1, 1]
-                dataframe.append(input)
+            # Append to the new table all data from the old one
+            # Bool / User / IP(s) / Route(s) / Conection(s) / #IP(s) / #Route(s)
+            input = [raw_data[i][0], raw_data[i][1], IPs, RTs, 0, 1, 1]
+            dataframe.append(input)
 
-                for j in range(len(raw_data)):
-                    # Same user
-                    last = len(dataframe) -1
-                    if (dataframe[last][0] == raw_data[j][0]):
-                        # New Conection
-                        dataframe[last][3] += 1
-                        # If the IP associate is new append it in new table
-                        conf = False
-                        for k in range(len(dataframe[last][1])) :
-                            if (dataframe[last][1][k] == raw_data[j][1]):
-                                conf = True
+            for j in range(len(raw_data)):
+                # Same user
+                last = len(dataframe) -1
+                if (dataframe[last][1] == raw_data[j][1]):
+                    # New Conection
+                    dataframe[last][4] += 1
+                    # If the IP associate is new append it in new table
+                    conf = False
+                    for k in range(len(dataframe[last][2])) :
+                        if (dataframe[last][2][k] == raw_data[j][2]):
+                            conf = True
                     
-                        if conf == False:
-                            dataframe[last][1].append(raw_data[j][1])
-                            dataframe[last][4] += 1
+                    if conf == False:
+                        dataframe[last][2].append(raw_data[j][2])
+                        dataframe[last][5] += 1
 
-                        conf = False
-                        for k in range(len(dataframe[last][2])) :
-                            if (dataframe[last][2][k] == raw_data[j][2]):
-                                conf = True
-                        
-                        if conf == False:
-                            dataframe[last][2].append(raw_data[j][2])
-                            dataframe[last][5] += 1
+                    conf = False
+                    for k in range(len(dataframe[last][3])) :
+                        if (dataframe[last][3][k] == raw_data[j][3]):
+                            conf = True
+                    
+                    if conf == False:
+                        dataframe[last][3].append(raw_data[j][3])
+                        dataframe[last][6] += 1
     return dataframe
 
 def create_graphs(dataframe):
@@ -210,12 +208,12 @@ def create_graphs(dataframe):
     
     # list of pairs (user, counter)
     top_5_users = sorted(dataframe.items(), key=lambda x: x[1], reverse=True)
-    data_users = dataframe[0][0]
-    data_amount = dataframe[0][5]
+    data_users = dataframe[0][1]
+    data_amount = dataframe[0][4]
     plt.plot(data_users, label="Line 1")
     plt.plot(data_amount, label="Line 2")
 
-    plt.title("Chart of users with more connections")
+    plt.title("Chart of users with more conections")
     plt.xlabel("Users")
     plt.ylabel("Connection per users")
     plt.grid(True)
