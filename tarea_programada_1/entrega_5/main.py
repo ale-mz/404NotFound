@@ -142,3 +142,12 @@ if __name__ == "__main__":
   # TODO : some errors with the save
   plt.savefig('Connections_per_user.png')
   # end TODO -------------------------------------------------
+
+  iplist = []
+  for i in range(len(dataframe)):
+    for j in range(len(dataframe[i][2])):
+      block = dataframe[i][2]
+      print(block)
+      iplist.append(dataframe[i][j])
+
+  # Create a list with all IPs

@@ -227,7 +227,7 @@ def init_info_window(self,students_counter,teachers_counter,total_connections,ip
         self.info_window.title("Data")
         to_print_text  = "Students Connections: [" + str(students_counter) + "]"
         to_print_text += "\nTeachers Connections: [" + str(teachers_counter) + "]"
-        to_print_text += "\nTotal Connections: [" + str(teachers_counter) + "]"
+        to_print_text += "\nTotal Connections: [" + str(total_connections) + "]"
         
         info = tk.Label(self.info_window, text= to_print_text)
         info.pack(padx=20, pady=20)
