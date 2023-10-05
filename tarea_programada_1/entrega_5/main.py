@@ -6,22 +6,22 @@ import matplotlib.pyplot as plt
 if __name__ == "__main__":
   output = []
   output = analyzer.analyze("vpn-logs-2020-modified-abb-revMM.txt")
-  for i in range(len(output)):
-    print(output[i])
+  # for i in range(len(output)):
+  #   print(output[i])
 
-  print("\n")
+  # print("\n")
 
   vpns = []
   vpns = analyzer.vpn_table()
-  for i in range(len(vpns)):
-    print(vpns[i])
+  # for i in range(len(vpns)):
+  #   print(vpns[i])
 
-  print("\n")
+  # print("\n")
 
   conn = []
   conn = analyzer.vpn_con()
-  for i in range(len(conn)):
-    print(conn[i])
+  # for i in range(len(conn)):
+  #   print(conn[i])
 
 
   # ------------------ Make a function -----------

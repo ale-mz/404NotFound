@@ -262,7 +262,7 @@ def p_file(t):
 def p_header(t):
   'header : ROUTE_HEADER vpnip ROUTE_HEADER'
 
-  print("Header complete\n")
+  # print("Header complete\n")
   pass
 
 def p_vpnipEM(t):
@@ -277,7 +277,7 @@ def p_vpnip(t):
   
 def p_init(t):
   'init : initbody FASE_END'
-  print("Initialization Complete\n")
+  # print("Initialization Complete\n")
   pass
 
 def p_initbody(t):
