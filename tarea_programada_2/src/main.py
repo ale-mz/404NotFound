@@ -57,13 +57,6 @@ class App(customtkinter.CTk):
         self.quit_button.grid(row=6, column=0, padx=20, pady=(10, 40))
         self.quit_button.configure(state="enabled", text="Quit simulation")
 
-
-
-        # self.sidebar_button_2 = customtkinter.CTkButton(self.sidebar_frame, command=self.sidebar_button_event)
-        # self.sidebar_button_2.grid(row=2, column=0, padx=20, pady=10)
-        # self.sidebar_button_3 = customtkinter.CTkButton(self.sidebar_frame, command=self.sidebar_button_event)
-        # self.sidebar_button_3.grid(row=3, column=0, padx=20, pady=10)
-
         # create main entry and button
         # self.entry = customtkinter.CTkEntry(self, placeholder_text="CTkEntry")
         # self.entry.grid(row=3, column=1, columnspan=2, padx=(20, 0), pady=(20, 20), sticky="nsew")
