@@ -57,39 +57,47 @@ class App(customtkinter.CTk):
         self.quit_button.grid(row=6, column=0, padx=20, pady=(10, 40))
         self.quit_button.configure(state="enabled", text="Quit simulation")
 
-        # create main entry and button
-        # self.entry = customtkinter.CTkEntry(self, placeholder_text="CTkEntry")
-        # self.entry.grid(row=3, column=1, columnspan=2, padx=(20, 0), pady=(20, 20), sticky="nsew")
-
-        # self.main_button_1 = customtkinter.CTkButton(master=self, fg_color="transparent", border_width=2, text_color=("gray10", "#DCE4EE"))
-        # self.main_button_1.grid(row=3, column=3, padx=(20, 20), pady=(20, 20), sticky="nsew")
-
         # create csv content preview
         self.csv_preview = customtkinter.CTkTextbox(self, width=250)
         self.csv_preview.grid(row=0, column=1, padx=(20, 0), pady=(20, 0), sticky="nsew")
-        # TODO: add the content of the csv into a csv_content variable
-        self.csv_preview.insert("0.0", "CTkTextbox\n\n" + "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua.\n\n" * 20)
 
-        # create tabview
-        self.tabview = customtkinter.CTkTabview(self, width=250)
-        self.tabview.grid(row=0, column=2, padx=(20, 0), pady=(20, 0), sticky="nsew")
-        self.tabview.add("CTkTabview")
-        self.tabview.add("Tab 2")
-        self.tabview.add("Tab 3")
-        self.tabview.tab("CTkTabview").grid_columnconfigure(0, weight=1)  # configure grid of individual tabs
-        self.tabview.tab("Tab 2").grid_columnconfigure(0, weight=1)
+        csv_content = ""    # write the content of data.csv into the csv_content variable
+        current_directory = os.getcwd() # Get the current working directory
+        file_name = "data.csv" # Define the file name
+        data_path = os.path.join(current_directory, file_name) # Create the path using the os package
 
-        self.optionmenu_1 = customtkinter.CTkOptionMenu(self.tabview.tab("CTkTabview"), dynamic_resizing=False,
-                                                        values=["Value 1", "Value 2", "Value Long Long Long"])
-        self.optionmenu_1.grid(row=0, column=0, padx=20, pady=(20, 10))
-        self.combobox_1 = customtkinter.CTkComboBox(self.tabview.tab("CTkTabview"),
-                                                    values=["Value 1", "Value 2", "Value Long....."])
-        self.combobox_1.grid(row=1, column=0, padx=20, pady=(10, 10))
-        self.string_input_button = customtkinter.CTkButton(self.tabview.tab("CTkTabview"), text="Open CTkInputDialog",
-                                                           command=self.open_input_dialog_event)
-        self.string_input_button.grid(row=2, column=0, padx=20, pady=(10, 10))
-        self.label_tab_2 = customtkinter.CTkLabel(self.tabview.tab("Tab 2"), text="CTkLabel on Tab 2")
-        self.label_tab_2.grid(row=0, column=0, padx=20, pady=20)
+        with open(data_path, "r") as csv_file:
+            csv_content = csv_file.read()
+        
+        # print(csv_content)
+        # TODO: implement a prettify function for the csv content
+
+        # self.csv_preview.insert("0.0", "CTkTextbox\n\n" + "Lorem ipsum dolor sit amet, consektetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua.\n\n" * 20)
+        self.csv_preview.insert("0.0", csv_content)
+
+
+
+
+        # # create tabview
+        # self.tabview = customtkinter.CTkTabview(self, width=250)
+        # self.tabview.grid(row=0, column=2, padx=(20, 0), pady=(20, 0), sticky="nsew")
+        # self.tabview.add("CTkTabview")
+        # self.tabview.add("Tab 2")
+        # self.tabview.add("Tab 3")
+        # self.tabview.tab("CTkTabview").grid_columnconfigure(0, weight=1)  # configure grid of individual tabs
+        # self.tabview.tab("Tab 2").grid_columnconfigure(0, weight=1)
+
+        # self.optionmenu_1 = customtkinter.CTkOptionMenu(self.tabview.tab("CTkTabview"), dynamic_resizing=False,
+        #                                                 values=["Value 1", "Value 2", "Value Long Long Long"])
+        # self.optionmenu_1.grid(row=0, column=0, padx=20, pady=(20, 10))
+        # self.combobox_1 = customtkinter.CTkComboBox(self.tabview.tab("CTkTabview"),
+        #                                             values=["Value 1", "Value 2", "Value Long....."])
+        # self.combobox_1.grid(row=1, column=0, padx=20, pady=(10, 10))
+        # self.string_input_button = customtkinter.CTkButton(self.tabview.tab("CTkTabview"), text="Open CTkInputDialog",
+        #                                                    command=self.open_input_dialog_event)
+        # self.string_input_button.grid(row=2, column=0, padx=20, pady=(10, 10))
+        # self.label_tab_2 = customtkinter.CTkLabel(self.tabview.tab("Tab 2"), text="CTkLabel on Tab 2")
+        # self.label_tab_2.grid(row=0, column=0, padx=20, pady=20)
 
         # create radiobutton frame
         self.radiobutton_frame = customtkinter.CTkFrame(self)
@@ -150,8 +158,8 @@ class App(customtkinter.CTk):
         self.scrollable_frame_switches[4].select()
         self.radio_button_3.configure(state="disabled")
         
-        self.optionmenu_1.set("CTkOptionmenu")
-        self.combobox_1.set("CTkComboBox")
+        # self.optionmenu_1.set("CTkOptionmenu")
+        # self.combobox_1.set("CTkComboBox")
         self.slider_1.configure(command=self.progressbar_2.set)
         self.slider_2.configure(command=self.progressbar_3.set)
         self.progressbar_1.configure(mode="indeterminnate")
