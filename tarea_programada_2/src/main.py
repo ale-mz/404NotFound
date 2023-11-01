@@ -25,41 +25,49 @@ class App(customtkinter.CTk):
         # configure grid layout (4x4)
         self.grid_columnconfigure(1, weight=1)
         self.grid_columnconfigure((2, 3), weight=0)
-        self.grid_rowconfigure((0, 1, 2), weight=1)
+        # self.grid_rowconfigure((0, 1, 2), weight=1)
+        self.grid_rowconfigure(0, weight=1)
+
+        # left side bar section
 
         # create and configure the sidebar frame
-        self.sidebar_frame = customtkinter.CTkFrame(self, width=140, corner_radius=0)
-        self.sidebar_frame.grid(row=0, column=0, rowspan=4, sticky="nsew")
-        self.sidebar_frame.grid_rowconfigure(5, weight=1)
+        self.left_sidebar_frame = customtkinter.CTkFrame(self, width=140, corner_radius=0)
+        self.left_sidebar_frame.grid(row=0, column=0, rowspan=4, sticky="nsew")
+        self.left_sidebar_frame.grid_rowconfigure(5, weight=1)
 
         # create and configure the logo label
-        self.logo_label = customtkinter.CTkLabel(self.sidebar_frame, text="Match making system", font=customtkinter.CTkFont(size=20, weight="bold"))
+        self.logo_label = customtkinter.CTkLabel(self.left_sidebar_frame, text="Match making system", font=customtkinter.CTkFont(size=20, weight="bold"))
         self.logo_label.grid(row=0, column=0, padx=20, pady=(20, 10))   # set the logo at the top of the left column
 
         # create and configure the appearance option menu and label
-        self.appearance_mode_optionemenu = customtkinter.CTkOptionMenu(self.sidebar_frame, values=["Light", "Dark", "System"],
+        self.appearance_mode_optionemenu = customtkinter.CTkOptionMenu(self.left_sidebar_frame, values=["Light", "Dark", "System"],
                                                                     command=self.change_appearance_mode_event)
         self.appearance_mode_optionemenu.grid(row=2, column=0, padx=20, pady=(0, 10))  # Removed padding at the bottom
         self.appearance_mode_optionemenu.set("Dark")
-        self.appearance_mode_label = customtkinter.CTkLabel(self.sidebar_frame, text="Appearance Mode: ", anchor="w")
+        self.appearance_mode_label = customtkinter.CTkLabel(self.left_sidebar_frame, text="Appearance Mode: ", anchor="w")
         self.appearance_mode_label.grid(row=1, column=0, padx=20, pady=(0, 10))
 
         # create and configure the scaling option menu and label
-        self.scaling_label = customtkinter.CTkLabel(self.sidebar_frame, text="UI Scaling:", anchor="w")
+        self.scaling_label = customtkinter.CTkLabel(self.left_sidebar_frame, text="UI Scaling:", anchor="w")
         self.scaling_label.grid(row=3, column=0, padx=20, pady=(10, 5))
-        self.scaling_optionemenu = customtkinter.CTkOptionMenu(self.sidebar_frame, values=["80%", "90%", "100%", "110%", "120%"],
+        self.scaling_optionemenu = customtkinter.CTkOptionMenu(self.left_sidebar_frame, values=["80%", "90%", "100%", "110%", "120%"],
                                                             command=self.change_scaling_event)
         self.scaling_optionemenu.grid(row=4, column=0, padx=20, pady=(5, 10))  # Removed padding at the bottom
         self.scaling_optionemenu.set("100%")
 
         # created and configure the quit button
-        self.quit_button = customtkinter.CTkButton(self.sidebar_frame, command=self.quit_simulation_event)
+        self.quit_button = customtkinter.CTkButton(self.left_sidebar_frame, command=self.quit_simulation_event)
         self.quit_button.grid(row=6, column=0, padx=20, pady=(10, 40))
         self.quit_button.configure(state="enabled", text="Quit simulation")
 
+
+
+
+
+        # DATA PREVIEW SECTIONS
         # create csv content preview
         self.csv_preview = customtkinter.CTkTextbox(self, width=250)
-        self.csv_preview.grid(row=0, column=1, padx=(20, 0), pady=(20, 0), sticky="nsew")
+        self.csv_preview.grid(row=0, column=1, padx=(20, 20), pady=(20, 20), sticky="nsew")
 
         csv_content = ""    # write the content of data.csv into the csv_content variable
         current_directory = os.getcwd() # Get the current working directory
@@ -99,73 +107,79 @@ class App(customtkinter.CTk):
         # self.label_tab_2 = customtkinter.CTkLabel(self.tabview.tab("Tab 2"), text="CTkLabel on Tab 2")
         # self.label_tab_2.grid(row=0, column=0, padx=20, pady=20)
 
-        # create radiobutton frame
-        self.radiobutton_frame = customtkinter.CTkFrame(self)
-        self.radiobutton_frame.grid(row=0, column=3, padx=(20, 20), pady=(20, 0), sticky="nsew")
+
+
+        # Create the outer frame (self.right_sidebar_frame)
+        self.right_sidebar_frame = customtkinter.CTkFrame(self, width=140, corner_radius=0)
+        self.right_sidebar_frame.grid(row=0, column=3, rowspan=4, sticky="nsew")
+        self.right_sidebar_frame.grid_rowconfigure(5, weight=1)
+
+        # CHOOSING SOLVING TECHNIQUE SECTION
+        # Create the inner frame (self.technique_choice)
+        self.technique_choice = customtkinter.CTkFrame(master=self.right_sidebar_frame)
+        self.technique_choice.grid(row=0, column=2, padx=(20, 20), pady=(20, 0), sticky="nsew")
+
+        # Create a variable to hold the selected radio button value
         self.radio_var = tkinter.IntVar(value=0)
-        self.label_radio_group = customtkinter.CTkLabel(master=self.radiobutton_frame, text="CTkRadioButton Group:")
-        self.label_radio_group.grid(row=0, column=2, columnspan=1, padx=10, pady=10, sticky="")
-        self.radio_button_1 = customtkinter.CTkRadioButton(master=self.radiobutton_frame, variable=self.radio_var, value=0)
-        self.radio_button_1.grid(row=1, column=2, pady=10, padx=20, sticky="n")
-        self.radio_button_2 = customtkinter.CTkRadioButton(master=self.radiobutton_frame, variable=self.radio_var, value=1)
-        self.radio_button_2.grid(row=2, column=2, pady=10, padx=20, sticky="n")
-        self.radio_button_3 = customtkinter.CTkRadioButton(master=self.radiobutton_frame, variable=self.radio_var, value=2)
-        self.radio_button_3.grid(row=3, column=2, pady=10, padx=20, sticky="n")
 
-        # create slider and progressbar frame
-        self.slider_progressbar_frame = customtkinter.CTkFrame(self, fg_color="transparent")
-        self.slider_progressbar_frame.grid(row=1, column=1, padx=(20, 0), pady=(20, 0), sticky="nsew")
-        self.slider_progressbar_frame.grid_columnconfigure(0, weight=1)
-        self.slider_progressbar_frame.grid_rowconfigure(4, weight=1)
-        self.seg_button_1 = customtkinter.CTkSegmentedButton(self.slider_progressbar_frame)
-        self.seg_button_1.grid(row=0, column=0, padx=(20, 10), pady=(10, 10), sticky="ew")
-        self.progressbar_1 = customtkinter.CTkProgressBar(self.slider_progressbar_frame)
-        self.progressbar_1.grid(row=1, column=0, padx=(20, 10), pady=(10, 10), sticky="ew")
-        self.progressbar_2 = customtkinter.CTkProgressBar(self.slider_progressbar_frame)
-        self.progressbar_2.grid(row=2, column=0, padx=(20, 10), pady=(10, 10), sticky="ew")
-        self.slider_1 = customtkinter.CTkSlider(self.slider_progressbar_frame, from_=0, to=1, number_of_steps=4)
-        self.slider_1.grid(row=3, column=0, padx=(20, 10), pady=(10, 10), sticky="ew")
-        self.slider_2 = customtkinter.CTkSlider(self.slider_progressbar_frame, orientation="vertical")
-        self.slider_2.grid(row=0, column=1, rowspan=5, padx=(10, 10), pady=(10, 10), sticky="ns")
-        self.progressbar_3 = customtkinter.CTkProgressBar(self.slider_progressbar_frame, orientation="vertical")
-        self.progressbar_3.grid(row=0, column=2, rowspan=5, padx=(10, 20), pady=(10, 10), sticky="ns")
+        # Create radio buttons
+        self.technique_label = customtkinter.CTkLabel(master=self.technique_choice, text="Choose the solving technique:")
+        self.technique_label.grid(row=0, column=2, columnspan=1, padx=10, pady=10, sticky="w")
 
-        # create scrollable frame
-        self.scrollable_frame = customtkinter.CTkScrollableFrame(self, label_text="CTkScrollableFrame")
-        self.scrollable_frame.grid(row=1, column=2, padx=(20, 0), pady=(20, 0), sticky="nsew")
-        self.scrollable_frame.grid_columnconfigure(0, weight=1)
-        self.scrollable_frame_switches = []
-        for i in range(100):
-            switch = customtkinter.CTkSwitch(master=self.scrollable_frame, text=f"CTkSwitch {i}")
-            switch.grid(row=i, column=0, padx=10, pady=(0, 20))
-            self.scrollable_frame_switches.append(switch)
+        self.brute_force = customtkinter.CTkRadioButton(master=self.technique_choice, variable=self.radio_var, value=0, text="Brute force technique")
+        self.brute_force.grid(row=1, column=2, pady=10, padx=20, sticky="w")
+        self.heuristic = customtkinter.CTkRadioButton(master=self.technique_choice, variable=self.radio_var, value=1, text="Heuristic technique")
+        self.heuristic.grid(row=2, column=2, pady=10, padx=20, sticky="w")
+        self.metaheuristic = customtkinter.CTkRadioButton(master=self.technique_choice, variable=self.radio_var, value=2, text="Metaheuristic technique")
+        self.metaheuristic.grid(row=3, column=2, pady=10, padx=20, sticky="w")
 
-        # create checkbox and switch frame
-        self.checkbox_slider_frame = customtkinter.CTkFrame(self)
-        self.checkbox_slider_frame.grid(row=1, column=3, padx=(20, 20), pady=(20, 0), sticky="nsew")
-        self.checkbox_1 = customtkinter.CTkCheckBox(master=self.checkbox_slider_frame)
-        self.checkbox_1.grid(row=1, column=0, pady=(20, 0), padx=20, sticky="n")
-        self.checkbox_2 = customtkinter.CTkCheckBox(master=self.checkbox_slider_frame)
-        self.checkbox_2.grid(row=2, column=0, pady=(20, 0), padx=20, sticky="n")
-        self.checkbox_3 = customtkinter.CTkCheckBox(master=self.checkbox_slider_frame)
-        self.checkbox_3.grid(row=3, column=0, pady=20, padx=20, sticky="n")
+        # CHOOSING THE POPULATION DISTRIBUTION SECTION
+        # Create the inner frame (self.technique_choice)
+        self.population_distribution = customtkinter.CTkFrame(master=self.right_sidebar_frame)
+        self.population_distribution.grid(row=1, column=2, padx=(20, 20), pady=(20, 0), sticky="nsew")
 
-        # set default values
-        # self.sidebar_button_3.configure(state="disabled", text="Disabled CTkButton")
-        self.checkbox_3.configure(state="disabled")
-        self.checkbox_1.select()
-        self.scrollable_frame_switches[0].select()
-        self.scrollable_frame_switches[4].select()
-        self.radio_button_3.configure(state="disabled")
-        
-        # self.optionmenu_1.set("CTkOptionmenu")
-        # self.combobox_1.set("CTkComboBox")
-        self.slider_1.configure(command=self.progressbar_2.set)
-        self.slider_2.configure(command=self.progressbar_3.set)
-        self.progressbar_1.configure(mode="indeterminnate")
-        self.progressbar_1.start()
-        self.seg_button_1.configure(values=["CTkSegmentedButton", "Value 2", "Value 3"])
-        self.seg_button_1.set("Value 2")
+        # Create a variable to hold the selected radio button value
+        self.radio_var = tkinter.IntVar(value=0)
+
+        # Create radio buttons
+        self.distribution_label = customtkinter.CTkLabel(master=self.population_distribution, text="Choose the population distribution:")
+        self.distribution_label.grid(row=0, column=2, columnspan=1, padx=10, pady=10, sticky="w")
+
+        self.linear_distribution = customtkinter.CTkRadioButton(master=self.population_distribution, variable=self.radio_var, value=0, text="Linear distribution")
+        self.linear_distribution.grid(row=1, column=2, pady=10, padx=20, sticky="w")
+        self.normal_distribution = customtkinter.CTkRadioButton(master=self.population_distribution, variable=self.radio_var, value=1, text="Normal distribution")
+        self.normal_distribution.grid(row=2, column=2, pady=10, padx=20, sticky="w")
+        self.bimodal_distribution = customtkinter.CTkRadioButton(master=self.population_distribution, variable=self.radio_var, value=2, text="Bimodal distribution")
+        self.bimodal_distribution.grid(row=3, column=2, pady=10, padx=20, sticky="w")
+
+
+
+        # CHOOSING THE POPULATION SIZE SECTION
+        # Create the inner frame (self.technique_choice)
+        self.population_size = customtkinter.CTkFrame(master=self.right_sidebar_frame)
+        self.population_size.grid(row=2, column=2, padx=(20, 20), pady=(20, 0), sticky="nsew")
+
+        # Create a variable to hold the selected radio button value
+        self.radio_var = tkinter.IntVar(value=0)
+
+        # Create radio buttons
+        self.size_label = customtkinter.CTkLabel(master=self.population_size, text="Choose the population size:")
+        self.size_label.grid(row=0, column=2, columnspan=1, padx=10, pady=10, sticky="w")
+
+        self.small_population = customtkinter.CTkRadioButton(master=self.population_size, variable=self.radio_var, value=0, text="Small population (100)")
+        self.small_population.grid(row=1, column=2, pady=10, padx=20, sticky="w")
+        self.medium_population = customtkinter.CTkRadioButton(master=self.population_size, variable=self.radio_var, value=1, text="Medium population (1000)")
+        self.medium_population.grid(row=2, column=2, pady=10, padx=20, sticky="w")
+        self.large_population = customtkinter.CTkRadioButton(master=self.population_size, variable=self.radio_var, value=2, text="Large population (10000)")
+        self.large_population.grid(row=3, column=2, pady=10, padx=20, sticky="w")
+
+
+
+        self.execute_technique = customtkinter.CTkButton(master=self.right_sidebar_frame, command=self.execute_technique_event)
+        self.execute_technique.grid(row=6, column=2, padx=20, pady=(10, 40))
+        self.execute_technique.configure(state="enabled", text="Execute technique")
+
+
 
     def open_input_dialog_event(self):
         dialog = customtkinter.CTkInputDialog(text="Type in a number:", title="CTkInputDialog")
@@ -178,8 +192,10 @@ class App(customtkinter.CTk):
         new_scaling_float = int(new_scaling.replace("%", "")) / 100
         customtkinter.set_widget_scaling(new_scaling_float)
 
-    # def sidebar_button_event(self):
-    #     print("sidebar_button click")
+    def execute_technique_event(self):
+        print("execute_technique_event")
+        # TODO: implement the solving technique
+        # TODO: update the csv_preview with the results of the solving technique
 
     def quit_simulation_event(self):
         self.destroy()
