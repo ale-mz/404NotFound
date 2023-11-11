@@ -102,9 +102,9 @@ class App(customtkinter.CTk):
 
         # self.linear_distribution = customtkinter.CTkRadioButton(master=self.population_distribution, variable=self.radio_var, value=0, text="Linear distribution")
         # self.linear_distribution.grid(row=1, column=2, pady=10, padx=20, sticky="w")
-        self.normal_distribution = customtkinter.CTkRadioButton(master=self.population_distribution, variable=self.radio_var, value=1, text="Normal distribution")
+        self.normal_distribution = customtkinter.CTkRadioButton(master=self.population_distribution, variable=self.radio_var, value=0, text="Normal distribution")
         self.normal_distribution.grid(row=2, column=2, pady=10, padx=20, sticky="w")
-        self.bimodal_distribution = customtkinter.CTkRadioButton(master=self.population_distribution, variable=self.radio_var, value=2, text="Bimodal distribution")
+        self.bimodal_distribution = customtkinter.CTkRadioButton(master=self.population_distribution, variable=self.radio_var, value=1, text="Bimodal distribution")
         self.bimodal_distribution.grid(row=3, column=2, pady=10, padx=20, sticky="w")
 
 
