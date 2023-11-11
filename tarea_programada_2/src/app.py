@@ -2,7 +2,10 @@ import tkinter
 import tkinter.messagebox
 import customtkinter
 import os
+import numpy as np
+import matplotlib.pyplot as plt
 
+np.set_printoptions(precision=8, suppress=True, threshold=np.inf)
 customtkinter.set_appearance_mode("System")  # Modes: "System" (standard), "Dark", "Light"
 # custom_theme_path = "C:/Users/archi/Documents/GitHub/tareas-programadas-404-not-found/tarea_programada_2/src/custom_theme.json"
 
@@ -94,7 +97,7 @@ class App(customtkinter.CTk):
         self.population_distribution.grid(row=0, column=2, padx=(20, 20), pady=(20, 0), sticky="nsew")
 
         # Create a variable to hold the selected radio button value
-        self.radio_var = tkinter.IntVar(value=0)
+        self.population_distribution_value = tkinter.IntVar(value=0)
 
         # Create radio buttons
         self.distribution_label = customtkinter.CTkLabel(master=self.population_distribution, text="Choose the population distribution:")
@@ -102,34 +105,33 @@ class App(customtkinter.CTk):
 
         # self.linear_distribution = customtkinter.CTkRadioButton(master=self.population_distribution, variable=self.radio_var, value=0, text="Linear distribution")
         # self.linear_distribution.grid(row=1, column=2, pady=10, padx=20, sticky="w")
-        self.normal_distribution = customtkinter.CTkRadioButton(master=self.population_distribution, variable=self.radio_var, value=0, text="Normal distribution")
+        self.normal_distribution = customtkinter.CTkRadioButton(master=self.population_distribution, variable=self.population_distribution_value, value=0, text="Normal distribution")
         self.normal_distribution.grid(row=2, column=2, pady=10, padx=20, sticky="w")
-        self.bimodal_distribution = customtkinter.CTkRadioButton(master=self.population_distribution, variable=self.radio_var, value=1, text="Bimodal distribution")
+        self.bimodal_distribution = customtkinter.CTkRadioButton(master=self.population_distribution, variable=self.population_distribution_value, value=1, text="Bimodal distribution")
         self.bimodal_distribution.grid(row=3, column=2, pady=10, padx=20, sticky="w")
 
 
 
         # CHOOSING THE POPULATION SIZE SECTION
-        # Create the inner frame (self.technique_choice)
         self.population_size = customtkinter.CTkFrame(master=self.right_sidebar_frame)
         self.population_size.grid(row=1, column=2, padx=(20, 20), pady=(20, 0), sticky="nsew")
 
         # Create a variable to hold the selected radio button value
-        self.radio_var = tkinter.IntVar(value=0)
+        self.population_size_value = tkinter.IntVar(value=0)
 
         # Create radio buttons
         self.size_label = customtkinter.CTkLabel(master=self.population_size, text="Choose the population size:")
         self.size_label.grid(row=0, column=2, columnspan=1, padx=10, pady=10, sticky="w")
 
-        self.small_population = customtkinter.CTkRadioButton(master=self.population_size, variable=self.radio_var, value=0, text="Small population (100)")
+        self.small_population = customtkinter.CTkRadioButton(master=self.population_size, variable=self.population_size_value, value=0, text="Small population (10000)")
         self.small_population.grid(row=1, column=2, pady=10, padx=20, sticky="w")
-        self.medium_population = customtkinter.CTkRadioButton(master=self.population_size, variable=self.radio_var, value=1, text="Medium population (1000)")
+        self.medium_population = customtkinter.CTkRadioButton(master=self.population_size, variable=self.population_size_value, value=1, text="Medium population (100000)")
         self.medium_population.grid(row=2, column=2, pady=10, padx=20, sticky="w")
-        self.large_population = customtkinter.CTkRadioButton(master=self.population_size, variable=self.radio_var, value=2, text="Large population (10000)")
+        self.large_population = customtkinter.CTkRadioButton(master=self.population_size, variable=self.population_size_value, value=2, text="Large population (1000000)")
         self.large_population.grid(row=3, column=2, pady=10, padx=20, sticky="w")
 
         # BUTTON CREATE POPULATION
-        self.create_population = customtkinter.CTkButton(master=self.right_sidebar_frame, command=self.execute_technique_event) # TODO: change the function
+        self.create_population = customtkinter.CTkButton(master=self.right_sidebar_frame, command=self.create_population_event) # TODO: change the function
         self.create_population.grid(row=2, column=2, padx=20, pady=(20, 40))
         self.create_population.configure(state="enabled", text="Create population")
 
@@ -158,6 +160,91 @@ class App(customtkinter.CTk):
         self.execute_technique.configure(state="enabled", text="Execute technique")
 
 
+
+
+    def create_population_event(self):
+        # store in variables the values of the radio buttons
+        distribution = self.population_distribution_value.get()
+        size = self.population_size_value.get()
+
+        if(distribution == 0):
+            distribution = "Normal"
+        else:
+            distribution = "Bimodal"
+        
+        if(size == 0):
+            # size = "Small"
+            size = 10000
+
+        elif(size == 1):
+            size = "Medium"
+            size = 100000
+
+        else:
+            size = "Large"
+            size = 1000000
+        
+        print("distribution:", distribution)
+        print("size:", size)
+        # TODO: implement the population creation
+
+        data = []
+
+        if(distribution == "Normal"):
+            # Set parameters for Gaussian distribution
+            mean, std = 100, 50
+            # Generate Gaussian data
+            data = self.generate_gaussian_data(size, mean, std)
+            # data = list(map(int, data))
+            data = list(map(lambda x: abs(int(x)), data))
+
+        else:
+            # Set parameters for bimodal distribution
+            mean1, std1 = 50, 10
+            mean2, std2 = 100, 20
+            weight1 = 0.7
+            # Generate bimodal data
+            data = self.generate_bimodal_data(size, mean1, std1, mean2, std2, weight1)
+            # data = list(map(int, data))
+            data = list(map(lambda x: abs(int(x)), data))
+
+
+        # store the data in the data.csv file
+
+        csv_content = ""    # write the content of data.csv into the csv_content variable
+        current_directory = os.getcwd() # Get the current working directory
+        file_name = "data.csv" # Define the file name
+        data_path = os.path.join(current_directory, file_name) # Create the path using the os package
+
+        # Convert numerical values to strings and concatenate with newline character
+        csv_content = "\n".join(map(str, data))
+
+        # Clear the existing content and write the new content to data.csv
+        with open(data_path, "w") as csv_file:
+            csv_file.write(csv_content)
+        
+
+        # with open(data_path, "w") as csv_file:
+        #     # csv_content = csv_file.read()
+        #     csv_file.write(str(data))
+
+        self.csv_preview.delete("0.0", "end")  # delete all text        
+        self.csv_preview.insert("0.0", str(csv_content))
+        # print(csv_content)
+        # TODO: implement a prettify function for the csv content
+
+        # self.csv_preview.insert("0.0", "CTkTextbox\n\n" + "Lorem ipsum dolor sit amet, consektetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua.\n\n" * 20)
+
+        # print("data:", data)
+        
+
+    def generate_bimodal_data(self, n, mean1, std1, mean2, std2, weight1=0.5):
+        data1 = np.random.normal(mean1, std1, int(n * weight1))
+        data2 = np.random.normal(mean2, std2, int(n * (1 - weight1)))
+        return np.concatenate([data1, data2])
+
+    def generate_gaussian_data(self, n, mean, std):
+        return np.random.normal(mean, std, n)
 
     def open_input_dialog_event(self):
         dialog = customtkinter.CTkInputDialog(text="Type in a number:", title="CTkInputDialog")
