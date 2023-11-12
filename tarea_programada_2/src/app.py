@@ -4,6 +4,7 @@ import customtkinter
 import os
 import numpy as np
 import matplotlib.pyplot as plt
+from analizer import Analizer
 
 np.set_printoptions(precision=8, suppress=True, threshold=np.inf)
 customtkinter.set_appearance_mode("System")  # Modes: "System" (standard), "Dark", "Light"
@@ -141,26 +142,23 @@ class App(customtkinter.CTk):
         self.technique_choice.grid(row=3, column=2, padx=(20, 20), pady=(20, 0), sticky="nsew")
 
         # Create a variable to hold the selected radio button value
-        self.radio_var = tkinter.IntVar(value=0)
+        self.technique_used = tkinter.IntVar(value=0)
 
         # Create radio buttons
         self.technique_label = customtkinter.CTkLabel(master=self.technique_choice, text="Choose the solving technique:")
         self.technique_label.grid(row=0, column=2, columnspan=1, padx=10, pady=10, sticky="w")
 
-        self.brute_force = customtkinter.CTkRadioButton(master=self.technique_choice, variable=self.radio_var, value=0, text="Brute force technique")
+        self.brute_force = customtkinter.CTkRadioButton(master=self.technique_choice, variable=self.technique_used, value=0, text="Brute force technique")
         self.brute_force.grid(row=1, column=2, pady=10, padx=20, sticky="w")
-        self.heuristic = customtkinter.CTkRadioButton(master=self.technique_choice, variable=self.radio_var, value=1, text="Heuristic technique")
+        self.heuristic = customtkinter.CTkRadioButton(master=self.technique_choice, variable=self.technique_used, value=1, text="Heuristic technique")
         self.heuristic.grid(row=2, column=2, pady=10, padx=20, sticky="w")
-        self.metaheuristic = customtkinter.CTkRadioButton(master=self.technique_choice, variable=self.radio_var, value=2, text="Metaheuristic technique")
+        self.metaheuristic = customtkinter.CTkRadioButton(master=self.technique_choice, variable=self.technique_used, value=2, text="Metaheuristic technique")
         self.metaheuristic.grid(row=3, column=2, pady=10, padx=20, sticky="w")
 
 
         self.execute_technique = customtkinter.CTkButton(master=self.right_sidebar_frame, command=self.execute_technique_event) # TODO: change the function
         self.execute_technique.grid(row=4, column=2, padx=20, pady=(20, 40))
         self.execute_technique.configure(state="enabled", text="Execute technique")
-
-
-
 
     def create_population_event(self):
         # store in variables the values of the radio buttons
@@ -173,21 +171,12 @@ class App(customtkinter.CTk):
             distribution = "Bimodal"
         
         if(size == 0):
-            # size = "Small"
             size = 10000
-
         elif(size == 1):
-            size = "Medium"
             size = 100000
-
         else:
-            size = "Large"
             size = 1000000
         
-        print("distribution:", distribution)
-        print("size:", size)
-        # TODO: implement the population creation
-
         data = []
 
         if(distribution == "Normal"):
@@ -195,9 +184,7 @@ class App(customtkinter.CTk):
             mean, std = 100, 50
             # Generate Gaussian data
             data = self.generate_gaussian_data(size, mean, std)
-            # data = list(map(int, data))
             data = list(map(lambda x: abs(int(x)), data))
-
         else:
             # Set parameters for bimodal distribution
             mean1, std1 = 50, 10
@@ -205,12 +192,9 @@ class App(customtkinter.CTk):
             weight1 = 0.7
             # Generate bimodal data
             data = self.generate_bimodal_data(size, mean1, std1, mean2, std2, weight1)
-            # data = list(map(int, data))
             data = list(map(lambda x: abs(int(x)), data))
 
-
         # store the data in the data.csv file
-
         csv_content = ""    # write the content of data.csv into the csv_content variable
         current_directory = os.getcwd() # Get the current working directory
         file_name = "data.csv" # Define the file name
@@ -237,7 +221,6 @@ class App(customtkinter.CTk):
 
         # print("data:", data)
         
-
     def generate_bimodal_data(self, n, mean1, std1, mean2, std2, weight1=0.5):
         data1 = np.random.normal(mean1, std1, int(n * weight1))
         data2 = np.random.normal(mean2, std2, int(n * (1 - weight1)))
@@ -245,10 +228,6 @@ class App(customtkinter.CTk):
 
     def generate_gaussian_data(self, n, mean, std):
         return np.random.normal(mean, std, n)
-
-    def open_input_dialog_event(self):
-        dialog = customtkinter.CTkInputDialog(text="Type in a number:", title="CTkInputDialog")
-        print("CTkInputDialog:", dialog.get_input())
 
     def change_appearance_mode_event(self, new_appearance_mode: str):
         customtkinter.set_appearance_mode(new_appearance_mode)
@@ -258,9 +237,32 @@ class App(customtkinter.CTk):
         customtkinter.set_widget_scaling(new_scaling_float)
 
     def execute_technique_event(self):
-        print("execute_technique_event")
-        # TODO: implement the solving technique
-        # TODO: update the csv_preview with the results of the solving technique
+        # create and object analizer
+        analizer = Analizer()
+        # store the value of the chosen technique
+        technique = self.technique_used.get()
+
+        if(technique == 0):
+            technique = "Brute force"
+        elif(technique == 1):
+            technique = "Heuristic"
+        else:
+            technique = "Metaheuristic"
+
+        print("technique:", technique)
+        analizer.analize(technique)
+
+        # TODO: update the csv_preview with the new data
+        csv_content = ""    # write the content of data.csv into the csv_content variable
+        current_directory = os.getcwd() # Get the current working directory
+        file_name = "data.csv" # Define the file name
+        data_path = os.path.join(current_directory, file_name) # Create the path using the os package
+
+        with open(data_path, "r") as csv_file:
+            csv_content = csv_file.read()
+        
+        self.csv_preview.delete("0.0", "end")
+        self.csv_preview.insert("0.0", csv_content)
 
     def quit_simulation_event(self):
         self.destroy()
