@@ -73,19 +73,20 @@ class App(customtkinter.CTk):
         self.csv_preview = customtkinter.CTkTextbox(self, width=250)
         self.csv_preview.grid(row=0, column=1, padx=(20, 20), pady=(20, 20), sticky="nsew")
 
-        csv_content = ""    # write the content of data.csv into the csv_content variable
-        current_directory = os.getcwd() # Get the current working directory
-        file_name = "data.csv" # Define the file name
-        data_path = os.path.join(current_directory, file_name) # Create the path using the os package
+        self.update_csv_preview()
+        # csv_content = ""    # write the content of data.csv into the csv_content variable
+        # current_directory = os.getcwd() # Get the current working directory
+        # file_name = "data.csv" # Define the file name
+        # data_path = os.path.join(current_directory, file_name) # Create the path using the os package
 
-        with open(data_path, "r") as csv_file:
-            csv_content = csv_file.read()
+        # with open(data_path, "r") as csv_file:
+        #     csv_content = csv_file.read()
         
-        # print(csv_content)
-        # TODO: implement a prettify function for the csv content
+        # # print(csv_content)
+        # # TODO: implement a prettify function for the csv content
 
-        # self.csv_preview.insert("0.0", "CTkTextbox\n\n" + "Lorem ipsum dolor sit amet, consektetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua.\n\n" * 20)
-        self.csv_preview.insert("0.0", csv_content)
+        # # self.csv_preview.insert("0.0", "CTkTextbox\n\n" + "Lorem ipsum dolor sit amet, consektetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua.\n\n" * 20)
+        # self.csv_preview.insert("0.0", csv_content)
 
         # Create the outer frame (self.right_sidebar_frame)
         self.right_sidebar_frame = customtkinter.CTkFrame(self, width=140, corner_radius=0)
@@ -199,7 +200,8 @@ class App(customtkinter.CTk):
         current_directory = os.getcwd() # Get the current working directory
         file_name = "data.csv" # Define the file name
         data_path = os.path.join(current_directory, file_name) # Create the path using the os package
-
+        
+        data.sort()
         # Convert numerical values to strings and concatenate with newline character
         csv_content = "\n".join(map(str, data))
 
@@ -207,8 +209,23 @@ class App(customtkinter.CTk):
         with open(data_path, "w") as csv_file:
             csv_file.write(csv_content)
 
-        self.csv_preview.delete("0.0", "end")  # delete all text        
-        self.csv_preview.insert("0.0", str(csv_content))
+        self.add_id_column()
+    
+    def add_id_column(self):
+        current_directory = os.getcwd() # Get the current working directory
+        file_name = "data.csv" # Define the file name
+        data_path = os.path.join(current_directory, file_name) # Create the path using the os package
+
+        # Read the content of data.csv
+        with open(data_path, 'r') as file:
+            lines = file.readlines()
+
+        # Write the modified content back to data.csv
+        with open(data_path, 'w') as file:
+            for i, line in enumerate(lines, 1):
+                file.write(f"{i}\t | \t{line.strip()}\n")
+        
+        self.update_csv_preview()
         
     def generate_bimodal_data(self, n, mean1, std1, mean2, std2, weight1=0.5):
         data1 = np.random.normal(mean1, std1, int(n * weight1))
@@ -228,8 +245,10 @@ class App(customtkinter.CTk):
     def execute_technique_event(self):
         analyzer = Analyzer()  # create and object analizer
         technique = self.technique_used.get()  # store the value of the chosen technique
-        analyzer.analyze(technique)  # call the analize method
+        analyzer.analyze(technique)  # call the analize method=
+        self.update_csv_preview()
 
+    def update_csv_preview(self):
         csv_content = ""    # write the content of data.csv into the csv_content variable
         current_directory = os.getcwd() # Get the current working directory
         file_name = "data.csv" # Define the file name
@@ -240,6 +259,8 @@ class App(customtkinter.CTk):
         
         self.csv_preview.delete("0.0", "end")
         self.csv_preview.insert("0.0", csv_content)
+
+
 
     def quit_simulation_event(self):
         self.destroy()
