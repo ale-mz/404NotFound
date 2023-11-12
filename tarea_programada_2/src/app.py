@@ -237,22 +237,10 @@ class App(customtkinter.CTk):
         customtkinter.set_widget_scaling(new_scaling_float)
 
     def execute_technique_event(self):
-        # create and object analizer
-        analizer = Analizer()
-        # store the value of the chosen technique
-        technique = self.technique_used.get()
+        analizer = Analizer()  # create and object analizer
+        technique = self.technique_used.get()  # store the value of the chosen technique
+        analizer.analize(technique)  # call the analize method
 
-        if(technique == 0):
-            technique = "Brute force"
-        elif(technique == 1):
-            technique = "Heuristic"
-        else:
-            technique = "Metaheuristic"
-
-        print("technique:", technique)
-        analizer.analize(technique)
-
-        # TODO: update the csv_preview with the new data
         csv_content = ""    # write the content of data.csv into the csv_content variable
         current_directory = os.getcwd() # Get the current working directory
         file_name = "data.csv" # Define the file name
