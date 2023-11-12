@@ -1,12 +1,12 @@
 import os
 
-class Analizer():
+class Analyzer():
     def __init__(self):
         self.__data = None
     
-    def analize(self, technique):
+    def analyze(self, technique):
         # TODO: implement the data param, could be either the default file or the user's file
-        print("Analizing data...")
+        print("Analyzing data...")
 
         # TODO: add a switch case to call the corresponding technique that calls a subroutine for each technique
         switch_values = {

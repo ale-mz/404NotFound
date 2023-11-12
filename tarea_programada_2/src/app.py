@@ -4,7 +4,7 @@ import customtkinter
 import os
 import numpy as np
 import matplotlib.pyplot as plt
-from analizer import Analizer
+from analyzer import Analyzer
 
 np.set_printoptions(precision=8, suppress=True, threshold=np.inf)
 customtkinter.set_appearance_mode("System")  # Modes: "System" (standard), "Dark", "Light"
@@ -206,20 +206,9 @@ class App(customtkinter.CTk):
         # Clear the existing content and write the new content to data.csv
         with open(data_path, "w") as csv_file:
             csv_file.write(csv_content)
-        
-
-        # with open(data_path, "w") as csv_file:
-        #     # csv_content = csv_file.read()
-        #     csv_file.write(str(data))
 
         self.csv_preview.delete("0.0", "end")  # delete all text        
         self.csv_preview.insert("0.0", str(csv_content))
-        # print(csv_content)
-        # TODO: implement a prettify function for the csv content
-
-        # self.csv_preview.insert("0.0", "CTkTextbox\n\n" + "Lorem ipsum dolor sit amet, consektetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua.\n\n" * 20)
-
-        # print("data:", data)
         
     def generate_bimodal_data(self, n, mean1, std1, mean2, std2, weight1=0.5):
         data1 = np.random.normal(mean1, std1, int(n * weight1))
@@ -237,9 +226,9 @@ class App(customtkinter.CTk):
         customtkinter.set_widget_scaling(new_scaling_float)
 
     def execute_technique_event(self):
-        analizer = Analizer()  # create and object analizer
+        analyzer = Analyzer()  # create and object analizer
         technique = self.technique_used.get()  # store the value of the chosen technique
-        analizer.analize(technique)  # call the analize method
+        analyzer.analyze(technique)  # call the analize method
 
         csv_content = ""    # write the content of data.csv into the csv_content variable
         current_directory = os.getcwd() # Get the current working directory
