@@ -201,7 +201,7 @@ class App(customtkinter.CTk):
         file_name = "data.csv" # Define the file name
         data_path = os.path.join(current_directory, file_name) # Create the path using the os package
         
-        data.sort()
+        # data.sort()
         # Convert numerical values to strings and concatenate with newline character
         csv_content = "\n".join(map(str, data))
 
@@ -209,7 +209,8 @@ class App(customtkinter.CTk):
         with open(data_path, "w") as csv_file:
             csv_file.write(csv_content)
 
-        self.add_id_column()
+        # self.add_id_column()
+        self.update_csv_preview()
     
     def add_id_column(self):
         current_directory = os.getcwd() # Get the current working directory
