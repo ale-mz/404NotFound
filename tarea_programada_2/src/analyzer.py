@@ -26,7 +26,6 @@ class Analyzer():
         data_content = self.read_data_from_csv()
         # print(data_content)
 
-    # TODO: implement the heuristic technique
     def heuristic(self):
         print("Heuristic technique")
         data_content = self.read_data_from_csv()
@@ -57,6 +56,7 @@ class Analyzer():
                 team_2.append(data_content[i])
 
             if i % 10 == 0 and i != 0:
+                
                 # print("Team 1: ", team_1)
                 # print("Team 2: ", team_2)
 
@@ -83,6 +83,25 @@ class Analyzer():
 
     # TODO: implement the genetic algorithm technique
     def genetic_algorithm(self):
+        # create the original population
+        data_content = self.read_data_from_csv()
+        # population_size must be divided by 10 because each individual has 10 values
+        population_size = len(data_content)/10
+        # cast the population_size to int
+        population_size = int(population_size)
+        population = [self.generate_individual(data_content) for _ in range(population_size)]
+        new_population = []
+
+        print ("Population: ", population)
+
+        counter = 0
+        max_generations = 10
+        while counter < max_generations:
+            # set the fitness value for each individual of the population
+            # select the best individuals
+            # copy the best individuals to the next generation
+            # apply the crossover operation
+            counter += 1
         print("Genetic algorithm technique")
 
     def default_option(self):
@@ -118,3 +137,10 @@ class Analyzer():
                 data_array.append(numerical_value)
 
         return data_array
+
+    def generate_individual(self, data_content):
+        # Generate a random match (two teams of 5 candidates each)
+        # np.random.shuffle(data_content)
+        match = [data_content[:5], data_content[5:]]
+        fitness = 0
+        return {'match': match, 'fitness': fitness}
