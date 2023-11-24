@@ -92,16 +92,34 @@ class Analyzer():
         population = [self.generate_individual(data_content) for _ in range(population_size)]
         new_population = []
 
-        print ("Population: ", population)
 
         counter = 0
         max_generations = 10
         while counter < max_generations:
-            # set the fitness value for each individual of the population
-            # select the best individuals
-            # copy the best individuals to the next generation
-            # apply the crossover operation
+            self.calculate_fitness(population)
+
+            population = sorted(population, key=lambda x: x['fitness'], reverse=True)
+            # Calculate the index to get the top 5%
+            top_5_percent_index = int(len(population) * 0.05)
+            # Get the top 5% individuals
+            top_5_percent = population[:top_5_percent_index]
+            # get the best 5% of the population and copy them to the next generation
+            new_population[:top_5_percent_index] = top_5_percent
+            population = population[top_5_percent_index:]
+
+            # TODO: apply the crossover operation to the population and store the result in new_population
+
+
+
+
+
+            # set the new population as the current population and clear the new population
+            population = new_population
+            new_population = []
             counter += 1
+        
+        # store the data in the data.csv file
+        self.save_data(population)
         print("Genetic algorithm technique")
 
     def default_option(self):
@@ -141,6 +159,19 @@ class Analyzer():
     def generate_individual(self, data_content):
         # Generate a random match (two teams of 5 candidates each)
         # np.random.shuffle(data_content)
-        match = [data_content[:5], data_content[5:]]
+        sub_data = data_content[:10]
+        data_content = data_content[10:]
+        match = [sub_data[:5], sub_data[5:]]
         fitness = 0
+        # with open("data.txt", 'a') as file:
+        #     file.write(f"Match: {match}, Fitness: {fitness}\n")
         return {'match': match, 'fitness': fitness}
+
+    def calculate_fitness(self, population):
+        for individual in population:
+            match = individual['match']
+            fitness = 0
+            # TODO: calculate the fitness of individual
+            # difference_team_1 = 
+            # difference_team_2 =       
+            individual['fitness'] = fitness
