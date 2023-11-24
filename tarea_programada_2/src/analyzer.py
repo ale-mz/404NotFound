@@ -108,7 +108,7 @@ class Analyzer():
             population = population[top_5_percent_index:]
 
             # TODO: apply the crossover operation to the population and store the result in new_population
-
+            
 
 
 
@@ -171,7 +171,10 @@ class Analyzer():
         for individual in population:
             match = individual['match']
             fitness = 0
-            # TODO: calculate the fitness of individual
-            # difference_team_1 = 
-            # difference_team_2 =       
+            team_1 = match[0]
+            team_2 = match[1]
+            difference_team_1 = abs(sum(team_1) - len(team_1)*np.mean(team_1))
+            difference_team_2 = abs(sum(team_2) - len(team_2)*np.mean(team_2))
+            difference_match = abs(sum(team_1) - sum(team_2))
+            fitness = difference_team_1 + difference_team_2 + difference_match
             individual['fitness'] = fitness
