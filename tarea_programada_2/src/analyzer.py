@@ -1,5 +1,6 @@
 import os
 import csv
+import numpy as np
 
 class Analyzer():
     def __init__(self):
@@ -96,6 +97,7 @@ class Analyzer():
         counter = 0
         max_generations = 10
         while counter < max_generations:
+            print(f"Generation: {counter}")
             self.calculate_fitness(population)
 
             population = sorted(population, key=lambda x: x['fitness'], reverse=True)
@@ -107,10 +109,25 @@ class Analyzer():
             new_population[:top_5_percent_index] = top_5_percent
             population = population[top_5_percent_index:]
 
+            population = sorted(population, key=lambda x: x['greatness'], reverse=True)
+
             # TODO: apply the crossover operation to the population and store the result in new_population
-            
+            for i in range(0, len(population)-1, 2):
+                # print(f"Individual {i}")
+                self.calculate_fitness(population)
+                self.calculate_greatness(population)
+                parent1 = population[i]
+                parent2 = population[i + 1]
 
+                # Perform crossover between parent1 and parent2
+                child1, child2 = self.crossover(parent1, parent2)
 
+                # Add the children to the new population
+                new_population.append(child1)
+                new_population.append(child2)
+
+            if len(population) % 2 != 0:
+                odd_one = population[-1]
 
 
             # set the new population as the current population and clear the new population
@@ -119,8 +136,36 @@ class Analyzer():
             counter += 1
         
         # store the data in the data.csv file
-        self.save_data(population)
+        #cast the population to str
+        # population = str(population)
+        matches_string = ""
+        for individual in population:
+            match = individual['match']
+            matches_string += f"{match[0]} VS {match[1]} with fitness of {individual['fitness']}\n"
+        self.save_data(matches_string)
         print("Genetic algorithm technique")
+
+    def crossover(self, parent1, parent2):
+        # Get the match of each parent
+        match1 = parent1['match']
+        match2 = parent2['match']
+
+        # Get the teams of each match
+        team1_parent1 = match1[0]
+        team2_parent1 = match1[1]
+        team1_parent2 = match2[0]
+        team2_parent2 = match2[1]
+
+        # put all element of the teams in a single array, shuffle it and split it in 4 new teams
+        all_teams = team1_parent1 + team2_parent1 + team1_parent2 + team2_parent2
+        np.random.shuffle(all_teams)
+        team1_child1 = all_teams[:5]
+        team2_child1 = all_teams[5:10]
+        team1_child2 = all_teams[10:15]
+        team2_child2 = all_teams[15:20]
+        child1 = {'match': [team1_child1, team2_child1], 'fitness': 0, 'greatness': 0}
+        child2 = {'match': [team1_child2, team2_child2], 'fitness': 0, 'greatness': 0}
+        return child1, child2
 
     def default_option(self):
         print("Invalid technique")
@@ -163,9 +208,17 @@ class Analyzer():
         data_content = data_content[10:]
         match = [sub_data[:5], sub_data[5:]]
         fitness = 0
+        greatness = 0
         # with open("data.txt", 'a') as file:
         #     file.write(f"Match: {match}, Fitness: {fitness}\n")
-        return {'match': match, 'fitness': fitness}
+        return {'match': match, 'fitness': fitness, 'greatness': greatness}
+    
+    def calculate_greatness(self, population):
+        for individual in population:
+            match = individual['match']
+            greatness = sum(match[0]) + sum(match[1])/10
+            # greatness is the average value of the match
+            individual['greatness'] = greatness
 
     def calculate_fitness(self, population):
         for individual in population:
@@ -173,6 +226,7 @@ class Analyzer():
             fitness = 0
             team_1 = match[0]
             team_2 = match[1]
+            # FIXME: difference msut be the difference between the biggest and the smallest value of the team
             difference_team_1 = abs(sum(team_1) - len(team_1)*np.mean(team_1))
             difference_team_2 = abs(sum(team_2) - len(team_2)*np.mean(team_2))
             difference_match = abs(sum(team_1) - sum(team_2))
