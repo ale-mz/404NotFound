@@ -1,6 +1,7 @@
 import os
 import csv
 import numpy as np
+from itertools import permutations
 
 class Analyzer():
     def __init__(self):
@@ -25,6 +26,26 @@ class Analyzer():
     def brute_force(self):
         print("Brute force technique")
         data_content = self.read_data_from_csv()
+        size_data = len(data_content)
+        
+        # best_solution = []
+        
+        # itertools makes an iterable object that keep making new combinations
+        # at the time the code is iterating over it
+        combinations_table = permutations(data_content, size_data)
+        
+        for iteration, permutation in enumerate(combinations_table):
+            print(f"Solucion #{iteration}: {permutation}")
+            
+            # make the fitness 
+            
+            # compare 
+            
+            # store the best one
+            # if (actual > best_solution)
+                # best_solutiob = list(permutation)
+            
+        
         # print(data_content)
 
     def heuristic(self):
