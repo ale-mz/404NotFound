@@ -265,28 +265,7 @@ class Analyzer():
         # self.save_data(population)
         print("Genetic algorithm technique")
 
-    def crossover(self, parent1, parent2):
-        # Get the match of each parent
-        match1 = parent1['match']
-        match2 = parent2['match']
-
-        # Get the teams of each match
-        team1_parent1 = match1[0]
-        team2_parent1 = match1[1]
-        team1_parent2 = match2[0]
-        team2_parent2 = match2[1]
-
-        # put all element of the teams in a single array, shuffle it and split it in 4 new teams
-        all_teams = team1_parent1 + team2_parent1 + team1_parent2 + team2_parent2
-        np.random.shuffle(all_teams)
-        team1_child1 = all_teams[:5]
-        team2_child1 = all_teams[5:10]
-        team1_child2 = all_teams[10:15]
-        team2_child2 = all_teams[15:20]
-        child1 = {'match': [team1_child1, team2_child1], 'fitness': 0, 'greatness': 0}
-        child2 = {'match': [team1_child2, team2_child2], 'fitness': 0, 'greatness': 0}
-        return child1, child2
-
+    
     def default_option(self):
         print("Invalid technique")
 
@@ -341,14 +320,23 @@ class Analyzer():
             individual['greatness'] = greatness
 
     def calculate_fitness(self, population):
-        for individual in population:
-            match = individual['match']
-            fitness = 0
-            team_1 = match[0]
-            team_2 = match[1]
-            # FIXME: difference msut be the difference between the biggest and the smallest value of the team
-            difference_team_1 = abs(sum(team_1) - len(team_1)*np.mean(team_1))
-            difference_team_2 = abs(sum(team_2) - len(team_2)*np.mean(team_2))
-            difference_match = abs(sum(team_1) - sum(team_2))
-            fitness = difference_team_1 + difference_team_2 + difference_match
-            individual['fitness'] = fitness
+        # create array with match
+        matchmaking = [Match() for i in range(len(population))]
+        # Load matchmaking
+        fitness = 5
+        mean_ac = 0
+        for match in range(len(population)):
+            # First Team
+            matchmaking[match].team1.players = population[match*10:match*10 + 5]
+            team_fix(matchmaking[match].team1)
+            # Second Team
+            matchmaking[match].team2.players = population[match*10 + 5:(match + 1)*10]
+            team_fix(matchmaking[match].team2)
+            # Add diff
+            diff = matchmaking[match].team1.mean - matchmaking[match].team2.mean
+            if (diff < 0):
+                diff *= -1
+            matchmaking[match].diff = diff
+            mean_ac += diff
+        fitness  = mean_ac / len(population)
+        return fitness
