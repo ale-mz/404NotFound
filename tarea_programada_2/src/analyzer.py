@@ -1,5 +1,32 @@
 import os
 import csv
+from itertools import combinations
+
+class Team():
+    players = [0,0,0,0,0]
+    mean = 0
+    var = 0
+
+class Match():
+    def __init__(self):
+        self.team1 = Team()  # Initialize team1 as an instance of the Team class
+        self.team2 = Team()  # Initialize team2 as an instance of the Team class
+        self.diff = 0
+
+def team_fix(input_team: Team):
+        # First, get mean of team
+        ref_mean = 0
+        for player in range(5):
+            ref_mean += input_team.players[player]
+        ref_mean /= 5
+        input_team.mean = ref_mean
+
+        # Second, get var
+        ref_var = 0
+        for player in range(5):
+            ref_var += (ref_mean - input_team.players[player]) * (ref_mean - input_team.players[player])
+        ref_var /= 5
+        input_team.var = ref_var
 
 class Analyzer():
     def __init__(self):
@@ -24,6 +51,28 @@ class Analyzer():
     def brute_force(self):
         print("Brute force technique")
         data_content = self.read_data_from_csv()
+        size_data = len(data_content)
+        team_1_bf = []
+        team_2_bf = []
+        
+        # store the data in the data.csv file
+        #current_directory = os.getcwd() # Get the current working directory
+        #file_name = "data.csv" # Define the file name
+        #data_path = os.path.join(current_directory, file_name) # Create the path using the os package
+
+        #with open(data_path, 'w') as file:
+        #    file.write('')
+        
+        
+        # create the placeholder for the final team
+        # create the placeholder for the current iteration
+        # for each profile
+        # for each team for that profile
+        # create the "solution for that itearation"
+        # compare with the ideal iteration (fitness):
+        # 1. compare the differences between teams
+        # 2. compare the differenes between players of the same team
+        # 3. if has less difference than the actual final swap it
         # print(data_content)
 
     def heuristic(self):
@@ -57,8 +106,8 @@ class Analyzer():
 
             if i % 10 == 0 and i != 0:
                 
-                # print("Team 1: ", team_1)
-                # print("Team 2: ", team_2)
+                print("Team 1: ", team_1)
+                print("Team 2: ", team_2)
 
                 # TODO: add the average value of each team/match ?
 
@@ -89,37 +138,131 @@ class Analyzer():
         population_size = len(data_content)/10
         # cast the population_size to int
         population_size = int(population_size)
-        population = [self.generate_individual(data_content) for _ in range(population_size)]
-        new_population = []
+        # create array with match
+        matchmaking = [Match() for i in range(population_size)]
 
+        # Load matchmaking
+        generations = 0
+        fitness = 5
+        mean_ac = 0
+        for match in range(population_size):
+            # First Team
+            matchmaking[match].team1.players = data_content[match*10:match*10 + 5]
+            team_fix(matchmaking[match].team1)
+            # Second Team
+            matchmaking[match].team2.players = data_content[match*10 + 5:(match + 1)*10]
+            team_fix(matchmaking[match].team2)
+            # Add diff
+            diff = matchmaking[match].team1.mean - matchmaking[match].team2.mean
+            if (diff < 0):
+                diff *= -1
+            matchmaking[match].diff = diff
+            mean_ac += diff
+        fitness  = mean_ac / population_size
+        print("fitness: ", fitness)
 
-        counter = 0
-        max_generations = 10
-        while counter < max_generations:
-            self.calculate_fitness(population)
+        while (fitness > 1) :
+            # Cross-Over Teams
+            print("Crossover Teams\n")
+            for match in range(population_size):
+                target = Match()
+                target = matchmaking[match]
+                # Load both teams in one array
+                load = target.team1.players + target.team2.players
+                # Sort array, lowest gone to first array, highest to second one
+                load.sort()
+                matchmaking[match].team1.players = load[:5]
+                matchmaking[match].team2.players = load[5:]
+                team_fix(matchmaking[match].team1)
+                team_fix(matchmaking[match].team2)
 
-            population = sorted(population, key=lambda x: x['fitness'], reverse=True)
-            # Calculate the index to get the top 5%
-            top_5_percent_index = int(len(population) * 0.05)
-            # Get the top 5% individuals
-            top_5_percent = population[:top_5_percent_index]
-            # get the best 5% of the population and copy them to the next generation
-            new_population[:top_5_percent_index] = top_5_percent
-            population = population[top_5_percent_index:]
+                fitness -= matchmaking[match].diff / population_size
 
-            # TODO: apply the crossover operation to the population and store the result in new_population
+                diff = matchmaking[match].team1.mean - matchmaking[match].team2.mean
+                if (diff < 0):
+                    diff *= -1
+                matchmaking[match].diff = diff
+                fitness += matchmaking[match].diff / population_size
 
+            # Mutation
+            for match in range(population_size-1):
+                target = matchmaking[match]
+                # Look for a better team
+                for index in range(match + 1, population_size):
+                    candidate = matchmaking[index]
+                    df = target.team1.mean - candidate.team1.mean
+                    # Reverse it if df is negative
+                    if (df < 0):
+                        df *= -1
+                    if (df < 1):
 
+                        # Change matchmaking parameters
+                        fitness -= matchmaking[match].diff / population_size
+                        fitness -= matchmaking[index].diff / population_size
 
+                        # Lower team
+                        higher = matchmaking[match].team2
+                        matchmaking[match].team2 = matchmaking[index].team1
+                        matchmaking[index].team1 = higher
+                        
+                        # Change match parameters
+                        difference1 = matchmaking[match].team1.mean - matchmaking[match].team2.mean
+                        if (difference1 < 0):
+                            difference1 *= -1
+                        matchmaking[match].diff = difference1
 
+                        difference2 = matchmaking[index].team1.mean - matchmaking[index].team2.mean
+                        if (difference2 < 0):
+                            difference2 *= -1
+                        matchmaking[index].diff = difference2
 
-            # set the new population as the current population and clear the new population
-            population = new_population
-            new_population = []
-            counter += 1
-        
+                        # Update matchmaking parameters
+                        fitness += matchmaking[match].diff / population_size
+                        fitness += matchmaking[index].diff / population_size
+                        break
+
+            generations += 1
+            print("Fitness: ", fitness)
+
         # store the data in the data.csv file
-        self.save_data(population)
+        current_directory = os.getcwd() # Get the current working directory
+        file_name = "data.csv" # Define the file name
+        data_path = os.path.join(current_directory, file_name) # Create the path using the os package
+        
+        with open(data_path, 'w') as file:
+            file.write('')
+
+        retry_matching = 0
+        for match in range(population_size):
+            print(matchmaking[match].team1.players)
+            csv_content = str(matchmaking[match].team1.players)
+            print(" vs ")
+            csv_content += " VS "
+            print(matchmaking[match].team2.players)
+            csv_content += str(matchmaking[match].team2.players)
+            print("\n")
+            csv_content += "\n"
+            if (matchmaking[match].diff > 3):
+                retry_matching +=1
+            with open(data_path, "a") as csv_file:
+                csv_file.write(csv_content)
+
+        print("Generations: ", generations)
+        print("Retrying Match: ", retry_matching)
+        print("Porcentage: ", retry_matching / population_size, "%")
+
+        accumulative = 0
+        for match in range(population_size):
+            team_fix(matchmaking[match].team1)
+            team_fix(matchmaking[match].team2)
+            diff = matchmaking[match].team1.mean - matchmaking[match].team2.mean
+            if (diff < 0):
+                diff *= -1
+            accumulative += diff
+        print("Fitness: ", accumulative / population_size)
+
+        # store the data in the data.csv file
+        # self.save_data(population)
         print("Genetic algorithm technique")
 
     def default_option(self):
