@@ -1,6 +1,8 @@
 import os
 import csv
 from itertools import combinations
+import numpy as np
+from itertools import permutations
 
 class Team():
     players = [0,0,0,0,0]
@@ -52,27 +54,25 @@ class Analyzer():
         print("Brute force technique")
         data_content = self.read_data_from_csv()
         size_data = len(data_content)
-        team_1_bf = []
-        team_2_bf = []
         
-        # store the data in the data.csv file
-        #current_directory = os.getcwd() # Get the current working directory
-        #file_name = "data.csv" # Define the file name
-        #data_path = os.path.join(current_directory, file_name) # Create the path using the os package
-
-        #with open(data_path, 'w') as file:
-        #    file.write('')
+        # best_solution = []
         
+        # itertools makes an iterable object that keep making new combinations
+        # at the time the code is iterating over it
+        combinations_table = permutations(data_content, size_data)
         
-        # create the placeholder for the final team
-        # create the placeholder for the current iteration
-        # for each profile
-        # for each team for that profile
-        # create the "solution for that itearation"
-        # compare with the ideal iteration (fitness):
-        # 1. compare the differences between teams
-        # 2. compare the differenes between players of the same team
-        # 3. if has less difference than the actual final swap it
+        for iteration, permutation in enumerate(combinations_table):
+            print(f"Solucion #{iteration}: {permutation}")
+            
+            # make the fitness 
+            
+            # compare 
+            
+            # store the best one
+            # if (actual > best_solution)
+                # best_solutiob = list(permutation)
+            
+        
         # print(data_content)
 
     def heuristic(self):
@@ -265,6 +265,28 @@ class Analyzer():
         # self.save_data(population)
         print("Genetic algorithm technique")
 
+    def crossover(self, parent1, parent2):
+        # Get the match of each parent
+        match1 = parent1['match']
+        match2 = parent2['match']
+
+        # Get the teams of each match
+        team1_parent1 = match1[0]
+        team2_parent1 = match1[1]
+        team1_parent2 = match2[0]
+        team2_parent2 = match2[1]
+
+        # put all element of the teams in a single array, shuffle it and split it in 4 new teams
+        all_teams = team1_parent1 + team2_parent1 + team1_parent2 + team2_parent2
+        np.random.shuffle(all_teams)
+        team1_child1 = all_teams[:5]
+        team2_child1 = all_teams[5:10]
+        team1_child2 = all_teams[10:15]
+        team2_child2 = all_teams[15:20]
+        child1 = {'match': [team1_child1, team2_child1], 'fitness': 0, 'greatness': 0}
+        child2 = {'match': [team1_child2, team2_child2], 'fitness': 0, 'greatness': 0}
+        return child1, child2
+
     def default_option(self):
         print("Invalid technique")
 
@@ -306,15 +328,27 @@ class Analyzer():
         data_content = data_content[10:]
         match = [sub_data[:5], sub_data[5:]]
         fitness = 0
+        greatness = 0
         # with open("data.txt", 'a') as file:
         #     file.write(f"Match: {match}, Fitness: {fitness}\n")
-        return {'match': match, 'fitness': fitness}
+        return {'match': match, 'fitness': fitness, 'greatness': greatness}
+    
+    def calculate_greatness(self, population):
+        for individual in population:
+            match = individual['match']
+            greatness = sum(match[0]) + sum(match[1])/10
+            # greatness is the average value of the match
+            individual['greatness'] = greatness
 
     def calculate_fitness(self, population):
         for individual in population:
             match = individual['match']
             fitness = 0
-            # TODO: calculate the fitness of individual
-            # difference_team_1 = 
-            # difference_team_2 =       
+            team_1 = match[0]
+            team_2 = match[1]
+            # FIXME: difference msut be the difference between the biggest and the smallest value of the team
+            difference_team_1 = abs(sum(team_1) - len(team_1)*np.mean(team_1))
+            difference_team_2 = abs(sum(team_2) - len(team_2)*np.mean(team_2))
+            difference_match = abs(sum(team_1) - sum(team_2))
+            fitness = difference_team_1 + difference_team_2 + difference_match
             individual['fitness'] = fitness
