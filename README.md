@@ -1,19 +1,29 @@
-# 📄 README del Proyecto
+# Proyecto: Analizador Léxico y Formación de Equipos en Videojuegos
 
-Este proyecto integra dos componentes principales: una **Aplicación en Python** que implementa un analizador léxico y una interfaz gráfica para el análisis de datos, y la descripción de un **Problema de Formación de Equipos** resuelto mediante la aplicación de diferentes técnicas algorítmicas de optimización.
+Este repositorio contiene **dos proyectos desarrollados en Python**, enfocados en áreas distintas pero complementarias:  
+- Un **analizador léxico** con interfaz gráfica para la interpretación de archivos y visualización de datos.  
+- Un **modelo de formación de equipos balanceados** en videojuegos tipo MOBA o FPS, utilizando distintas estrategias algorítmicas.  
 
 ---
 
-## 💻 Aplicación en Python: Analizador Léxico e Interfaz Gráfica
+## 🧩 Primera Parte — Aplicación en Python (Analizador Léxico)
 
-Esta sección describe la implementación y uso de la aplicación desarrollada.
+La primera parte consiste en una **aplicación de escritorio en Python** que utiliza la librería **PLY** para construir un analizador léxico, junto con **Tkinter** y **Matplotlib** para su interfaz gráfica y visualización de resultados.
 
-### 🛠️ Librerías Usadas para el Analizador Léxico
+### 🔧 Dependencias
+Para ejecutar esta aplicación es necesario tener instalado:
+- [Python 3](https://www.python.org/)
+- [pip](https://pypi.org/project/pip/)
 
-Para trabajar con expresiones regulares (regex) y construir el analizador, se hizo uso de la librería **[ply](https://pypi.org/project/ply/)**, una implementación de `lex` y `yacc` escrita en Python.
-
-#### Instalación
-Para poder trabajar con esta herramienta, debe instalarse con el siguiente comando:
-
+Instalación de las librerías necesarias:
 ```bash
 pip install ply
+pip install tkinter
+pip install matplotlib
+```
+
+### Créditos
+#### Codigo escrito por:
+- [Madriz Agüero Jorge Alejandro](https://github.com/ale-mz)
+- [Padilla Fallas Axel Fabián](https://github.com/FabianPadFal)
+- [Carrion Claeys Archibald Emmanuel](https://github.com/archibald-carrion)
